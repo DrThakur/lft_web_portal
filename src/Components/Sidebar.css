@@ -1,0 +1,266 @@
+/* Basic styles for the layout */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  background-color: lightblue;
+}
+
+/* .app {
+    display: flex;
+    height: 100%;
+  }
+   */
+
+/* Left Column styles */
+.left-sidebar {
+  width: 75px;
+  height: 100vh;
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  overflow: auto;
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+}
+
+.left-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar by default */
+.left-sidebar::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar */
+}
+
+/* Show scrollbar on hover */
+.left-sidebar:hover::-webkit-scrollbar {
+  width: 8px; /* Adjust scrollbar width as needed */
+}
+
+.left-sidebar::-webkit-scrollbar-thumb {
+  background-color: #888; /* Scrollbar thumb color */
+  border-radius: 4px; /* Border radius for thumb */
+}
+
+.sidebar-column-left {
+  position: relative;
+}
+
+.sidebar-item {
+  cursor: pointer;
+  padding: 10px;
+  height: 60px;
+  margin-top: 10px;
+  /* border-radius: 0 30px; */
+  transition: 0.5s ease;
+}
+
+.sidebar-item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Hover effect for left sidebar items */
+.sidebar-item:hover {
+  background-color: #555; /* Change the background color on hover */
+  /* border-left: 3px solid #fff; Adjust the left border color 
+    border-radius: 0 30px;*/
+  transition: 0.8s ease;
+}
+
+.sidebar-item.active {
+  /* background-color: #3498db; Active item background color (light blue) */
+  background-color: #555;
+  /* Full width of the left sidebar */
+  border-left: 4px solid #5e76fd;
+}
+
+.sidebar-item.active .sidebar-icon,
+.sidebar-item.active .sidebar-text {
+  color: #fff; /* White color for icon and text */
+}
+
+.sidebar-icon {
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 25px; /* Adjust icon spacing */
+  font-weight: bold;
+  /* Add styles for icons (like width, height, colors, etc.) */
+}
+.sidebar-text {
+  font-size: 0.7em; /* Adjust font size */
+  font-weight: lighter;
+  /* Add any other styles for item text */
+}
+
+/* Change text and icon color on hover */
+.sidebar-item:hover .sidebar-icon,
+.sidebar-item:hover .sidebar-text {
+  color: #fff;
+}
+
+/* Right Column styles */
+.right-sidebar {
+  width: 145px;
+  height: 100vh;
+  position: absolute;
+  left: 75px;
+  top: 60px;
+  background-color: #ffffff; /*f0f0f0*/
+  color: #000;
+  padding: 10px;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  transition: width 0.3s ease;
+  /* border-radius: 5px; */
+  /* box-shadow: 2px 2px 10px rgb(2, 2, 2); */
+
+  /* Styles for the close button */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000;
+  }
+}
+
+.right-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar by default */
+.right-sidebar::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar */
+}
+
+/* Show scrollbar on hover */
+.right-sidebar:hover::-webkit-scrollbar {
+  width: 8px; /* Adjust scrollbar width as needed */
+}
+
+.right-sidebar::-webkit-scrollbar-thumb {
+  background-color: #888; /* Scrollbar thumb color */
+  border-radius: 4px; /* Border radius for thumb */
+}
+
+/* .sidebar-column-right {
+   
+  } */
+
+.right-sidebar-item {
+  /*li*/
+  cursor: pointer;
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 0 30px;
+}
+
+.right-sidebar span {
+  display: block;
+  padding: 10px 0;
+  /* border-bottom: 1px solid #ccc; Add a border between items */
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  /* Add any other styles for the main content */
+}
+
+.hidden {
+  display: none;
+}
+
+.right-sidebar-item-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  margin-left: -15px;
+  border-radius: 0 30px;
+  transition: 0.5s ease;
+  margin-bottom: 5px;
+}
+/* .right-sidebar-item-content.submenu {
+    
+  } */
+
+.right-sidebar-icon {
+  font-size: 25px;
+}
+.right-sidebar-text {
+  margin-left: 5px;
+  font-size: 0.8em;
+}
+
+.right-sidebar-item-content.active {
+  margin-left: -20px;
+  padding-left: 5px;
+  width: 132px;
+  background-color: #3498db; /* Active item background color (light blue) */
+  /* Full width of the left sidebar */
+  border-right: 3px solid #d1291a;
+}
+
+/* Hover effect for right sidebar items */
+.right-sidebar-item-content:not(.active):hover {
+  margin-left: -20px;
+  padding-left: 5px;
+  width: 132px;
+  background-color: #ccc; /* Change the background color on hover */
+  border-right: 3px solid #333; /* Adjust the left border color */
+}
+
+/* Change text and icon color on hover */
+.right-sidebar-item-content:not(.active):hover .right-sidebar-icon,
+.right-sidebar-item-content:not(.active):hover .right-sidebar-text {
+  color: #333;
+}
+
+/* Add a class to style the sub-item list */
+.submenu {
+  position: absolute;
+  left: 250px;
+  width: 150px;
+  top: 0;
+  display: none;
+  /*Hide sub-items by default*/
+  /* Adjust this value to position the submenu */
+  background-color: #e06060;
+  padding: 10px;
+}
+
+/*.right-sidebar-item-content:hover .submenu {
+    display: block; Show submenu on hover
+  }*/
+
+/* .right-sidebar .right-sidebar-item-content .dropdown {
+    position: relative;
+  }
+  
+  .right-sidebar-item-content.dropdown:hover .submenu {
+    display: initial;
+  }
+  
+  .submenu:hover {
+    display: initial;
+  }
+   */

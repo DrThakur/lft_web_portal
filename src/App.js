@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Layout from "./Components/Layout/Layout";
+import Dashboard from "./Pages/Dashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CreateProjectForm from "./Components/CreateProjectForm";
+import PurchaseOrder from "./Components/PurchaseOrder";
+import ProjectDetails from "./Components/ProjectDetails";
+import AllProjects from "./Components/AllProjects";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/all-projects" element={<AllProjects />} />
+            <Route path="/create-project" element={<CreateProjectForm />} />
+            <Route path="/purchase-order" element={<PurchaseOrder />} />
+            <Route path="/project-details" element={<ProjectDetails />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

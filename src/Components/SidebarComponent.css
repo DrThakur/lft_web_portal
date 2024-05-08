@@ -1,0 +1,16 @@
+.myscrollbar::-webkit-scrollbar {
+  width: 0;
+}
+
+
+.myscrollbar:hover::-webkit-scrollbar {
+  width: 4px; /* Adjust scrollbar width as needed */
+}
+.myscrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(166, 249, 198);
+  border-radius: 4px;
+}
+
+.myscrollbar {
+  scrollbar-gutter: stable both-edges;
+}
