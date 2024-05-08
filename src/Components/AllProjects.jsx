@@ -114,17 +114,18 @@ const AllProjects = () => {
     return `${day} ${month} ${year}`;
   };
 
-  const openNew = () => {
-    setProduct(emptyProduct);
-    setSubmitted(false);
-    // setProductDialog(true);
-    navigate("/create-project");
-  };
+//   const openNew = () => {
+//     setProduct(emptyProduct);
+//     setSubmitted(false);
+//     // setProductDialog(true);
+//     navigate("/create-project");
+//   };
 
   const openNewProject = () => {
     setProject(emptyProject);
     setSubmitted(false);
-    setProjectDialog(true);
+    navigate("/create-project");
+    // setProjectDialog(true);
   };
 
   const hideDialog = () => {
@@ -364,16 +365,16 @@ const AllProjects = () => {
           label="Create New Project"
           icon="pi pi-plus"
           severity="success"
-          onClick={openNew}
-          className="bg-green-400 text-white p-2 px-4"
+          onClick={openNewProject}
+          
         />
         <Button
           label="Delete"
           icon="pi pi-trash"
           severity="danger"
           onClick={confirmDeleteSelected}
-          disabled={!selectedProducts || !selectedProducts.length}
-          className={`bg-red-200 text-white p-2 px-4`}
+          disabled={!selectedProjects || !selectedProjects.length}
+         
         />
         <SelectButton
           value={size}
@@ -526,7 +527,7 @@ const AllProjects = () => {
           rounded
           outlined
           severity="danger"
-          onClick={() => confirmDeleteProduct(rowData)}
+          onClick={() => confirmDeleteProject(rowData)}
           className="border border-red-400 rounded-full"
         />
       </React.Fragment>
@@ -591,7 +592,7 @@ const AllProjects = () => {
   );
   const productDialogFooter = (
     <React.Fragment>
-      <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
+      <Button label="Cancel" icon="pi pi-times" outlined onClick={hideProjectDialog} />
       <Button label="Save" icon="pi pi-check" onClick={saveProduct} />
     </React.Fragment>
   );
@@ -609,6 +610,24 @@ const AllProjects = () => {
         icon="pi pi-check"
         severity="danger"
         onClick={deleteProduct}
+        className="border rounded p-2 px-6 bg-red-500 text-white ml-2"
+      />
+    </React.Fragment>
+  );
+  const deleteProjectDialogFooter = (
+    <React.Fragment >
+      <Button
+        label="No"
+        icon="pi pi-times"
+        outlined
+        onClick={hideDeleteProjectDialog}
+        className="rounded p-2 px-6  text-blue-300 border border-blue-300 mr-2"
+      />
+      <Button
+        label="Yes"
+        icon="pi pi-check"
+        severity="danger"
+        onClick={deleteProject}
         className="border rounded p-2 px-6 bg-red-500 text-white ml-2"
       />
     </React.Fragment>
@@ -647,7 +666,7 @@ const AllProjects = () => {
           selection={selectedProjects}
           onSelectionChange={(e) => setSelectedProjects(e.value)}
           size={size}
-          dataKey="id"
+          dataKey="projectId"
           paginator
           rows={10}
           rowsPerPageOptions={[5, 10, 25]}
@@ -898,22 +917,22 @@ const AllProjects = () => {
       </Dialog>
 
       <Dialog
-        visible={deleteProductDialog}
+        visible={deleteProjectDialog}
         style={{ width: "32rem" }}
         breakpoints={{ "960px": "75vw", "641px": "90vw" }}
         header="Confirm"
         modal
-        footer={deleteProductDialogFooter}
-        onHide={hideDeleteProductDialog}
+        footer={deleteProjectDialogFooter}
+        onHide={hideDeleteProjectDialog}
       >
         <div className="confirmation-content">
           <i
             className="pi pi-exclamation-triangle mr-3"
             style={{ fontSize: "2rem" }}
           />
-          {product && (
+          {project && (
             <span>
-              Are you sure you want to delete <b>{project.name}</b>?
+              Are you sure you want to delete <b>{project.projectName}</b>?
             </span>
           )}
         </div>
