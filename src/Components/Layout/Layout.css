@@ -1,19 +1,6 @@
-
-.children::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Hide scrollbar by default */
-  .children::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar */
-  }
-  
-  /* Show scrollbar on hover */
-  .children:hover::-webkit-scrollbar {
-    width: 8px; /* Adjust scrollbar width as needed */
-  }
-  
-  .children::-webkit-scrollbar-thumb {
-    background-color: #888; /* Scrollbar thumb color */
-    border-radius: 4px; /* Border radius for thumb */
-  }
+*{
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
