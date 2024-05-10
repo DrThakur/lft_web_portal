@@ -14,6 +14,7 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { useStateContext } from "../Contexts/ContextProvider";
 import { FaProjectDiagram } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Tooltip from "@mui/material/Tooltip";
 
 const Sidebar = () => {
   const [selectedMainItem, setSelectedMainItem] = useState("Dashboard"); // State to track selected main item
@@ -71,84 +72,96 @@ const Sidebar = () => {
         <div className="sidebar-column-left">
           {/*ul*/}
           {/* Main items */}
-          <div
-            className={`sidebar-item ${
-              selectedMainItem === "Dashboard" ? "active" : ""
-            }`}
-            onClick={() => handleMainItemClick("Dashboard")}
-          >
-            <div className="sidebar-item-content">
-              <span className="sidebar-icon">
-                <LuLayoutDashboard />
-              </span>
-              <span className="sidebar-text">Dashboard</span>
+          <Tooltip title="Dasshboard" placement="right" arrow>
+            <div
+              className={`sidebar-item ${
+                selectedMainItem === "Dashboard" ? "active" : ""
+              }`}
+              onClick={() => handleMainItemClick("Dashboard")}
+            >
+              <div className="sidebar-item-content">
+                <span className="sidebar-icon">
+                  <LuLayoutDashboard />
+                </span>
+                <span className="sidebar-text">Dashboard</span>
+              </div>
             </div>
-          </div>
-          <div
-            className={`sidebar-item ${
-              selectedMainItem === "HR Operations" ? "active" : ""
-            }`}
-            onClick={() => handleMainItemClick("HR Operations")}
-          >
-            <div className="sidebar-item-content">
-              <span className="sidebar-icon">
-                <BsPeople />
-              </span>
-              <span className="sidebar-text">HR</span>
+          </Tooltip>
+          <Tooltip title="HR Operations" placement="right" arrow>
+            <div
+              className={`sidebar-item ${
+                selectedMainItem === "HR Operations" ? "active" : ""
+              }`}
+              onClick={() => handleMainItemClick("HR Operations")}
+            >
+              <div className="sidebar-item-content">
+                <span className="sidebar-icon">
+                  <BsPeople />
+                </span>
+                <span className="sidebar-text">HR</span>
+              </div>
             </div>
-          </div>
-          <div
-            className={`sidebar-item ${
-              selectedMainItem === "Finance Operations" ? "active" : ""
-            }`}
-            onClick={() => handleMainItemClick("Finance Operations")}
-          >
-            <div className="sidebar-item-content">
-              <span className="sidebar-icon">
-                <MdAttachMoney />
-              </span>
-              <span className="sidebar-text">Finance</span>
+          </Tooltip>
+          <Tooltip title="Finance Operations" placement="right" arrow>
+            <div
+              className={`sidebar-item ${
+                selectedMainItem === "Finance Operations" ? "active" : ""
+              }`}
+              onClick={() => handleMainItemClick("Finance Operations")}
+            >
+              <div className="sidebar-item-content">
+                <span className="sidebar-icon">
+                  <MdAttachMoney />
+                </span>
+                <span className="sidebar-text">Finance</span>
+              </div>
             </div>
-          </div>
-          <div
-            className={`sidebar-item ${
-              selectedMainItem === "Procurement" ? "active" : ""
-            }`}
-            onClick={() => handleMainItemClick("Procurement")}
-          >
-            <div className="sidebar-item-content">
-              <span className="sidebar-icon">
-                <RiStore2Line />
-              </span>
-              <span className="sidebar-text">Procurement</span>
+          </Tooltip>
+          <Tooltip title="Procurement" placement="right" arrow>
+            <div
+              className={`sidebar-item ${
+                selectedMainItem === "Procurement" ? "active" : ""
+              }`}
+              onClick={() => handleMainItemClick("Procurement")}
+            >
+              <div className="sidebar-item-content">
+                <span className="sidebar-icon">
+                  <RiStore2Line />
+                </span>
+                <span className="sidebar-text">Procurement</span>
+              </div>
             </div>
-          </div>
-          <div
-            className={`sidebar-item ${
-              selectedMainItem === "PMS" ? "active" : ""
-            }`}
-            onClick={() => handleMainItemClick("PMS")}
-          >
-            <div className="sidebar-item-content">
-              <span className="sidebar-icon">
-                <FaProjectDiagram />
-              </span>
-              <span className="sidebar-text">PMS</span>
+          </Tooltip>
+          <Tooltip title="Project Management System" placement="right" arrow>
+            <div
+              className={`sidebar-item ${
+                selectedMainItem === "PMS" ? "active" : ""
+              }`}
+              onClick={() => handleMainItemClick("PMS")}
+            >
+              <div className="sidebar-item-content">
+                <span className="sidebar-icon">
+                  <FaProjectDiagram />
+                </span>
+                <span className="sidebar-text">PMS</span>
+              </div>
             </div>
-          </div>
-          <div
-            className={`sidebar-item ${
-              selectedMainItem === "IT" ? "active" : ""
-            }`}
-            onClick={() => handleMainItemClick("IT")}
-          >
-            <div className="sidebar-item-content">
-              <span className="sidebar-icon">
-                <BsLaptop />
-              </span>
-              <span className="sidebar-text">IT</span>
+          </Tooltip>
+          <Tooltip title="IT" placement="right" arrow>
+            <div
+              className={`sidebar-item ${
+                selectedMainItem === "IT" ? "active" : ""
+              }`}
+              onClick={() => handleMainItemClick("IT")}
+            >
+              <div className="sidebar-item-content">
+                <span className="sidebar-icon">
+                  <BsLaptop />
+                </span>
+                <span className="sidebar-text">IT</span>
+              </div>
             </div>
-          </div>
+          </Tooltip>
 
           <div
             className={`sidebar-item ${

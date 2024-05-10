@@ -6,6 +6,9 @@ import CreateProjectForm from "./Components/CreateProjectForm";
 import PurchaseOrder from "./Components/PurchaseOrder";
 import ProjectDetails from "./Components/ProjectDetails";
 import AllProjects from "./Components/AllProjects";
+import UserProfilePage from "./Pages/UserProfilePage";
+import ProjectCard from "./Components/ProjectCard";
+import ProjectCarousel from "./Components/ProjectCarousel";
 
 const App = () => {
   return (
@@ -18,6 +21,9 @@ const App = () => {
             <Route path="/create-project" element={<CreateProjectForm />} />
             <Route path="/purchase-order" element={<PurchaseOrder />} />
             <Route path="/project-details" element={<ProjectDetails />} />
+            <Route path="/user-profile" element={<UserProfilePage />} />
+            <Route path="/test" element={<ProjectCarousel />} />
+            <Route path="/test2" element={<ProjectCard />} />
           </Routes>
         </Layout>
       </BrowserRouter>

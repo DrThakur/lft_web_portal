@@ -1,13 +1,19 @@
-import React from 'react';
-import { MdOutlineCancel } from 'react-icons/md';
+import React from "react";
+import { MdOutlineCancel } from "react-icons/md";
 
-import { Button } from '.';
-import { userProfileData } from '../data/dummy';
+import { Button } from ".";
+import { userProfileData } from "../data/dummy";
 import { useStateContext } from "../Contexts/ContextProvider";
-import avatar from '../data/avatar.jpg';
+import avatar from "../data/avatar.jpg";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
+  const navigate = useNavigate();
+
+  const handleProfileSettings = () => {
+    navigate("/user-Profile");
+  };
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-80 mt-[1.6px]">
@@ -28,14 +34,24 @@ const UserProfile = () => {
           alt="user-profile"
         />
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200 ml-4"> Ankit Kumar Thakur </p>
-          <p className="text-gray-500 text-sm dark:text-gray-400 ml-4 ">  Administrator   </p>
-          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400 ml-4"> ankit.kumar@logic-fruit.com</p>
+          <p className="font-semibold text-xl dark:text-gray-200 ml-4">
+            Ankit Kumar Thakur
+          </p>
+          <p className="text-gray-500 text-sm dark:text-gray-400 ml-4 ">
+            Administrator
+          </p>
+          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400 ml-4">
+            ankit.kumar@logic-fruit.com
+          </p>
         </div>
       </div>
       <div>
         {userProfileData.map((item, index) => (
-          <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+          <div
+            key={index}
+            className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]"
+            onClick={handleProfileSettings}
+          >
             <button
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}
@@ -46,7 +62,10 @@ const UserProfile = () => {
 
             <div>
               <p className="font-semibold dark:text-gray-200 ">{item.title}</p>
-              <p className="text-gray-500 text-sm dark:text-gray-400"> {item.desc} </p>
+              <p className="text-gray-500 text-sm dark:text-gray-400">
+                {" "}
+                {item.desc}{" "}
+              </p>
             </div>
           </div>
         ))}
@@ -61,7 +80,6 @@ const UserProfile = () => {
         />
       </div>
     </div>
-
   );
 };
 

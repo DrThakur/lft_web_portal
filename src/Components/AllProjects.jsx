@@ -650,7 +650,7 @@ const AllProjects = () => {
   );
 
   return (
-    <div className="p-2">
+    <div className="p-2 rounded">
       <Toast ref={toast} />
       <div className="card">
         <Toolbar
