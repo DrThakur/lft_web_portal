@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
 import { MdModeEdit } from "react-icons/md";
 import { TabView, TabPanel } from "primereact/tabview";
@@ -6,6 +6,21 @@ import { Timeline } from "primereact/timeline";
 import ProjectCarousel from "../Components/ProjectCarousel";
 
 const UserProfilePage = () => {
+  const [resume, setResume] = useState(null);
+  const uploadInputRef = useRef(null);
+
+  const handleEditClick = () => {
+    // Programmatically click the hidden file input element
+    uploadInputRef.current.click();
+  };
+
+  const handleUpload = (event) => {
+    const file = event.target.files[0];
+    // Upload file to backend (you'll need to implement this)
+    // After successful upload, update the state to the new resume
+    setResume(file);
+  };
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     // Handle the file upload here
@@ -219,6 +234,26 @@ const UserProfilePage = () => {
         <div className="conatiner2">
           <TabView>
             <TabPanel header="Profile">
+              <div className="resume border rounded shadow-lg p-2 -ml-5 mb-4 flex flex-row justify-between items-center">
+              {resume ? <span className="font-bold text-xl ml-5 text-blue-500">{resume.name}</span> : <span className="font-bold text-xl ml-5">Upload Resume</span>}
+                <div className="editButton">
+                  <input
+                    ref={uploadInputRef}
+                    type="file"
+                    accept=".pdf"
+                    onChange={handleUpload}
+                    style={{ display: "none" }} // Hide the input visually
+                    id="resume-upload"
+                  />
+                  <label htmlFor="resume-upload"></label>
+                  <button
+                    className="hover:text-blue-500 bg-gray-200 rounded-full p-2 mr-7 ml-1"
+                    onClick={handleEditClick}
+                  >
+                    <MdModeEdit />
+                  </button>
+                </div>
+              </div>
               <div className="-ml-5 grid grid-cols-2 gap-4">
                 <div className="profile1 personalInformation  border shadow-lg rounded p-4 px-8">
                   <div className="tableInforation">
@@ -479,7 +514,6 @@ const UserProfilePage = () => {
             </TabPanel>
             <TabPanel header="Projects">
               <div className="-mt-10 -ml-5">
-             
                 <ProjectCarousel title="On Going Projects" />
               </div>
             </TabPanel>

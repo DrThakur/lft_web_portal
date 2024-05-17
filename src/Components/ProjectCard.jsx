@@ -5,32 +5,31 @@ import { AvatarGroup } from "primereact/avatargroup";
 import { Tooltip } from "react-tooltip";
 import { ProgressBar } from "primereact/progressbar";
 
-
-const ProjectCard = () => {
+const ProjectCard = ({ project }) => {
   return (
     <div className="cardContainer border-2 rounded-lg shadow-lg w-1/5 mt-4 bg-gray-50 p-4 h-fit">
       <div className="cardHeading p-2">
         <span className="flex flex-row justify-start items-center text-red-400 bg-red-50 rounded-lg w-[200px] font-semibold text-sm">
           <BsDot className="text-xl" /> Deadline : 10 Feb 2024
         </span>
-        <h3 className="font-bold text-2xl -ml-2">LFT Intranet Web Portal</h3>
+        <h3 className="font-bold text-2xl -ml-2">{project.name}</h3>
       </div>
       <div className="cardBody flex flex-col gap-2">
         <div className="flex rounded-lg ">
           <div className="flex-1 bg-blue-100 rounded-s p-1 flex flex-col justify-center items-center gap-1">
-            <span className="font-bold text-2xl">10</span>
+            <span className="font-bold text-2xl">{project.milestones}</span>
             <span>Milestones</span>
           </div>
           <div className="flex-1   bg-green-100 p-1 flex flex-col justify-center items-center gap-1">
-            <span className="font-bold text-2xl">5</span>
+            <span className="font-bold text-2xl">{project.completed}</span>
             <span>Completed</span>
           </div>
           <div className="flex-1 bg-yellow-100 p-1 flex flex-col justify-center items-center gap-1">
-            <span className="font-bold text-2xl">1</span>
+            <span className="font-bold text-2xl">{project.active}</span>
             <span>Active</span>
           </div>
           <div className="flex-1 bg-red-100 rounded-e p-1 flex flex-col justify-center items-center gap-1">
-            <span className="font-bold text-2xl">4</span>
+            <span className="font-bold text-2xl">{project.pending}</span>
             <span>Pending</span>
           </div>
         </div>
@@ -57,22 +56,21 @@ const ProjectCard = () => {
               href="/"
               className="text-blue-500 hover:text-blue-900 font-semibold"
             >
-              Dhruv Kumar Saxena
+              {project.manager}
             </a>
           </span>
         </div>
         <div className="teams flex flex-row justify-start items-center gap-2 mt-1 mb-1">
           <h3 className="font-bold">Teams:</h3>
           <div className="flex flex-wrap justify-start items-center gap-1 ml-8">
-            <button className="bg-blue-400 rounded-full p-1 px-2 text-white font-bold">
-              Software
-            </button>
-            <button className="bg-blue-400 rounded-full p-1 px-2 text-white font-bold">
-              Hardware
-            </button>
-            <button className="bg-blue-400 rounded-full p-1 px-2 text-white font-bold">
-              FPGA
-            </button>
+            {project.teams.map((team, index) => (
+              <button
+                key={index}
+                className="bg-blue-400 rounded-full p-1 px-2 text-white font-bold"
+              >
+                {team}
+              </button>
+            ))}
           </div>
         </div>
         <div className="teamMembersFromAllTeam mt-1 mb-1 flex flex-row justify-start items-center gap-2">
@@ -136,7 +134,6 @@ const ProjectCard = () => {
             <AvatarGroup className="hover:gap-2">
               <Avatar
                 image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
-                
                 shape="circle"
                 style={{ borderRadius: "100px" }}
                 className="avatar1"
@@ -144,56 +141,48 @@ const ProjectCard = () => {
 
               <Avatar
                 image="https://primefaces.org/cdn/primereact/images/avatar/asiyajavayant.png"
-               
                 shape="circle"
                 style={{ borderRadius: "100px" }}
                 className="avatar2"
               />
               <Avatar
                 image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png"
-              
                 shape="circle"
                 style={{ borderRadius: "100px" }}
                 className="avatar3"
               />
               <Avatar
                 image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png"
-              
                 shape="circle"
                 style={{ borderRadius: "100px" }}
                 className="avatar4"
               />
               <Avatar
                 image="https://primefaces.org/cdn/primereact/images/avatar/xuxuefeng.png"
-                
                 shape="circle"
                 style={{ borderRadius: "100px" }}
                 className="avatar5"
               />
               <Avatar
                 image="https://primefaces.org/cdn/primereact/images/avatar/xuxuefeng.png"
-                
                 shape="circle"
                 style={{ borderRadius: "100px" }}
                 className="avatar6"
               />
               <Avatar
                 image="https://primefaces.org/cdn/primereact/images/avatar/xuxuefeng.png"
-               
                 shape="circle"
                 style={{ borderRadius: "100px" }}
                 className="avatar7"
               />
               <Avatar
                 image="https://primefaces.org/cdn/primereact/images/avatar/xuxuefeng.png"
-             
                 shape="circle"
                 style={{ borderRadius: "100px" }}
                 className="avatar8"
               />
               <Avatar
                 label="+2"
-               
                 shape="circle"
                 style={{
                   backgroundColor: "#9c27b0",
@@ -207,7 +196,7 @@ const ProjectCard = () => {
         </div>
         <div className="progressbar mt-2 flex flex-col gap-2">
           <h3 className="font-bold">Progress:</h3>
-          <ProgressBar value={50}></ProgressBar>
+          <ProgressBar value={project.progress} ></ProgressBar>
         </div>
       </div>
     </div>

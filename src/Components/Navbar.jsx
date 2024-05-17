@@ -133,8 +133,8 @@ const Navbar = () => {
             background: "white",
             borderRadius: "0 10px 10px 0",
             padding: "10px",
-            top: "-170px",
-            left: "-793px",
+            top: "-62px",
+            left: "-700px",
             boxShadow: "0px 0px 5px 0px",
           }}
           onHide={() => setVisible(false)}

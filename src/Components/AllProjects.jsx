@@ -18,7 +18,7 @@ import { SelectButton } from "primereact/selectbutton";
 import { ProjectData } from "../service/ProjectData";
 import { ToggleButton } from "primereact/togglebutton";
 import { useNavigate } from "react-router-dom";
-
+import ProjectTableView from "./ProjectTableView";
 
 const AllProjects = () => {
   let emptyProduct = {
@@ -54,6 +54,7 @@ const AllProjects = () => {
     { label: "Normal", value: "normal" },
     { label: "Large", value: "large" },
   ]);
+  const [selectedView, setSelectedView] = useState("list");
   const [size, setSize] = useState(sizeOptions[1].value);
   const [products, setProducts] = useState(null);
   const [projects, setProjects] = useState(null);
@@ -114,12 +115,12 @@ const AllProjects = () => {
     return `${day} ${month} ${year}`;
   };
 
-//   const openNew = () => {
-//     setProduct(emptyProduct);
-//     setSubmitted(false);
-//     // setProductDialog(true);
-//     navigate("/create-project");
-//   };
+  //   const openNew = () => {
+  //     setProduct(emptyProduct);
+  //     setSubmitted(false);
+  //     // setProductDialog(true);
+  //     navigate("/create-project");
+  //   };
 
   const openNewProject = () => {
     setProject(emptyProject);
@@ -366,7 +367,6 @@ const AllProjects = () => {
           icon="pi pi-plus"
           severity="success"
           onClick={openNewProject}
-          
         />
         <Button
           label="Delete"
@@ -374,7 +374,6 @@ const AllProjects = () => {
           severity="danger"
           onClick={confirmDeleteSelected}
           disabled={!selectedProjects || !selectedProjects.length}
-         
         />
         <SelectButton
           value={size}
@@ -387,12 +386,28 @@ const AllProjects = () => {
 
   const rightToolbarTemplate = () => {
     return (
-      <Button
-        label="Export"
-        icon="pi pi-upload"
-        className="p-button-help bg-blue-500 p-3 px-4 text-white"
-        onClick={exportCSV}
-      />
+      <div className="flex flex-row justify-start items-center gap-2">
+        <Button
+          icon="pi pi-list"
+          className={selectedView === "list" ? "primary-500 text-white" : "bg-white text-black"}
+          onClick={() => setSelectedView("list")}
+        />
+        <Button
+          icon="pi pi-table"
+          className={
+            selectedView === "table"
+              ? "primary-500 text-white"
+              : "bg-white text-black"
+          }
+          onClick={() => setSelectedView("table")}
+        />
+        <Button
+          label="Export"
+          icon="pi pi-upload"
+          className="p-button-help bg-blue-500 p-3 px-4 text-white"
+          onClick={exportCSV}
+        />
+      </div>
     );
   };
 
@@ -592,12 +607,17 @@ const AllProjects = () => {
   );
   const productDialogFooter = (
     <React.Fragment>
-      <Button label="Cancel" icon="pi pi-times" outlined onClick={hideProjectDialog} />
+      <Button
+        label="Cancel"
+        icon="pi pi-times"
+        outlined
+        onClick={hideProjectDialog}
+      />
       <Button label="Save" icon="pi pi-check" onClick={saveProduct} />
     </React.Fragment>
   );
   const deleteProductDialogFooter = (
-    <React.Fragment >
+    <React.Fragment>
       <Button
         label="No"
         icon="pi pi-times"
@@ -615,7 +635,7 @@ const AllProjects = () => {
     </React.Fragment>
   );
   const deleteProjectDialogFooter = (
-    <React.Fragment >
+    <React.Fragment>
       <Button
         label="No"
         icon="pi pi-times"
@@ -650,16 +670,17 @@ const AllProjects = () => {
   );
 
   return (
-    <div className="p-2 rounded">
+    <div className="p-2 rounded overflow-y-auto">
       <Toast ref={toast} />
       <div className="card">
         <Toolbar
           className="mb-4"
           left={leftToolbarTemplate}
           right={rightToolbarTemplate}
+      
         ></Toolbar>
 
-        <DataTable
+        {selectedView === 'list' ? (<DataTable
           ref={dt}
           value={projects}
           selectionMode="checkbox"
@@ -793,7 +814,8 @@ const AllProjects = () => {
             exportable={false}
             style={{ minWidth: "12rem" }}
           ></Column>
-        </DataTable>
+        </DataTable>)  :(<ProjectTableView/>)}
+        
       </div>
 
       <Dialog

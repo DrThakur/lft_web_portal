@@ -29,10 +29,7 @@ const employeesData = [
   // Add more employee data as needed
 ];
 
-const EmployeeDropdown = ({ isMultiSelect = false, placeholder }) => {
-  const [selectedEmployees, setSelectedEmployees] = useState(
-    isMultiSelect ? [] : null
-  );
+const EmployeeDropdown = ({ isMultiSelect = false, value, placeholder, onChange }) => {
   const animatedComponents = makeAnimated();
 
   // Map employees data into options for React Select
@@ -55,52 +52,31 @@ const EmployeeDropdown = ({ isMultiSelect = false, placeholder }) => {
     ),
   }));
 
-
   // Handle change in selected employee
   const handleSelectChange = (selectedOption) => {
-    if (isMultiSelect) {
-      const selectedEmployeesData = selectedOption.map((option) =>
-        employeesData.find((employee) => employee.id === option.value)
-      );
-      console.log("My EmployeesDate", selectedEmployeesData)
-      setSelectedEmployees(selectedEmployeesData);
-    } else {
-      setSelectedEmployees(selectedOption);
-    }
+    console.log("my employeeOptions", selectedOption);
   };
 
   return (
     <div className="">
       <Select
-      value={
-        isMultiSelect
-          ? selectedEmployees.map((employee) => ({
-            value: employee.id,
-            label: (
-              <div className="flex items-center h-10">
-                <img
-                  src={employee.photo}
-                  alt={employee.name}
-                  className="w-8 h-8 rounded-full"
-                />
-                <div>
-                  <div>
-                    {employee.name} ({employee.employeeId})
-                  </div>
-                  <div className="text-gray-500 text-sm">{employee.designation}</div>
-                </div>
-              </div>),
-            }))
-          : selectedEmployees
-      }
-        onChange={handleSelectChange}
+        value={value}
+        onChange={onChange}
         options={options}
         placeholder={placeholder}
         isSearchable
         isClearable
         isMulti={isMultiSelect}
         components={animatedComponents}
-        styles={{padding:"10px"}}
+        styles={{
+          padding: "10px",
+          menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+          valueContainer: (base) => ({
+            ...base,
+            minHeight: "44px",
+          }),
+        }}
+        menuPortalTarget={document.body}
       />
     </div>
   );

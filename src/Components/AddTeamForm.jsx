@@ -1,5 +1,4 @@
 // AddTeamForm.js
-
 import React, { useState } from "react";
 import EmployeeDropdown from "./EmployeeDropdown";
 import { FaPlus } from "react-icons/fa6";
@@ -8,13 +7,25 @@ const AddTeamForm = ({ onAddTeam, onSave }) => {
   const [teamName, setTeamName] = useState("");
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [role, setRole] = useState("");
+  const [showSelectedMembers, setShowSelectedMembers] = useState(false);
 
   const handleAddMember = (selectedOption) => {
     console.log("my selected option", selectedOption);
-    console.log("My Mbers", selectedMembers);
-    setSelectedMembers([...selectedMembers, selectedOption]);
+    // console.log("My Mbers", selectedMembers);
+    console.log("my mebers", selectedMembers);
+    // setSelectedMembers([...selectedMembers, selectedOption]);
+    setSelectedMembers([...selectedOption]);
+    // const newSelectedMembers = selectedOption.filter(option => !selectedMembers.includes(option));
+    // setSelectedMembers((prevSelectedMembers) => [...prevSelectedMembers, ...newSelectedMembers]);
+    console.log("my final members", selectedMembers)
   };
 
+  const handleFinalAddMember = ()=> {
+    console.log("handleFinalAddMember",selectedMembers)
+    setShowSelectedMembers(true);
+  }
+  
+  console.log("my final members -inside", selectedMembers);
   const handleSaveTeam = () => {
     const newTeam = {
       name: teamName,
@@ -36,21 +47,22 @@ const AddTeamForm = ({ onAddTeam, onSave }) => {
             placeholder="Enter team name"
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
-            className="border rounded px-2 py-2 mt-2"
+            className="border rounded px-2 py-2 mt-2 h-[48px]"
           />
         </div>
         <div className="flex flex-col col-start-2 col-end-3">
           <label className="mb-2">Add Team Members</label>
           <EmployeeDropdown
+            value={selectedMembers}
             isMultiSelect
             placeholder="Select Team Member"
-            onSelect={handleAddMember}
+            onChange={handleAddMember}
           />
         </div>
         <div className="flex flex-col col-start-3 col-end-4">
           <label htmlFor="role">Role</label>
           <select
-            className="p-2 border rounded mt-2"
+            className="p-2 border rounded mt-2 h-[46px]"
             value={role}
             onChange={(e) => setRole(e.target.value)}
           >
@@ -67,7 +79,7 @@ const AddTeamForm = ({ onAddTeam, onSave }) => {
         </div>
         <div className="w-full col-start-4 col-end-5 mt-8 text-center ml-8">
           <button
-            onClick={handleAddMember}
+            onClick={handleFinalAddMember}
             className="bg-purple-500 text-white rounded-full px-6 py-2 hover:bg-purple-700 flex flex-row justify-start items-center gap-2"
           >
             <FaPlus />
@@ -85,12 +97,12 @@ const AddTeamForm = ({ onAddTeam, onSave }) => {
           </button>
         </div>
         <div className="flex items-center">
-          {selectedMembers.length > 0 && (
+          {showSelectedMembers && selectedMembers.length > 0 && (
             <div className="ml-2">
               <span>Selected Members:</span>
               <ul>
                 {selectedMembers.map((member) => (
-                  <li key={member.id}>{member.label}</li>
+                  <li key={member.value}>{member.label}</li>
                 ))}
               </ul>
             </div>

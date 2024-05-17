@@ -30,7 +30,13 @@ const CreateProjectForm = () => {
   const [showMilestoneForm, setShowMilestoneForm] = useState(false);
   const [error, setError] = useState("");
   const [showAddTeamForm, setShowAddTeamForm] = useState(false);
+  const [selectedProjectManager, setSelectedProjectManager] = useState('');
 
+
+  const handleSelectProjectManager =(selectedOption)=> {
+    console.log("my project manager from select", selectedOption);
+    setSelectedProjectManager(selectedOption);
+  }
   const handleSelectLocation = (event) => {
     // Update the selectedOption state variable with the value of the selected option
     setLocation(event.target.value);
@@ -150,7 +156,7 @@ const CreateProjectForm = () => {
   };
 
   return (
-    <div className="container mx-auto bg-white p-4 rounded-md ">
+    <div className="container mx-auto bg-white p-4 rounded-md mt-2">
       <h2 className="text-2xl font-bold mb-4">Create New Project</h2>
       <form onSubmit={handleSubmit} className="flex flex-col mt-8">
         {/* Project Information */}
@@ -517,8 +523,10 @@ const CreateProjectForm = () => {
           <div className="flex flex-row justify-start items-center gap-4 mt-2 py-2">
             <span>Project Manager</span>
             <EmployeeDropdown
+              value={selectedProjectManager}
               className="w-1/2"
               placeholder="Select Project Manager"
+              onChange={handleSelectProjectManager}
             />
           </div>
         </div>
@@ -539,8 +547,9 @@ const CreateProjectForm = () => {
           )}
         </div>
         {/* Show added teams */}
+        {console.log("my Teams", teams)}
         {teams.map((team, index) => (
-          <div key={index}>
+          <div key={index} className="flex flex-wrap justify-start items-center gap-2">
             <h3 className="text-xl font-semibold">Team {index + 1}</h3>
             <div>
               <span>Name: {team.name}</span>

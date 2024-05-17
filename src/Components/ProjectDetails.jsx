@@ -263,7 +263,7 @@ const ProjectDetails = () => {
       </div>
 
       <div className="projectDescription grid grid-cols-3 gap-4 mt-4">
-        <div className="projectBrief bg-gray-200 p-2">
+        <div className="projectBrief bg-gray-200 p-2 rounded-lg">
           <h3 className="text-xl font-semibold mb-2 rounded">Project Brief:</h3>
           <span>
             Develop bridge application between HOST & NVMe SSD running at PCIe
@@ -272,8 +272,8 @@ const ProjectDetails = () => {
             Achronix Speedster AC7t1500 FPGA on S7t-VG6 Vector Path board
           </span>
         </div>
-        <div className="projectStatusTable bg-white col-span-2 rounded-md ">
-          <table className="table-auto border-collapse border w-full">
+        <div className="projectStatusTable bg-white col-span-2 rounded-lg">
+          <table className="table-auto border-collapse border w-full rounded-lg">
             <tbody>
               <tr>
                 <td
@@ -340,7 +340,7 @@ const ProjectDetails = () => {
                   colSpan={7}
                   className="text-center text-xl font-semibold bg-blue-200"
                 >
-                  Project Mielstones Tracking
+                  Resource Planning
                 </td>
               </tr>
               <tr className="bg-yellow-200">
@@ -414,7 +414,7 @@ const ProjectDetails = () => {
                 Risk Mitigation Plan
               </td>
             </tr>
-            <tr className="bg-yellow-200">
+            <tr className="bg-yellow-300">
               <th className="border p-2">Milestones</th>
               <th className="border p-2">Risks</th>
               <th className="border p-2">Priority</th>
