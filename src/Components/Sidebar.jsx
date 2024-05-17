@@ -15,6 +15,12 @@ import { useStateContext } from "../Contexts/ContextProvider";
 import { FaProjectDiagram } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
+import { GoProjectRoadmap } from "react-icons/go";
+import { IoCreateOutline } from "react-icons/io5";
+import { BiPurchaseTag } from "react-icons/bi";
+import { TbListDetails } from "react-icons/tb";
+import { GoMilestone } from "react-icons/go";
+import { MdAddTask } from "react-icons/md";
 
 const Sidebar = () => {
   const [selectedMainItem, setSelectedMainItem] = useState("Dashboard"); // State to track selected main item
@@ -42,6 +48,10 @@ const Sidebar = () => {
       navigate("/purchase-order");
     } else if (menuItem === "Project Details") {
       navigate("/project-details");
+    } else if (menuItem === "Project Milestones") {
+      navigate("/project-milestones");
+    }else if (menuItem === "Add Task") {
+      navigate("/add-task");
     }
 
     // Perform any other actions upon main item click
@@ -400,7 +410,7 @@ const Sidebar = () => {
                   onClick={() => handleMenuItemClick("Purchase Orders")}
                 >
                   <span className="right-sidebar-icon">
-                    <IoIosPeople />
+                    <BiPurchaseTag />
                   </span>
                   <span className="right-sidebar-text"> Purchase Orders</span>
                 </div>
@@ -446,7 +456,7 @@ const Sidebar = () => {
                   onClick={() => handleMenuItemClick("All Projects")}
                 >
                   <span className="right-sidebar-icon">
-                    <IoIosPeople />
+                    <GoProjectRoadmap />
                   </span>
                   <span className="right-sidebar-text"> All Projects</span>
                 </div>
@@ -457,7 +467,7 @@ const Sidebar = () => {
                   onClick={() => handleMenuItemClick("Create Project")}
                 >
                   <span className="right-sidebar-icon">
-                    <IoIosPeople />
+                    <IoCreateOutline />
                   </span>
                   <span className="right-sidebar-text"> Create Project</span>
                 </div>
@@ -469,7 +479,7 @@ const Sidebar = () => {
                   onClick={() => handleMenuItemClick("Purchase Order")}
                 >
                   <span className="right-sidebar-icon">
-                    <IoIosPeople />
+                    <BiPurchaseTag />
                   </span>
                   <span className="right-sidebar-text">Purchase Order</span>
                 </div>
@@ -481,9 +491,31 @@ const Sidebar = () => {
                   onClick={() => handleMenuItemClick("Project Details")}
                 >
                   <span className="right-sidebar-icon">
-                    <IoIosPeople />
+                    <TbListDetails />
                   </span>
                   <span className="right-sidebar-text">Project Details</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Project Milestones" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Project Milestones")}
+                >
+                  <span className="right-sidebar-icon">
+                    <GoMilestone />
+                  </span>
+                  <span className="right-sidebar-text">Project Milestones</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Add Task" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Add Task")}
+                >
+                  <span className="right-sidebar-icon">
+                  <MdAddTask />
+                  </span>
+                  <span className="right-sidebar-text">Add Task</span>
                 </div>
               </div>
             )}

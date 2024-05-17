@@ -145,8 +145,8 @@ const App = () => {
             <Route path="/test1" element={<ProjectCarousel />} />
             <Route path="/test2" element={<ProjectCard project={projects[1]}/>} />
             <Route path="/test3" element={<ProjectTableView/>} />
-            <Route path="/test4" element={<ProjectMilestones/>} />
-            <Route path="/test5" element={<TaskForm/>} />
+            <Route path="/project-milestones" element={<ProjectMilestones/>} />
+            <Route path="/add-task" element={<TaskForm/>} />
             <Route path="/test6" element={<TestSelect/>} />
             <Route path="/test7" element={<TeamDeatils/>} />
             
