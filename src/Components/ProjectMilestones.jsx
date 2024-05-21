@@ -15,10 +15,11 @@ import { Dialog } from "primereact/dialog";
 import { Tag } from "primereact/tag";
 import { Calendar } from "primereact/calendar";
 import EmployeeDropdown from "./EmployeeDropdown";
+import { useNavigate } from "react-router-dom";
 
 const ProjectMilestones = () => {
   let emptyTask = {
-    id:"",
+    id: "",
     task: "",
     task_details: "",
     status: "",
@@ -41,7 +42,7 @@ const ProjectMilestones = () => {
   const [taskDialog, setTaskDialog] = useState(false);
   const [deleteTaskDialog, setDeleteTaskDialog] = useState(false);
   const [deleteTasksDialog, setDeleteTasksDialog] = useState(false);
-
+  const navigate = useNavigate("");
 
   const milestones = [
     {
@@ -146,6 +147,10 @@ const ProjectMilestones = () => {
     },
   ];
 
+  const handleMilestoneFormOpen = () => {
+    navigate("/test10");
+  };
+
   const startContent = (
     <div className="flex flex-row justify-start items-center gap-2">
       <Button label="Import Plan" icon="pi pi-plus" className="" />
@@ -168,6 +173,7 @@ const ProjectMilestones = () => {
         label="Add Milestone"
         icon="pi pi-plus"
         className="p-button-success"
+        onClick={handleMilestoneFormOpen}
       />
       <Button
         label="Publish Plan"
@@ -355,8 +361,6 @@ const ProjectMilestones = () => {
 
   // My new datatable
 
-
-
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
   const toast = useRef(null);
@@ -400,7 +404,6 @@ const ProjectMilestones = () => {
     return `${day} ${month} ${year}`;
   };
 
-
   const openNewTask = () => {
     setTask(emptyTask);
     setSubmitted(false);
@@ -415,7 +418,6 @@ const ProjectMilestones = () => {
   const hideDeleteTaskDialog = () => {
     setDeleteTaskDialog(false);
   };
-
 
   const hideDeleteTasksDialog = () => {
     setDeleteTasksDialog(false);
@@ -435,7 +437,7 @@ const ProjectMilestones = () => {
         console.log("my id", task.id);
         taskId = task.id.split(".");
         lastPart = parseInt(taskId[1]);
-        firstPart= parseInt(taskId[0]);
+        firstPart = parseInt(taskId[0]);
         const index = findIndexById(task.id);
 
         console.log("myfirstpart", firstPart);
@@ -451,7 +453,7 @@ const ProjectMilestones = () => {
         });
       } else {
         _task.id = getNextTaskId(0);
-        _task.task=`Task-${_task.id}`
+        _task.task = `Task-${_task.id}`;
         _tasks.push(_task);
         toast.current.show({
           severity: "success",
@@ -464,7 +466,7 @@ const ProjectMilestones = () => {
       setTasks(_tasks);
       setTaskDialog(false);
       setTask(emptyTask);
-      console.log("my tasks", tasks)
+      console.log("my tasks", tasks);
     }
   };
 
@@ -473,12 +475,10 @@ const ProjectMilestones = () => {
     setTaskDialog(true);
   };
 
-
   const confirmDeleteTask = (task) => {
     setTask(task);
     setDeleteTaskDialog(true);
   };
-
 
   const deleteTask = () => {
     let _tasks = tasks.filter((val) => val.id !== task.id);
@@ -506,12 +506,11 @@ const ProjectMilestones = () => {
     return index;
   };
 
-
   const getNextTaskId = (milestoneIndex) => {
-    console.log("my milestone index", milestoneIndex)
+    console.log("my milestone index", milestoneIndex);
     const tasks = milestones[milestoneIndex].tasks;
 
-    console.log("task lengt",tasks.length);
+    console.log("task lengt", tasks.length);
 
     if (tasks.length === 0) {
       return `Task-${milestoneIndex + 1}.1`;
@@ -527,11 +526,9 @@ const ProjectMilestones = () => {
     dt.current.exportCSV();
   };
 
-
   const confirmDeleteSelectedTasks = () => {
     setDeleteTasksDialog(true);
   };
-
 
   const deleteSelectedTasks = () => {
     let _tasks = tasks.filter((val) => !selectedTasks.includes(val));
@@ -547,7 +544,6 @@ const ProjectMilestones = () => {
     });
   };
 
- 
   const onInputChange = (e, name) => {
     const val = (e.target && e.target.value) || "";
     let _task = { ...task };
@@ -558,7 +554,6 @@ const ProjectMilestones = () => {
     console.log("Ankitmy taskname", _task[`${name}`]);
     console.log("my vinal task befor use", _task);
   };
-
 
   const leftToolbarTemplate = () => {
     return (
@@ -633,7 +628,7 @@ const ProjectMilestones = () => {
     return formatDate(rowData.planned_end_date);
   };
   const actualStartDateTemplate = (rowData) => {
-     return formatDate(rowData.actual_start_date);
+    return formatDate(rowData.actual_start_date);
   };
   const actualEndDateTemplate = (rowData) => {
     return formatDate(rowData.actual_end_date);
@@ -652,7 +647,6 @@ const ProjectMilestones = () => {
     );
   };
 
-  
   const taskStatusBodyTemplate = (rowData) => {
     return (
       <Tag value={rowData.status} severity={getSeverityTask(rowData)}></Tag>
@@ -757,8 +751,6 @@ const ProjectMilestones = () => {
       </span>
     </div>
   );
- 
-
 
   const taskDialogFooter = (
     <React.Fragment>
@@ -989,7 +981,10 @@ const ProjectMilestones = () => {
                 <label htmlFor="price" className="font-bold">
                   Owner
                 </label>
-                <EmployeeDropdown placeholder="Select Owner" onSelect={(e) => onInputChange(e, "owner")} />
+                <EmployeeDropdown
+                  placeholder="Select Owner"
+                  onSelect={(e) => onInputChange(e, "owner")}
+                />
               </div>
               <div className="flex flex-row justify-start items-center gap-2">
                 <div className="field col">

@@ -1,6 +1,6 @@
 // MilestoneForm.js
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const MilestoneForm = ({ milestoneNumber,onAddMilestone, onSave }) => {
   
@@ -49,7 +49,7 @@ const MilestoneForm = ({ milestoneNumber,onAddMilestone, onSave }) => {
 
       <div>
         <label htmlFor="startDate" className="font-semibold">
-          Start Date:
+          Planned Start Date:
         </label>
         <input
           type="date"
@@ -60,7 +60,7 @@ const MilestoneForm = ({ milestoneNumber,onAddMilestone, onSave }) => {
         />
       </div>
       <div>
-        <label>End Date:</label>
+        <label>Planned End Date:</label>
         <input
           type="date"
           name="endDate"

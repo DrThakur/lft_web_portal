@@ -14,6 +14,9 @@ import ProjectMilestones from "./Components/ProjectMilestones";
 import TaskForm from "./Components/TaskForm";
 import TestSelect from "./Components/TestSelect";
 import TeamDeatils from "./Components/TeamDeatils";
+import FinalEmployeeDropdown from "./Components/FinalEmployeeDropdown";
+import NewAddTeamForm from "./Components/NewAddTeamForm";
+import NewMilestoneForm from "./Components/NewMilestoneForm";
 
 const App = () => {
   const projects = [
@@ -131,6 +134,30 @@ const App = () => {
     },
     // Add more project data as needed
   ]
+
+  const teamsData = [
+    {
+      teamName: "Software",
+      members: [
+        { name: "John Doe", role: "Manager" },
+        { name: "Jane Doe", role: "Developer" },
+        { name: "Alice Smith", role: "Designer" },
+        { name: "Bob Johnson", role: "QA" }
+      ]
+    },
+    {
+      teamName: "Hardware",
+      members: [
+        { name: "John Doe", role: "Manager" },
+        { name: "Jane Doe", role: "Developer" },
+        { name: "Alice Smith", role: "Designer" },
+        { name: "Bob Johnson", role: "QA" }
+      ]
+    },
+    // Add more teams here if needed
+  ];
+
+
   return (
     <div>
       <BrowserRouter>
@@ -148,7 +175,10 @@ const App = () => {
             <Route path="/project-milestones" element={<ProjectMilestones/>} />
             <Route path="/add-task" element={<TaskForm/>} />
             <Route path="/test6" element={<TestSelect/>} />
-            <Route path="/test7" element={<TeamDeatils/>} />
+            <Route path="/test7" element={<TeamDeatils teams={teamsData}/>} />
+            <Route path="/test8" element={<FinalEmployeeDropdown/>} />
+            <Route path="/test9" element={<NewAddTeamForm/>} />
+            <Route path="/test10" element={<NewMilestoneForm/>} />
             
           </Routes>
         </Layout>

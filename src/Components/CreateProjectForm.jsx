@@ -23,6 +23,7 @@ const CreateProjectForm = () => {
   const [hardwareBQ, setHardwareBQ] = useState("");
   const [fpgaBQ, setFpgaBQ] = useState("");
   const [totalBQ, setTotalBQ] = useState("");
+  const [link, setLink] = useState("");
   const [teams, setTeams] = useState([]);
 
   const [milestones, setMilestones] = useState([]);
@@ -30,13 +31,12 @@ const CreateProjectForm = () => {
   const [showMilestoneForm, setShowMilestoneForm] = useState(false);
   const [error, setError] = useState("");
   const [showAddTeamForm, setShowAddTeamForm] = useState(false);
-  const [selectedProjectManager, setSelectedProjectManager] = useState('');
+  const [projectManager, setProjectManager] = useState("");
 
-
-  const handleSelectProjectManager =(selectedOption)=> {
+  const handleSelectProjectManager = (selectedOption) => {
     console.log("my project manager from select", selectedOption);
-    setSelectedProjectManager(selectedOption);
-  }
+    setProjectManager(selectedOption);
+  };
   const handleSelectLocation = (event) => {
     // Update the selectedOption state variable with the value of the selected option
     setLocation(event.target.value);
@@ -73,16 +73,45 @@ const CreateProjectForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here
+
+      // Gather form data
+  const formData = {
+    projectName,
+    projectId,
+    description,
+    keywords,
+    clientName,
+    clientAddress,
+    pointOfContact,
+    contactDetails,
+    smLeadId,
+    location,
+    startDate,
+    endDate,
+    duration,
+    softwareBQ,
+    hardwareBQ,
+    fpgaBQ,
+    totalBQ,
+    link,
+    teams,
+    milestones,
+    projectManager
+    // Add more fields as needed
+  };
+
+  // Here you can send formData to your mock backend
+  console.log("Form data:", formData);
   };
 
   const handleDeleteMilestone = (index) => {
     // Create a copy of the milestones array
-  const updatedMilestones = [...milestones];
-  // Remove the milestone at the specified index
-  updatedMilestones.splice(index, 1);
-  // Update the milestones state with the updated array
-  setMilestones(updatedMilestones);
-  setMilestoneNumber(milestones.length-1);
+    const updatedMilestones = [...milestones];
+    // Remove the milestone at the specified index
+    updatedMilestones.splice(index, 1);
+    // Update the milestones state with the updated array
+    setMilestones(updatedMilestones);
+    setMilestoneNumber(milestones.length - 1);
   };
 
   const handleStartDateChange = (event) => {
@@ -147,6 +176,29 @@ const CreateProjectForm = () => {
         formattedDuration += `${duration.days} days`;
       }
       return formattedDuration;
+    }
+  };
+
+  const handleSoftwareBQ = (event) => {
+    setSoftwareBQ(event.target.value);
+    calculateTotalBQ(event.target.value, hardwareBQ, fpgaBQ);
+  };
+  const handleHardwareBQ = (event) => {
+    setHardwareBQ(event.target.value);
+    calculateTotalBQ(softwareBQ, event.target.value, fpgaBQ);
+  };
+  const handleFpgaBQ = (event) => {
+    setFpgaBQ(event.target.value);
+    calculateTotalBQ(softwareBQ, hardwareBQ, event.target.value);
+  };
+
+  const calculateTotalBQ = (softBQ, hardBQ, fpga) => {
+    if (softBQ && hardBQ && fpga) {
+      const finalBQ = parseInt(softBQ) + parseInt(hardBQ) + parseInt(fpga);
+      setTotalBQ(finalBQ);
+      console.log("Total Bugdegst");
+    } else {
+      setTotalBQ("");
     }
   };
 
@@ -385,7 +437,7 @@ const CreateProjectForm = () => {
                   placeholder="12345 or 12345-6789"
                   pattern="^\d{5}(-\d{4})?$"
                   value={softwareBQ}
-                  onChange={(e) => setSoftwareBQ(e.target.value)}
+                  onChange={handleSoftwareBQ}
                   required
                 />
               </div>
@@ -407,7 +459,7 @@ const CreateProjectForm = () => {
                   placeholder="12345 or 12345-6789"
                   pattern="^\d{5}(-\d{4})?$"
                   value={hardwareBQ}
-                  onChange={(e) => setHardwareBQ(e.target.value)}
+                  onChange={handleHardwareBQ}
                   required
                 />
               </div>
@@ -429,7 +481,7 @@ const CreateProjectForm = () => {
                   placeholder="12345 or 12345-6789"
                   pattern="^\d{5}(-\d{4})?$"
                   value={fpgaBQ}
-                  onChange={(e) => setFpgaBQ(e.target.value)}
+                  onChange={handleFpgaBQ}
                   required
                 />
               </div>
@@ -451,8 +503,9 @@ const CreateProjectForm = () => {
                   placeholder="12345 or 12345-6789"
                   pattern="^\d{5}(-\d{4})?$"
                   value={totalBQ}
-                  onChange={(e) => setTotalBQ(e.target.value)}
+                  // onChange={(e) => setTotalBQ(e.target.value)}
                   required
+                  readOnly
                 />
               </div>
             </div>
@@ -474,7 +527,7 @@ const CreateProjectForm = () => {
           )}
           {showMilestoneForm && (
             <MilestoneForm
-            milestoneNumber={milestoneNumber}
+              milestoneNumber={milestoneNumber}
               onAddMilestone={handleAddMilestone}
               onSave={hideMilestoneForm}
             />
@@ -482,7 +535,7 @@ const CreateProjectForm = () => {
 
           <div>
             <table>
-              {milestones.length >0 && (
+              {milestones.length > 0 && (
                 <thead>
                   <tr>
                     <th>Milestone</th>
@@ -523,7 +576,7 @@ const CreateProjectForm = () => {
           <div className="flex flex-row justify-start items-center gap-4 mt-2 py-2">
             <span>Project Manager</span>
             <EmployeeDropdown
-              value={selectedProjectManager}
+              value={projectManager}
               className="w-1/2"
               placeholder="Select Project Manager"
               onChange={handleSelectProjectManager}
@@ -549,7 +602,10 @@ const CreateProjectForm = () => {
         {/* Show added teams */}
         {console.log("my Teams", teams)}
         {teams.map((team, index) => (
-          <div key={index} className="flex flex-wrap justify-start items-center gap-2">
+          <div
+            key={index}
+            className="flex flex-wrap justify-start items-center gap-2"
+          >
             <h3 className="text-xl font-semibold">Team {index + 1}</h3>
             <div>
               <span>Name: {team.name}</span>
@@ -574,8 +630,8 @@ const CreateProjectForm = () => {
               <input
                 type="url"
                 id="link"
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
                 className="border w-full rounded px-2 py-2 mt-1"
               />
             </div>
@@ -597,6 +653,7 @@ const CreateProjectForm = () => {
           <button
             type="submit"
             className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600 border-2 w-1/5"
+            onClick={handleSubmit}
           >
             Save
           </button>

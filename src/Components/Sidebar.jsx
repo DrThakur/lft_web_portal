@@ -1,32 +1,24 @@
 import React, { useState } from "react";
 import "./Sidebar.css"; // Import your CSS file for styling
 import { LuLayoutDashboard } from "react-icons/lu";
-import { BsPeople } from "react-icons/bs";
-import { MdAttachMoney, MdOutlineCancel } from "react-icons/md";
-import { RiStore2Line } from "react-icons/ri";
-import { BsLaptop } from "react-icons/bs";
-import { FaSellsy } from "react-icons/fa";
+import { BsPeople, BsLaptop } from "react-icons/bs";
+import { MdAttachMoney, MdOutlineCancel, MdAddTask } from "react-icons/md";
+import { RiStore2Line, RiAdminLine } from "react-icons/ri";
+import { FaSellsy, FaProjectDiagram } from "react-icons/fa";
 import { GiArchiveResearch } from "react-icons/gi";
-import { RiAdminLine } from "react-icons/ri";
-import { IoSettingsOutline } from "react-icons/io5";
-import { IoIosPeople } from "react-icons/io";
-import { IoIosArrowDropright } from "react-icons/io";
+import { IoSettingsOutline, IoCreateOutline } from "react-icons/io5";
+import { IoIosPeople, IoIosArrowDropright } from "react-icons/io";
 import { useStateContext } from "../Contexts/ContextProvider";
-import { FaProjectDiagram } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
-import { GoProjectRoadmap } from "react-icons/go";
-import { IoCreateOutline } from "react-icons/io5";
+import { GoProjectRoadmap, GoMilestone } from "react-icons/go";
 import { BiPurchaseTag } from "react-icons/bi";
 import { TbListDetails } from "react-icons/tb";
-import { GoMilestone } from "react-icons/go";
-import { MdAddTask } from "react-icons/md";
 
 const Sidebar = () => {
   const [selectedMainItem, setSelectedMainItem] = useState("Dashboard"); // State to track selected main item
   const [selectedMenuItem, setSelectedMenuItem] = useState("");
   const [showSubmenu, setShowSubmenu] = useState(false);
-  // const [showRightSidebar, setShowRightSidebar] = useState(true);
   const { activeRightSidebar, setActiveRightSidebar } = useStateContext();
   const navigate = useNavigate();
 
@@ -50,7 +42,7 @@ const Sidebar = () => {
       navigate("/project-details");
     } else if (menuItem === "Project Milestones") {
       navigate("/project-milestones");
-    }else if (menuItem === "Add Task") {
+    } else if (menuItem === "Add Task") {
       navigate("/add-task");
     }
 
@@ -59,12 +51,10 @@ const Sidebar = () => {
 
   // Function to handle submenu visibility
   const handleSubmenu = (status) => {
-    console.log(status);
     setShowSubmenu(status);
   };
 
   const closeRightSidebar = (mainItem) => {
-    console.log(mainItem);
     setSelectedMainItem(mainItem);
     setActiveRightSidebar(!activeRightSidebar);
   };
@@ -74,6 +64,28 @@ const Sidebar = () => {
     setActiveRightSidebar(false);
   }
 
+  // const sidebarMainItem = ({icon: IconComponent, title, selectedMainItem, handleMainItemClick}) => (
+  //   <React.Fragment>
+  //     <Tooltip title={title} placement="right" arrow>
+  //       <div
+  //         className={`sidebar-item ${
+  //           selectedMainItem === title ? "active" : ""
+  //         }`}
+  //         onClick={() => handleMainItemClick(title)}
+  //       >
+  //         <div className="sidebar-item-content">
+  //           <span className="sidebar-icon">
+  //           {IconComponent && <IconComponent />}
+  //           </span>
+  //           <span className="sidebar-text">{title}</span>
+  //         </div>
+  //       </div>
+  //     </Tooltip>
+  //   </React.Fragment>
+  // );
+
+  // <sidebarMainItem icon={LuLayoutDashboard}  title="Dashboard" selectedMainItem="Dashboard" handleMainItemClick ={handleMainItemClick} />
+
   return (
     <div className="app">
       {/* Left Column */}
@@ -82,21 +94,22 @@ const Sidebar = () => {
         <div className="sidebar-column-left">
           {/*ul*/}
           {/* Main items */}
-          <Tooltip title="Dasshboard" placement="right" arrow>
-            <div
-              className={`sidebar-item ${
-                selectedMainItem === "Dashboard" ? "active" : ""
-              }`}
-              onClick={() => handleMainItemClick("Dashboard")}
-            >
-              <div className="sidebar-item-content">
-                <span className="sidebar-icon">
-                  <LuLayoutDashboard />
-                </span>
-                <span className="sidebar-text">Dashboard</span>
-              </div>
-            </div>
-          </Tooltip>
+        
+         <Tooltip title="Dashboard" placement="right" arrow>
+         <div
+           className={`sidebar-item ${
+             selectedMainItem === "Dashboard" ? "active" : ""
+           }`}
+           onClick={() => handleMainItemClick("Dashboard")}
+         >
+           <div className="sidebar-item-content">
+             <span className="sidebar-icon">
+               <LuLayoutDashboard />
+             </span>
+             <span className="sidebar-text">Dashboard</span>
+           </div>
+         </div>
+       </Tooltip>
           <Tooltip title="HR Operations" placement="right" arrow>
             <div
               className={`sidebar-item ${
@@ -513,7 +526,7 @@ const Sidebar = () => {
                   onClick={() => handleMenuItemClick("Add Task")}
                 >
                   <span className="right-sidebar-icon">
-                  <MdAddTask />
+                    <MdAddTask />
                   </span>
                   <span className="right-sidebar-text">Add Task</span>
                 </div>
