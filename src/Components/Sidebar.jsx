@@ -32,7 +32,10 @@ const Sidebar = () => {
   // Function to handle click on menu items
   const handleMenuItemClick = (menuItem) => {
     setSelectedMenuItem(menuItem);
-    if (menuItem === "All Projects") {
+
+    if (menuItem === "PMS Dashboard") {
+      navigate(`/pms-dashboard`);
+    } else if (menuItem === "All Projects") {
       navigate(`/all-projects`);
     } else if (menuItem === "Create Project") {
       navigate("/create-project");
@@ -94,22 +97,22 @@ const Sidebar = () => {
         <div className="sidebar-column-left">
           {/*ul*/}
           {/* Main items */}
-        
-         <Tooltip title="Dashboard" placement="right" arrow>
-         <div
-           className={`sidebar-item ${
-             selectedMainItem === "Dashboard" ? "active" : ""
-           }`}
-           onClick={() => handleMainItemClick("Dashboard")}
-         >
-           <div className="sidebar-item-content">
-             <span className="sidebar-icon">
-               <LuLayoutDashboard />
-             </span>
-             <span className="sidebar-text">Dashboard</span>
-           </div>
-         </div>
-       </Tooltip>
+
+          <Tooltip title="Dashboard" placement="right" arrow>
+            <div
+              className={`sidebar-item ${
+                selectedMainItem === "Dashboard" ? "active" : ""
+              }`}
+              onClick={() => handleMainItemClick("Dashboard")}
+            >
+              <div className="sidebar-item-content">
+                <span className="sidebar-icon">
+                  <LuLayoutDashboard />
+                </span>
+                <span className="sidebar-text">Dashboard</span>
+              </div>
+            </div>
+          </Tooltip>
           <Tooltip title="HR Operations" placement="right" arrow>
             <div
               className={`sidebar-item ${
@@ -464,6 +467,17 @@ const Sidebar = () => {
                 {/* ... */}
                 <div
                   className={`right-sidebar-item-content ${
+                    selectedMenuItem === "PMS Dashboard" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("PMS Dashboard")}
+                >
+                  <span className="right-sidebar-icon">
+                    <GoProjectRoadmap />
+                  </span>
+                  <span className="right-sidebar-text">PMS Dashboard</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
                     selectedMenuItem === "All Projects" ? "active" : ""
                   }`}
                   onClick={() => handleMenuItemClick("All Projects")}
@@ -485,7 +499,7 @@ const Sidebar = () => {
                   <span className="right-sidebar-text"> Create Project</span>
                 </div>
 
-                <div
+                {/*<div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "Purchase Order" ? "active" : ""
                   }`}
@@ -496,8 +510,9 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text">Purchase Order</span>
                 </div>
+                */}
 
-                <div
+                {/*<div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "Project Details" ? "active" : ""
                   }`}
@@ -508,6 +523,7 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text">Project Details</span>
                 </div>
+                */}
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "Project Milestones" ? "active" : ""
@@ -650,6 +666,17 @@ const Sidebar = () => {
               <div className="right-sidebar-item">
                 {/* Sub-items for Finance Ops */}
                 {/* ... */}
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Purchase Order" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Purchase Order")}
+                >
+                  <span className="right-sidebar-icon">
+                    <IoIosPeople />
+                  </span>
+                  <span className="right-sidebar-text"> Purchase Order</span>
+                </div>
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "CRM" ? "active" : ""

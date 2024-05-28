@@ -17,7 +17,7 @@ import { Tag } from "primereact/tag";
 import { SelectButton } from "primereact/selectbutton";
 import { ProjectData } from "../service/ProjectData";
 import { ToggleButton } from "primereact/togglebutton";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProjectTableView from "./ProjectTableView";
 
 const AllProjects = () => {
@@ -32,6 +32,7 @@ const AllProjects = () => {
     rating: 0,
     inventoryStatus: "INSTOCK",
   };
+
   let emptyProject = {
     sno: null,
     projectName: "",
@@ -389,7 +390,11 @@ const AllProjects = () => {
       <div className="flex flex-row justify-start items-center gap-2">
         <Button
           icon="pi pi-list"
-          className={selectedView === "list" ? "primary-500 text-white" : "bg-white text-black"}
+          className={
+            selectedView === "list"
+              ? "primary-500 text-white"
+              : "bg-white text-black"
+          }
           onClick={() => setSelectedView("list")}
         />
         <Button
@@ -411,20 +416,6 @@ const AllProjects = () => {
     );
   };
 
-  const imageBodyTemplate = (rowData) => {
-    return (
-      <img
-        src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`}
-        alt={rowData.image}
-        className="shadow-2 border-round"
-        style={{ width: "64px" }}
-      />
-    );
-  };
-
-  const priceBodyTemplate = (rowData) => {
-    return formatCurrency(rowData.price);
-  };
   const plannedStartDateTemplate = (rowData) => {
     console.log("my rowDate", rowData);
     return formatDate(rowData.plannedStartDate);
@@ -471,6 +462,32 @@ const AllProjects = () => {
             {rowData.projectManager}
           </a>
         </div>
+      </div>
+    );
+  };
+
+  const dashboardBodyTemplate = (rowData) => {
+    // const createdBy = rowData.projectManager;
+    console.log(rowData);
+
+    return (
+      <div className="flex flex-col align-items-center gap-2 mr-2">
+        <Link to="/project-details" className="ml-2 text-green-500 hover:text-green-900">
+         View Dashbaord
+        </Link>
+      </div>
+    );
+  };
+
+  const projectNameBodyTemplate = (rowData) => {
+    // const createdBy = rowData.projectManager;
+    console.log(rowData);
+
+    return (
+      <div className="flex flex-col align-items-center gap-2 mr-2">
+        <Link to="/project-details" className="ml-2 text-blue-500 hover:text-blue-900">
+         {rowData.projectName}
+        </Link>
       </div>
     );
   };
@@ -677,145 +694,156 @@ const AllProjects = () => {
           className="mb-4"
           left={leftToolbarTemplate}
           right={rightToolbarTemplate}
-      
         ></Toolbar>
 
-        {selectedView === 'list' ? (<DataTable
-          ref={dt}
-          value={projects}
-          selectionMode="checkbox"
-          selection={selectedProjects}
-          onSelectionChange={(e) => setSelectedProjects(e.value)}
-          size={size}
-          dataKey="projectId"
-          paginator
-          rows={10}
-          rowsPerPageOptions={[5, 10, 25]}
-          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} projects"
-          globalFilter={globalFilter}
-          header={header}
-          removableSort
-          showGridlines
-          scrollable
-          scrollHeight="600px"
-          className=""
-        >
-          <Column selectionMode="multiple" exportable={false}></Column>
-          <Column
-            field="sno"
-            header="S.No"
-            sortable
-            style={{ minWidth: "6rem" }}
-            frozen={projectNameColumnFrozen}
-            alignFrozen="left"
-          ></Column>
-          <Column
-            field="projectName"
-            header="Project Name"
-            sortable
-            style={{ minWidth: "16rem" }}
-            frozen={projectNameColumnFrozen}
-            alignFrozen="left"
-          ></Column>
-          <Column
-            field="status"
-            header="Status"
-            body={statusBodyTemplateForProject}
-          ></Column>
-          <Column
-            field="health"
-            header="Health"
-            body={healthBodyTemplateForProject}
-            sortable
-            style={{ minWidth: "8rem" }}
-          ></Column>
-          <Column
-            field="projectId"
-            header="Project Id"
-            sortable
-            style={{ minWidth: "10rem" }}
-          ></Column>
-          <Column
-            field="projectManager"
-            header="Project Manager"
-            body={userBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="teams"
-            header="Team(s)"
-            // body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="description"
-            header="Description"
-            // body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
+        {selectedView === "list" ? (
+          <DataTable
+            ref={dt}
+            value={projects}
+            selectionMode="checkbox"
+            selection={selectedProjects}
+            onSelectionChange={(e) => setSelectedProjects(e.value)}
+            size={size}
+            dataKey="projectId"
+            paginator
+            rows={10}
+            rowsPerPageOptions={[5, 10, 25]}
+            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} projects"
+            globalFilter={globalFilter}
+            header={header}
+            removableSort
+            showGridlines
+            scrollable
+            scrollHeight="600px"
+            className=""
+          >
+            <Column selectionMode="multiple" exportable={false}></Column>
+            <Column
+              field="sno"
+              header="S.No"
+              sortable
+              style={{ minWidth: "6rem" }}
+              frozen={projectNameColumnFrozen}
+              alignFrozen="left"
+            ></Column>
+            <Column
+              field="projectName"
+              header="Project Name"
+              sortable
+              style={{ minWidth: "16rem" }}
+              frozen={projectNameColumnFrozen}
+              body={projectNameBodyTemplate}
+              alignFrozen="left"
+            ></Column>
+            <Column
+              field="dashboard"
+              header="Dashboard"
+              body={dashboardBodyTemplate}
+              sortable
+              style={{ minWidth: "16rem" }}
+              alignFrozen="left"
+            ></Column>
+            <Column
+              field="status"
+              header="Status"
+              body={statusBodyTemplateForProject}
+            ></Column>
+            <Column
+              field="health"
+              header="Health"
+              body={healthBodyTemplateForProject}
+              sortable
+              style={{ minWidth: "8rem" }}
+            ></Column>
+            <Column
+              field="projectId"
+              header="Project Id"
+              sortable
+              style={{ minWidth: "10rem" }}
+            ></Column>
+            <Column
+              field="projectManager"
+              header="Project Manager"
+              body={userBodyTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="teams"
+              header="Team(s)"
+              // body={statusBodyTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="description"
+              header="Description"
+              // body={statusBodyTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
 
-          <Column
-            field="plannedStartDate"
-            header="Planned Start Date"
-            body={plannedStartDateTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="plannedEndDate"
-            header="Planned End Date"
-            body={plannedEndDateTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="actualStartDate"
-            header="Actual Start Date"
-            body={actualStartDateTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="actualEndDate"
-            header="Actual End Date"
-            body={actualEndDateTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="client"
-            header="Client"
-            body={clientBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="contactPerson"
-            header="Contact Person"
-            body={ContactPersonBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="history"
-            header="History"
-            // body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
+            <Column
+              field="plannedStartDate"
+              header="Planned Start Date"
+              body={plannedStartDateTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="plannedEndDate"
+              header="Planned End Date"
+              body={plannedEndDateTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="actualStartDate"
+              header="Actual Start Date"
+              body={actualStartDateTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="actualEndDate"
+              header="Actual End Date"
+              body={actualEndDateTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="client"
+              header="Client"
+              body={clientBodyTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="contactPerson"
+              header="Contact Person"
+              body={ContactPersonBodyTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="history"
+              header="History"
+              // body={statusBodyTemplate}
+              sortable
+              style={{ minWidth: "12rem" }}
+            ></Column>
 
-          <Column
-            header="Action"
-            body={actionBodyTemplate}
-            exportable={false}
-            style={{ minWidth: "12rem" }}
-          ></Column>
-        </DataTable>)  :(<ProjectTableView/>)}
-        
+            <Column
+              header="Action"
+              body={actionBodyTemplate}
+              exportable={false}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+          </DataTable>
+        ) : (
+          <ProjectTableView />
+        )}
       </div>
 
       <Dialog

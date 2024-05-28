@@ -14,9 +14,6 @@ const NewAddTeamForm = () => {
       ...member,
       role: selectedRole,
     }));
-    console.log("my selected role", selectedRole);
-    // setTeamData([...teamData, ...updatedMembers]);
-    console.log("mu updated members", updatedMembers);
     setMembers([...members, ...updatedMembers]);
     setSelectedMembers([]);
     setSelectedRole("");

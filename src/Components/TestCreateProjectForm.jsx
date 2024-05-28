@@ -5,8 +5,9 @@ import AddTeamForm from "./AddTeamForm";
 import MilestoneForm from "./MilestoneForm";
 import { FaPlus } from "react-icons/fa6";
 import NewMilestoneForm from "./NewMilestoneForm";
+import TestMilestoneForm from "./TestMilestoneForm";
 
-const CreateProjectForm = () => {
+const TestCreateProjectForm = () => {
   const [projectName, setProjectName] = useState("");
   const [projectId, setProjectId] = useState("");
   const [description, setDescription] = useState("");
@@ -29,7 +30,7 @@ const CreateProjectForm = () => {
   const [teams, setTeams] = useState([]);
 
   const [milestones, setMilestones] = useState([]);
-  const [milestoneNumber, setMilestoneNumber] = useState(1);
+  const [milestoneNumber, setMilestoneNumber] = useState(0);
   const [showMilestoneForm, setShowMilestoneForm] = useState(false);
   const [error, setError] = useState("");
   const [showAddTeamForm, setShowAddTeamForm] = useState(false);
@@ -53,10 +54,15 @@ const CreateProjectForm = () => {
   };
 
   const handleAddMilestone = (newMilestone) => {
+    console.log("my project form new milestone", newMilestone);
     setMilestones([...milestones, newMilestone]);
     // const nextMilestoneNumber = milestones.length + 1;
     // setMilestoneNumber(nextMilestoneNumber);
   };
+
+  const handleMilestones = (milestoneDetails)=> {
+    setMilestones([...milestoneDetails]);
+  }
 
   const handleAddTeam = (newTeam) => {
     setTeams([...teams, newTeam]);
@@ -214,6 +220,10 @@ const CreateProjectForm = () => {
     e.target.blur(); // Remove focus to hide virtual keyboard on mobile devices
     e.target.focus(); // Focus to open the date picker
   };
+
+
+console.log("My Milestone deatiln in create project form-fffinal", milestones);
+
 
   return (
     <div className="container mx-auto bg-white p-4 rounded-md mt-2">
@@ -555,48 +565,56 @@ const CreateProjectForm = () => {
             </button>
           )}
           {showMilestoneForm && (
-            <MilestoneForm
-              milestoneNumber={milestoneNumber}
-              onAddMilestone={handleAddMilestone}
-              onSave={hideMilestoneForm}
-            />
+            
+            <TestMilestoneForm existingMilestones={milestoneNumber} addMilestones={handleMilestones} onSave={hideMilestoneForm}/>
           )}
 
-          <div>
-            <table>
-              {milestones.length > 0 && (
-                <thead>
-                  <tr>
-                    <th>Milestone</th>
-                    <th>Description</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Invoice Value (INR)</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-              )}
-              <tbody>
-                {milestones.map((milestone, index) => (
-                  <tr key={index}>
-                    <td>{milestone.name}</td>
-                    <td>{milestone.description}</td>
-                    <td>{milestone.startDate}</td>
-                    <td>{milestone.endDate}</td>
-                    <td>{milestone.invoiceValue}</td>
-                    <td>
-                      <button
-                        onClick={() => handleDeleteMilestone(index)}
-                        className="border rounded-md bg-red-400 text-white hover:bg-red-700 p-2"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+       
+    {!showMilestoneForm && milestones && milestones.length >0 && (
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold mb-4">Milestone Details</h2>
+          <table className="border-collapse border border-gray-400 w-full">
+            <thead>
+              <tr>
+                <th className="border border-gray-400 px-4 py-2">
+                  Milestone Name
+                </th>
+                <th className="border border-gray-400 px-4 py-2">
+                  Planned Start Date
+                </th>
+                <th className="border border-gray-400 px-4 py-2">
+                  Planned End Date
+                </th>
+                <th className="border border-gray-400 px-4 py-2">
+                  Invoice Value (INR)
+                </th>
+                <th className="border border-gray-400 px-4 py-2">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {milestones.map((milestone, index) => (
+                <tr key={index}>
+                  <td className="border border-gray-400 px-4 py-2 text-center">
+                    {milestone.milestoneName}
+                  </td>
+                  <td className="border border-gray-400 px-4 py-2 text-center">
+                    {milestone.plannedStartDate}
+                  </td>
+                  <td className="border border-gray-400 px-4 py-2 text-center">
+                    {milestone.plannedEndDate}
+                  </td>
+                  <td className="border border-gray-400 px-4 py-2 text-center">
+                    {milestone.invoiceValue}
+                  </td>
+                  <td className="border border-gray-400 px-4 py-2 text-center">
+                    {milestone.description}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
         </div>
         {/* Project Manager */}
         <div className="projectManager">
@@ -692,4 +710,4 @@ const CreateProjectForm = () => {
   );
 };
 
-export default CreateProjectForm;
+export default TestCreateProjectForm;

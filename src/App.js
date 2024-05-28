@@ -17,6 +17,8 @@ import TeamDeatils from "./Components/TeamDeatils";
 import FinalEmployeeDropdown from "./Components/FinalEmployeeDropdown";
 import NewAddTeamForm from "./Components/NewAddTeamForm";
 import NewMilestoneForm from "./Components/NewMilestoneForm";
+import TestCreateProjectForm from "./Components/TestCreateProjectForm";
+import TestMilestoneForm from "./Components/TestMilestoneForm";
 
 const App = () => {
   const projects = [
@@ -171,7 +173,7 @@ const App = () => {
             <Route path="/user-profile" element={<UserProfilePage />} />
             <Route path="/test1" element={<ProjectCarousel />} />
             <Route path="/test2" element={<ProjectCard project={projects[1]}/>} />
-            <Route path="/test3" element={<ProjectTableView/>} />
+            <Route path="/pms-dashboard" element={<ProjectTableView/>} />
             <Route path="/project-milestones" element={<ProjectMilestones/>} />
             <Route path="/add-task" element={<TaskForm/>} />
             <Route path="/test6" element={<TestSelect/>} />
@@ -179,6 +181,8 @@ const App = () => {
             <Route path="/test8" element={<FinalEmployeeDropdown/>} />
             <Route path="/test9" element={<NewAddTeamForm/>} />
             <Route path="/test10" element={<NewMilestoneForm/>} />
+            <Route path="/test11" element={<TestCreateProjectForm/>} />
+            <Route path="/test12" element={<TestMilestoneForm/>} />
             
           </Routes>
         </Layout>

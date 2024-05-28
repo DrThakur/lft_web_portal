@@ -59,6 +59,9 @@ const MilestoneForm = ({ milestoneNumber,onAddMilestone, onSave }) => {
           className="border w-full rounded px-2 py-2 mt-1"
         />
       </div>
+
+
+
       <div>
         <label>Planned End Date:</label>
         <input
@@ -69,6 +72,9 @@ const MilestoneForm = ({ milestoneNumber,onAddMilestone, onSave }) => {
           className="border w-full rounded px-2 py-2 mt-1"
         />
       </div>
+
+
+
       <div>
         <label>Invoice Value (INR):</label>
         <input
@@ -79,7 +85,13 @@ const MilestoneForm = ({ milestoneNumber,onAddMilestone, onSave }) => {
           className="border w-full rounded px-2 py-2 mt-1"
         />
       </div>
+
+
+      
       </div>
+
+
+
       <div className="flex flex-col gap-4">
         <div>
           <label>Description:</label>

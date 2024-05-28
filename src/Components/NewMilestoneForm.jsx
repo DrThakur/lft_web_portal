@@ -47,12 +47,14 @@ const NewMilestoneForm = ({ projectId, existingMilestones }) => {
       setMilestoneName(`MS-${milestoneNumber + 1}`);
     }
 
+    
     // Clear form inputs
     setMilestoneName(`MS-${milestoneNumber + 1}`);
     setPlannedStartDate("");
     setPlannedEndDate("");
     setInvoiceValue("");
     setDescription("");
+    
   };
 
   return (

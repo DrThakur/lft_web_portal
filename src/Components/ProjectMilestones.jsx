@@ -16,6 +16,7 @@ import { Tag } from "primereact/tag";
 import { Calendar } from "primereact/calendar";
 import EmployeeDropdown from "./EmployeeDropdown";
 import { useNavigate } from "react-router-dom";
+import TestMilestoneForm from "./TestMilestoneForm";
 
 const ProjectMilestones = () => {
   let emptyTask = {
@@ -40,6 +41,7 @@ const ProjectMilestones = () => {
   const [selectedTasks, setSelectedTasks] = useState(null);
   const [task, setTask] = useState(emptyTask);
   const [taskDialog, setTaskDialog] = useState(false);
+  const [milestoneDialog, setMilestoneDialog] = useState(false);
   const [deleteTaskDialog, setDeleteTaskDialog] = useState(false);
   const [deleteTasksDialog, setDeleteTasksDialog] = useState(false);
   const navigate = useNavigate("");
@@ -145,10 +147,62 @@ const ProjectMilestones = () => {
         },
       ],
     },
+    {
+      name: "Milestone 3",
+      tasks: [
+        {
+          id: "3.1",
+          task: "Task-3.1",
+          task_details: "Details 3.1",
+          status: "Done",
+          owner: "David",
+          performance: "Good",
+          state: "Done",
+          effort_days: 4,
+          dependency: "None",
+          planned_start_date: "2024-05-01",
+          planned_end_date: "2024-05-04",
+          actual_start_date: "2024-05-01",
+          actual_end_date: "2024-05-03",
+        },
+        {
+          id: "3.2",
+          task: "Task-3.2",
+          task_details: "Details 3.2",
+          status: "InProgress",
+          owner: "Eve",
+          performance: "Excellent",
+          state: "Ongoing",
+          effort_days: 6,
+          dependency: "Task-2.1",
+          planned_start_date: "2024-05-05",
+          planned_end_date: "2024-05-10",
+          actual_start_date: "2024-05-06",
+        },
+        {
+          id: "3.3",
+          task: "Task-3.3",
+          task_details: "Details 3.3",
+          status: "Pending",
+          owner: "Frank",
+          performance: "Average",
+          state: "Not Started",
+          effort_days: 8,
+          dependency: "None",
+          planned_start_date: "2024-05-11",
+          planned_end_date: "2024-05-18",
+        },
+      ],
+    },
   ];
 
   const handleMilestoneFormOpen = () => {
-    navigate("/test10");
+    if (selectedProject === null) {
+      alert("Please Select a Project before proceeding");
+      return;
+    } else {
+      setMilestoneDialog(true);
+    }
   };
 
   const startContent = (
@@ -413,6 +467,10 @@ const ProjectMilestones = () => {
   const hideTaskDialog = () => {
     setSubmitted(false);
     setTaskDialog(false);
+  };
+  const hideMilestoneDialog = () => {
+    // setSubmitted(false);
+    setMilestoneDialog(false);
   };
 
   const hideDeleteTaskDialog = () => {
@@ -1066,6 +1124,23 @@ const ProjectMilestones = () => {
                 </div>
               </div>
             </div>
+          </Dialog>
+
+          <Dialog
+            visible={milestoneDialog}
+            style={{ width: "32rem" }}
+            breakpoints={{ "960px": "75vw", "641px": "90vw" }}
+            header="Task Details"
+            modal
+            className="p-fluid"
+            footer={taskDialogFooter}
+            onHide={hideMilestoneDialog}
+          >
+            <TestMilestoneForm
+              projectId={selectedProject?.id}
+              existingMilestones={milestones}
+            />
+            
           </Dialog>
 
           <Dialog

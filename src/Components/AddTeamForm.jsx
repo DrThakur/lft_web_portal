@@ -10,22 +10,13 @@ const AddTeamForm = ({ onAddTeam, onSave }) => {
   const [showSelectedMembers, setShowSelectedMembers] = useState(false);
 
   const handleAddMember = (selectedOption) => {
-    console.log("my selected option", selectedOption);
-    // console.log("My Mbers", selectedMembers);
-    console.log("my mebers", selectedMembers);
-    // setSelectedMembers([...selectedMembers, selectedOption]);
-    setSelectedMembers([...selectedOption]);
-    // const newSelectedMembers = selectedOption.filter(option => !selectedMembers.includes(option));
-    // setSelectedMembers((prevSelectedMembers) => [...prevSelectedMembers, ...newSelectedMembers]);
-    console.log("my final members", selectedMembers)
+       setSelectedMembers([...selectedOption]);
   };
 
   const handleFinalAddMember = ()=> {
-    console.log("handleFinalAddMember",selectedMembers)
     setShowSelectedMembers(true);
   }
   
-  console.log("my final members -inside", selectedMembers);
   const handleSaveTeam = () => {
     const newTeam = {
       name: teamName,
