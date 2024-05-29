@@ -187,10 +187,15 @@ const projects = [
   // Add more project data as needed
 ];
 
-const ProjectTableView = () => {
+const ProjectTableView = ({ selectedView }) => {
   return (
     <div>
-      <h2 className="font-bold text-2xl mt-2 ml-2 ">PMS Dashboard</h2>
+      {selectedView && selectedView === "table" ? (
+        ""
+      ) : (
+        <h2 className="font-bold text-2xl mt-2 ml-2 ">PMS Dashboard</h2>
+      )}
+
       <div className="grid grid-cols-4 gap-2 overflow-x-hidden">
         {projects.map((project) => (
           <div key={project.id} className="w-screen">

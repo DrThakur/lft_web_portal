@@ -512,7 +512,7 @@ const Sidebar = () => {
                 </div>
                 */}
 
-                {/*<div
+                <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "Project Details" ? "active" : ""
                   }`}
@@ -523,7 +523,7 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text">Project Details</span>
                 </div>
-                */}
+              
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "Project Milestones" ? "active" : ""

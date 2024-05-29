@@ -472,7 +472,7 @@ const AllProjects = () => {
 
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
-        <Link to="/project-details" className="ml-2 text-green-500 hover:text-green-900">
+        <Link to="/project-dashboard" className="ml-2 text-green-500 hover:text-green-900">
          View Dashbaord
         </Link>
       </div>
@@ -842,7 +842,7 @@ const AllProjects = () => {
             ></Column>
           </DataTable>
         ) : (
-          <ProjectTableView />
+          <ProjectTableView selectedView={selectedView} />
         )}
       </div>
 

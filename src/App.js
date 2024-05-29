@@ -19,6 +19,7 @@ import NewAddTeamForm from "./Components/NewAddTeamForm";
 import NewMilestoneForm from "./Components/NewMilestoneForm";
 import TestCreateProjectForm from "./Components/TestCreateProjectForm";
 import TestMilestoneForm from "./Components/TestMilestoneForm";
+import ProjectDetailsPage from "./Components/ProjectDetailsPage";
 
 const App = () => {
   const projects = [
@@ -35,6 +36,21 @@ const App = () => {
       completed: "5",
       active: "1",
       pending: "4",
+      plannedStartDate:"10 Feb 2024",
+      plannedEndDate:"10 Dec 2024",
+      actualStartDate:"13 Mar 2024",
+      actualEndDate:"20 Jan 2025",
+      smLeadId:"LFT/202326",
+      location:"Gurgaon",
+      clientName:"Joshua Technologies Pvt Ltd",
+      clientAddress:"Bangalore",
+      pointOfContact:"Ankit Singh",
+      clientPhone:"7011711442",
+      clientEmail:"drankitkumarthakur@gmail.com",
+      duration:"12 Months",
+      totalBudget:"$500000",
+      repository:"https://www.logic-fruit.com/",
+      status:"Unpublish"
     },
     {
       id: 2,
@@ -169,7 +185,7 @@ const App = () => {
             <Route path="/all-projects" element={<AllProjects />} />
             <Route path="/create-project" element={<CreateProjectForm />} />
             <Route path="/purchase-order" element={<PurchaseOrder />} />
-            <Route path="/project-details" element={<ProjectDetails />} />
+            <Route path="/project-dashboard" element={<ProjectDetails />} />
             <Route path="/user-profile" element={<UserProfilePage />} />
             <Route path="/test1" element={<ProjectCarousel />} />
             <Route path="/test2" element={<ProjectCard project={projects[1]}/>} />
@@ -183,6 +199,7 @@ const App = () => {
             <Route path="/test10" element={<NewMilestoneForm/>} />
             <Route path="/test11" element={<TestCreateProjectForm/>} />
             <Route path="/test12" element={<TestMilestoneForm/>} />
+            <Route path="/project-details" element={<ProjectDetailsPage project={projects[0]}/>} />
             
           </Routes>
         </Layout>

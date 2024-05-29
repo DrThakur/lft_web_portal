@@ -18,7 +18,6 @@ export const ProjectData = {
           client: "KEYSIGHT",
           contactPerson: "John Doe",
           history: "Last Updated On 22/04/2024\nBy Ankit Kumar Thakur",
-          projectDetails:"project-details"
         },
         {
           sno: 2,
