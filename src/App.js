@@ -20,6 +20,7 @@ import NewMilestoneForm from "./Components/NewMilestoneForm";
 import TestCreateProjectForm from "./Components/TestCreateProjectForm";
 import TestMilestoneForm from "./Components/TestMilestoneForm";
 import ProjectDetailsPage from "./Components/ProjectDetailsPage";
+import ColumnToggleDemo from "./Components/MultiSelectColumns";
 
 const App = () => {
   const projects = [
@@ -200,6 +201,7 @@ const App = () => {
             <Route path="/test11" element={<TestCreateProjectForm/>} />
             <Route path="/test12" element={<TestMilestoneForm/>} />
             <Route path="/project-details" element={<ProjectDetailsPage project={projects[0]}/>} />
+            <Route path="/test13" element={<ColumnToggleDemo/>} />
             
           </Routes>
         </Layout>

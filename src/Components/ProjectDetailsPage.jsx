@@ -363,7 +363,7 @@ const ProjectDetailsPage = ({ project }) => {
 
         {/* Add other sections for teams, budget details, and milestones similarly */}
         <div className="flex flex-row justify-start items-center gap-4">
-          <div className="box1 bg-teal-100 p-4 rounded-xl w-1/4">
+          <div className="box1 bg-teal-100 p-4 rounded-xl w-1/4 h-48">
             <h2 className="text-lg font-bold">Teams</h2>
             <table className="">
               <tbody>
@@ -407,8 +407,65 @@ const ProjectDetailsPage = ({ project }) => {
               </tbody>
             </table>
           </div>
-          <div className="box-2 bg-gray-200 p-4 rounded-xl">
-          <h1>Milestone Box</h1>
+          <div className="box-2 h-48">
+          <div className="projectStatusTable bg-white col-span-2 rounded-xl">
+          <table className="table-auto border-collapse border w-full rounded-xl">
+            <tbody>
+              <tr>
+                <td
+                  colSpan={7}
+                  className="text-center text-xl font-semibold bg-gray-200"
+                >
+                  Project Mielstones Tracking
+                </td>
+              </tr>
+              <tr>
+                <td className="border p-2 bg-blue-200 font-semibold ">
+                  Milestones{" "}
+                </td>
+                <td className="border p-2 bg-green-200">1.1</td>
+                <td className="border p-2 bg-yellow-200">1.2</td>
+                <td className="border p-2 bg-yellow-300">1.3</td>
+                <td className="border p-2 bg-red-200">1.4</td>
+                <td className="border p-2">1.5</td>
+                <td className="border p-2">1.6</td>
+              </tr>
+              <tr>
+                <td className="border p-2 bg-blue-200 font-semibold">
+                  Planned
+                </td>
+                <td className="border p-2 bg-green-200">31 Jan 24</td>
+                <td className="border p-2 bg-yellow-200">29 Feb 24</td>
+                <td className="border p-2 bg-yellow-300">31 Mar 24</td>
+                <td className="border p-2 bg-red-200">30 Apr 24</td>
+                <td className="border p-2">31 May 24</td>
+                <td className="border p-2">30 Jun 24</td>
+              </tr>
+              <tr>
+                <td className="border p-2 bg-blue-200 font-semibold">
+                  Actual / Estimated
+                </td>
+                <td className="border p-2 bg-green-200">6 Mar 24</td>
+                <td className="border p-2 bg-yellow-200">31 Mar 24*</td>
+                <td className="border p-2 bg-yellow-300">23 May 24*</td>
+                <td className="border p-2 bg-red-200">30 Apr 24*</td>
+                <td className="border p-2"></td>
+                <td className="border p-2"></td>
+              </tr>
+              <tr>
+                <td className="border p-2 bg-blue-200 font-semibold">
+                  C-Sat Level
+                </td>
+                <td className="border p-2 bg-green-200">+ve</td>
+                <td className="border p-2 bg-yellow-200">Neutral</td>
+                <td className="border p-2 bg-yellow-300"></td>
+                <td className="border p-2 bg-red-200"></td>
+                <td className="border p-2"></td>
+                <td className="border p-2"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
           </div>
 
           {/*    {staticTeamData.map((team, index) => (
