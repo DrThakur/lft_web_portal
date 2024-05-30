@@ -21,19 +21,32 @@ import {
   FaRupeeSign,
 } from "react-icons/fa";
 import { GiArchiveResearch } from "react-icons/gi";
-import { IoSettingsOutline, IoCreateOutline, IoDocumentText  } from "react-icons/io5";
-import { IoIosPeople, IoIosArrowDropright,IoIosTime, IoMdLaptop  } from "react-icons/io";
+import {
+  IoSettingsOutline,
+  IoCreateOutline,
+  IoDocumentText,
+} from "react-icons/io5";
+import {
+  IoIosPeople,
+  IoIosArrowDropright,
+  IoIosTime,
+  IoMdLaptop,
+} from "react-icons/io";
 import { useStateContext } from "../Contexts/ContextProvider";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
-import { GoProjectRoadmap, GoMilestone,GoGoal  } from "react-icons/go";
+import { GoProjectRoadmap, GoMilestone, GoGoal } from "react-icons/go";
 import { BiPurchaseTag } from "react-icons/bi";
-import { TbListDetails,TbReportSearch } from "react-icons/tb";
+import { TbListDetails, TbReportSearch } from "react-icons/tb";
 
 import { ImProfile } from "react-icons/im";
-import { GrMonitor,GrResources, GrDocumentPerformance } from "react-icons/gr";
+import { GrMonitor, GrResources, GrDocumentPerformance } from "react-icons/gr";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
-import { FaMoneyCheckDollar,FaLaptopMedical, FaPersonCirclePlus  } from "react-icons/fa6";
+import {
+  FaMoneyCheckDollar,
+  FaLaptopMedical,
+  FaPersonCirclePlus,
+} from "react-icons/fa6";
 
 const Sidebar = () => {
   const [selectedMainItem, setSelectedMainItem] = useState("Dashboard"); // State to track selected main item
@@ -46,6 +59,9 @@ const Sidebar = () => {
   const handleMainItemClick = (mainItem) => {
     setSelectedMainItem(mainItem);
     setActiveRightSidebar(true);
+    if (mainItem === "Dashboard") {
+      navigate(`/`);
+    }
     // Perform any other actions upon main item click
   };
 
@@ -53,9 +69,7 @@ const Sidebar = () => {
   const handleMenuItemClick = (menuItem) => {
     setSelectedMenuItem(menuItem);
 
-    if (menuItem === "Dashboard") {
-      navigate(`/`);
-    } else if (menuItem === "PMS Dashboard") {
+    if (menuItem === "PMS Dashboard") {
       navigate(`/pms-dashboard`);
     } else if (menuItem === "All Projects") {
       navigate(`/all-projects`);
@@ -281,7 +295,7 @@ const Sidebar = () => {
                 <span className="sidebar-icon">
                   <IoDocumentText />
                 </span>
-                <span className="sidebar-text text-center">D/C</span>
+                <span className="sidebar-text text-center">Documents</span>
               </div>
             </div>
           </Tooltip>
@@ -370,17 +384,23 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text">Employee Dashboard</span>
                 </div>
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "EoS Update" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("EoS Update")}
+                <Tooltip
+                  title="Employee Occupancy Sheet"
+                  placement="right"
+                  arrow
                 >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">EoS Update</span>
-                </div>
+                  <div
+                    className={`right-sidebar-item-content ${
+                      selectedMenuItem === "EoS Update" ? "active" : ""
+                    }`}
+                    onClick={() => handleMenuItemClick("EoS Update")}
+                  >
+                    <span className="right-sidebar-icon">
+                      <IoIosPeople />
+                    </span>
+                    <span className="right-sidebar-text">EoS Update</span>
+                  </div>
+                </Tooltip>
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "My Profile" ? "active" : ""
@@ -392,18 +412,19 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text">My Profile</span>
                 </div>
-
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "My MoS" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("My MoS")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">My MoS</span>
-                </div>
+                <Tooltip title="Measure Of Success" placement="right" arrow>
+                  <div
+                    className={`right-sidebar-item-content ${
+                      selectedMenuItem === "My MoS" ? "active" : ""
+                    }`}
+                    onClick={() => handleMenuItemClick("My MoS")}
+                  >
+                    <span className="right-sidebar-icon">
+                      <IoIosPeople />
+                    </span>
+                    <span className="right-sidebar-text">My MoS</span>
+                  </div>
+                </Tooltip>
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "My Assets" ? "active" : ""
@@ -661,17 +682,23 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text">Project Milestones</span>
                 </div>
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "EoS Approval" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("EoS Approval")}
+                <Tooltip
+                  title="Employee Occupancy Sheet"
+                  placement="right"
+                  arrow
                 >
-                  <span className="right-sidebar-icon">
-                    <MdOutlineApproval />
-                  </span>
-                  <span className="right-sidebar-text">EoS Approval</span>
-                </div>
+                  <div
+                    className={`right-sidebar-item-content ${
+                      selectedMenuItem === "EoS Approval" ? "active" : ""
+                    }`}
+                    onClick={() => handleMenuItemClick("EoS Approval")}
+                  >
+                    <span className="right-sidebar-icon">
+                      <MdOutlineApproval />
+                    </span>
+                    <span className="right-sidebar-text">EoS Approval</span>
+                  </div>
+                </Tooltip>
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "Invoicing" ? "active" : ""
@@ -863,17 +890,23 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text"> PO Entry</span>
                 </div>
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "EoS Approval" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("EoS Approval")}
+                <Tooltip
+                  title="Employee Occupancy Sheet"
+                  placement="right"
+                  arrow
                 >
-                  <span className="right-sidebar-icon">
-                    <MdOutlineApproval />
-                  </span>
-                  <span className="right-sidebar-text">EoS Approval</span>
-                </div>
+                  <div
+                    className={`right-sidebar-item-content ${
+                      selectedMenuItem === "EoS Approval" ? "active" : ""
+                    }`}
+                    onClick={() => handleMenuItemClick("EoS Approval")}
+                  >
+                    <span className="right-sidebar-icon">
+                      <MdOutlineApproval />
+                    </span>
+                    <span className="right-sidebar-text">EoS Approval</span>
+                  </div>
+                </Tooltip>
               </div>
             )}
 
@@ -903,17 +936,23 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text"> Resource Pool</span>
                 </div>
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "EoS Approval" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("EoS Approval")}
+                <Tooltip
+                  title="Employee Occupancy Sheet"
+                  placement="right"
+                  arrow
                 >
-                  <span className="right-sidebar-icon">
-                    <MdOutlineApproval />
-                  </span>
-                  <span className="right-sidebar-text"> EoS Approval</span>
-                </div>
+                  <div
+                    className={`right-sidebar-item-content ${
+                      selectedMenuItem === "EoS Approval" ? "active" : ""
+                    }`}
+                    onClick={() => handleMenuItemClick("EoS Approval")}
+                  >
+                    <span className="right-sidebar-icon">
+                      <MdOutlineApproval />
+                    </span>
+                    <span className="right-sidebar-text"> EoS Approval</span>
+                  </div>
+                </Tooltip>
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "Employee Goals" ? "active" : ""
