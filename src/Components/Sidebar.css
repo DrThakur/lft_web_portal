@@ -125,8 +125,10 @@ body {
   display: flex;
   flex-direction: row;
   transition: width 0.3s ease;
+
   /* border-radius: 5px; */
   /* box-shadow: 2px 2px 10px rgb(2, 2, 2); */
+
 }
 
 /* Styles for the close button */

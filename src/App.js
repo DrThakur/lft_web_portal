@@ -21,6 +21,8 @@ import TestCreateProjectForm from "./Components/TestCreateProjectForm";
 import TestMilestoneForm from "./Components/TestMilestoneForm";
 import ProjectDetailsPage from "./Components/ProjectDetailsPage";
 import ColumnToggleDemo from "./Components/MultiSelectColumns";
+import HolidayCalendarPage from "./Components/HolidayCalenderPage";
+import AnnouncementsPage from "./Components/AnnoucementPage";
 
 const App = () => {
   const projects = [
@@ -176,6 +178,97 @@ const App = () => {
     // Add more teams here if needed
   ];
 
+  const holidays = [
+    { day: 1, month: 1, year: 2024, name: 'New Year\'s Day' }, // January 1st, 2024
+    { day: 26, month: 1, year: 2024, name: 'Australia Day' }, // January 26th, 2024
+    { day: 14, month: 2, year: 2024, name: 'Valentine\'s Day' }, // February 14th, 2024
+    { day: 17, month: 3, year: 2024, name: 'St. Patrick\'s Day' }, // March 17th, 2024
+    { day: 10, month: 4, year: 2024, name: 'Good Friday' }, // April 10th, 2024
+    { day: 12, month: 4, year: 2024, name: 'Easter Sunday' }, // April 12th, 2024
+    { day: 25, month: 4, year: 2024, name: 'Anzac Day' }, // April 25th, 2024
+    { day: 28, month: 5, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
+    { day: 28, month: 6, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
+    { day: 28, month: 7, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
+    { day: 28, month: 8, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
+    { day: 28, month: 9, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
+    { day: 28, month: 10, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
+    { day: 28, month: 11, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
+    { day: 28, month: 12, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
+    // Add more holidays here
+  ];
+
+
+  const announcements = [
+    {
+      date: "June 1, 2024",
+      title: "Important Update",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    },
+    {
+      date: "June 2, 2024",
+      title: "New Feature Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    // Add more announcements here as needed
+    {
+      date: "May 5, 2024",
+      title: "Prodcuct1 Launch Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      date: "May 5, 2024",
+      title: "Prodcuct2 Launch Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      date: "May 5, 2024",
+      title: "Prodcuct3 Launch Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      date: "May 5, 2024",
+      title: "Prodcuct4 Launch Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      date: "May 5, 2024",
+      title: "Prodcuct5 Launch Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      date: "May 5, 2024",
+      title: "Prodcuct6 Launch Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      date: "May 5, 2024",
+      title: "Prodcuct7 Launch Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      date: "May 5, 2024",
+      title: "Prodcuct5 Launch Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      date: "May 5, 2024",
+      title: "Prodcuct8 Launch Announcement",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    // Add more announcements here as needed
+  ];
+
+
 
   return (
     <div>
@@ -202,6 +295,8 @@ const App = () => {
             <Route path="/test12" element={<TestMilestoneForm/>} />
             <Route path="/project-details" element={<ProjectDetailsPage project={projects[0]}/>} />
             <Route path="/test13" element={<ColumnToggleDemo/>} />
+            <Route path="/holiday-calender" element={<HolidayCalendarPage holidays={holidays}/>} />
+            <Route path="/announcements" element={<AnnouncementsPage announcements={announcements}/>} />
             
           </Routes>
         </Layout>

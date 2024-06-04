@@ -10,6 +10,7 @@ import {
   MdOutlineApproval,
   MdManageAccounts,
   MdAddLocation,
+  MdIncompleteCircle
 } from "react-icons/md";
 import { RiStore2Line, RiAdminLine } from "react-icons/ri";
 import {
@@ -47,6 +48,10 @@ import {
   FaLaptopMedical,
   FaPersonCirclePlus,
 } from "react-icons/fa6";
+
+import { FaMedal } from "react-icons/fa";
+import { MdAssignmentReturn } from "react-icons/md";
+
 
 const Sidebar = () => {
   const [selectedMainItem, setSelectedMainItem] = useState("Dashboard"); // State to track selected main item
@@ -396,7 +401,7 @@ const Sidebar = () => {
                     onClick={() => handleMenuItemClick("EoS Update")}
                   >
                     <span className="right-sidebar-icon">
-                      <IoIosPeople />
+                    <MdIncompleteCircle />
                     </span>
                     <span className="right-sidebar-text">EoS Update</span>
                   </div>
@@ -420,7 +425,7 @@ const Sidebar = () => {
                     onClick={() => handleMenuItemClick("My MoS")}
                   >
                     <span className="right-sidebar-icon">
-                      <IoIosPeople />
+                    <FaMedal />
                     </span>
                     <span className="right-sidebar-text">My MoS</span>
                   </div>
@@ -599,7 +604,7 @@ const Sidebar = () => {
                     onClick={() => handleMenuItemClick("Asset Allocation")}
                   >
                     <span className="right-sidebar-icon">
-                      <IoIosPeople />
+                    <MdAssignmentReturn className="rotate-180" />
                     </span>
                     <span className="right-sidebar-text">
                       {" "}
