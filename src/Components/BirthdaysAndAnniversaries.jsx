@@ -2,6 +2,8 @@ import React from 'react';
 import { format } from 'date-fns';
 import { Badge } from 'primereact/badge';
 import { useNavigate } from 'react-router-dom';
+import annivarsaryGif  from "../data/icons8-confetti.gif"
+import birthdayGif from "../data/icons8-happy-birthday.gif"
 
 const employees = [
   { name: 'John Doe', birthday: '1990-06-15', hireDate: '2015-06-03' },
@@ -51,9 +53,9 @@ const BirthdaysAndAnniversaries = () => {
   }
 
   return (
-    <div className="p-4 w-72">
-      <h2 className="text-lg font-bold mb-2 bg-gray-200 p-2 rounded-lg">Birthdays and Anniversaries</h2>
-      <div className="h-80 overflow-y-auto">
+    <div className="p-4 w-72 -mt-2">
+      <h2 className="text-lg font-bold mb-2 bg-purple-200 py-2 px-2 -ml-2 -mr-2 rounded-lg">Birthdays and Anniversaries</h2>
+      <div className="h-96 overflow-y-auto">
         <ul className="space-y-2">
           {displayedDates.map(([date, events]) => (
             <li key={date}>
@@ -67,8 +69,8 @@ const BirthdaysAndAnniversaries = () => {
                       {event.type === 'Anniversary' && (
                         <span> <Badge style={{"fontSize":"9px"}}  value={`${event.years} Year${event.years !== 1 ? 's' : ''}`} severity="info"></Badge> </span>
                       )}
-                      <span>{event.type === 'Birthday' && '🎉'}</span>
-                      <span>{event.type === 'Anniversary' && '🎂'}</span>
+                      <span>{event.type === 'Birthday' && <img src={birthdayGif} alt="🎉" width={25} height={25}/>}</span>
+                      <span>{event.type === 'Anniversary' && <img src={annivarsaryGif} alt="🎂" width={25} height={25}/>}</span>
                     </div>
                   </li>
                 ))}

@@ -6,7 +6,7 @@ const Header = ({ department, title }) => {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = myDate.toLocaleDateString(undefined, options);
   return (
-    <div className=" mb-10 ml-2 bg-yellow-400 rounded-lg p-2">
+    <div className=" mb-10  bg-yellow-400 rounded-lg p-2">
       <p className="text-lg text-black">{department}</p>
       <p className="text-3xl font-bold tracking-tight text-slate-900">
         {title}

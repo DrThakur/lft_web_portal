@@ -98,14 +98,14 @@ const AnnouncementList = () => {
   ];
 
   return (
-    <div className="container mx-auto w-72">
-      <div className="flex flex-row justify-between items-center mb-4 bg-gray-200 rounded-lg mr-2">
-        <h1 className="text-lg font-bold p-2">Announcements</h1>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-1 rounded text-xs mr-4">
+    <div className="container mx-auto w-72 mt-2">
+      <div className="flex flex-row justify-between items-center mb-4 bg-red-200 rounded-lg mr-3 ml-1 py-2 px-3">
+        <h1 className="text-lg font-bold">Announcements</h1>
+        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded text-xs ">
           + Add New
         </button>
       </div>
-      <div className="overflow-y-auto h-80" style={{ top: `-${announcementIndexRef.current * 100}%`, transition: 'top 1s cubic-bezier(0, 1, 0, 1)' }} >
+      <div className="overflow-y-auto h-96" style={{ top: `-${announcementIndexRef.current * 100}%`, transition: 'top 1s cubic-bezier(0, 1, 0, 1)' }} >
         <div className="grid grid-cols-1 gap-2">
           {visibleAnnouncements.map((announcement, index) => (
             <Announcement
@@ -117,7 +117,7 @@ const AnnouncementList = () => {
           ))}
         </div>
       </div>
-      <div className="text-center mt-2">
+      <div className="text-center -mt-2">
         <button className="text-blue-500 hover:underline" onClick={handleViewAll}>
           View All
         </button>

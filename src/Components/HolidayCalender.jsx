@@ -13,8 +13,8 @@ const handleViewAll = () => {
   return (
     <div className="border rounded p-2 w-72">
       <div className="mb-2">
-        <h3 className="text-lg font-bold mb-2 bg-gray-200 py-2 px-3 rounded-lg">Upcoming Holidays</h3>
-        <div className="overflow-y-scroll max-h-80"> {/* Set max height and overflow scroll here */}
+        <h3 className="text-lg font-bold mb-2 bg-green-200  py-2 px-3 rounded-lg">Upcoming Holidays</h3>
+        <div className="overflow-y-scroll max-h-96"> {/* Set max height and overflow scroll here */}
           <ul className="list-none">
             {holidays.map((holiday, index) => {
               const holidayDate = new Date();
