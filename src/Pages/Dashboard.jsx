@@ -5,6 +5,8 @@ import AnnouncementList from "../Components/AnnouncementList";
 import BirthdaysAndAnniversaries from "../Components/BirthdaysAndAnniversaries";
 import QuickAccess from "../Components/QuickAccess";
 import JobVacancy from "../Components/JobVacancy";
+import RecruitmentProgress from "../Components/RecruitmentProgress";
+import AwardsRecognition from "../Components/AwardsRecognition";
 
 const Dashboard = () => {
   const holidays = [
@@ -27,7 +29,7 @@ const Dashboard = () => {
       <Header title="Dashboard" />
       <div className="grid grid-cols-6 gap-2 bg-purple-400 -mt-8 rounded-lg">
         {/* */}
-        <div className="big col-start-1 col-end-6 grid grid-cols-5 grid-rows-12 gap-2">
+        <div className="big col-start-1 col-end-6 grid grid-cols-5 grid-rows-8 gap-2">
           <div
             key=""
             className={`col-start-1 col-end-2 row-start-1 row-end-2 rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
@@ -298,7 +300,24 @@ const Dashboard = () => {
           </div>
           <div
             key=""
-            className={`rounded-lg col-start-1 col-end-6  shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
+            className={`rounded-lg col-start-1 col-end-6 row-start-3 row-end-5  shadow-md  cursor-pointer p-2 bg-white`}
+          >
+          <RecruitmentProgress/>
+            </div>
+
+            
+          <div
+            key=""
+            className={`rounded-lg col-start-1 col-end-6 row-start-5 row-end-7  shadow-md  cursor-pointer bg-black`}
+          >
+            <AwardsRecognition/>
+          </div>
+
+
+
+          <div
+            key=""
+            className={`rounded-lg col-start-1 col-end-6 row-start-7 row-end-9  shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
           >
             <div className="flex flex-row">
               <div className="flex flex-col justify-center items-center">
