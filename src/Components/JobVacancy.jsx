@@ -23,7 +23,7 @@ const JobVacancy = () => {
       </ul>
       </div>
       </div>
-      <div className="text-center mt-2">
+      <div className="text-center -mt-1">
       <button className="text-blue-500 hover:underline" onClick={handleViewAll}>
         View All
       </button>

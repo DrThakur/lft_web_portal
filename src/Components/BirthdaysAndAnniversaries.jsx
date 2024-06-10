@@ -53,14 +53,14 @@ const BirthdaysAndAnniversaries = () => {
   }
 
   return (
-    <div className="p-4 w-72 -mt-2">
-      <h2 className="text-lg font-bold mb-2 bg-purple-200 py-2 px-2 -ml-2 -mr-2 rounded-lg">Birthdays and Anniversaries</h2>
-      <div className="h-96 overflow-y-auto">
-        <ul className="space-y-2">
+    <div className="p-4 w-72 rounded -mt-2">
+      <h2 className="text-lg font-bold mb-1 bg-purple-200 py-2 px-2 -ml-2 -mr-2 rounded-lg">Birthdays and Anniversaries</h2>
+      <div className="h-96 overflow-y-auto" style={{ maxHeight: "137px", overflowY: "auto" }}>
+        <ul className="space-y-1">
           {displayedDates.map(([date, events]) => (
             <li key={date}>
               <p className="font-semibold">{date}</p>
-              <ul className="ml-2 space-y-1">
+              <ul className="ml-2">
                 {events.map(event => (
                   <li key={`${date}-${event.type}-${event.name}`}>
                     <div className='flex flex-row justify-start gap-1'>
@@ -79,7 +79,7 @@ const BirthdaysAndAnniversaries = () => {
           ))}
         </ul>
       </div>
-      <div className="text-center mt-2">
+      <div className="text-center">
         <button className="text-blue-500 hover:underline" onClick={handleViewAll}>
           View All
         </button>
