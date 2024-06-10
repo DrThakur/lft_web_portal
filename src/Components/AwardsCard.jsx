@@ -49,7 +49,7 @@ const AwardCard = ({
       </div>
       {imagePosition === "right" && (
         <div className="w-1/2">
-          <img src={image} alt="Award" className="w-full h-full object-cover"  />
+          <img src={image} alt="Award" className="w-full h-full object-fill"  />
         </div>
       )}
     </div>
