@@ -3,14 +3,6 @@ import React, { useState } from "react";
 const EosUpdate = () => {
   // State to keep track of the number of project rows
   const [numProjects, setNumProjects] = useState(5);
-  const [formData, setFormData] = useState({
-    employeeId: "23026",
-    employeeName: "Ankit Kumar Thakur",
-    email: "ankit.thakur@logic-fruit.com",
-    reportingManager: "Dhruv Kumar Saxena",
-    projects: [],
-  });
-
   const projectManagers = [
     "Mohammad Rafi",
     "Deepak Goyal",
@@ -80,45 +72,87 @@ const EosUpdate = () => {
     "IDEX_ImageProcessing_algorithm_Development_181",
   ];
 
-  const handleProjectChange = (index, project) => {
-    const newProjects = [...formData.projects];
-    newProjects[index] = { ...newProjects[index], project };
-    setFormData({ ...formData, projects: newProjects });
-  };
-
-  const handlePercentageChange = (index, percentage) => {
-    const newProjects = [...formData.projects];
-    newProjects[index] = { ...newProjects[index], percentage };
-    setFormData({ ...formData, projects: newProjects });
-  };
-
-  // Function to handle addition of a new project row
-  const addProjectRow = () => {
-    setNumProjects((prevNum) => prevNum + 1);
-  };
-
-   // Default values for employee details
-   const defaultEmployeeDetails = {
+  // Default values for employee details
+  const defaultEmployeeDetails = {
     employeeId: "23026",
     employeeName: "Ankit Kumar Thakur",
     email: "ankit.thakur@logic-fruit.com",
     reportingManager: "Dhruv Kumar Saxena",
   };
 
+  // State to manage the form data
+  const [formData, setFormData] = useState({
+    ...defaultEmployeeDetails,
+    projects: [...Array(numProjects)].map(() => ({
+      project: "",
+      workPercentage: "",
+    })),
+    remarks: "",
+  });
 
-   // Function to handle form submission
-   const handleSubmit = (event) => {
-    event.preventDefault();
-    // Add your form submission logic here
-    console.log("Form Data:", formData);
-   
+  // Function to handle addition of a new project row
+  const addProjectRow = () => {
+    setNumProjects((prevNum) => prevNum + 1);
+    setFormData((prevData) => ({
+      ...prevData,
+      projects: [...prevData.projects, { project: "", workPercentage: "" }],
+    }));
   };
 
+  // Function to handle input changes
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  // Function to handle project input changes
+  const handleProjectInputChange = (index, field, value) => {
+    const newProjects = [...formData.projects];
+    newProjects[index][field] = value;
+    setFormData({ ...formData, projects: newProjects });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Add your form submission logic here
+    
+    // Calculate the total work percentage
+    const totalWorkPercentage = formData.projects.reduce(
+      (total, project) => total + parseInt(project.workPercentage || 0, 10),
+      0
+    );
+
+    // Check if total work percentage exceeds 100
+    if (totalWorkPercentage > 100) {
+      alert("Total work percentage cannot exceed 100%");
+      return;
+    }
+    // Filter out empty projects
+    const filteredProjects = formData.projects.filter(
+      (project) => project.project && project.workPercentage
+    );
+
+    // Create the final form data with filtered projects
+    const finalFormData = {
+      ...formData,
+      projects: filteredProjects,
+    };
+
+    console.log("Form Data Submitted:", finalFormData);
+
+    // Reset form data to default values
+    setFormData({
+      ...defaultEmployeeDetails,
+      projects: [...Array(5)].map(() => ({ project: "", workPercentage: "" })),
+      remarks: "",
+    });
+  };
 
   return (
     <div className="max-w-full mx-auto p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-6">EoS Update</h1>
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={handleSubmit}>
         {/* Employee Details Section */}
         <div>
           <h2 className="text-xl font-semibold mb-4">Employee Details</h2>
@@ -134,8 +168,8 @@ const EosUpdate = () => {
               <input
                 type="text"
                 id="employeeId"
-                value={defaultEmployeeDetails.employeeId}
-                required
+                value={formData.employeeId}
+                readOnly
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
               />
             </div>
@@ -151,8 +185,8 @@ const EosUpdate = () => {
               <input
                 type="text"
                 id="employeeName"
-                value={defaultEmployeeDetails.employeeName}
-                required
+                value={formData.employeeName}
+                readOnly
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
               />
             </div>
@@ -168,8 +202,8 @@ const EosUpdate = () => {
               <input
                 type="email"
                 id="email"
-                value={defaultEmployeeDetails.email}
-                required
+                value={formData.email}
+                readOnly
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
               />
             </div>
@@ -184,8 +218,8 @@ const EosUpdate = () => {
               </label>
               <select
                 id="reportingManager"
-                value={defaultEmployeeDetails.reportingManager}
-                required
+                value={formData.reportingManager}
+                readOnly
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
                 defaultValue=""
               >
@@ -206,7 +240,7 @@ const EosUpdate = () => {
         <div>
           <h2 className="text-xl font-semibold mb-4">Project Information</h2>
           <div className="">
-            {[...Array(numProjects)].map((_, index) => (
+            {formData.projects.map((project, index) => (
               <div
                 key={index}
                 className="col-span-1 grid grid-cols-2 gap-4 mb-2"
@@ -221,16 +255,20 @@ const EosUpdate = () => {
                   </label>
                   <select
                     id={`project${index + 1}`}
+                    value={project.project}
+                    onChange={(e) =>
+                      handleProjectInputChange(index, "project", e.target.value)
+                    }
                     required={index < 1}
-                    className="mt-2  w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
+                    className="mt-2 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
                     defaultValue=""
                   >
                     <option value="" disabled>
                       Select Project
                     </option>
-                    {projects.map((project, i) => (
-                      <option key={i} value={project}>
-                        {project}
+                    {projects.map((proj, i) => (
+                      <option key={i} value={proj}>
+                        {proj}
                       </option>
                     ))}
                   </select>
@@ -246,6 +284,14 @@ const EosUpdate = () => {
                   <input
                     type="number"
                     id={`workPercentage${index + 1}`}
+                    value={project.workPercentage}
+                    onChange={(e) =>
+                      handleProjectInputChange(
+                        index,
+                        "workPercentage",
+                        e.target.value
+                      )
+                    }
                     required={index < 1}
                     className="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
                   />
@@ -271,7 +317,7 @@ const EosUpdate = () => {
             <div>
               <label
                 className="block text-sm font-medium text-gray-700"
-                htmlFor="email"
+                htmlFor="remarks"
               >
                 Remarks
               </label>
@@ -279,6 +325,8 @@ const EosUpdate = () => {
                 type="text"
                 id="remarks"
                 rows={5}
+                value={formData.remarks}
+                onChange={handleInputChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
               />
             </div>
@@ -290,7 +338,6 @@ const EosUpdate = () => {
           <button
             type="submit"
             className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-            onClick={handleSubmit}
           >
             Submit
           </button>
