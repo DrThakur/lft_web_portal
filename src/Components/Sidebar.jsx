@@ -90,6 +90,8 @@ const Sidebar = () => {
       navigate("/add-task");
     } else if (menuItem === "My Profile") {
       navigate("/user-profile");
+    } else if(menuItem==="EoS Update"){
+      navigate("/eos-update")
     }
 
     // Perform any other actions upon main item click
@@ -108,8 +110,8 @@ const Sidebar = () => {
   if (
     selectedMainItem === "Dashboard" ||
     selectedMainItem === "Admin" ||
-    selectedMainItem === "Learning & Developement" ||
-    selectedMainItem === "Document Center"
+    selectedMainItem === "Learning & Developement"
+    // selectedMainItem === "Document Center"
   ) {
     // If selectedMainItem is "Dashboard", set activeRightSidebar to false
     setActiveRightSidebar(false);
@@ -622,6 +624,119 @@ const Sidebar = () => {
                     <BiPurchaseTag />
                   </span>
                   <span className="right-sidebar-text"> Asset Records</span>
+                </div>
+              </div>
+            )}
+            {selectedMainItem === "Document Center" && (
+              <div className="right-sidebar-item">
+                {/* Sub-items for Finance Ops */}
+                {/* ... */}
+                <Tooltip
+                  title="All Documents"
+                  placement="right"
+                  arrow
+                >
+                  <div
+                    className={`right-sidebar-item-content ${
+                      selectedMenuItem === "All Documents" ? "active" : ""
+                    }`}
+                    onClick={() => handleMenuItemClick("All Documents")}
+                  >
+                    <span className="right-sidebar-icon">
+                    <MdAssignmentReturn className="rotate-180" />
+                    </span>
+                    <span className="right-sidebar-text">
+                      All Documents
+                    </span>
+                  </div>
+                </Tooltip>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Project Documents" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Project Documents")}
+                >
+                  <span className="right-sidebar-icon">
+                    <BiPurchaseTag />
+                  </span>
+                  <span className="right-sidebar-text"> Project Documents</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Project Documents" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Project Documents")}
+                >
+                  <span className="right-sidebar-icon">
+                    <BiPurchaseTag />
+                  </span>
+                  <span className="right-sidebar-text"> HR Documents</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Project Documents" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Project Documents")}
+                >
+                  <span className="right-sidebar-icon">
+                    <BiPurchaseTag />
+                  </span>
+                  <span className="right-sidebar-text"> R&D Documents</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Project Documents" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Project Documents")}
+                >
+                  <span className="right-sidebar-icon">
+                    <BiPurchaseTag />
+                  </span>
+                  <span className="right-sidebar-text"> IT Documents</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Project Documents" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Project Documents")}
+                >
+                  <span className="right-sidebar-icon">
+                    <BiPurchaseTag />
+                  </span>
+                  <span className="right-sidebar-text"> Finance Documents</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Project Documents" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Project Documents")}
+                >
+                  <span className="right-sidebar-icon">
+                    <BiPurchaseTag />
+                  </span>
+                  <span className="right-sidebar-text">S&M Documents</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Project Documents" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Project Documents")}
+                >
+                  <span className="right-sidebar-icon">
+                    <BiPurchaseTag />
+                  </span>
+                  <span className="right-sidebar-text"> Admin Documents</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Project Documents" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Project Documents")}
+                >
+                  <span className="right-sidebar-icon">
+                    <BiPurchaseTag />
+                  </span>
+                  <span className="right-sidebar-text"> Procurement Documents</span>
                 </div>
               </div>
             )}

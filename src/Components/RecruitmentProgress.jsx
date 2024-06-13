@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { ProductService } from "../service/ProductService";
 import { Button } from "primereact/button";
 import { Tag } from "primereact/tag";
 
 const RecruitmentProgress = () => {
-  const [products, setProducts] = useState([]);
+
   const [recruitments, setRecruitments] = useState([]);
 
-  useEffect(() => {
-    ProductService.getProductsMini().then((data) => setProducts(data));
-  }, []);
+
 
   const recruitmentData = [
     {

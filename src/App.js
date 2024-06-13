@@ -23,6 +23,7 @@ import ProjectDetailsPage from "./Components/ProjectDetailsPage";
 import ColumnToggleDemo from "./Components/MultiSelectColumns";
 import HolidayCalendarPage from "./Components/HolidayCalenderPage";
 import AnnouncementsPage from "./Components/AnnoucementPage";
+import EosUpdate from "./Components/EosUpdate";
 
 const App = () => {
   const projects = [
@@ -297,6 +298,7 @@ const App = () => {
             <Route path="/test13" element={<ColumnToggleDemo/>} />
             <Route path="/holiday-calender" element={<HolidayCalendarPage holidays={holidays}/>} />
             <Route path="/announcements" element={<AnnouncementsPage announcements={announcements}/>} />
+            <Route path="/eos-update" element={<EosUpdate/>} />
             
           </Routes>
         </Layout>

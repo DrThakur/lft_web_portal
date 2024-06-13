@@ -8,10 +8,10 @@ const Header = ({ department, title }) => {
   return (
     <div className=" mb-10  rounded-lg p-2">
       <p className="text-lg text-black">{department}</p>
-      <p className="text-3xl font-bold tracking-tight text-slate-900">
+      <p className="text-3xl font-bold tracking-tight  text-teal-900">
         {title}
       </p>
-      <p className="text-xl font-semibold tracking-tight text-slate-700 mt-4 flex flex-row justify-start items-center gap-4">
+      <p className="text-xl font-semibold tracking-tight text-slate-700 mt-4 flex flex-row justify-start items-center gap-4 ">
       {formattedDate}  <DigitalClock />
       </p>
     </div>
