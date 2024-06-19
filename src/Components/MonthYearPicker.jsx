@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   format,
   addMonths,
@@ -7,15 +7,24 @@ import {
   isAfter,
   isSameMonth,
   isSameYear,
+  parse,
 } from "date-fns";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const MonthYearPicker = () => {
+    const { year, month } = useParams();
   const [showCalendar, setShowCalendar] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const today = new Date();
   const navigate = useNavigate("");
+
+  useEffect(() => {
+    if (year && month) {
+      const newDate = parse(`${month} ${year}`, "MMM yyyy", new Date());
+      setCurrentDate(newDate);
+    }
+  }, [year, month]);
 
   const handlePreviousMonth = (e) => {
     e.stopPropagation(); // Prevent triggering the calendar toggle

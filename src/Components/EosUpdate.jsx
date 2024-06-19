@@ -10,10 +10,7 @@ const EosUpdate = () => {
   const [userData, setUserData] = useState(null);
   const [projects, setProjects] = useState([]);
   const [activities, setActivities] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date()); // Default to current date
-  const [readOnlyMode, setReadOnlyMode] = useState(false);
-  const [eosData, setEosData] = useState([]); // EOS data for the selected month
-  const [showCalendar, setShowCalendar] = useState(false);
+
   // State to manage the form data
   const [formData, setFormData] = useState({
     // ...defaultEmployeeDetails,
@@ -28,7 +25,6 @@ const EosUpdate = () => {
     reportingManager: "",
     projects: [],
     activities: [],
-    remarks: "",
   });
 
   const projectManagers = [
@@ -459,7 +455,7 @@ const EosUpdate = () => {
           </div>
 */}
 
-          <div>
+          {/*  <div>
             <h2 className="text-xl font-semibold mb-4">
               (Only for Sales Lead Investigation & Sales & Marketing Activities)
             </h2>
@@ -480,6 +476,7 @@ const EosUpdate = () => {
               />
             </div>
           </div>
+        */}
         </div>
 
         {/* Submit Button */}
