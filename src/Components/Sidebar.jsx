@@ -663,9 +663,9 @@ const Sidebar = () => {
                 </div>
                 <div
                   className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Project Documents" ? "active" : ""
+                    selectedMenuItem === "HR Documents" ? "active" : ""
                   }`}
-                  onClick={() => handleMenuItemClick("Project Documents")}
+                  onClick={() => handleMenuItemClick("HR Documents")}
                 >
                   <span className="right-sidebar-icon">
                     <BiPurchaseTag />
@@ -674,9 +674,9 @@ const Sidebar = () => {
                 </div>
                 <div
                   className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Project Documents" ? "active" : ""
+                    selectedMenuItem === "R&D Documents" ? "active" : ""
                   }`}
-                  onClick={() => handleMenuItemClick("Project Documents")}
+                  onClick={() => handleMenuItemClick("R&D Documents")}
                 >
                   <span className="right-sidebar-icon">
                     <BiPurchaseTag />
@@ -685,9 +685,9 @@ const Sidebar = () => {
                 </div>
                 <div
                   className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Project Documents" ? "active" : ""
+                    selectedMenuItem === "IT Documents" ? "active" : ""
                   }`}
-                  onClick={() => handleMenuItemClick("Project Documents")}
+                  onClick={() => handleMenuItemClick("IT Documents")}
                 >
                   <span className="right-sidebar-icon">
                     <BiPurchaseTag />
@@ -696,9 +696,9 @@ const Sidebar = () => {
                 </div>
                 <div
                   className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Project Documents" ? "active" : ""
+                    selectedMenuItem === "Finance Documents" ? "active" : ""
                   }`}
-                  onClick={() => handleMenuItemClick("Project Documents")}
+                  onClick={() => handleMenuItemClick("Finance Documents")}
                 >
                   <span className="right-sidebar-icon">
                     <BiPurchaseTag />
@@ -707,9 +707,9 @@ const Sidebar = () => {
                 </div>
                 <div
                   className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Project Documents" ? "active" : ""
+                    selectedMenuItem === "S&M Documents" ? "active" : ""
                   }`}
-                  onClick={() => handleMenuItemClick("Project Documents")}
+                  onClick={() => handleMenuItemClick("S&M Documents")}
                 >
                   <span className="right-sidebar-icon">
                     <BiPurchaseTag />
@@ -718,9 +718,9 @@ const Sidebar = () => {
                 </div>
                 <div
                   className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Project Documents" ? "active" : ""
+                    selectedMenuItem === "Admin Documents" ? "active" : ""
                   }`}
-                  onClick={() => handleMenuItemClick("Project Documents")}
+                  onClick={() => handleMenuItemClick("Admin Documents")}
                 >
                   <span className="right-sidebar-icon">
                     <BiPurchaseTag />
@@ -729,9 +729,9 @@ const Sidebar = () => {
                 </div>
                 <div
                   className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Project Documents" ? "active" : ""
+                    selectedMenuItem === "Procurement Documents" ? "active" : ""
                   }`}
-                  onClick={() => handleMenuItemClick("Project Documents")}
+                  onClick={() => handleMenuItemClick("Procurement Documents")}
                 >
                   <span className="right-sidebar-icon">
                     <BiPurchaseTag />

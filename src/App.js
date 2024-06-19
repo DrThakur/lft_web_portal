@@ -24,6 +24,8 @@ import ColumnToggleDemo from "./Components/MultiSelectColumns";
 import HolidayCalendarPage from "./Components/HolidayCalenderPage";
 import AnnouncementsPage from "./Components/AnnoucementPage";
 import EosUpdate from "./Components/EosUpdate";
+import MonthYearPicker from "./Components/MonthYearPicker";
+import EosUpdateByMonth from "./Components/EosUpdateByMonth";
 
 const App = () => {
   const projects = [
@@ -299,6 +301,8 @@ const App = () => {
             <Route path="/holiday-calender" element={<HolidayCalendarPage holidays={holidays}/>} />
             <Route path="/announcements" element={<AnnouncementsPage announcements={announcements}/>} />
             <Route path="/eos-update" element={<EosUpdate/>} />
+            <Route path="/month" element={<MonthYearPicker/>} />
+            <Route path="/eos-update-month/:year/:month" element={<EosUpdateByMonth />} />
             
           </Routes>
         </Layout>
