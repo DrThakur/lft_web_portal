@@ -27,26 +27,26 @@ const EosUpdate = () => {
     activities: [],
   });
 
-  const projectManagers = [
-    "Mohammad Rafi",
-    "Deepak Goyal",
-    "Raghavan T V",
-    "Vishal Sinha",
-    "Monika Gupta",
-    "Akash Jain",
-    "Shashank Chaurasia",
-    "Sonu Sonkar",
-    "Rahul Sharma",
-    "Ramakrishna D C",
-    "Dhruv Kumar Saxena",
-    "Gurpreet Singh",
-    "Vineet Goel",
-    "Abhishek Khandelwal",
-    "NA",
-    "Puneet Sinha",
-    "Amritpreet Singh",
-    "Madhukar Manohar",
-  ];
+//   const projectManagers = [
+//     "Mohammad Rafi",
+//     "Deepak Goyal",
+//     "Raghavan T V",
+//     "Vishal Sinha",
+//     "Monika Gupta",
+//     "Akash Jain",
+//     "Shashank Chaurasia",
+//     "Sonu Sonkar",
+//     "Rahul Sharma",
+//     "Ramakrishna D C",
+//     "Dhruv Kumar Saxena",
+//     "Gurpreet Singh",
+//     "Vineet Goel",
+//     "Abhishek Khandelwal",
+//     "NA",
+//     "Puneet Sinha",
+//     "Amritpreet Singh",
+//     "Madhukar Manohar",
+//   ];
 
   
 
@@ -168,10 +168,10 @@ const EosUpdate = () => {
   //   };
 
   // Function to handle input changes
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
-  };
+//   const handleInputChange = (e) => {
+//     const { id, value } = e.target;
+//     setFormData({ ...formData, [id]: value });
+//   };
 
   // Function to handle project input changes
   const handleProjectInputChange = (index, field, value) => {

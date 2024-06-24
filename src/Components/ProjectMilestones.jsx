@@ -4,11 +4,9 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { MdOutlinePublish } from "react-icons/md";
 import { Dropdown } from "primereact/dropdown";
-
 import { classNames } from "primereact/utils";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-
 import { Toast } from "primereact/toast";
 import { Rating } from "primereact/rating";
 import { Dialog } from "primereact/dialog";
@@ -857,8 +855,8 @@ const ProjectMilestones = () => {
   );
 
   return (
-    <div className="bg-white mt-4 p-2 rounded-lg">
-      <h1 className="font-bold text-xl">Project Milestones</h1>
+    <div className="bg-white p-4 rounded-lg">
+      <h1 className="font-bold text-2xl">Project Milestones</h1>
       <div className="mainContainerS mt-4">
         <div className="1">
           <Toolbar start={startContent} end={endContent} />

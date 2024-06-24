@@ -10,7 +10,7 @@ import {
   MdOutlineApproval,
   MdManageAccounts,
   MdAddLocation,
-  MdIncompleteCircle
+  MdIncompleteCircle,
 } from "react-icons/md";
 import { RiStore2Line, RiAdminLine } from "react-icons/ri";
 import {
@@ -52,7 +52,6 @@ import {
 import { FaMedal } from "react-icons/fa";
 import { MdAssignmentReturn } from "react-icons/md";
 
-
 const Sidebar = () => {
   const [selectedMainItem, setSelectedMainItem] = useState("Dashboard"); // State to track selected main item
   const [selectedMenuItem, setSelectedMenuItem] = useState("");
@@ -90,8 +89,10 @@ const Sidebar = () => {
       navigate("/add-task");
     } else if (menuItem === "My Profile") {
       navigate("/user-profile");
-    } else if(menuItem==="EoS Update"){
-      navigate("/eos-update")
+    } else if (menuItem === "EoS Update") {
+      navigate("/eos-update");
+    } else if (menuItem === "EoS Approval") {
+      navigate("/eos-approval");
     }
 
     // Perform any other actions upon main item click
@@ -403,7 +404,7 @@ const Sidebar = () => {
                     onClick={() => handleMenuItemClick("EoS Update")}
                   >
                     <span className="right-sidebar-icon">
-                    <MdIncompleteCircle />
+                      <MdIncompleteCircle />
                     </span>
                     <span className="right-sidebar-text">EoS Update</span>
                   </div>
@@ -427,7 +428,7 @@ const Sidebar = () => {
                     onClick={() => handleMenuItemClick("My MoS")}
                   >
                     <span className="right-sidebar-icon">
-                    <FaMedal />
+                      <FaMedal />
                     </span>
                     <span className="right-sidebar-text">My MoS</span>
                   </div>
@@ -606,7 +607,7 @@ const Sidebar = () => {
                     onClick={() => handleMenuItemClick("Asset Allocation")}
                   >
                     <span className="right-sidebar-icon">
-                    <MdAssignmentReturn className="rotate-180" />
+                      <MdAssignmentReturn className="rotate-180" />
                     </span>
                     <span className="right-sidebar-text">
                       {" "}
@@ -631,11 +632,7 @@ const Sidebar = () => {
               <div className="right-sidebar-item">
                 {/* Sub-items for Finance Ops */}
                 {/* ... */}
-                <Tooltip
-                  title="All Documents"
-                  placement="right"
-                  arrow
-                >
+                <Tooltip title="All Documents" placement="right" arrow>
                   <div
                     className={`right-sidebar-item-content ${
                       selectedMenuItem === "All Documents" ? "active" : ""
@@ -643,11 +640,9 @@ const Sidebar = () => {
                     onClick={() => handleMenuItemClick("All Documents")}
                   >
                     <span className="right-sidebar-icon">
-                    <MdAssignmentReturn className="rotate-180" />
+                      <MdAssignmentReturn className="rotate-180" />
                     </span>
-                    <span className="right-sidebar-text">
-                      All Documents
-                    </span>
+                    <span className="right-sidebar-text">All Documents</span>
                   </div>
                 </Tooltip>
                 <div
@@ -736,7 +731,10 @@ const Sidebar = () => {
                   <span className="right-sidebar-icon">
                     <BiPurchaseTag />
                   </span>
-                  <span className="right-sidebar-text"> Procurement Documents</span>
+                  <span className="right-sidebar-text">
+                    {" "}
+                    Procurement Documents
+                  </span>
                 </div>
               </div>
             )}

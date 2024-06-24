@@ -599,9 +599,7 @@ const AllProjects = () => {
 
   const header = (
     <div className="flex flex-row justify-start gap-8 align-items-center justify-content-between">
-      <div className="flex items-center ml-8">
-        <h4 className="m-0">All Projects</h4>
-      </div>
+      
       <span className="p-input-icon-left flex flex-row items-center">
         <i className="pi pi-search ml-4 text-center opacity-50" />
         <InputText
@@ -687,11 +685,12 @@ const AllProjects = () => {
   );
 
   return (
-    <div className="p-2 rounded overflow-y-auto">
+    <div className="p-4 rounded overflow-y-auto bg-white">
+    <h1 className="font-bold text-2xl mb-4">All Projects</h1>
       <Toast ref={toast} />
       <div className="card">
         <Toolbar
-          className="mb-4"
+          className="mb-4 bg-gray-50"
           left={leftToolbarTemplate}
           right={rightToolbarTemplate}
         ></Toolbar>

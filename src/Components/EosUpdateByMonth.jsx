@@ -11,7 +11,6 @@ const EosUpdateByMonth = () => {
   const [userData, setUserData] = useState(null);
   const [projects, setProjects] = useState([]);
   const [activities, setActivities] = useState([]);
-  const [salesRemark, setSalesRemark] = useState("");
 
   // State to manage the form data
 
@@ -55,7 +54,6 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "Good progress on sales leads",
     },
     {
       month: "Apr 2024",
@@ -84,7 +82,6 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "Promising leads for next quarter",
     },
     {
       month: "Mar 2024",
@@ -118,7 +115,6 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "Sales strategy meeting held",
     },
     {
       month: "Feb 2024",
@@ -151,7 +147,6 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "New market analysis",
     },
     {
       month: "Jan 2024",
@@ -184,7 +179,6 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "Sales targets met for the month",
     },
     {
       month: "Dec 2023",
@@ -217,7 +211,7 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "End of year sales report",
+    
     },
     {
       month: "Nov 2023",
@@ -250,7 +244,7 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "Sales campaign launched",
+      
     },
     {
       month: "Oct 2023",
@@ -279,7 +273,7 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "Initial client meetings",
+      
     },
     {
       month: "Sept 2023",
@@ -312,7 +306,7 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "Q3 sales summary",
+      
     },
     {
       month: "Aug 2023",
@@ -341,7 +335,7 @@ const EosUpdateByMonth = () => {
           remark: "Initial setup",
         },
       ],
-      salesRemark: "High potential for new leads",
+     
     },
   ];
 
@@ -355,7 +349,6 @@ const EosUpdateByMonth = () => {
     if (dataForSelectedMonth) {
       setProjects(dataForSelectedMonth.projects);
       setActivities(dataForSelectedMonth.activities);
-      setSalesRemark(dataForSelectedMonth.salesRemark);
     }
   }, [selectedMonth]);
 
@@ -513,6 +506,7 @@ const EosUpdateByMonth = () => {
             ))}
           </div>
 
+          {/*
           <div>
             <h2 className="text-xl font-semibold mb-4">
               (Only for Sales Lead Investigation & Sales & Marketing Activities)
@@ -522,6 +516,7 @@ const EosUpdateByMonth = () => {
               <span className="text-blue-500 font-semibold">{salesRemark}</span>
             </div>
           </div>
+          */}
         </div>
       </div>
     </div>
