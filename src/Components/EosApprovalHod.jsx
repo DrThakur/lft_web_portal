@@ -5,7 +5,6 @@ import { Column } from "primereact/column";
 import MonthYearPickerFinal from "./MonthYearPickerFinal";
 import { InputText } from "primereact/inputtext";
 import { MdOutlineEmail } from "react-icons/md";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { eosData as EosData } from "../service/eosData";
 import { MdFilterAlt } from "react-icons/md";
 import { MdFilterAltOff } from "react-icons/md";
@@ -13,10 +12,10 @@ import { Toolbar } from "primereact/toolbar";
 import { VscFilter } from "react-icons/vsc";
 import { VscFilterFilled } from "react-icons/vsc";
 
-const EosApproval = () => {
-  // Assuming eosData is an array of objects with the required fields
-
+// Assuming eosData is an array of objects with the required fields
+const EosApprovalHod = () => {
   const [eosData, setEosData] = useState(null);
+
   const [remarksFilled, setRemarksFilled] = useState({});
   const [approverRemarks, setApproverRemarks] = useState({});
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -49,22 +48,6 @@ const EosApproval = () => {
     }
   }, [filterType, eosData]);
 
-  useEffect(() => {
-    if (eosData) {
-      const updatedRemarksFilled = {};
-      eosData.forEach((item) => {
-        if (item.employeeId in updatedRemarksFilled) {
-          updatedRemarksFilled[item.employeeId] +=
-            item.approverRemarks.trim() !== "" ? 1 : 0;
-        } else {
-          updatedRemarksFilled[item.employeeId] =
-            item.approverRemarks.trim() !== "" ? 1 : 0;
-        }
-      });
-      setRemarksFilled(updatedRemarksFilled);
-    }
-  }, [eosData]);
-
   const handleAction = (id, action, remarks) => {
     const updatedData = eosData.map((item) =>
       item.id === id
@@ -92,6 +75,7 @@ const EosApproval = () => {
     setFilterType(type); // Ensure this function is defined elsewhere in your code
   };
 
+
   const leftToolbarTemplate = () => {
     return (
       <div className="flex flex-wrap gap-2">
@@ -117,26 +101,21 @@ const EosApproval = () => {
           }`}
           onClick={() => handleButtonClick("filled")}
         >
-          {activeButton === "filled" ? <VscFilterFilled /> : <VscFilter />}{" "}
-          Filled Eos
+        {activeButton === "filled" ? <VscFilterFilled /> : <VscFilter />} Filled Eos
         </button>
         <button
-          className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
-            activeButton === "empty"
-              ? "bg-green-500 text-white"
-              : "bg-green-300"
-          }`}
+        className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
+          activeButton === "empty" ? "bg-green-500 text-white" : "bg-green-300"
+        }`}
           onClick={() => handleButtonClick("empty")}
         >
-          {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />}{" "}
-          Empty Eos
+         
+        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} Empty Eos
         </button>
         <button
-          className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
-            activeButton === "filled" || activeButton === "empty"
-              ? "bg-gray-500 text-white"
-              : "bg-gray-300"
-          }`}
+        className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
+         activeButton === "filled" || activeButton === "empty"? "bg-gray-500 text-white" : "bg-gray-300"
+        }`}
           onClick={() => handleButtonClick("all")}
         >
           <MdFilterAltOff /> Clear Filter
@@ -145,10 +124,9 @@ const EosApproval = () => {
     );
   };
 
-  // const renderHeader = () => {
-  //   return (
-  //     <div className="flex flex-row justify-between items-center gap-4 w-full">
-  //       <span className="p-input-icon-left text-right w-fit">
+  //   const header = (
+  //     <div className="flex flex-row justify-evenly items-center gap-4 w-4/12 ">
+  //       <span className="p-input-icon-left text-right">
   //         <i className="pi pi-search" />
   //         <InputText
   //           type="search"
@@ -157,34 +135,28 @@ const EosApproval = () => {
   //           className="placeholder-gray-500 placeholder-opacity-50 text-center border border-gray-300 rounded-md px-2 py-2"
   //         />
   //       </span>
-  //       <div className="flex flex-row justify-start items-center gap-2">
-  //         <button
-  //           className="bg-blue-300 px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2"
-  //           onClick={() => setFilterType("filled")}
-  //         >
-  //           <MdFilterAlt /> Filled EOS
-  //         </button>
-  //         <button
-  //           className="bg-green-300 px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 "
-  //           onClick={() => setFilterType("empty")}
-  //         >
-  //           <MdFilterAlt /> Empty EOS
-  //         </button>
-  //         <button
-  //           className="bg-gray-300 px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2"
-  //           onClick={() => setFilterType("all")}
-  //         >
-  //           <MdFilterAltOff /> Clear Filter
-  //         </button>
-  //       </div>
+  //       <button
+  //         className="bg-blue-300 px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-full p-2"
+  //         onClick={() => setFilterType("filled")}
+  //       >
+  //         <MdFilterAlt /> Filled EOS
+  //       </button>
+  //       <button
+  //         className="bg-green-300 px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-full p-2 "
+  //         onClick={() => setFilterType("empty")}
+  //       >
+  //         <MdFilterAlt /> Empty EOS
+  //       </button>
+  //       <button
+  //         className="bg-gray-300 px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-full p-2"
+  //         onClick={() => setFilterType("all")}
+  //       >
+  //         <MdFilterAltOff /> Clear Filter
+  //       </button>
   //     </div>
   //   );
-  // };
-
-  // const header = renderHeader();
 
   const emloyeeBodyTemplate = (rowData) => {
-    console.log("my row data", rowData);
     return (
       <div className="flex align-items-center gap-2">
         <img
@@ -213,6 +185,21 @@ const EosApproval = () => {
     );
   };
 
+  const projectManagerBodyTemplate = (rowData) => {
+    return (
+      <div className="flex align-items-center gap-2">
+        <img
+          alt={rowData.projectManager}
+          src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
+          width={30}
+          height={30}
+          className="rounded-full"
+        />
+        <span className="font-bold">{rowData.projectManager}</span>
+      </div>
+    );
+  };
+
   const [approvedIds, setApprovedIds] = useState([]);
   const [rejectedIds, setRejectedIds] = useState([]);
 
@@ -226,17 +213,6 @@ const EosApproval = () => {
 
   const isApproved = (id) => approvedIds.includes(id);
   const isRejected = (id) => rejectedIds.includes(id);
-
-  const removeLastLetter = (str) => {
-    if (str.length > 0) {
-      return str.slice(0, -1);
-    }
-    return str;
-  };
-
-  const headerTemplate = (header) => {
-    return <span>{header}</span>;
-  };
 
   const inputTextareaBodyTemplate = (rowData) => {
     return (
@@ -276,8 +252,8 @@ const EosApproval = () => {
             rounded
           />
           <Button
-            label="Correct"
-            icon="pi pi-pencil"
+             label="Correct"
+           icon="pi pi-pencil"
             onClick={() =>
               handleAction(rowData.id, "Corrected", rowData.approverRemarks)
             }
@@ -309,9 +285,7 @@ const EosApproval = () => {
               </div>
               <div className="bg-orange-100 hover:bg-orange-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
                 <span className="font-bold">Cut-Off: &nbsp;</span>
-                <span className="font-semibold  text-orange-500">
-                  26 Jun 2024
-                </span>
+                <span className="font-semibold  text-orange-500">28 Jun 2024</span>
               </div>
               <div className="shadow-md">
                 <button className="bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 flex flex-row justify-center items-center gap-4 w-[220px] text-center">
@@ -326,24 +300,22 @@ const EosApproval = () => {
               <MonthYearPickerFinal />
             </div>
           </div>
-
           <Toolbar
             className="mb-2"
             pt={{
-              root: { style: { padding: "8px" } },
-            }}
+                    root: { style: {padding:"8px" } }
+                }}
+            
             start={leftToolbarTemplate}
             end={rightToolbarTemplate}
           ></Toolbar>
           <DataTable
             value={filteredEosData}
             rowGroupMode="rowspan"
-            groupRowsBy={["employeeId", "employeeName"]}
-            sortMode="multiple"
-            multiSortMeta={[
-              { field: "employeeId", order: 1 },
-              { field: "employeeName", order: 1 },
-            ]}
+            groupRowsBy="employeeId"
+            sortMode="single"
+            sortField="employeeId"
+            sortOrder={1}
             className="p-datatable text-center"
             paginator
             rows={10}
@@ -364,7 +336,7 @@ const EosApproval = () => {
             ></Column>
             <Column
               field="employeeId"
-              header={headerTemplate("Employee Id")}
+              header="Employee Id"
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -372,7 +344,7 @@ const EosApproval = () => {
               style={{ fontWeight: "bold", textAlign: "center" }}
             ></Column>
             <Column
-              field="employeeName"
+              field="employeeId"
               header="Employee Name"
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
@@ -381,6 +353,7 @@ const EosApproval = () => {
               body={emloyeeBodyTemplate}
               style={{ textAlign: "center" }}
             ></Column>
+
             <Column
               field="employeeId"
               header="Reporting Manager"
@@ -391,6 +364,17 @@ const EosApproval = () => {
                 textAlign: "center",
               }}
             ></Column>
+            <Column
+              field="projectManager"
+              header="Project Manager"
+              body={projectManagerBodyTemplate}
+              style={{ textAlign: "center" }}
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+            ></Column>
+
             <Column
               field="projectName"
               header="Project Name"
@@ -423,7 +407,7 @@ const EosApproval = () => {
                 wordBreak: "break=word",
               }}
             ></Column>
-            {/*   <Column
+            {/*      <Column
               field="submitionDate"
               header="Submition Date"
               headerStyle={{
@@ -434,7 +418,7 @@ const EosApproval = () => {
                 textAlign: "center",
               }}
             ></Column>
-            */}
+              */}
             <Column
               field="approverRemarks"
               header="Approver Remarks"
@@ -462,4 +446,4 @@ const EosApproval = () => {
   );
 };
 
-export default EosApproval;
+export default EosApprovalHod;

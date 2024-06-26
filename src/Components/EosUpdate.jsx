@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import MonthYearPicker from "./MonthYearPicker";
 
-
-
-
 const EosUpdate = () => {
   // State to keep track of the number of project rows
   //   const [numProjects, setNumProjects] = useState(14);
   const [userData, setUserData] = useState(null);
   const [projects, setProjects] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [salesLeadError, setSalesLeadError] = useState("");
 
   // State to manage the form data
   const [formData, setFormData] = useState({
@@ -27,28 +25,26 @@ const EosUpdate = () => {
     activities: [],
   });
 
-//   const projectManagers = [
-//     "Mohammad Rafi",
-//     "Deepak Goyal",
-//     "Raghavan T V",
-//     "Vishal Sinha",
-//     "Monika Gupta",
-//     "Akash Jain",
-//     "Shashank Chaurasia",
-//     "Sonu Sonkar",
-//     "Rahul Sharma",
-//     "Ramakrishna D C",
-//     "Dhruv Kumar Saxena",
-//     "Gurpreet Singh",
-//     "Vineet Goel",
-//     "Abhishek Khandelwal",
-//     "NA",
-//     "Puneet Sinha",
-//     "Amritpreet Singh",
-//     "Madhukar Manohar",
-//   ];
-
-  
+  //   const projectManagers = [
+  //     "Mohammad Rafi",
+  //     "Deepak Goyal",
+  //     "Raghavan T V",
+  //     "Vishal Sinha",
+  //     "Monika Gupta",
+  //     "Akash Jain",
+  //     "Shashank Chaurasia",
+  //     "Sonu Sonkar",
+  //     "Rahul Sharma",
+  //     "Ramakrishna D C",
+  //     "Dhruv Kumar Saxena",
+  //     "Gurpreet Singh",
+  //     "Vineet Goel",
+  //     "Abhishek Khandelwal",
+  //     "NA",
+  //     "Puneet Sinha",
+  //     "Amritpreet Singh",
+  //     "Madhukar Manohar",
+  //   ];
 
   useEffect(() => {
     const projectsData = [
@@ -104,6 +100,8 @@ const EosUpdate = () => {
       employeeName: "Ankit Kumar Thakur",
       email: "ankit.thakur@logic-fruit.com",
       reportingManager: "Dhruv Kumar Saxena",
+      projectManager: "Ankit Kumar Thakur",
+      cutOff:"24 Jun 2024"
     };
     const activitiesData = [
       "Admin Activities",
@@ -168,10 +166,10 @@ const EosUpdate = () => {
   //   };
 
   // Function to handle input changes
-//   const handleInputChange = (e) => {
-//     const { id, value } = e.target;
-//     setFormData({ ...formData, [id]: value });
-//   };
+  //   const handleInputChange = (e) => {
+  //     const { id, value } = e.target;
+  //     setFormData({ ...formData, [id]: value });
+  //   };
 
   // Function to handle project input changes
   const handleProjectInputChange = (index, field, value) => {
@@ -204,6 +202,21 @@ const EosUpdate = () => {
 
     const totalWorkPercentage =
       totalProjectWorkPercentage + totalActivityWorkPercentage;
+
+    const salesLeadInvestigation = formData.activities.find(
+      (activity) => activity.activity === "Sales Lead Investigation"
+    );
+
+    if (
+      salesLeadInvestigation &&
+      salesLeadInvestigation.workPercentage &&
+      !salesLeadInvestigation.remark
+    ) {
+      setSalesLeadError(
+        "Remark is required for Sales Lead Investigation if its work percentage is filled"
+      );
+      return;
+    }
 
     // Check if total work percentage exceeds 100
     if (totalWorkPercentage !== 100) {
@@ -255,23 +268,21 @@ const EosUpdate = () => {
 
   return (
     <div className="max-w-full mx-auto p-6 bg-white rounded-lg shadow-md">
-    <div className="flex flex-row justify-between items-center mb-4">
-      <h1 className="text-2xl font-bold">EoS Update</h1>
-      <MonthYearPicker/>
+      <div className="flex flex-row justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">EoS Update</h1>
+        <MonthYearPicker />
       </div>
-  
+
       <form className="space-y-6" onSubmit={handleSubmit}>
         {/* Employee Details Section */}
 
         {userData && (
           <div>
             <h2 className="text-xl font-semibold mb-4">Employee Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               {/* Employee ID */}
               <div>
-                <p className="text-sm font-medium text-gray-700">
-                  Employee ID *
-                </p>
+                <p className="text-sm font-medium text-gray-700">Employee ID</p>
                 <p className="mt-2 text-blue-500 font-bold">
                   {formData.employeeId}
                 </p>
@@ -280,7 +291,7 @@ const EosUpdate = () => {
               {/* Employee Name */}
               <div>
                 <p className="text-sm font-medium text-gray-700">
-                  Employee Name *
+                  Employee Name
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
                   {formData.employeeName}
@@ -289,17 +300,37 @@ const EosUpdate = () => {
 
               {/* Email */}
               <div>
-                <p className="text-sm font-medium text-gray-700">Email *</p>
+                <p className="text-sm font-medium text-gray-700">Email</p>
                 <p className="mt-2 text-blue-500 font-bold">{formData.email}</p>
               </div>
 
               {/* Reporting Manager */}
               <div>
                 <p className="text-sm font-medium text-gray-700">
-                  Reporting Manager *
+                  Reporting Manager
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
                   {formData.reportingManager}
+                </p>
+              </div>
+
+              {/* Project Manager */}
+              <div>
+                <p className="text-sm font-medium text-gray-700">
+                  Project Manager
+                </p>
+                <p className="mt-2 text-blue-500 font-bold">
+                  {formData.projectManager}
+                </p>
+              </div>
+
+              {/* Cut-Off Date */}
+              <div>
+                <p className="text-sm font-medium text-gray-700">
+                  Cut-Off
+                </p>
+                <p className="mt-2 text-blue-500 font-bold">
+                  {formData.cutOff}
                 </p>
               </div>
             </div>
@@ -320,7 +351,6 @@ const EosUpdate = () => {
                     htmlFor={`project${index + 1}`}
                   >
                     Work {index + 1}
-                    {index < 1 && " *"}
                   </label>
                   <p
                     id={`project${index + 1}`}
@@ -335,8 +365,7 @@ const EosUpdate = () => {
                     className="block text-sm font-medium text-gray-700"
                     htmlFor={`workPercentage${index + 1}`}
                   >
-                    Work Percentage in project {index + 1} (In %)
-                    {index < 1 && " *"}
+                    Occupancy (In %)
                   </label>
                   <input
                     type="number"
@@ -399,7 +428,7 @@ const EosUpdate = () => {
                       formData.projects.length + index + 1
                     }`}
                   >
-                    Work Percentage in activity {index + 1} (In %)
+                    Occupancy (In %)
                   </label>
                   <input
                     type="number"
@@ -420,7 +449,14 @@ const EosUpdate = () => {
                     className="block text-sm font-medium text-gray-700"
                     htmlFor={`remark${formData.projects.length + index + 1}`}
                   >
-                    Remark
+                    {activity.activity === "Sales Lead Investigation" ? (
+                      <React.Fragment>
+                        Remarks
+                        <span style={{ color: "red" }}> *</span>
+                      </React.Fragment>
+                    ) : (
+                      "Remarks"
+                    )}
                   </label>
                   <input
                     type="text"
@@ -478,6 +514,13 @@ const EosUpdate = () => {
           </div>
         */}
         </div>
+
+        {/* Display error messagem for sales lead investigation remarks */}
+        {salesLeadError && (
+          <div className="text-red-500 font-semibold mb-4 text-center">
+            {salesLeadError}
+          </div>
+        )}
 
         {/* Submit Button */}
         <div className="text-center mt-6">

@@ -93,6 +93,8 @@ const Sidebar = () => {
       navigate("/eos-update");
     } else if (menuItem === "EoS Approval") {
       navigate("/eos-approval");
+    } else if (menuItem === "EoS Approval Hod") {
+      navigate("/eos-approval-hod");
     }
 
     // Perform any other actions upon main item click
@@ -1061,9 +1063,9 @@ const Sidebar = () => {
                 >
                   <div
                     className={`right-sidebar-item-content ${
-                      selectedMenuItem === "EoS Approval" ? "active" : ""
+                      selectedMenuItem === "EoS Approval Hod" ? "active" : ""
                     }`}
-                    onClick={() => handleMenuItemClick("EoS Approval")}
+                    onClick={() => handleMenuItemClick("EoS Approval Hod")}
                   >
                     <span className="right-sidebar-icon">
                       <MdOutlineApproval />

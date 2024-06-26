@@ -28,6 +28,7 @@ import MonthYearPicker from "./Components/MonthYearPicker";
 import EosUpdateByMonth from "./Components/EosUpdateByMonth";
 import EosApproval from "./Components/EosApproval";
 import EosApprovalFinal from "./Components/EosApprovalFinal";
+import EosApprovalHod from "./Components/EosApprovalHod";
 
 const App = () => {
   const projects = [
@@ -310,6 +311,7 @@ const App = () => {
             <Route path="/eos-update-month/:year/:month" element={<EosUpdateByMonth />} />
             <Route path="/eos-approval" element={<EosApproval />} />
             <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
+            <Route path="/eos-approval-hod" element={<EosApprovalHod/>} />
             
           </Routes>
         </Layout>
