@@ -308,7 +308,7 @@ const EosApproval = () => {
                 <span className="font-semibold  text-red-500">Pending</span>
               </div>
               <div className="bg-orange-100 hover:bg-orange-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
-                <span className="font-bold">Cut-Off: &nbsp;</span>
+                <span className="font-bold">Cut-Off Date: &nbsp;</span>
                 <span className="font-semibold  text-orange-500">
                   26 Jun 2024
                 </span>

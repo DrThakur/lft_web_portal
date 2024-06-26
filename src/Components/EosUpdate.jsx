@@ -327,7 +327,7 @@ const EosUpdate = () => {
               {/* Cut-Off Date */}
               <div>
                 <p className="text-sm font-medium text-gray-700">
-                  Cut-Off
+                  Cut-Off Date
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
                   {formData.cutOff}
