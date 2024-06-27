@@ -110,7 +110,25 @@ const EosApprovalHod = () => {
           onClick={() => handleButtonClick("empty")}
         >
          
-        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} Empty Eos
+        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} Pending Eos
+        </button>
+        <button
+        className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
+          activeButton === "empty" ? "bg-yellow-500 text-white" : "bg-yellow-300"
+        }`}
+          onClick={() => handleButtonClick("empty")}
+        >
+         
+        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} PM Filled Eos
+        </button>
+        <button
+        className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
+          activeButton === "empty" ? "bg-purple-500 text-white" : "bg-purple-300"
+        }`}
+          onClick={() => handleButtonClick("empty")}
+        >
+         
+        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} PM Pending Eos
         </button>
         <button
         className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
@@ -158,7 +176,7 @@ const EosApprovalHod = () => {
 
   const emloyeeBodyTemplate = (rowData) => {
     return (
-      <div className="flex align-items-center gap-2">
+      <div className="flex flex-row justify-start items-center gap-2">
         <img
           alt={rowData.employeeName}
           src={`https://wl-incrivel.cf.tsp.li/resize/728x/webp/0ec/140/d189845022bb6eddb88bb5279a.jpg.webp`}
@@ -172,7 +190,7 @@ const EosApprovalHod = () => {
   };
   const reportingManagerBodyTemplate = (rowData) => {
     return (
-      <div className="flex align-items-center gap-2">
+      <div className="flex flex-row justify-center items-center gap-2">
         <img
           alt={rowData.reportingManager}
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
@@ -187,7 +205,7 @@ const EosApprovalHod = () => {
 
   const projectManagerBodyTemplate = (rowData) => {
     return (
-      <div className="flex align-items-center gap-2">
+      <div className="flex flex-row justify-center items-center gap-2">
         <img
           alt={rowData.projectManager}
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
@@ -225,7 +243,7 @@ const EosApprovalHod = () => {
             value={rowData.approverRemarks || ""}
             onChange={(e) => handleRemarksChange(rowData.id, e.target.value)}
             className="block" // Hide when status is not approved or rejected
-            placeholder="Enter remarks"
+            placeholder="Enter remarks..."
           />
         )}
       </>
@@ -272,9 +290,9 @@ const EosApprovalHod = () => {
     <div className="p-grid p-fluid bg-white p-6 rpunded-lg shadow-md h-full w-full rounded-lg">
       <div className="p-col-12">
         <div className="card card-w-title">
-          <div className="flex flex-row justify-between items-center bg-gray-100 p-2 rounded-lg">
+          <div className="flex flex-wrap flex-row justify-between items-center bg-gray-100 p-2 rounded-lg">
             <h1 className="font-bold text-2xl">Eos Approval</h1>
-            <div className="flex flex-row justify-between items-center gap-4">
+            <div className="flex flex-wrap flex-row justify-between items-center gap-4">
               <div className="bg-yellow-100 hover:bg-yellow-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
                 <span className="font-bold">Pending Eos: &nbsp; </span>
                 <span className="font-smmibold text-blue-500">4</span>
@@ -332,11 +350,13 @@ const EosApprovalHod = () => {
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
+                alignHeader={"center"}
               body={(data, options) => options.rowIndex + 1}
             ></Column>
             <Column
               field="employeeId"
               header="Employee Id"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -346,19 +366,21 @@ const EosApprovalHod = () => {
             <Column
               field="employeeId"
               header="Employee Name"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
               body={emloyeeBodyTemplate}
-              style={{ textAlign: "center" }}
+              style={{ width: "10rem", textAlign: "center" }}
             ></Column>
 
             <Column
               field="employeeId"
               header="Reporting Manager"
+              alignHeader={"center"}
               body={reportingManagerBodyTemplate}
-              style={{ textAlign: "center" }}
+              style={{ width: "14rem", textAlign: "center" }}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -367,8 +389,9 @@ const EosApprovalHod = () => {
             <Column
               field="projectManager"
               header="Project Manager"
+              alignHeader={"center"}
               body={projectManagerBodyTemplate}
-              style={{ textAlign: "center" }}
+              style={{ width: "14rem", textAlign: "center" }}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -378,6 +401,7 @@ const EosApprovalHod = () => {
             <Column
               field="projectName"
               header="Project Name"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -387,6 +411,7 @@ const EosApprovalHod = () => {
             <Column
               field="workPercentage"
               header="Work %"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -395,7 +420,8 @@ const EosApprovalHod = () => {
             ></Column>
             <Column
               field="remarks"
-              header="Remarks"
+              header="Emp Remarks"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -410,6 +436,7 @@ const EosApprovalHod = () => {
             {/*      <Column
               field="submitionDate"
               header="Submition Date"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -422,6 +449,7 @@ const EosApprovalHod = () => {
             <Column
               field="approverRemarks"
               header="Approver Remarks"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -432,6 +460,7 @@ const EosApprovalHod = () => {
             <Column
               field="employeeId"
               header="Actions"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",

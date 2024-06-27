@@ -129,7 +129,7 @@ const EosApproval = () => {
           onClick={() => handleButtonClick("empty")}
         >
           {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />}{" "}
-          Empty Eos
+          Pending Eos
         </button>
         <button
           className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
@@ -186,7 +186,7 @@ const EosApproval = () => {
   const emloyeeBodyTemplate = (rowData) => {
     console.log("my row data", rowData);
     return (
-      <div className="flex align-items-center gap-2">
+      <div className="flex flex-row justify-start items-center gap-1">
         <img
           alt={rowData.employeeName}
           src={`https://wl-incrivel.cf.tsp.li/resize/728x/webp/0ec/140/d189845022bb6eddb88bb5279a.jpg.webp`}
@@ -200,7 +200,7 @@ const EosApproval = () => {
   };
   const reportingManagerBodyTemplate = (rowData) => {
     return (
-      <div className="flex align-items-center gap-2">
+      <div className="flex flex-row justify-center items-center gap-2">
         <img
           alt={rowData.reportingManager}
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
@@ -249,7 +249,7 @@ const EosApproval = () => {
             value={rowData.approverRemarks || ""}
             onChange={(e) => handleRemarksChange(rowData.id, e.target.value)}
             className="block" // Hide when status is not approved or rejected
-            placeholder="Enter remarks"
+            placeholder="Enter remarks..."
           />
         )}
       </>
@@ -293,12 +293,14 @@ const EosApproval = () => {
   };
 
   return (
-    <div className="p-grid p-fluid bg-white p-6 rpunded-lg shadow-md h-full w-full rounded-lg">
+    <div className="bg-white p-6 rpunded-lg shadow-md h-full w-full rounded-lg">
       <div className="p-col-12">
         <div className="card card-w-title">
-          <div className="flex flex-row justify-between items-center bg-gray-100 p-2 rounded-lg">
-            <h1 className="font-bold text-2xl">Eos Approval</h1>
-            <div className="flex flex-row justify-between items-center gap-4">
+          <div className="flex flex-wrap flex-row justify-between items-center bg-gray-100 p-2 rounded-lg">
+            <h1 className="font-bold text-2xl white-space: nowrap flex-shrink: 0">
+              Eos Approval
+            </h1>
+            <div className="flex  flex-wrap flex-row justify-between items-center gap-4">
               <div className="bg-yellow-100 hover:bg-yellow-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
                 <span className="font-bold">Pending Eos: &nbsp; </span>
                 <span className="font-smmibold text-blue-500">4</span>
@@ -360,11 +362,13 @@ const EosApproval = () => {
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
+                alignHeader={"center"}
               body={(data, options) => options.rowIndex + 1}
             ></Column>
             <Column
               field="employeeId"
               header={headerTemplate("Employee Id")}
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -374,35 +378,39 @@ const EosApproval = () => {
             <Column
               field="employeeName"
               header="Employee Name"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
               body={emloyeeBodyTemplate}
-              style={{ textAlign: "center" }}
+              style={{ width: "10rem",textAlign: "center" }}
             ></Column>
             <Column
               field="employeeId"
               header="Reporting Manager"
-              body={reportingManagerBodyTemplate}
-              style={{ textAlign: "center" }}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
+              alignHeader={"center"}
+              body={reportingManagerBodyTemplate}
+              style={{ width: "14rem", textAlign: "center" }}
             ></Column>
             <Column
               field="projectName"
               header="Project Name"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
-              style={{ textAlign: "center" }}
+              style={{ width: "8rem", textAlign: "center" }}
             ></Column>
             <Column
               field="workPercentage"
               header="Work %"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -412,6 +420,7 @@ const EosApproval = () => {
             <Column
               field="remarks"
               header="Remarks"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -426,6 +435,7 @@ const EosApproval = () => {
             {/*   <Column
               field="submitionDate"
               header="Submition Date"
+                 alignHeader={'center'}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -438,16 +448,18 @@ const EosApproval = () => {
             <Column
               field="approverRemarks"
               header="Approver Remarks"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
               body={inputTextareaBodyTemplate}
-              style={{ textAlign: "center" }}
+              style={{ width: "8rem", textAlign: "center" }}
             ></Column>
             <Column
               field="employeeId"
               header="Actions"
+              alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
