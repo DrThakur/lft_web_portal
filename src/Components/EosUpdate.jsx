@@ -101,7 +101,7 @@ const EosUpdate = () => {
       email: "ankit.thakur@logic-fruit.com",
       reportingManager: "Dhruv Kumar Saxena",
       projectManager: "Ankit Kumar Thakur",
-      cutOff:"24 Jun 2024"
+      cutOff: "24 Jun 2024",
     };
     const activitiesData = [
       "Admin Activities",
@@ -268,16 +268,27 @@ const EosUpdate = () => {
 
   return (
     <div className="max-w-full mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div className="flex flex-row justify-between items-center mb-4">
+      <div className="flex flex-row justify-between items-center mb-2 bg-gray-200 p-2 rounded-lg">
         <h1 className="text-2xl font-bold">EoS Update</h1>
+        {/* Submit Button */}
+        <div className="flex flex-row justify-start items-center gap-2">
+        <div className="text-center">
+          <button
+            type="submit"
+            className="px-4 py-2 w-[150px] bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >
+            Submit
+          </button>
+        </div>
         <MonthYearPicker />
+        </div>
       </div>
 
       <form className="space-y-6" onSubmit={handleSubmit}>
         {/* Employee Details Section */}
 
         {userData && (
-          <div>
+          <div className="bg-green-200 rounded-lg p-4 -mb-4">
             <h2 className="text-xl font-semibold mb-4">Employee Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               {/* Employee ID */}
@@ -337,7 +348,7 @@ const EosUpdate = () => {
           </div>
         )}
         {/* Project Information Section */}
-        <div>
+        <div className="bg-gray-100 rounded-lg p-2">
           <h2 className="text-xl font-semibold mb-4">Work Information</h2>
           <div>
             {formData.projects.map((project, index) => (
@@ -521,16 +532,6 @@ const EosUpdate = () => {
             {salesLeadError}
           </div>
         )}
-
-        {/* Submit Button */}
-        <div className="text-center mt-6">
-          <button
-            type="submit"
-            className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >
-            Submit
-          </button>
-        </div>
       </form>
     </div>
   );

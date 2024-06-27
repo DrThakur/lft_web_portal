@@ -290,7 +290,7 @@ const EosApprovalHod = () => {
     <div className="p-grid p-fluid bg-white p-6 rpunded-lg shadow-md h-full w-full rounded-lg">
       <div className="p-col-12">
         <div className="card card-w-title">
-          <div className="flex flex-wrap flex-row justify-between items-center bg-gray-100 p-2 rounded-lg">
+          <div className="flex flex-wrap flex-row justify-between items-center bg-gray-100 p-2 rounded-lg mb-1">
             <h1 className="font-bold text-2xl">Eos Approval</h1>
             <div className="flex flex-wrap flex-row justify-between items-center gap-4">
               <div className="bg-yellow-100 hover:bg-yellow-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">

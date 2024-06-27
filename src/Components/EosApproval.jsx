@@ -296,7 +296,7 @@ const EosApproval = () => {
     <div className="bg-white p-6 rpunded-lg shadow-md h-full w-full rounded-lg">
       <div className="p-col-12">
         <div className="card card-w-title">
-          <div className="flex flex-wrap flex-row justify-between items-center bg-gray-100 p-2 rounded-lg">
+          <div className="flex flex-wrap flex-row justify-between items-center bg-gray-100 p-2 rounded-lg mb-1">
             <h1 className="font-bold text-2xl white-space: nowrap flex-shrink: 0">
               Eos Approval
             </h1>

@@ -96,7 +96,7 @@ const MonthYearPicker = () => {
   return (
     <div className="relative mr-6 w-80">
       <div
-        className="flex items-center space-x-2 p-2 border rounded cursor-pointer bg-white w-full justify-center"
+        className="flex items-center space-x-2 p-2 border cursor-pointer bg-white w-full justify-center rounded-lg"
         onClick={handleMonthYearClick}
       >
         <FaChevronLeft onClick={handlePreviousMonth} />
