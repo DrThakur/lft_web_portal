@@ -29,6 +29,7 @@ import EosUpdateByMonth from "./Components/EosUpdateByMonth";
 import EosApproval from "./Components/EosApproval";
 import EosApprovalFinal from "./Components/EosApprovalFinal";
 import EosApprovalHod from "./Components/EosApprovalHod";
+import DocumentCenter from "./Components/DocumentCenter";
 
 const App = () => {
   const projects = [
@@ -312,6 +313,7 @@ const App = () => {
             <Route path="/eos-approval" element={<EosApproval />} />
             <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
             <Route path="/eos-approval-hod" element={<EosApprovalHod/>} />
+            <Route path="/document-center" element={<DocumentCenter/>} />
             
           </Routes>
         </Layout>

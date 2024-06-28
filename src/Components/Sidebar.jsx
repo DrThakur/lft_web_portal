@@ -65,6 +65,8 @@ const Sidebar = () => {
     setActiveRightSidebar(true);
     if (mainItem === "Dashboard") {
       navigate(`/`);
+    } else if(mainItem === "Document Center"){
+      navigate(`/document-center`);
     }
     // Perform any other actions upon main item click
   };
@@ -95,7 +97,7 @@ const Sidebar = () => {
       navigate("/eos-approval");
     } else if (menuItem === "EoS Approval Hod") {
       navigate("/eos-approval-hod");
-    }
+    } 
 
     // Perform any other actions upon main item click
   };
@@ -297,7 +299,7 @@ const Sidebar = () => {
           <Tooltip title="Document Center" placement="right" arrow>
             <div
               className={`sidebar-item ${
-                selectedMainItem === "Document Ceter" ? "active" : ""
+                selectedMainItem === "Document Center" ? "active" : ""
               }`}
               onClick={() => handleMainItemClick("Document Center")}
             >
@@ -305,7 +307,7 @@ const Sidebar = () => {
                 <span className="sidebar-icon">
                   <IoDocumentText />
                 </span>
-                <span className="sidebar-text text-center">Documents</span>
+                <span className="sidebar-text">Documents</span>
               </div>
             </div>
           </Tooltip>
