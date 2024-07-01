@@ -67,7 +67,7 @@ const OragnizationChart = ({tabTitle}) => {
               data: {
                 image:
                   "https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png",
-                name: "Sanjeev Kumar",
+                name: "Amritpreet Singh",
                 title: "CEO",
                 empId:"23005"
               }
@@ -78,7 +78,7 @@ const OragnizationChart = ({tabTitle}) => {
                 data: {
                   image:
                     "https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png",
-                  name: "Vineet Goel",
+                  name: "Meenu Kukreja",
                   title: "CTO",
                   empId:"23008"
                 }
