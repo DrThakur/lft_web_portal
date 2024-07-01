@@ -11,6 +11,13 @@ const employees = [
   { name: 'Bob Johnson', birthday: '1992-06-05', hireDate: '2017-06-20' },
   { name: 'Bobby John', birthday: '1992-06-05', hireDate: '2017-06-21' },
   { name: 'John Cena', birthday: '1992-06-06', hireDate: '2017-06-22' },
+
+
+  { name: 'John Doe', birthday: '1990-07-15', hireDate: '2015-07-03' },
+  { name: 'Jane Smith', birthday: '1985-07-25', hireDate: '2016-07-10' },
+  { name: 'Bob Johnson', birthday: '1992-07-05', hireDate: '2017-07-20' },
+  { name: 'Bobby John', birthday: '1992-07-05', hireDate: '2017-07-21' },
+  { name: 'John Cena', birthday: '1992-07-06', hireDate: '2017-07-22' },
   // Add more employees here
 ];
 

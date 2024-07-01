@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Sidebar.css"; // Import your CSS file for styling
 import { LuLayoutDashboard } from "react-icons/lu";
 import { BsPeople, BsLaptop } from "react-icons/bs";
+import { RiOrganizationChart } from "react-icons/ri";
 import {
   MdAttachMoney,
   MdOutlineCancel,
@@ -97,6 +98,8 @@ const Sidebar = () => {
       navigate("/eos-approval");
     } else if (menuItem === "EoS Approval Hod") {
       navigate("/eos-approval-hod");
+    } else if (menuItem === "Organization Chart") {
+      navigate("/org-chart-page");
     } 
 
     // Perform any other actions upon main item click
@@ -447,6 +450,18 @@ const Sidebar = () => {
                     <IoMdLaptop />
                   </span>
                   <span className="right-sidebar-text"> My Assets</span>
+                </div>
+
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "Organization Chart" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("Organization Chart")}
+                >
+                  <span className="right-sidebar-icon">
+                  <RiOrganizationChart />
+                  </span>
+                  <span className="right-sidebar-text"> Organization Chart</span>
                 </div>
               </div>
             )}

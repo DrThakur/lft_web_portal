@@ -30,7 +30,8 @@ import EosApproval from "./Components/EosApproval";
 import EosApprovalFinal from "./Components/EosApprovalFinal";
 import EosApprovalHod from "./Components/EosApprovalHod";
 import DocumentCenter from "./Components/DocumentCenter";
-
+import OragnizationChart from "./Components/OragnizationChart";
+import OrganizationChartPage from "./Pages/OrganizationChartPage";
 const App = () => {
   const projects = [
     {
@@ -314,6 +315,8 @@ const App = () => {
             <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
             <Route path="/eos-approval-hod" element={<EosApprovalHod/>} />
             <Route path="/document-center" element={<DocumentCenter/>} />
+            <Route path="/org-chart" element={<OragnizationChart/>} />
+            <Route path="/org-chart-page" element={<OrganizationChartPage/>} />
             
           </Routes>
         </Layout>
