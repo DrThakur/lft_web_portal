@@ -60,8 +60,6 @@ const MilestoneForm = ({ milestoneNumber,onAddMilestone, onSave }) => {
         />
       </div>
 
-
-
       <div>
         <label>Planned End Date:</label>
         <input

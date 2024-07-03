@@ -1147,6 +1147,7 @@ import {
   MdDelete,
 } from "react-icons/md";
 import UploadModal from "./UploadModal";
+import { GrDocumentText } from "react-icons/gr";
 
 const DocumentCenter = () => {
   const [files, setFiles] = useState([
@@ -1194,6 +1195,7 @@ const DocumentCenter = () => {
     },
   ]);
   const [isGridView, setIsGridView] = useState(true);
+  const [isFileView, setIsFileView] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const menuRef = useRef(null);
@@ -1331,6 +1333,27 @@ const DocumentCenter = () => {
         <div className="flex justify-between items-center bg-gray-100 rounded-lg p-2">
           <h1 className="text-2xl font-bold">Document Center</h1>
           <div className="flex items-center">
+            <button
+              onClick={() => setIsFileView(false)}
+              className={`flex items-center px-4 py-2 rounded-l-lg ${
+                !isGridView
+                  ? "bg-yellow-500 text-white"
+                  : "bg-white text-yellow-500 hover:bg-gray-200"
+              }`}
+            >
+            <GrDocumentText className="text-xl mr-2"  />
+            </button>
+            <button
+              onClick={() => setIsFileView(true)}
+              className={`flex items-center px-4 py-2 rounded-r-lg mr-2 ${
+                isGridView
+                  ? "bg-yellow-500 text-white"
+                  : "bg-white text-yellow-500 hover:bg-gray-200"
+              }`}
+            >
+            <FaFolder className="text-xl mr-2" />
+            
+            </button>
             <button
               onClick={() => setIsGridView(false)}
               className={`flex items-center px-4 py-2 rounded-l-lg ${

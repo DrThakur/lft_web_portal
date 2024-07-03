@@ -5,6 +5,8 @@ import AddTeamForm from "./AddTeamForm";
 import MilestoneForm from "./MilestoneForm";
 import { FaPlus } from "react-icons/fa6";
 import NewMilestoneForm from "./NewMilestoneForm";
+import NewAddTeamForm from "./NewAddTeamForm";
+import FinalEmployeeDropdown from "./FinalEmployeeDropdown";
 
 const CreateProjectForm = () => {
   const [projectName, setProjectName] = useState("");
@@ -34,6 +36,14 @@ const CreateProjectForm = () => {
   const [error, setError] = useState("");
   const [showAddTeamForm, setShowAddTeamForm] = useState(false);
   const [projectManager, setProjectManager] = useState("");
+
+  const toggleAddTeamForm = () => {
+    setShowAddTeamForm((prevState) => !prevState);
+  };
+
+  const toggleMilestoneForm = () => {
+    setShowMilestoneForm((prevState) => !prevState);
+  };
 
   const handleSelectProjectManager = (selectedOption) => {
     console.log("my project manager from select", selectedOption);
@@ -555,11 +565,7 @@ const CreateProjectForm = () => {
             </button>
           )}
           {showMilestoneForm && (
-            <MilestoneForm
-              milestoneNumber={milestoneNumber}
-              onAddMilestone={handleAddMilestone}
-              onSave={hideMilestoneForm}
-            />
+            <NewMilestoneForm toggleMilestoneForm={toggleMilestoneForm} onSave={handleAddMilestone} />
           )}
 
           <div>
@@ -602,14 +608,15 @@ const CreateProjectForm = () => {
         <div className="projectManager">
           <hr className="border-2 mt-2 mb-2 rounded border-dashed" />
           <h3 className="text-xl font-semibold">Add Project Manager</h3>
-          <div className="flex flex-row justify-start items-center gap-4 mt-2 py-2">
-            <span>Project Manager</span>
-            <EmployeeDropdown
+          <div className="flex flex-row justify-start items-center gap-2 mt-2 py-2">
+            <span className="">Project Manager</span>
+            <div className="w-1/6">
+            <FinalEmployeeDropdown
               value={projectManager}
-              className="w-1/2"
               placeholder="Select Project Manager"
               onChange={handleSelectProjectManager}
             />
+            </div>
           </div>
         </div>
         {/* Add Teams */}
@@ -624,9 +631,7 @@ const CreateProjectForm = () => {
               <FaPlus /> Add Team
             </button>
           )}
-          {showAddTeamForm && (
-            <AddTeamForm onAddTeam={handleAddTeam} onSave={hideAddTeamForm} />
-          )}
+          {showAddTeamForm && <NewAddTeamForm toggleForm={toggleAddTeamForm} onSave={handleAddTeam} />}
         </div>
         {/* Show added teams */}
         {console.log("my Teams", teams)}
@@ -649,6 +654,25 @@ const CreateProjectForm = () => {
             </div>
           </div>
         ))}
+
+        <div className="mt-4">
+        <h3 className="text-xl font-semibold">Milestones</h3>
+        <ul>
+          {milestones.map((milestone, index) => (
+            <li key={index}>{milestone.milestoneName}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="mt-4">
+        <h3 className="text-xl font-semibold">Team Members</h3>
+        <ul>
+          {teams.map((team, index) => (
+            <li key={index}>{team.teamName}</li>
+          ))}
+        </ul>
+      </div>
+
+      
         {/* Project Repository */}
         <div className="addProjectRepository">
           <hr className="border-2 mt-2 mb-2 rounded border-dashed" />

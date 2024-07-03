@@ -255,8 +255,8 @@ const EosApprovalHod = () => {
       remarksFilled[rowData.employeeId] !==
       eosData.filter((item) => item.employeeId === rowData.employeeId).length;
     return (
-      <div className="flex flex-column gap-2">
-        <div className="flex gap-2">
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
           <Button
             label="Approve"
             icon="pi pi-check"

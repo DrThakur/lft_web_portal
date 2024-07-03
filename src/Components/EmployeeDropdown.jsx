@@ -33,29 +33,53 @@ const EmployeeDropdown = ({ isMultiSelect = false, value, placeholder, onChange 
   const animatedComponents = makeAnimated();
 
   // Map employees data into options for React Select
+  // const options = employeesData.map((employee) => ({
+  //   value: employee.id,
+  //   label: (
+  //     <div className="flex items-center h-10">
+  //       <img
+  //         src={employee.photo}
+  //         alt={employee.name}
+  //         className="w-8 h-8 rounded-full"
+  //       />
+  //       <div>
+  //         <div>
+  //           {employee.name} ({employee.employeeId})
+  //         </div>
+  //         <div className="text-gray-500 text-sm">{employee.designation}</div>
+  //       </div>
+  //     </div>
+  //   ),
+  // }));
+
+  
   const options = employeesData.map((employee) => ({
     value: employee.id,
-    label: (
-      <div className="flex items-center h-10">
-        <img
-          src={employee.photo}
-          alt={employee.name}
-          className="w-8 h-8 rounded-full"
-        />
-        <div>
-          <div>
-            {employee.name} ({employee.employeeId})
-          </div>
-          <div className="text-gray-500 text-sm">{employee.designation}</div>
-        </div>
-      </div>
-    ),
+    label: employee.name,
+    data: employee
   }));
 
   // Handle change in selected employee
   const handleSelectChange = (selectedOption) => {
     console.log("my employeeOptions", selectedOption);
   };
+
+
+  const formatOptionLabel = ({ label, data }) => (
+    <div className="flex items-center h-10">
+      <img
+        src={data.photo}
+        alt={data.name}
+        className="w-8 h-8 rounded-full"
+      />
+      <div>
+        <div>
+          {data.name} ({data.employeeId})
+        </div>
+        <div className="text-gray-500 text-sm">{data.designation}</div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="">
@@ -68,6 +92,7 @@ const EmployeeDropdown = ({ isMultiSelect = false, value, placeholder, onChange 
         isClearable
         isMulti={isMultiSelect}
         components={animatedComponents}
+        formatOptionLabel={formatOptionLabel}
         styles={{
           padding: "10px",
           menuPortal: (base) => ({ ...base, zIndex: 9999 }),
