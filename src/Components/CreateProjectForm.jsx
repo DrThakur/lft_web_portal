@@ -64,8 +64,8 @@ const CreateProjectForm = () => {
 
   const handleAddMilestone = (newMilestone) => {
     setMilestones([...milestones, newMilestone]);
-    // const nextMilestoneNumber = milestones.length + 1;
-    // setMilestoneNumber(nextMilestoneNumber);
+    const nextMilestoneNumber = milestones.length + 1;
+    setMilestoneNumber(nextMilestoneNumber);
   };
 
   const handleAddTeam = (newTeam) => {
@@ -565,45 +565,72 @@ const CreateProjectForm = () => {
             </button>
           )}
           {showMilestoneForm && (
-            <NewMilestoneForm toggleMilestoneForm={toggleMilestoneForm} onSave={handleAddMilestone} />
+            <NewMilestoneForm
+              toggleMilestoneForm={toggleMilestoneForm}
+              onSave={handleAddMilestone}
+              existingMilestones={milestones}
+            />
           )}
 
-          <div>
-            <table>
-              {milestones.length > 0 && (
+          {!showMilestoneForm && milestones && milestones.length > 0 && (
+            <div className="mt-8 ">
+              <h2 className="text-xl font-semibold mb-4 text-center">
+                Milestone Details
+              </h2>
+              <table className="border-collapse border border-gray-400 w-full bg-white p-2">
                 <thead>
                   <tr>
-                    <th>Milestone</th>
-                    <th>Description</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Invoice Value (INR)</th>
-                    <th>Action</th>
+                    <th className="border border-gray-400 px-4 py-2">
+                      Milestone Name
+                    </th>
+                    <th className="border border-gray-400 px-4 py-2">
+                      Planned Start Date
+                    </th>
+                    <th className="border border-gray-400 px-4 py-2">
+                      Planned End Date
+                    </th>
+                    <th className="border border-gray-400 px-4 py-2">
+                      Invoice Value (INR)
+                    </th>
+                    <th className="border border-gray-400 px-4 py-2">
+                      Description
+                    </th>
                   </tr>
                 </thead>
-              )}
-              <tbody>
-                {milestones.map((milestone, index) => (
-                  <tr key={index}>
-                    <td>{milestone.name}</td>
-                    <td>{milestone.description}</td>
-                    <td>{milestone.startDate}</td>
-                    <td>{milestone.endDate}</td>
-                    <td>{milestone.invoiceValue}</td>
-                    <td>
-                      <button
-                        onClick={() => handleDeleteMilestone(index)}
-                        className="border rounded-md bg-red-400 text-white hover:bg-red-700 p-2"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                <tbody>
+                  {milestones.map((milestone, index) => (
+                    <tr key={index}>
+                      <td className="border border-gray-400 px-4 py-2 text-center">
+                        {milestone.milestoneName}
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2 text-center">
+                        {milestone.plannedStartDate}
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2 text-center">
+                        {milestone.plannedEndDate}
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2 text-center">
+                        {milestone.invoiceValue}
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2 text-center">
+                        {milestone.description}
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2 text-center">
+                        <button
+                          className="border rounded-md bg-red-400 text-white hover:bg-red-700 p-2"
+                          onClick={() => handleDeleteMilestone(index)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
+
         {/* Project Manager */}
         <div className="projectManager">
           <hr className="border-2 mt-2 mb-2 rounded border-dashed" />
@@ -611,11 +638,11 @@ const CreateProjectForm = () => {
           <div className="flex flex-row justify-start items-center gap-2 mt-2 py-2">
             <span className="">Project Manager</span>
             <div className="w-1/6">
-            <FinalEmployeeDropdown
-              value={projectManager}
-              placeholder="Select Project Manager"
-              onChange={handleSelectProjectManager}
-            />
+              <FinalEmployeeDropdown
+                value={projectManager}
+                placeholder="Select Project Manager"
+                onChange={handleSelectProjectManager}
+              />
             </div>
           </div>
         </div>
@@ -631,48 +658,105 @@ const CreateProjectForm = () => {
               <FaPlus /> Add Team
             </button>
           )}
-          {showAddTeamForm && <NewAddTeamForm toggleForm={toggleAddTeamForm} onSave={handleAddTeam} />}
+          {showAddTeamForm && (
+            <NewAddTeamForm
+              toggleForm={toggleAddTeamForm}
+              onSave={handleAddTeam}
+            />
+          )}
+
+          {!showAddTeamForm && teams && teams.length > 0 && (
+            <div className="mt-8 text-center">
+              <h2 className="text-lg font-bold mb-4">Team Data</h2>
+              <div className="">
+                <table className="border-collapse border border-gray-400 bg-white w-full">
+                  <thead>
+                    <tr>
+                      <th className="border border-gray-400 px-4 py-2">
+                        Team Name
+                      </th>
+                      <th className="border border-gray-400 px-4 py-2">
+                        Member Details
+                      </th>
+                      <th className="border border-gray-400 px-4 py-2">Role</th>
+                      <th className="border border-gray-400 px-4 py-2">
+                        Delete Member
+                      </th>
+                      <th className="border border-gray-400 px-4 py-2">
+                        Delete Team
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {teams.map((team, index) => (
+                      <tr key={index}>
+                        <td className="border border-gray-400 px-4 py-2">
+                          {team.teamName}
+                        </td>
+                        <td className="border border-gray-400 px-4 py-2">
+                          {team.members &&
+                            team.members.length > 0 &&
+                            team.members.map((member) => (
+                              <div
+                                key={member.value}
+                                className="flex justify-center items-center py-2"
+                              >
+                                <div className="flex justify-center items-center h-10 ">
+                                  <img
+                                    src={member.data.photo}
+                                    alt={member.data.name}
+                                    className="w-8 h-8 rounded-full"
+                                  />
+                                  <div>
+                                    <div>
+                                      {member.data.name} (
+                                      {member.data.employeeId})
+                                    </div>
+                                    <div className="text-gray-500 text-sm">
+                                      {member.data.designation}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                        </td>
+                        <td className="border border-gray-400 px-4 py-2">
+                          {team.members &&
+                            team.members.length > 0 &&
+                            team.members.map((member) => (
+                              <div
+                                key={member.value}
+                                className="flex flex-col justify-start items-center gap-8"
+                              >
+                                <span className="ml-2 py-4">{member.role}</span>
+                              </div>
+                            ))}
+                        </td>
+                        <td className="border border-gray-400 px-4 py-2 text-center">
+                          {team.members &&
+                            team.members.length > 0 &&
+                            team.members.map((member) => (
+                              <div key={member.value} className="py-2">
+                                <button className="border rounded-md bg-red-400 text-white hover:bg-red-700 p-2">
+                                  Delete
+                                </button>
+                              </div>
+                            ))}
+                        </td>
+                        <td className="border border-gray-400 px-4 py-2 text-center">
+                          <button className="border rounded-md bg-red-400 text-white hover:bg-red-700 p-2">
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
-        {/* Show added teams */}
-        {console.log("my Teams", teams)}
-        {teams.map((team, index) => (
-          <div
-            key={index}
-            className="flex flex-wrap justify-start items-center gap-2"
-          >
-            <h3 className="text-xl font-semibold">Team {index + 1}</h3>
-            <div>
-              <span>Name: {team.name}</span>
-            </div>
-            <div>
-              <span>Members:</span>
-              <ul>
-                {team.members.map((member) => (
-                  <li key={member.value}>{member.label}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ))}
 
-        <div className="mt-4">
-        <h3 className="text-xl font-semibold">Milestones</h3>
-        <ul>
-          {milestones.map((milestone, index) => (
-            <li key={index}>{milestone.milestoneName}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="mt-4">
-        <h3 className="text-xl font-semibold">Team Members</h3>
-        <ul>
-          {teams.map((team, index) => (
-            <li key={index}>{team.teamName}</li>
-          ))}
-        </ul>
-      </div>
-
-      
         {/* Project Repository */}
         <div className="addProjectRepository">
           <hr className="border-2 mt-2 mb-2 rounded border-dashed" />

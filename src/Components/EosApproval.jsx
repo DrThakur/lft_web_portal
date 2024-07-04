@@ -186,7 +186,7 @@ const EosApproval = () => {
   const emloyeeBodyTemplate = (rowData) => {
     console.log("my row data", rowData);
     return (
-      <div className="flex flex-row justify-start items-center gap-1">
+      <div className="flex flex-row justify-center items-center gap-1">
         <img
           alt={rowData.employeeName}
           src={`https://wl-incrivel.cf.tsp.li/resize/728x/webp/0ec/140/d189845022bb6eddb88bb5279a.jpg.webp`}
@@ -373,10 +373,10 @@ const EosApproval = () => {
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
-              style={{ fontWeight: "bold", textAlign: "center" }}
+              style={{fontWeight: "bold", textAlign: "center" }}
             ></Column>
             <Column
-              field="employeeName"
+              field="employeeId"
               header="Employee Name"
               alignHeader={"center"}
               headerStyle={{
@@ -384,7 +384,7 @@ const EosApproval = () => {
                 textAlign: "center",
               }}
               body={emloyeeBodyTemplate}
-              style={{ width: "10rem",textAlign: "center" }}
+              style={{ width: "14rem", textAlign: "center" }}
             ></Column>
             <Column
               field="employeeId"
@@ -395,7 +395,7 @@ const EosApproval = () => {
               }}
               alignHeader={"center"}
               body={reportingManagerBodyTemplate}
-              style={{ width: "14rem", textAlign: "center" }}
+              style={{width:"18rem"}}
             ></Column>
             <Column
               field="projectName"
@@ -405,7 +405,7 @@ const EosApproval = () => {
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
-              style={{ width: "8rem", textAlign: "center" }}
+              style={{  textAlign: "center" }}
             ></Column>
             <Column
               field="workPercentage"
@@ -426,7 +426,7 @@ const EosApproval = () => {
                 textAlign: "center",
               }}
               style={{
-                maxWidth: "8rem",
+                width: "8rem",
                 textAlign: "center",
                 whiteSpace: "normal",
                 wordBreak: "break=word",
@@ -454,7 +454,7 @@ const EosApproval = () => {
                 textAlign: "center",
               }}
               body={inputTextareaBodyTemplate}
-              style={{ width: "8rem", textAlign: "center" }}
+              style={{ width:"8rem",textAlign: "center" }}
             ></Column>
             <Column
               field="employeeId"

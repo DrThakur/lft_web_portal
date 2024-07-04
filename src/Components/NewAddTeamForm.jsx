@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import FinalEmployeeDropdown from "./FinalEmployeeDropdown";
 import employeesData from "../data/employeesData";
+import { FaPlus } from "react-icons/fa6";
 
-const NewAddTeamForm = ({ toggleForm ,onSave}) => {
+const NewAddTeamForm = ({ toggleForm, onSave }) => {
   const [teamName, setTeamName] = useState("");
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [selectedRole, setSelectedRole] = useState("");
@@ -35,13 +36,15 @@ const NewAddTeamForm = ({ toggleForm ,onSave}) => {
         })),
       };
       setTeamData([...teamData, team]);
-      onSave(team)
+      onSave(team);
       setTeamName("");
       setSelectedMembers([]);
       setSelectedRole("");
       setMembers([]);
     } else {
-      return alert("Please add team members and provide a team name before saving.");
+      return alert(
+        "Please add team members and provide a team name before saving."
+      );
     }
   };
 
@@ -117,10 +120,10 @@ const NewAddTeamForm = ({ toggleForm ,onSave}) => {
         </div>
         <div className="mt-6 ml-4 text-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full focus:outline-none focus:shadow-outline mr-4"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full focus:outline-none focus:shadow-outlinem ml-16 mr-8 flex flex-row justify-center items-center gap-4"
             onClick={handleAddMember}
           >
-            Add Member(s)
+            <FaPlus /> Add Member(s)
           </button>
         </div>
       </div>
@@ -193,7 +196,10 @@ const NewAddTeamForm = ({ toggleForm ,onSave}) => {
                       {team.members &&
                         team.members.length > 0 &&
                         team.members.map((member) => (
-                          <div key={member.value} className="flex items-center py-2">
+                          <div
+                            key={member.value}
+                            className="flex items-center py-2"
+                          >
                             <div className="flex justify-center items-center h-10 ">
                               <img
                                 src={member.data.photo}

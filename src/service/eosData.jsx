@@ -11,6 +11,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "22 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "23 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 3,
@@ -37,6 +39,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "24 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 4,
@@ -50,6 +53,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "24 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 5,
@@ -63,6 +67,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "22 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 6,
@@ -76,6 +81,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "23 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 7,
@@ -89,6 +95,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "24 Jun 2024",
+    pmApproval:"Yes"
   },
 
   {
@@ -103,6 +110,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "25 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 9,
@@ -116,6 +124,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "22 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 10,
@@ -129,6 +138,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "22 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 11,
@@ -142,6 +152,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "23 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 12,
@@ -155,6 +166,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "23 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 13,
@@ -168,6 +180,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "24 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 14,
@@ -181,6 +194,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "24 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 15,
@@ -194,6 +208,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "23 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 16,
@@ -207,6 +222,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "25 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 17,
@@ -220,6 +236,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "22 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 18,
@@ -233,6 +250,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "26 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 19,
@@ -246,6 +264,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "26 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 20,
@@ -260,6 +279,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "26 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 21,
@@ -274,6 +294,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "24 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 22,
@@ -288,6 +309,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "25 Jun 2024",
+    pmApproval:"No"
   },
   {
     id: 23,
@@ -302,6 +324,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "22 Jun 2024",
+    pmApproval:"Yes"
   },
   {
     id: 24,
@@ -316,6 +339,7 @@ const eosData = [
     approverRemarks: "",
     status: "",
     submitionDate: "23 Jun 2024",
+    pmApproval:"No"
   },
 ];
 

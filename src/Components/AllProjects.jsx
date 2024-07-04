@@ -380,6 +380,7 @@ const AllProjects = () => {
           value={size}
           onChange={(e) => setSize(e.value)}
           options={sizeOptions}
+          disabled
         />
       </div>
     );
@@ -685,7 +686,7 @@ const AllProjects = () => {
   );
 
   return (
-    <div className="p-4 rounded overflow-y-auto bg-white">
+    <div className="p-4 rounded overflow-y-auto overflow-x-scroll bg-white">
     <h1 className="font-bold text-2xl mb-4">All Projects</h1>
       <Toast ref={toast} />
       <div className="card">
@@ -702,7 +703,7 @@ const AllProjects = () => {
             selectionMode="checkbox"
             selection={selectedProjects}
             onSelectionChange={(e) => setSelectedProjects(e.value)}
-            size={size}
+            size="small"
             dataKey="projectId"
             paginator
             rows={10}

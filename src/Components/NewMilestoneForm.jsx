@@ -4,9 +4,10 @@ const NewMilestoneForm = ({
   projectId,
   existingMilestones,
   toggleMilestoneForm,
-  onSave
+  onSave,
 }) => {
   // Determine milestone number
+  console.log("milestoneds", existingMilestones);
   const [milestoneNumber, setMilestoneNumber] = useState(
     existingMilestones ? existingMilestones.length + 1 : 1
   );
@@ -21,6 +22,10 @@ const NewMilestoneForm = ({
 
   // State for displaying milestone details
   const [milestoneDetails, setMilestoneDetails] = useState([]);
+
+  console.log("milestone number", milestoneNumber);
+  console.log("milestone Name", milestoneName);
+
 
   const handleCancel = () => {
     if (toggleMilestoneForm) {
@@ -63,6 +68,7 @@ const NewMilestoneForm = ({
 
     // Clear form inputs
     setMilestoneName(`MS-${milestoneNumber + 1}`);
+    
     setPlannedStartDate("");
     setPlannedEndDate("");
     setInvoiceValue("");
@@ -72,23 +78,22 @@ const NewMilestoneForm = ({
   return (
     <div>
       <div className="grid grid-cols-4 gap-2">
-        {!existingMilestones && (
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2 w-full"
-              htmlFor="milestoneName"
-            >
-              Milestone Name
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="milestoneName"
-              type="text"
-              value={milestoneName}
-              readOnly
-            />
-          </div>
-        )}
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2 w-full"
+            htmlFor="milestoneName"
+          >
+            Milestone Name
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="milestoneName"
+            type="text"
+            value={milestoneName}
+            readOnly
+          />
+        </div>
+
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"

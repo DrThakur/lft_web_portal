@@ -796,7 +796,10 @@ const ProjectMilestones = () => {
 
   const header = (
     <div className="flex flex-wrap justify-between items-center gap-2 ">
+    <div className ="flex flex-row justify-start items-center gap-4">
       <h4 className="m-0">Milestone 1</h4>
+      <p className="font-normal">loremipsum</p>
+      </div>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText

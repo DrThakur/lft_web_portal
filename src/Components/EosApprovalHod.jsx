@@ -11,6 +11,9 @@ import { MdFilterAltOff } from "react-icons/md";
 import { Toolbar } from "primereact/toolbar";
 import { VscFilter } from "react-icons/vsc";
 import { VscFilterFilled } from "react-icons/vsc";
+import { FcApproval } from "react-icons/fc";
+import { MdCancel } from "react-icons/md";
+
 
 // Assuming eosData is an array of objects with the required fields
 const EosApprovalHod = () => {
@@ -119,7 +122,7 @@ const EosApprovalHod = () => {
           onClick={() => handleButtonClick("empty")}
         >
          
-        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} PM Filled Eos
+        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} PM Approved Eos
         </button>
         <button
         className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
@@ -214,6 +217,14 @@ const EosApprovalHod = () => {
           className="rounded-full"
         />
         <span className="font-bold">{rowData.projectManager}</span>
+      </div>
+    );
+  };
+
+  const pmAprrovalBodyTemplate = (rowData) => {
+    return (
+      <div className="flex flex-row justify-center items-center gap-2">
+      {rowData.pmApproval==="Yes" ? (<FcApproval />): ( <MdCancel className="text-red-500" />)}
       </div>
     );
   };
@@ -428,6 +439,22 @@ const EosApprovalHod = () => {
               }}
               style={{
                 maxWidth: "8rem",
+                textAlign: "center",
+                whiteSpace: "normal",
+                wordBreak: "break=word",
+              }}
+            ></Column>
+               <Column
+              field="remarks"
+              header="PM Approval"
+              body={pmAprrovalBodyTemplate}
+              alignHeader={"center"}
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{
+                maxWidth: "6rem",
                 textAlign: "center",
                 whiteSpace: "normal",
                 wordBreak: "break=word",
