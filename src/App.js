@@ -32,6 +32,9 @@ import EosApprovalHod from "./Components/EosApprovalHod";
 import DocumentCenter from "./Components/DocumentCenter";
 import OragnizationChart from "./Components/OragnizationChart";
 import OrganizationChartPage from "./Pages/OrganizationChartPage";
+import Login from "./Components/login";
+import ResourcePool from "./Components/ResourcePool";
+import ResourceTable from "./Components/ResourceTable";
 const App = () => {
   const projects = [
     {
@@ -317,6 +320,9 @@ const App = () => {
             <Route path="/document-center" element={<DocumentCenter/>} />
             <Route path="/org-chart" element={<OragnizationChart/>} />
             <Route path="/org-chart-page" element={<OrganizationChartPage/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/resource-pool" element={<ResourcePool/>} />
+            <Route path="/resource-table" element={<ResourceTable/>} />
             
           </Routes>
         </Layout>

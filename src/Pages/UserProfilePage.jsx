@@ -1,12 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
 import { MdModeEdit } from "react-icons/md";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Timeline } from "primereact/timeline";
 import ProjectCarousel from "../Components/ProjectCarousel";
+import axios from "axios";
 
 const UserProfilePage = () => {
   const [resume, setResume] = useState(null);
+  const [users, setUsers] = useState("")
   const uploadInputRef = useRef(null);
 
   const handleEditClick = () => {
@@ -25,6 +27,29 @@ const UserProfilePage = () => {
     const file = e.target.files[0];
     // Handle the file upload here
   };
+  // const baseURL = process.env.REACT_APP_BASE_URL;
+  // const port = process.env.REACT_APP_BACKEND_PORT;
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const port = process.env.REACT_APP_BACKEND_PORT;
+
+  // console.log("baseUrl", baseURL);
+  // console.log("port", port);
+
+  useEffect(() => {
+    const fetchUserInformation = async () => {
+      try {
+        // const res = await axios.get(`http://${baseURL}:${port}/users`);
+        const res = await axios.get(`https://lft-web-portal-backend.onrender.com/users`);
+        console.log("response data", res.data);
+       setUsers(res.data);
+      } catch (error) {
+        console.error("Error", error);
+      }
+    }
+  
+  fetchUserInformation();
+  })
+  
 
   const events = [
     {

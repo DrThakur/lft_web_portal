@@ -192,6 +192,30 @@ const OragnizationChart = ({tabTitle}) => {
                 title: "Project Lead",
                 empId:"21059"
               },
+              children: [
+                {
+                  expanded: true,
+                  type: "person",
+                  data: {
+                    image:
+                      "https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png",
+                    name: "Jagdish Chandra Gorain",
+                    title: "R&D Engineer",
+                    empId:"21097"
+                  },
+                },
+                {
+                  expanded: true,
+                  type: "person",
+                  data: {
+                    image:
+                      "https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png",
+                    name: "Deepanshu",
+                    title: "R&D Engineer",
+                    empId:"22050"
+                  },
+                }
+              ]
             },
           ],
         },

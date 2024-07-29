@@ -66,7 +66,7 @@ const Sidebar = () => {
     setActiveRightSidebar(true);
     if (mainItem === "Dashboard") {
       navigate(`/`);
-    } else if(mainItem === "Document Center"){
+    } else if (mainItem === "Document Center") {
       navigate(`/document-center`);
     }
     // Perform any other actions upon main item click
@@ -100,7 +100,9 @@ const Sidebar = () => {
       navigate("/eos-approval-hod");
     } else if (menuItem === "Organization Chart") {
       navigate("/org-chart-page");
-    } 
+    } else if (menuItem === "Resource Pool") {
+      navigate("/resource-pool");
+    }
 
     // Perform any other actions upon main item click
   };
@@ -459,9 +461,12 @@ const Sidebar = () => {
                   onClick={() => handleMenuItemClick("Organization Chart")}
                 >
                   <span className="right-sidebar-icon">
-                  <RiOrganizationChart />
+                    <RiOrganizationChart />
                   </span>
-                  <span className="right-sidebar-text"> Organization Chart</span>
+                  <span className="right-sidebar-text">
+                    {" "}
+                    Organization Chart
+                  </span>
                 </div>
               </div>
             )}
