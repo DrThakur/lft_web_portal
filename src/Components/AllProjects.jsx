@@ -19,6 +19,7 @@ import { ProjectData } from "../service/ProjectData";
 import { ToggleButton } from "primereact/togglebutton";
 import { Link, useNavigate } from "react-router-dom";
 import ProjectTableView from "./ProjectTableView";
+import axios from "axios";
 
 const AllProjects = () => {
   let emptyProduct = {
@@ -76,12 +77,31 @@ const AllProjects = () => {
   const [projectNameColumnFrozen, setprojectNameColumnFrozen] = useState(false);
   const navigate = useNavigate();
 
+
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const port = process.env.REACT_APP_BACKEND_PORT;
+
   useEffect(() => {
     ProductService.getProducts().then((data) => setProducts(data));
   }, []);
 
   useEffect(() => {
-    ProjectData.getProjetcts().then((data) => setProjects(data));
+    // ProjectData.getProjetcts().then((data) => setProjects(data));
+    const fetchProjects = async () => {
+      try {
+        // const response = await axios.get('https://lft-web-portal-backend.onrender.com/projects');
+        const response = await axios.get(`http://${baseURL}:${port}/projects`);
+       
+       const projectsData= response.data.projects
+        console.log("My projects", response.data);
+        console.log("My projects---333", response.data.projects[0]);
+        setProjects(projectsData);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
+
+    fetchProjects();
   }, []);
 
   const formatCurrency = (value) => {
@@ -419,19 +439,23 @@ const AllProjects = () => {
 
   const plannedStartDateTemplate = (rowData) => {
     console.log("my rowDate", rowData);
-    return formatDate(rowData.plannedStartDate);
+    // return formatDate(rowData.plannedStartDate);
+    return "Not Available";
   };
   const plannedEndDateTemplate = (rowData) => {
     console.log("my rowDate", rowData);
-    return formatDate(rowData.plannedStartDate);
+    // return formatDate(rowData.plannedStartDate);
+    return "Not Available";
   };
   const actualStartDateTemplate = (rowData) => {
     console.log("my rowDate", rowData);
-    return formatDate(rowData.actualStartDate);
+    // return formatDate(rowData.actualStartDate);
+    return "Not Available";
   };
   const actualEndDateTemplate = (rowData) => {
     console.log("my rowDate", rowData);
-    return formatDate(rowData.actualEndDate);
+    // return formatDate(rowData.actualEndDate);
+    return "Not Available";
   };
 
   const ratingBodyTemplate = (rowData) => {
@@ -448,19 +472,19 @@ const AllProjects = () => {
   };
 
   const userBodyTemplate = (rowData) => {
-    // const createdBy = rowData.projectManager;
+    console.log("project maager rowdata",rowData.projectManager);
 
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
         <div className="flex flex-row items-center justify-start">
           <img
-            alt={rowData.projectManager}
+            alt={rowData.projectManager.fullName}
             src="https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
             width="40"
             height="40"
           />
           <a href="/" className="ml-2 text-green-500 hover:text-green-900">
-            {rowData.projectManager}
+            {rowData.projectManager.fullName}
           </a>
         </div>
       </div>
@@ -500,13 +524,13 @@ const AllProjects = () => {
       <div className="flex flex-col align-items-center gap-2 mr-2">
         <div className="flex flex-row items-center justify-start">
           <img
-            alt={rowData.client}
+            alt={rowData.clientName}
             src="https://www.keysight.com/content/dam/keysight/en/img/gnav/keysight-logo.svg"
             width="60"
             height="60"
           />
           <a href="/" className="ml-2 text-green-500 hover:text-green-900">
-            {rowData.client}
+            {rowData.clientName}
           </a>
         </div>
       </div>
@@ -526,7 +550,7 @@ const AllProjects = () => {
             height="40"
           />
           <a href="/" className="ml-2 text-green-500 hover:text-green-900">
-            {rowData.contactPerson}
+            {rowData.contactPerson || "Not Available"}
           </a>
         </div>
       </div>
@@ -777,7 +801,7 @@ const AllProjects = () => {
               style={{ minWidth: "12rem" }}
             ></Column>
             <Column
-              field="description"
+              field="projectDescription"
               header="Description"
               // body={statusBodyTemplate}
               sortable
