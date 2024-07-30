@@ -89,8 +89,8 @@ const AllProjects = () => {
     // ProjectData.getProjetcts().then((data) => setProjects(data));
     const fetchProjects = async () => {
       try {
-        // const response = await axios.get('https://lft-web-portal-backend.onrender.com/projects');
-        const response = await axios.get(`http://${baseURL}:${port}/projects`);
+        const response = await axios.get('https://lft-web-portal-backend.onrender.com/projects');
+        // const response = await axios.get(`http://${baseURL}:${port}/projects`);
        
        const projectsData= response.data.projects
         console.log("My projects", response.data);
@@ -537,6 +537,13 @@ const AllProjects = () => {
     );
   };
 
+  
+  const sNoBodyTemplate = (rowData) => {
+    console.log("my console log s number", rowData);
+    const sNo =projects.findIndex(project=>project.projectName===rowData.projectName ) +1;
+    return sNo  ;
+  };
+
   const ContactPersonBodyTemplate = (rowData) => {
     // const createdBy = rowData.projectManager;
 
@@ -746,6 +753,7 @@ const AllProjects = () => {
             <Column
               field="sno"
               header="S.No"
+              body={sNoBodyTemplate}
               sortable
               style={{ minWidth: "6rem" }}
               frozen={projectNameColumnFrozen}
