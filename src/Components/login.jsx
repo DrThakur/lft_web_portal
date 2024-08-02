@@ -1,10 +1,11 @@
 import { useRef, useContext, useState, useEffect } from "react";
-// import jwtDecode from "jwt-decode";
-// import logo from "../Images";
+import {jwtDecode} from "jwt-decode";
+import logo from "../Images/LFT-Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
-// import  useStateContext  from "../Contexts/ContextProvider";
+import  {useStateContext}  from "../Contexts/ContextProvider";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 const images = [
   `man_with_laptop.png`,
@@ -18,7 +19,7 @@ const Login = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const userRef = useRef();
   const passwordRef = useRef();
-//   const { dispatch, isFetching } = useContext(useStateContext);
+  const { dispatch, isFetching } = useStateContext();
   const [passwordShown, setPasswordShown] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -30,28 +31,30 @@ const Login = () => {
     passwordRef.current.focus();
   };
 
-//   const handleSignin = async (e) => {
-//     e.preventDefault();
-//     dispatch({ type: "LOGIN_START" });
-//     setLoading(true);
-//     try {
-//       const res = await axios.post(`http://${baseURL}:${port}/users/login`, {
-//         email: userRef.current.value,
-//         password: passwordRef.current.value,
-//       });
-//       const token = res.data;
-//       const decodedToken = jwtDecode(token);
-//       const userData = decodedToken;
+  const handleSignin = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
+    setLoading(true);
+    try {
+      const res = await axios.post(`http://${baseURL}:${port}/api/v1/auth/login`, {
+        email: userRef.current.value,
+        password: passwordRef.current.value,
+      });
+      console.log("My login response", res);
+      const token = res.data.token;
+      const decodedToken = jwtDecode(token);
+      const userData = decodedToken;
+      console.log("user Dtata",userData);
 
-//       dispatch({ type: "LOGIN_SUCCESS", payload: userData });
-//       return navigate("/");
-//     } catch (error) {
-//       dispatch({ type: "LOGIN_FAILURE" });
-//       setErrorMsg("*Incorrect email or password.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+      dispatch({ type: "LOGIN_SUCCESS", payload: userData });
+      return navigate("/dashboard");
+    } catch (error) {
+      dispatch({ type: "LOGIN_FAILURE" });
+      setErrorMsg("*Incorrect email or password.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -99,7 +102,7 @@ const Login = () => {
       <div className="w-1/2 flex items-center justify-center">
         <div className="w-3/5 h-[96%] bg-white p-10 rounded-xl shadow-2xl">
           <div className="w-full mx-28 mt-4">
-            <img src="logo" alt="Logo" className="h-56 w-56 cursor-pointer" />
+            <img src={logo} alt="Logo" className="h-56 w-56 cursor-pointer" />
           </div>
           <div className="text-3xl font-bold mb-6 text-center -mt-8 flex items-center">
             <hr className="flex-grow border-t-2 border-blue-400 rounded-lg shadow-md mb-4 mt-4" />
@@ -154,19 +157,19 @@ const Login = () => {
                 </label>
               </div>
               <div className="font-bold text-blue-600 text-xl">
-                <Link to="/user/forgot-password">Forgot Password</Link>
+                <Link to="/forgot-password">Forgot Password</Link>
               </div>
             </div>
             <p className="text-red-500 text-xl font-bold mb-2">{errorMsg}</p>
             <button
               type="submit"
-            //   disabled={isFetching || loading}
-            //   onClick={handleSignin}
-            //   className={`w-full py-3 rounded-md text-2xl ${
-            //     isFetching || loading
-            //       ? "bg-red-300 cursor-not-allowed"
-            //       : "bg-blue-500 text-white hover:bg-blue-600"
-            //   }`}
+              disabled={isFetching || loading}
+              onClick={handleSignin}
+              className={`w-full py-3 rounded-md text-2xl ${
+                isFetching || loading
+                  ? "bg-red-300 cursor-not-allowed"
+                  : "bg-blue-500 text-white hover:bg-blue-600"
+              }`}
             >
               {loading ? "Loading...." : "Login"}
             </button>

@@ -6,6 +6,7 @@ import axios from "axios";
 const ResourcePool = () => {
   const [employees, setEmployees] = useState("");
   const [employeesByDepartment, setEmployeesByDepartment] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const tabs = Array.from({ length: 50 }, (_, i) => ({
     title: `Tab ${i + 1}`,
@@ -57,6 +58,8 @@ const ResourcePool = () => {
         setEmployeesByDepartment(departmentMap);
       } catch (error) {
         console.error("Error", error);
+      }finally {
+        setLoading(false); // Set loading to false when data is fetched
       }
     };
 
@@ -70,7 +73,7 @@ const ResourcePool = () => {
             const departmentEmployees = employeesByDepartment[department] || [];
           return (
             <TabPanel key={index} header={`${department} Department`} className="cursor-pointer">
-              <ResourceTable title={department} employees={departmentEmployees|| []}/>
+              <ResourceTable title={department} employees={departmentEmployees|| []} loading={loading}/>
             </TabPanel>
           );
         })}

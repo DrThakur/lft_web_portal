@@ -8,11 +8,17 @@ import avatar from "../data/avatar.jpg";
 import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
-  const { currentColor } = useStateContext();
+  const { currentColor,  user, dispatch } = useStateContext();
   const navigate = useNavigate();
 
   const handleProfileSettings = () => {
     navigate("/user-Profile");
+  };
+
+  const handleLogOut = () => {
+    console.log("Logout clicked");
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
   };
 
   return (
@@ -35,13 +41,13 @@ const UserProfile = () => {
         />
         <div>
           <p className="font-semibold text-xl dark:text-gray-200 ml-4">
-            Ankit Kumar Thakur
+            {user.fullName || "Ankit Kuamr Thakur"}
           </p>
           <p className="text-gray-500 text-sm dark:text-gray-400 ml-4 ">
-            Administrator
+            {user.designation||"Administrator"}
           </p>
           <p className="text-gray-500 text-sm font-semibold dark:text-gray-400 ml-4">
-            ankit.kumar@logic-fruit.com
+            {user.email||"ankit.kumar@logic-fruit.com"}
           </p>
         </div>
       </div>
@@ -77,6 +83,7 @@ const UserProfile = () => {
           text="Logout"
           borderRadius="10px"
           width="full"
+          onClick={handleLogOut}
         />
       </div>
     </div>

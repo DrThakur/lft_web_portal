@@ -11,6 +11,8 @@ import WelcomeCard from "../Components/WelcomeCard";
 import Events from "../Components/Events";
 
 const Dashboard = () => {
+
+  console.log("My dashbaord")
   const holidays = [
     { day: 1, month: 1, name: "New Year's Day" }, // January 1st
     { day: 26, month: 1, name: "Australia Day" }, // January 26th

@@ -15,7 +15,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 
-const ResourceTable = ({title, employees}) => {
+const ResourceTable = ({title, employees, loading}) => {
     let emptyProduct = {
         id: null,
         name: '',

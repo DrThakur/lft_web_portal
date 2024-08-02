@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MonthYearPicker from "./MonthYearPicker";
+import { useStateContext } from "../Contexts/ContextProvider";
 
 const EosUpdate = () => {
   // State to keep track of the number of project rows
@@ -24,6 +25,8 @@ const EosUpdate = () => {
     projects: [],
     activities: [],
   });
+
+  const { user } = useStateContext();
 
   //   const projectManagers = [
   //     "Mohammad Rafi",
@@ -287,7 +290,7 @@ const EosUpdate = () => {
       <form className="space-y-6" onSubmit={handleSubmit}>
         {/* Employee Details Section */}
 
-        {userData && (
+        {user && (
           <div className="bg-green-200 rounded-lg p-4 -mb-4">
             <h2 className="text-xl font-semibold mb-4">Employee Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
@@ -295,7 +298,7 @@ const EosUpdate = () => {
               <div>
                 <p className="text-sm font-medium text-gray-700">Employee ID</p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {formData.employeeId}
+                  {user.employeeId}
                 </p>
               </div>
 
@@ -305,14 +308,14 @@ const EosUpdate = () => {
                   Employee Name
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {formData.employeeName}
+                  {user.fullName}
                 </p>
               </div>
 
               {/* Email */}
               <div>
                 <p className="text-sm font-medium text-gray-700">Email</p>
-                <p className="mt-2 text-blue-500 font-bold">{formData.email}</p>
+                <p className="mt-2 text-blue-500 font-bold">{user.email}</p>
               </div>
 
               {/* Reporting Manager */}
@@ -321,7 +324,7 @@ const EosUpdate = () => {
                   Reporting Manager
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {formData.reportingManager}
+                  {user.reportingManager}
                 </p>
               </div>
 
@@ -331,7 +334,7 @@ const EosUpdate = () => {
                   Project Manager
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {formData.projectManager}
+                  {user.projectManager || "N/A"}
                 </p>
               </div>
 

@@ -5,11 +5,17 @@ import { TabView, TabPanel } from "primereact/tabview";
 import { Timeline } from "primereact/timeline";
 import ProjectCarousel from "../Components/ProjectCarousel";
 import axios from "axios";
+import { useStateContext } from "../Contexts/ContextProvider";
+import { format } from "date-fns";
 
 const UserProfilePage = () => {
   const [resume, setResume] = useState(null);
-  const [users, setUsers] = useState("")
+  const [users, setUsers] = useState("");
   const uploadInputRef = useRef(null);
+
+  const { user } = useStateContext();
+
+  console.log("My user---1122", user);
 
   const handleEditClick = () => {
     // Programmatically click the hidden file input element
@@ -27,6 +33,13 @@ const UserProfilePage = () => {
     const file = e.target.files[0];
     // Handle the file upload here
   };
+
+  // Format the date
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return format(date, "dd-MMM-yyyy");
+  };
+
   // const baseURL = process.env.REACT_APP_BASE_URL;
   // const port = process.env.REACT_APP_BACKEND_PORT;
   const baseURL = process.env.REACT_APP_BASE_URL;
@@ -35,21 +48,20 @@ const UserProfilePage = () => {
   // console.log("baseUrl", baseURL);
   // console.log("port", port);
 
-  useEffect(() => {
-    const fetchUserInformation = async () => {
-      try {
-        // const res = await axios.get(`http://${baseURL}:${port}/users`);
-        const res = await axios.get(`https://lft-web-portal-backend.onrender.com/users`);
-        console.log("response data", res.data);
-       setUsers(res.data);
-      } catch (error) {
-        console.error("Error", error);
-      }
-    }
-  
-  fetchUserInformation();
-  })
-  
+  // useEffect(() => {
+  //   const fetchUserInformation = async () => {
+  //     try {
+  //       // const res = await axios.get(`http://${baseURL}:${port}/users`);
+  //       const res = await axios.get(`https://lft-web-portal-backend.onrender.com/users`);
+  //       console.log("response data", res.data);
+  //      setUsers(res.data);
+  //     } catch (error) {
+  //       console.error("Error", error);
+  //     }
+  //   }
+
+  // fetchUserInformation();
+  // })
 
   const events = [
     {
@@ -136,6 +148,7 @@ const UserProfilePage = () => {
   return (
     <div className="bg-white p-2 h-screen w-full mt-2 overflow-y-auto border rounded-lg shadow-lg">
       <h1 className="text-xl font-bold">My Profile</h1>
+
       <div className="main Container flex flex-col">
         <div className="conatiner1 grid grid-cols-4 border rounded-lg shadow-md p-4 mt-4">
           <div className="subConatiner1 flex flex-col justify-start items-center ">
@@ -163,12 +176,25 @@ const UserProfilePage = () => {
               </div>
               {/*Profile Values*/}
               <div className="profileValue flex flex-col justify-start items-start gap-1 col-span-1">
-                <p className="text-xl font-bold py-1">Ankit Kumar Thakur</p>
-                <p className="text-gray-400 py-1">R&D Engineer</p>
-                <p className="text-gray-400 py-1">Gurgaon</p>
-                <p className="text-gray-400 py-1">Software Department</p>
-                <p className="font-medium py-1">Employee Id: LFT-23026</p>
-                <p className="font-medium py-1">Date of Join: 26-Sep-2023</p>
+                <p className="text-xl font-bold py-1 w-full">
+                  {user.fullName || "Ankit Kumar Thakur"}
+                </p>
+                <p className="text-gray-400 py-1">
+                  {user.designation || "R&D Engineer"}
+                </p>
+                <p className="text-gray-400 py-1">
+                  {user.location || "Gurgaon"}
+                </p>
+                <p className="text-gray-400 py-1">
+                  {user.department || "Software Department"}
+                </p>
+                <p className="font-medium py-1">
+                  Employee Id: {user.employeeId || "N/A"}
+                </p>
+                <p className="font-medium py-1">
+                  Date of Join:{" "}
+                  {user.dateOfJoining ? formatDate(user.dateOfJoining) : "N/A"}
+                </p>
                 <div>
                   <button className="flex flex-row justify-start items-center gap-2 p-2 px-6 bg-blue-500 hover:bg-blue-700 text-white rounded shadow">
                     <BsFillSendFill />
@@ -195,34 +221,37 @@ const UserProfilePage = () => {
                 <td className="font-bold px-2 w-1/4">Phone&nbsp; </td>
                 <td className="px-2">:</td>
                 <td className="px-2">&nbsp; &nbsp; </td>
-                <td className="px-2 w-3/4">7011711442</td>
+                <td className="px-2 w-3/4">
+                  {user.phoneNumber || "7011711442"}
+                </td>
               </tr>
               <tr>
                 <td className="font-bold px-2">Email&nbsp; </td>
                 <td className="px-2">:</td>
                 <td className="px-2">&nbsp; &nbsp; </td>
-                <td className="px-2">ankit.thakur@logic-fruit.com</td>
+                <td className="px-2">
+                  {user.email || "ankit.thakur@logic-fruit.com"}
+                </td>
               </tr>
               <tr>
                 <td className="font-bold px-2">Birthday&nbsp; </td>
                 <td className="px-2">:</td>
                 <td className="px-2">&nbsp; &nbsp; </td>
-                <td className="px-2">04-11-1994</td>
+                <td className="px-2">
+                  {user.dateOfBirth ? formatDate(user.dateOfBirth) : "N/A"}
+                </td>
               </tr>
               <tr>
                 <td className="font-bold px-2">Address &nbsp; </td>
                 <td className="px-2">: </td>
                 <td className="px-2"> &nbsp; &nbsp; </td>
-                <td className="px-2">
-                  D-314, Third Floor, Gali No. 56, Near 60 Futa Road, Mahavir
-                  Enclave-III, New Delhi-110059
-                </td>
+                <td className="px-2">{user.permanentAddress || "N/A"} </td>
               </tr>
               <tr>
                 <td className="font-bold px-2">Gender&nbsp; </td>
                 <td className="px-2">:</td>
                 <td className="px-2">&nbsp; &nbsp; </td>
-                <td className="px-2">Male</td>
+                <td className="px-2">{user.gender || "N/A"}</td>
               </tr>
               <tr>
                 <td className="font-bold px-2">Reports to&nbsp; </td>
@@ -241,7 +270,7 @@ const UserProfilePage = () => {
                         href="/"
                         className="ml-2 text-blue-500 hover:text-blue-900"
                       >
-                        Dhruv Kumar Saxena
+                       {user.reportingManager}
                       </a>
                     </span>
                   </div>
@@ -260,7 +289,13 @@ const UserProfilePage = () => {
           <TabView>
             <TabPanel header="Profile">
               <div className="resume border rounded shadow-lg p-2 -ml-5 mb-4 flex flex-row justify-between items-center">
-              {resume ? <span className="font-bold text-xl ml-5 text-blue-500">{resume.name}</span> : <span className="font-bold text-xl ml-5">Upload Resume</span>}
+                {resume ? (
+                  <span className="font-bold text-xl ml-5 text-blue-500">
+                    {resume.name}
+                  </span>
+                ) : (
+                  <span className="font-bold text-xl ml-5">Upload Resume</span>
+                )}
                 <div className="editButton">
                   <input
                     ref={uploadInputRef}

@@ -32,9 +32,64 @@ import EosApprovalHod from "./Components/EosApprovalHod";
 import DocumentCenter from "./Components/DocumentCenter";
 import OragnizationChart from "./Components/OragnizationChart";
 import OrganizationChartPage from "./Pages/OrganizationChartPage";
-import Login from "./Components/login";
 import ResourcePool from "./Components/ResourcePool";
 import ResourceTable from "./Components/ResourceTable";
+import Login from "./Components/Login";
+import ForgotPassword from "./Components/ForgotPassword";
+
+
+// const LayoutRoutes = () => (
+//   <Layout>
+//     <Routes>
+//       <Route path="/" element={<Dashboard />} />
+//       <Route path="/all-projects" element={<AllProjects />} />
+//       <Route path="/create-project" element={<CreateProjectForm />} />
+//       <Route path="/purchase-order" element={<PurchaseOrder />} />
+//       <Route path="/project-dashboard" element={<ProjectDetails />} />
+//       <Route path="/user-profile" element={<UserProfilePage />} />
+//       <Route path="/test1" element={<ProjectCarousel />} />
+//       <Route path="/test2" element={<ProjectCard project={projects[1]} />} />
+//       <Route path="/pms-dashboard" element={<ProjectTableView />} />
+//       <Route path="/project-milestones" element={<ProjectMilestones />} />
+//       <Route path="/add-task" element={<TaskForm />} />
+//       <Route path="/test6" element={<TestSelect />} />
+//       <Route path="/test7" element={<TeamDeatils teams={teamsData} />} />
+//       <Route path="/test8" element={<FinalEmployeeDropdown />} />
+//       <Route path="/test9" element={<NewAddTeamForm />} />
+//       <Route path="/test10" element={<NewMilestoneForm />} />
+//       <Route path="/test11" element={<TestCreateProjectForm />} />
+//       <Route path="/test12" element={<TestMilestoneForm />} />
+//       <Route
+//         path="/project-details"
+//         element={<ProjectDetailsPage project={projects[0]} />}
+//       />
+//       <Route path="/test13" element={<ColumnToggleDemo />} />
+//       <Route
+//         path="/holiday-calender"
+//         element={<HolidayCalendarPage holidays={holidays} />}
+//       />
+//       <Route
+//         path="/announcements"
+//         element={<AnnouncementsPage announcements={announcements} />}
+//       />
+//       <Route path="/eos-update" element={<EosUpdate />} />
+//       <Route path="/month" element={<MonthYearPicker />} />
+//       <Route
+//         path="/eos-update-month/:year/:month"
+//         element={<EosUpdateByMonth />}
+//       />
+//       <Route path="/eos-approval" element={<EosApproval />} />
+//       <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
+//       <Route path="/eos-approval-hod" element={<EosApprovalHod />} />
+//       <Route path="/document-center" element={<DocumentCenter />} />
+//       <Route path="/org-chart" element={<OragnizationChart />} />
+//       <Route path="/org-chart-page" element={<OrganizationChartPage />} />
+//       <Route path="/resource-pool" element={<ResourcePool />} />
+//       <Route path="/resource-table" element={<ResourceTable />} />
+//     </Routes>
+//   </Layout>
+// );
+
 const App = () => {
   const projects = [
     {
@@ -50,21 +105,21 @@ const App = () => {
       completed: "5",
       active: "1",
       pending: "4",
-      plannedStartDate:"10 Feb 2024",
-      plannedEndDate:"10 Dec 2024",
-      actualStartDate:"13 Mar 2024",
-      actualEndDate:"20 Jan 2025",
-      smLeadId:"LFT/202326",
-      location:"Gurgaon",
-      clientName:"Joshua Technologies Pvt Ltd",
-      clientAddress:"Bangalore",
-      pointOfContact:"Ankit Singh",
-      clientPhone:"7011711442",
-      clientEmail:"drankitkumarthakur@gmail.com",
-      duration:"12 Months",
-      totalBudget:"$500000",
-      repository:"https://www.logic-fruit.com/",
-      status:"Unpublish"
+      plannedStartDate: "10 Feb 2024",
+      plannedEndDate: "10 Dec 2024",
+      actualStartDate: "13 Mar 2024",
+      actualEndDate: "20 Jan 2025",
+      smLeadId: "LFT/202326",
+      location: "Gurgaon",
+      clientName: "Joshua Technologies Pvt Ltd",
+      clientAddress: "Bangalore",
+      pointOfContact: "Ankit Singh",
+      clientPhone: "7011711442",
+      clientEmail: "drankitkumarthakur@gmail.com",
+      duration: "12 Months",
+      totalBudget: "$500000",
+      repository: "https://www.logic-fruit.com/",
+      status: "Unpublish",
     },
     {
       id: 2,
@@ -165,7 +220,7 @@ const App = () => {
       pending: "5",
     },
     // Add more project data as needed
-  ]
+  ];
 
   const teamsData = [
     {
@@ -174,8 +229,8 @@ const App = () => {
         { name: "John Doe", role: "Manager" },
         { name: "Jane Doe", role: "Developer" },
         { name: "Alice Smith", role: "Designer" },
-        { name: "Bob Johnson", role: "QA" }
-      ]
+        { name: "Bob Johnson", role: "QA" },
+      ],
     },
     {
       teamName: "Hardware",
@@ -183,31 +238,30 @@ const App = () => {
         { name: "John Doe", role: "Manager" },
         { name: "Jane Doe", role: "Developer" },
         { name: "Alice Smith", role: "Designer" },
-        { name: "Bob Johnson", role: "QA" }
-      ]
+        { name: "Bob Johnson", role: "QA" },
+      ],
     },
     // Add more teams here if needed
   ];
 
   const holidays = [
-    { day: 1, month: 1, year: 2024, name: 'New Year\'s Day' }, // January 1st, 2024
-    { day: 26, month: 1, year: 2024, name: 'Australia Day' }, // January 26th, 2024
-    { day: 14, month: 2, year: 2024, name: 'Valentine\'s Day' }, // February 14th, 2024
-    { day: 17, month: 3, year: 2024, name: 'St. Patrick\'s Day' }, // March 17th, 2024
-    { day: 10, month: 4, year: 2024, name: 'Good Friday' }, // April 10th, 2024
-    { day: 12, month: 4, year: 2024, name: 'Easter Sunday' }, // April 12th, 2024
-    { day: 25, month: 4, year: 2024, name: 'Anzac Day' }, // April 25th, 2024
-    { day: 28, month: 5, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
-    { day: 28, month: 6, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
-    { day: 28, month: 7, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
-    { day: 28, month: 8, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
-    { day: 28, month: 9, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
-    { day: 28, month: 10, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
-    { day: 28, month: 11, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
-    { day: 28, month: 12, year: 2024, name: 'Anzac Day' }, // May 28th, 2024
+    { day: 1, month: 1, year: 2024, name: "New Year's Day" }, // January 1st, 2024
+    { day: 26, month: 1, year: 2024, name: "Australia Day" }, // January 26th, 2024
+    { day: 14, month: 2, year: 2024, name: "Valentine's Day" }, // February 14th, 2024
+    { day: 17, month: 3, year: 2024, name: "St. Patrick's Day" }, // March 17th, 2024
+    { day: 10, month: 4, year: 2024, name: "Good Friday" }, // April 10th, 2024
+    { day: 12, month: 4, year: 2024, name: "Easter Sunday" }, // April 12th, 2024
+    { day: 25, month: 4, year: 2024, name: "Anzac Day" }, // April 25th, 2024
+    { day: 28, month: 5, year: 2024, name: "Anzac Day" }, // May 28th, 2024
+    { day: 28, month: 6, year: 2024, name: "Anzac Day" }, // May 28th, 2024
+    { day: 28, month: 7, year: 2024, name: "Anzac Day" }, // May 28th, 2024
+    { day: 28, month: 8, year: 2024, name: "Anzac Day" }, // May 28th, 2024
+    { day: 28, month: 9, year: 2024, name: "Anzac Day" }, // May 28th, 2024
+    { day: 28, month: 10, year: 2024, name: "Anzac Day" }, // May 28th, 2024
+    { day: 28, month: 11, year: 2024, name: "Anzac Day" }, // May 28th, 2024
+    { day: 28, month: 12, year: 2024, name: "Anzac Day" }, // May 28th, 2024
     // Add more holidays here
   ];
-
 
   const announcements = [
     {
@@ -280,15 +334,51 @@ const App = () => {
   ];
 
 
-
-
+  // Define the protected routes in an array
+const protectedRoutes = [
+  { path: "/", element: <Dashboard /> },
+  { path: "/project/create", element: <CreateProjectForm /> },
+  { path: "/purchase-order", element: <PurchaseOrder /> },
+  { path: "/project/:projectId", element: <ProjectDetails /> },
+  { path: "/projects", element: <AllProjects /> },
+  { path: "/user/profile", element: <UserProfilePage /> },
+  { path: "/project/card", element: <ProjectCard /> },
+  { path: "/project/carousel", element: <ProjectCarousel /> },
+  { path: "/project/table", element: <ProjectTableView /> },
+  { path: "/project/milestones", element: <ProjectMilestones /> },
+  { path: "/task/form", element: <TaskForm /> },
+  { path: "/test/select", element: <TestSelect /> },
+  { path: "/team/details", element: <TeamDeatils /> },
+  { path: "/employee/dropdown", element: <FinalEmployeeDropdown /> },
+  { path: "/team/new-form", element: <NewAddTeamForm /> },
+  { path: "/milestone/new-form", element: <NewMilestoneForm /> },
+  { path: "/test/project-form", element: <TestCreateProjectForm /> },
+  { path: "/test/milestone-form", element: <TestMilestoneForm /> },
+  { path: "/project/details", element: <ProjectDetailsPage /> },
+  { path: "/columns/toggle", element: <ColumnToggleDemo /> },
+  { path: "/holiday/calendar", element: <HolidayCalendarPage /> },
+  { path: "/announcements", element: <AnnouncementsPage /> },
+  { path: "/eos/update", element: <EosUpdate /> },
+  { path: "/month-year-picker", element: <MonthYearPicker /> },
+  { path: "/eos/update/month", element: <EosUpdateByMonth /> },
+  { path: "/eos/approval", element: <EosApproval /> },
+  { path: "/eos/approval/final", element: <EosApprovalFinal /> },
+  { path: "/eos/approval/hod", element: <EosApprovalHod /> },
+  { path: "/document-center", element: <DocumentCenter /> },
+  { path: "/organization-chart", element: <OragnizationChart /> },
+  { path: "/organization-chart/page", element: <OrganizationChartPage /> },
+  { path: "/resource/pool", element: <ResourcePool /> },
+  { path: "/resource/table", element: <ResourceTable /> },
+];
 
 
   return (
     <div>
       <BrowserRouter>
-        <Layout>
+       {/* <Layout>
           <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="/all-projects" element={<AllProjects />} />
             <Route path="/create-project" element={<CreateProjectForm />} />
@@ -296,36 +386,98 @@ const App = () => {
             <Route path="/project-dashboard" element={<ProjectDetails />} />
             <Route path="/user-profile" element={<UserProfilePage />} />
             <Route path="/test1" element={<ProjectCarousel />} />
-            <Route path="/test2" element={<ProjectCard project={projects[1]}/>} />
-            <Route path="/pms-dashboard" element={<ProjectTableView/>} />
-            <Route path="/project-milestones" element={<ProjectMilestones/>} />
-            <Route path="/add-task" element={<TaskForm/>} />
-            <Route path="/test6" element={<TestSelect/>} />
-            <Route path="/test7" element={<TeamDeatils teams={teamsData}/>} />
-            <Route path="/test8" element={<FinalEmployeeDropdown/>} />
-            <Route path="/test9" element={<NewAddTeamForm/>} />
-            <Route path="/test10" element={<NewMilestoneForm/>} />
-            <Route path="/test11" element={<TestCreateProjectForm/>} />
-            <Route path="/test12" element={<TestMilestoneForm/>} />
-            <Route path="/project-details" element={<ProjectDetailsPage project={projects[0]}/>} />
-            <Route path="/test13" element={<ColumnToggleDemo/>} />
-            <Route path="/holiday-calender" element={<HolidayCalendarPage holidays={holidays}/>} />
-            <Route path="/announcements" element={<AnnouncementsPage announcements={announcements}/>} />
-            <Route path="/eos-update" element={<EosUpdate/>} />
-            <Route path="/month" element={<MonthYearPicker/>} />
-            <Route path="/eos-update-month/:year/:month" element={<EosUpdateByMonth />} />
+            <Route
+              path="/test2"
+              element={<ProjectCard project={projects[1]} />}
+            />
+            <Route path="/pms-dashboard" element={<ProjectTableView />} />
+            <Route path="/project-milestones" element={<ProjectMilestones />} />
+            <Route path="/add-task" element={<TaskForm />} />
+            <Route path="/test6" element={<TestSelect />} />
+            <Route path="/test7" element={<TeamDeatils teams={teamsData} />} />
+            <Route path="/test8" element={<FinalEmployeeDropdown />} />
+            <Route path="/test9" element={<NewAddTeamForm />} />
+            <Route path="/test10" element={<NewMilestoneForm />} />
+            <Route path="/test11" element={<TestCreateProjectForm />} />
+            <Route path="/test12" element={<TestMilestoneForm />} />
+            <Route
+              path="/project-details"
+              element={<ProjectDetailsPage project={projects[0]} />}
+            />
+            <Route path="/test13" element={<ColumnToggleDemo />} />
+            <Route
+              path="/holiday-calender"
+              element={<HolidayCalendarPage holidays={holidays} />}
+            />
+            <Route
+              path="/announcements"
+              element={<AnnouncementsPage announcements={announcements} />}
+            />
+            <Route path="/eos-update" element={<EosUpdate />} />
+            <Route path="/month" element={<MonthYearPicker />} />
+            <Route
+              path="/eos-update-month/:year/:month"
+              element={<EosUpdateByMonth />}
+            />
             <Route path="/eos-approval" element={<EosApproval />} />
             <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
-            <Route path="/eos-approval-hod" element={<EosApprovalHod/>} />
-            <Route path="/document-center" element={<DocumentCenter/>} />
-            <Route path="/org-chart" element={<OragnizationChart/>} />
-            <Route path="/org-chart-page" element={<OrganizationChartPage/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/resource-pool" element={<ResourcePool/>} />
-            <Route path="/resource-table" element={<ResourceTable/>} />
-            
+            <Route path="/eos-approval-hod" element={<EosApprovalHod />} />
+            <Route path="/document-center" element={<DocumentCenter />} />
+            <Route path="/org-chart" element={<OragnizationChart />} />
+            <Route path="/org-chart-page" element={<OrganizationChartPage />} />
+
+            <Route path="/resource-pool" element={<ResourcePool />} />
+            <Route path="/resource-table" element={<ResourceTable />} />
           </Routes>
         </Layout>
+        */}
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+          path="/*"
+          element={
+            <Layout>
+              <Routes>
+              
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/all-projects" element={<AllProjects />} />
+                <Route path="/create-project" element={<CreateProjectForm />} />
+                <Route path="/purchase-order" element={<PurchaseOrder />} />
+                <Route path="/project-dashboard" element={<ProjectDetails />} />
+                <Route path="/user-profile" element={<UserProfilePage />} />
+                <Route path="/test1" element={<ProjectCarousel />} />
+                <Route path="/test2" element={<ProjectCard project={projects[1]} />} />
+                <Route path="/pms-dashboard" element={<ProjectTableView />} />
+                <Route path="/project-milestones" element={<ProjectMilestones />} />
+                <Route path="/add-task" element={<TaskForm />} />
+                <Route path="/test6" element={<TestSelect />} />
+                <Route path="/test7" element={<TeamDeatils teams={teamsData} />} />
+                <Route path="/test8" element={<FinalEmployeeDropdown />} />
+                <Route path="/test9" element={<NewAddTeamForm />} />
+                <Route path="/test10" element={<NewMilestoneForm />} />
+                <Route path="/test11" element={<TestCreateProjectForm />} />
+                <Route path="/test12" element={<TestMilestoneForm />} />
+                <Route path="/project-details" element={<ProjectDetailsPage project={projects[0]} />} />
+                <Route path="/test13" element={<ColumnToggleDemo />} />
+                <Route path="/holiday-calender" element={<HolidayCalendarPage holidays={holidays} />} />
+                <Route path="/announcements" element={<AnnouncementsPage announcements={announcements} />} />
+                <Route path="/eos-update" element={<EosUpdate />} />
+                <Route path="/month" element={<MonthYearPicker />} />
+                <Route path="/eos-update-month/:year/:month" element={<EosUpdateByMonth />} />
+                <Route path="/eos-approval" element={<EosApproval />} />
+                <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
+                <Route path="/eos-approval-hod" element={<EosApprovalHod />} />
+                <Route path="/document-center" element={<DocumentCenter />} />
+                <Route path="/org-chart" element={<OragnizationChart />} />
+                <Route path="/org-chart-page" element={<OrganizationChartPage />} />
+                <Route path="/resource-pool" element={<ResourcePool />} />
+                <Route path="/resource-table" element={<ResourceTable />} />
+              </Routes>
+            </Layout>
+          }
+        />
+        </Routes>
       </BrowserRouter>
     </div>
   );
