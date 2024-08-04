@@ -432,7 +432,7 @@ const protectedRoutes = [
         </Layout>
         */}
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route
           path="/*"
@@ -440,7 +440,7 @@ const protectedRoutes = [
             <Layout>
               <Routes>
               
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/all-projects" element={<AllProjects />} />
                 <Route path="/create-project" element={<CreateProjectForm />} />
                 <Route path="/purchase-order" element={<PurchaseOrder />} />
