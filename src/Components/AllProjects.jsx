@@ -85,11 +85,15 @@ const AllProjects = () => {
     ProductService.getProducts().then((data) => setProducts(data));
   }, []);
 
+  const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/projects"
+  const apiUrl1 = `http://${baseURL}:${port}/projects`
+
+
   useEffect(() => {
     // ProjectData.getProjetcts().then((data) => setProjects(data));
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('https://lft-web-portal-backend.onrender.com/projects');
+        const response = await axios.get('https://lft-web-portal-backend-1.onrender.com/projects');
         // const response = await axios.get(`http://${baseURL}:${port}/projects`);
        
        const projectsData= response.data.projects

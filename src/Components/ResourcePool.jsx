@@ -34,7 +34,7 @@ const ResourcePool = () => {
   };
   
   const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
-  const apiUrl1 = "http://${baseURL}:${port}/users"
+  const apiUrl1 = `http://${baseURL}:${port}/users`
 
 
   useEffect(() => {
