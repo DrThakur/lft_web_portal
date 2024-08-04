@@ -33,12 +33,15 @@ const ResourcePool = () => {
     return employees.filter(employee => employee.department === department);
   };
   
+  const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
+  const apiUrl1 = "http://${baseURL}:${port}/users"
+
 
   useEffect(() => {
     const fetchUserInformation = async () => {
       try {
         // const res = await axios.get(`http://${baseURL}:${port}/users`);
-        const res = await axios.get(`https://lft-web-portal-backend.onrender.com/users`);
+        const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users`);
         const employeeData = res.data.users;
         console.log("response data", res.data);
         console.log("response data-2", res.data.users);
