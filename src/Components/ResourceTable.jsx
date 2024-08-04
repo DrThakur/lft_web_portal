@@ -235,7 +235,7 @@ console.log("my employees data", employees);
 
     const header = (
         <div className="flex flex-row justify-between items-center">
-            <h4 className="m-0">{title} Department</h4>
+            <h4 className="m-0">{title} Department-- </h4>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
@@ -319,7 +319,7 @@ console.log("my employees data", employees);
                 <DataTable ref={dt} value={employees} selectionMode={'checkbox'} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
                         dataKey="employeeId"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" globalFilter={globalFilter} header={header}>
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees" globalFilter={globalFilter} header={header}>
                     <Column selectionMode="multiple" exportable={false}></Column>
                     <Column field="employeeId" header="Employee Id" sortable style={{ minWidth: '12rem' }}></Column>
                     <Column field="fullName" header="Employee Name" sortable style={{ minWidth: '16rem' }}></Column>
@@ -354,7 +354,7 @@ console.log("my employees data", employees);
             <Dialog visible={deleteProductsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {product && <span>Are you sure you want to delete the selected products?</span>}
+                    {product && <span>Are you sure you want to delete the selected employees?</span>}
                 </div>
             </Dialog>
         </div>
