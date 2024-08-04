@@ -39,7 +39,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     setLoading(true);
     try {
-      const res = await axios.post(`https://lft-web-portal-backend-1.onrender.com/api/v1/auth/login`, {
+      const res = await axios.post(`http://${baseURL}:${port}/api/v1/auth/login`, {
         email: userRef.current.value,
         password: passwordRef.current.value,
       });

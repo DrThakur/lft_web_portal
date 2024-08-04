@@ -18,7 +18,7 @@ const UserProfile = () => {
   const handleLogOut = () => {
     console.log("Logout clicked");
     dispatch({ type: "LOGOUT" });
-    navigate("/login");
+    navigate("/");
   };
 
   return (
