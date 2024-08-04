@@ -65,7 +65,7 @@ const Sidebar = () => {
     setSelectedMainItem(mainItem);
     setActiveRightSidebar(true);
     if (mainItem === "Dashboard") {
-      navigate(`/`);
+      navigate(`/dashboard`);
     } else if (mainItem === "Document Center") {
       navigate(`/document-center`);
     }
