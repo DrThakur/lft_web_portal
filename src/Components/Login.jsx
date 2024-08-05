@@ -64,7 +64,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     setLoading(true);
     try {
-      const res = await axios.post(apiUrl1, {
+      const res = await axios.post(apiUrl2, {
         email: "guest@example.com",
         password: "guestpassword",
       });
