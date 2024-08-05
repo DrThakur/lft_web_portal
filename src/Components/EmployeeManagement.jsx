@@ -14,8 +14,9 @@ import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Tag } from "primereact/tag";
+import axios from "axios";
 
-const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pageSize, onPageChange, onPageSizeChange  }) => {
+const EmployeeManagement = () => {
   let emptyProduct = {
     id: null,
     name: "",
@@ -27,7 +28,7 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
     rating: 0,
     inventoryStatus: "INSTOCK",
   };
-  console.log("my employees data", employees);
+  
 
   // const [employees, setEmployees] = useState(employees);
   const [products, setProducts] = useState(null);
@@ -41,6 +42,61 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
   const toast = useRef(null);
   const dt = useRef(null);
 
+  const [employees, setEmployees] = useState("");
+  const [employeesByDepartment, setEmployeesByDepartment] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+ 
+
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const port = process.env.REACT_APP_BACKEND_PORT;
+
+
+  // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
+  // const apiUrl1 = `http://${baseURL}:${port}/users`
+
+  useEffect(() => {
+    const fetchUserInformation = async (page, limit) => {
+      try {
+        // const res = await axios.get(`http://${baseURL}:${port}/users?page=${page}&limit=${limit}`);
+        // const res = await axios.get(`http://${baseURL}:${port}/users/all`);
+        // const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users?page=${page}&limit=${limit}`);
+        const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users/all`);
+        // const employeeData = res.data.users;
+        const { users, totalPages } = res.data;
+        // console.log("response data", res.data);
+        console.log("response data---final", users);
+        // console.log("response data-2", res.data.users);
+        // console.log("response data-3", res.data.users);
+        // console.log("Type of data:", typeof res.data);
+        // console.log("Type of data-222:", typeof res.data.users);
+
+        // const filteredEmployees = filterEmployeesByDepartment(employeeData, department);
+
+        //  // Organize employees by department
+        // const departmentMap = departments.reduce((acc, department) => {
+        //   acc[department] = filterEmployeesByDepartment(
+        //     users,
+        //     department
+        //   );
+        //   return acc;
+        // }, {});
+        setEmployees(users);
+        // setEmployeesByDepartment(departmentMap);
+        setTotalPages(totalPages);
+      } catch (error) {
+        console.error("Error", error);
+      } finally {
+        setLoading(false); // Set loading to false when data is fetched
+      }
+    };
+
+    fetchUserInformation(currentPage, pageSize);
+  }, [currentPage, pageSize]);
+
   useEffect(() => {
     ProductService.getProducts().then((data) => setProducts(data));
   }, []);
@@ -52,13 +108,24 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
     });
   };
 
-  const handlePageChange = (event) => {
-    onPageChange(event.page + 1);
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    setLoading(true);
   };
 
-  const handlePageSizeChange = (event) => {
-    onPageSizeChange(event.rows);
+  const handlePageSizeChange = (newSize) => {
+    setPageSize(newSize);
+    setCurrentPage(1);
+    setLoading(true);
   };
+
+//   const handlePageChange = (event) => {
+//     onPageChange(event.page + 1);
+//   };
+
+//   const handlePageSizeChange = (event) => {
+//     onPageSizeChange(event.rows);
+//   };
 
   const openNew = () => {
     setProduct(emptyProduct);
@@ -308,7 +375,7 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
 
   const header = (
     <div className="flex flex-row justify-between items-center">
-      <h4 className="m-0">{title} Department-- </h4>
+      <h4 className="m-0">HR Department -All Employees</h4>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText
@@ -435,7 +502,7 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
           onSelectionChange={(e) => setSelectedProducts(e.value)}
           dataKey="employeeId"
           paginator
-          rows={pageSize}
+          rows={10}
           rowsPerPageOptions={[5, 10, 25]}
         //   totalRecords={totalPages * pageSize}
         //   onPage={handlePageChange}
@@ -478,7 +545,7 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
-          <Column
+          {/*<Column
             field="inventoryStatus"
             header="Projects"
             body={statusBodyTemplate}
@@ -513,6 +580,7 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
+          */}
           <Column
             field="inventoryStatus"
             header="Tech Skills"
@@ -582,4 +650,4 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
   );
 };
 
-export default ResourceTable;
+export default EmployeeManagement;

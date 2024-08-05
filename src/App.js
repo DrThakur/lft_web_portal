@@ -36,6 +36,7 @@ import ResourcePool from "./Components/ResourcePool";
 import ResourceTable from "./Components/ResourceTable";
 import Login from "./Components/Login";
 import ForgotPassword from "./Components/ForgotPassword";
+import EmployeeManagement from "./Components/EmployeeManagement";
 
 
 // const LayoutRoutes = () => (
@@ -473,6 +474,7 @@ const protectedRoutes = [
                 <Route path="/org-chart-page" element={<OrganizationChartPage />} />
                 <Route path="/resource-pool" element={<ResourcePool />} />
                 <Route path="/resource-table" element={<ResourceTable />} />
+                <Route path="/employee-management" element={<EmployeeManagement />} />
               </Routes>
             </Layout>
           }

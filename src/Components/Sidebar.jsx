@@ -102,6 +102,8 @@ const Sidebar = () => {
       navigate("/org-chart-page");
     } else if (menuItem === "Resource Pool") {
       navigate("/resource-pool");
+    } else if (menuItem === "Employee Management") {
+      navigate("/employee-management");
     }
 
     // Perform any other actions upon main item click
