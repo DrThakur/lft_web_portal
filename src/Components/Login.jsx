@@ -59,6 +59,31 @@ const Login = () => {
     }
   };
 
+
+  const handleGuestLogin = async () => {
+    dispatch({ type: "LOGIN_START" });
+    setLoading(true);
+    try {
+      const res = await axios.post(apiUrl1, {
+        email: "guest@example.com",
+        password: "guestpassword",
+      });
+      console.log("Guest login response", res);
+      const token = res.data.token;
+      const decodedToken = jwtDecode(token);
+      const userData = decodedToken;
+      console.log("Guest user data", userData);
+
+      dispatch({ type: "LOGIN_SUCCESS", payload: userData });
+      return navigate("/dashboard");
+    } catch (error) {
+      dispatch({ type: "LOGIN_FAILURE" });
+      setErrorMsg("*Guest login failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prevImage) =>
@@ -183,6 +208,14 @@ const Login = () => {
               </Link>
             </div>
           </form>
+          <div className="font-bold text-xl mt-4 text-center">
+            <button
+              onClick={handleGuestLogin}
+              className="text-black-500 hover:text-black-800 bg-gray-300 hover:bg-gray-500 w-full py-3 rounded-md "
+            >
+              Login as Guest
+            </button>
+          </div>
         </div>
       </div>
     </div>
