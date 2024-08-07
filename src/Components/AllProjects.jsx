@@ -85,15 +85,17 @@ const AllProjects = () => {
     ProductService.getProducts().then((data) => setProducts(data));
   }, []);
 
-  const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/projects"
-  const apiUrl1 = `http://${baseURL}:${port}/projects`
+  // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/projects"
+  // const apiUrl1 = `http://${baseURL}:${port}/projects`
+
+  const apiUrl = process.env.REACT_APP_API_URL;
 
 
   useEffect(() => {
     // ProjectData.getProjetcts().then((data) => setProjects(data));
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('https://lft-web-portal-backend-1.onrender.com/projects');
+        const response = await axios.get(`${apiUrl}/projects`);
         // const response = await axios.get(`http://${baseURL}:${port}/projects`);
        
        const projectsData= response.data.projects
@@ -106,7 +108,7 @@ const AllProjects = () => {
     };
 
     fetchProjects();
-  }, []);
+  }, [apiUrl]);
 
   const formatCurrency = (value) => {
     return value.toLocaleString("en-US", {

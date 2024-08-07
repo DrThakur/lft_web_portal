@@ -39,14 +39,16 @@ const ProjectDetailsPage = () => {
   console.log("my project id", projectId);
   const baseURL = process.env.REACT_APP_BASE_URL;
   const port = process.env.REACT_APP_BACKEND_PORT;
-  const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`;
-  const apiUrl1 = `http://${baseURL}:${port}/projects/${projectId}`;
+  // const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`;
+  // const apiUrl1 = `http://${baseURL}:${port}/projects/${projectId}`;
+
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
         const response = await axios.get(
-          `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`
+          `${apiUrl}/projects/${projectId}`
         );
         setProject(response.data.project);
       } catch (error) {
@@ -55,7 +57,7 @@ const ProjectDetailsPage = () => {
     };
 
     fetchProjectDetails();
-  }, [projectId]);
+  }, [projectId,apiUrl]);
 
   if (!project) {
     return <div>Loading...</div>;

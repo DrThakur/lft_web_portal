@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { Chart } from "primereact/chart";
 import { useParams } from "react-router-dom";
@@ -29,7 +28,6 @@ const ProjectDetails = () => {
   const [chartOptions, setChartOptions] = useState({});
   const [pieChartData, setPieChartData] = useState({});
   const [pieChartOptions, setPieChartOptions] = useState({});
-  
 
   const formatDate = (value) => {
     const date = new Date(value);
@@ -72,15 +70,14 @@ const ProjectDetails = () => {
 
   const baseURL = process.env.REACT_APP_BASE_URL;
   const port = process.env.REACT_APP_BACKEND_PORT;
-  const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`;
-  const apiUrl1 = `http://${baseURL}:${port}/projects/${projectId}`;
+  // const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`;
+  // const apiUrl1 = `http://${baseURL}:${port}/projects/${projectId}`;
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
-        const response = await axios.get(
-          `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`
-        );
+        const response = await axios.get(`${apiUrl}/projects/${projectId}`);
         setProject(response.data.project);
       } catch (error) {
         console.error("Error fetching project details:", error);
@@ -90,7 +87,6 @@ const ProjectDetails = () => {
     fetchProjectDetails();
   }, [projectId]);
 
-  
   useEffect(() => {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue("--text-color");
@@ -221,9 +217,7 @@ const ProjectDetails = () => {
           <span className="text-5xl font-bold">{project.clientName}</span>
         </div>
         <div>
-          <span className="text-5xl font-bold">
-          {project.projectName}
-          </span>
+          <span className="text-5xl font-bold">{project.projectName}</span>
           <span className="text-5xl font-bold">-</span>
           <span className="text-5xl font-bold"> {"N/A"}</span>
         </div>
@@ -276,9 +270,7 @@ const ProjectDetails = () => {
             </thead>
             <tbody>
               <tr>
-                <td className="border p-2">
-                  {project.projectName}
-                </td>
+                <td className="border p-2">{project.projectName}</td>
                 <td className="border p-2">{"N/A"}</td>
                 <td className="border p-2">{"N/A"}</td>
                 <td className="border p-2">{"N/A"}</td>
@@ -295,9 +287,7 @@ const ProjectDetails = () => {
       <div className="projectDescription grid grid-cols-3 gap-4 mt-4">
         <div className="projectBrief bg-gray-200 p-2 rounded-lg">
           <h3 className="text-xl font-semibold mb-2 rounded">Project Brief:</h3>
-          <span>
-           {project.projectDescription}
-          </span>
+          <span>{project.projectDescription}</span>
         </div>
         <div className="projectStatusTable bg-white col-span-2 rounded-lg">
           <table className="table-auto border-collapse border w-full rounded-lg">

@@ -27,12 +27,13 @@ const ResourcePool = () => {
 
   // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
   // const apiUrl1 = `http://${baseURL}:${port}/users`
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchUserInformation = async (page, limit) => {
       try {
         // const res = await axios.get(`http://${baseURL}:${port}/users?page=${page}&limit=${limit}`);
-        const res = await axios.get(`http://${baseURL}:${port}/users/all`);
+        const res = await axios.get(`${apiUrl}/users/all`);
         // const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users?page=${page}&limit=${limit}`);
         // const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users/all`);
         // const employeeData = res.data.users;

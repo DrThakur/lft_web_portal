@@ -193,13 +193,15 @@ const ProjectTableView = ({ selectedView }) => {
 
   const baseURL = process.env.REACT_APP_BASE_URL;
   const port = process.env.REACT_APP_BACKEND_PORT;
-  const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects`;
-  const apiUrl1 = `http://${baseURL}:${port}/projects`;
+  // const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects`;
+  // const apiUrl1 = `http://${baseURL}:${port}/projects`;
+
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
-        const response = await axios.get(`https://lft-web-portal-backend-1.onrender.com/projects`);
+        const response = await axios.get(`${apiUrl}/projects`);
         const projectsData= response.data.projects
         console.log("my projects", response.data.projects);
         setProjects(projectsData);
