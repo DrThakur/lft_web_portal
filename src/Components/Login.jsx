@@ -1,11 +1,10 @@
 import { useRef, useContext, useState, useEffect } from "react";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import logo from "../Images/LFT-Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
-import  {useStateContext}  from "../Contexts/ContextProvider";
+import { useStateContext } from "../Contexts/ContextProvider";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
 
 const images = [
   `man_with_laptop.png`,
@@ -23,23 +22,27 @@ const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const baseURL = process.env.REACT_APP_BASE_URL;
-  const port = process.env.REACT_APP_BACKEND_PORT;
+  // const baseURL = process.env.REACT_APP_BASE_URL;
+  // const port = process.env.REACT_APP_BACKEND_PORT;
 
   const togglePasswordVisiblity = () => {
     setPasswordShown(!passwordShown);
     passwordRef.current.focus();
   };
-  
-  const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/api/v1/auth/login"
-  const apiUrl1 = `http://${baseURL}:${port}/api/v1/auth/login`
+
+  // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/api/v1/auth/login"
+  // const apiUrl1 = `http://${baseURL}:${port}/api/v1/auth/login`
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  console.log("my api url final", apiUrl);
+  console.log("Environment Variables:", process.env);
 
   const handleSignin = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     setLoading(true);
     try {
-      const res = await axios.post(`https://lft-web-portal-backend-1.onrender.com/api/v1/auth/login`, {
+      const res = await axios.post(`${apiUrl}/api/v1/auth/login`, {
         email: userRef.current.value,
         password: passwordRef.current.value,
       });
@@ -47,7 +50,7 @@ const Login = () => {
       const token = res.data.token;
       const decodedToken = jwtDecode(token);
       const userData = decodedToken;
-      console.log("user Dtata",userData);
+      console.log("user Dtata", userData);
 
       dispatch({ type: "LOGIN_SUCCESS", payload: userData });
       return navigate("/dashboard");
@@ -59,12 +62,11 @@ const Login = () => {
     }
   };
 
-
   const handleGuestLogin = async () => {
     dispatch({ type: "LOGIN_START" });
     setLoading(true);
     try {
-      const res = await axios.post(apiUrl2, {
+      const res = await axios.post(`${apiUrl}/api/v1/auth/login`, {
         email: "guest@example.com",
         password: "guestpassword",
       });
