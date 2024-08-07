@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsDot } from "react-icons/bs";
 import { Avatar } from "primereact/avatar";
 import { AvatarGroup } from "primereact/avatargroup";
@@ -6,42 +6,67 @@ import { Tooltip } from "react-tooltip";
 import { ProgressBar } from "primereact/progressbar";
 
 const ProjectCard = ({ project }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  // Function to toggle description
+  const handleToggleDescription = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  // Function to truncate description to 24 words
+  const truncateDescription = (description, wordLimit) => {
+    const words = description.split(" ");
+    if (words.length <= wordLimit) {
+      return description;
+    }
+    return words.slice(0, wordLimit).join(" ") + "...";
+  };
   return (
-    <div className="cardContainer border-2 rounded-lg shadow-lg w-1/5 mt-4 bg-gray-50 p-4 h-fit">
+    <div className="cardContainer border-2 rounded-lg shadow-lg w-1/5 mt-4 bg-gray-50 p-4 h-full">
       <div className="cardHeading p-2">
         <span className="flex flex-row justify-start items-center text-red-400 bg-red-50 rounded-lg w-[200px] font-semibold text-sm">
           <BsDot className="text-xl" /> Deadline : 10 Feb 2024
         </span>
-        <h3 className="font-bold text-2xl -ml-2">{project.name}</h3>
+        <h3 className="font-bold text-2xl -ml-2 overflow-wrap break-words">
+          {project.projectName}
+        </h3>
       </div>
       <div className="cardBody flex flex-col gap-2">
         <div className="flex rounded-lg ">
           <div className="flex-1 bg-blue-100 rounded-s p-1 flex flex-col justify-center items-center gap-1">
-            <span className="font-bold text-2xl">{project.milestones}</span>
+            <span className="font-bold text-2xl">
+              {project.milestones || "M/A"}
+            </span>
             <span>Milestones</span>
           </div>
           <div className="flex-1   bg-green-100 p-1 flex flex-col justify-center items-center gap-1">
-            <span className="font-bold text-2xl">{project.completed}</span>
+            <span className="font-bold text-2xl">
+              {project.completed || "N/A"}
+            </span>
             <span>Completed</span>
           </div>
           <div className="flex-1 bg-yellow-100 p-1 flex flex-col justify-center items-center gap-1">
-            <span className="font-bold text-2xl">{project.active}</span>
+            <span className="font-bold text-2xl">
+              {project.active || "N/A"}
+            </span>
             <span>Active</span>
           </div>
           <div className="flex-1 bg-red-100 rounded-e p-1 flex flex-col justify-center items-center gap-1">
-            <span className="font-bold text-2xl">{project.pending}</span>
+            <span className="font-bold text-2xl">
+              {project.pending || "N/A"}
+            </span>
             <span>Pending</span>
           </div>
         </div>
         <div className="description flex flex-wrap">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua....
-          <a
-            href="/"
+          {isExpanded
+            ? project.projectDescription
+            : truncateDescription(project.projectDescription, 14)}
+          <button
+            onClick={handleToggleDescription}
             className="text-blue-600 font-semibold hover:text-blue-800"
           >
-            Read more
-          </a>
+            {isExpanded ? "Read less" : "Read more"}
+          </button>
         </div>
         <div className="flex flex-row justify-start items-center gap-2 mb-1 mt-1">
           <h3 className="font-bold">Project Manager: </h3>
@@ -56,7 +81,7 @@ const ProjectCard = ({ project }) => {
               href="/"
               className="text-blue-500 hover:text-blue-900 font-semibold"
             >
-              {project.manager}
+              {project.projectManager.fullName}
             </a>
           </span>
         </div>
@@ -196,7 +221,7 @@ const ProjectCard = ({ project }) => {
         </div>
         <div className="progressbar mt-2 flex flex-col gap-2">
           <h3 className="font-bold">Progress:</h3>
-          <ProgressBar value={project.progress} ></ProgressBar>
+          <ProgressBar value={project.progress}></ProgressBar>
         </div>
       </div>
     </div>

@@ -93,8 +93,8 @@ const AllProjects = () => {
     // ProjectData.getProjetcts().then((data) => setProjects(data));
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('https://lft-web-portal-backend-1.onrender.com/projects');
-        // const response = await axios.get(`http://${baseURL}:${port}/projects`);
+        // const response = await axios.get('https://lft-web-portal-backend-1.onrender.com/projects');
+        const response = await axios.get(`http://${baseURL}:${port}/projects`);
        
        const projectsData= response.data.projects
         console.log("My projects", response.data);
@@ -501,7 +501,7 @@ const AllProjects = () => {
 
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
-        <Link to="/project-dashboard" className="ml-2 text-green-500 hover:text-green-900">
+        <Link to={`/project-dashboard/${rowData._id}`}className="ml-2 text-green-500 hover:text-green-900">
          View Dashbaord
         </Link>
       </div>
@@ -514,7 +514,7 @@ const AllProjects = () => {
 
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
-        <Link to="/project-details" className="ml-2 text-blue-500 hover:text-blue-900">
+        <Link to={`/project-details/${rowData._id}`} className="ml-2 text-blue-500 hover:text-blue-900">
          {rowData.projectName}
         </Link>
       </div>

@@ -1,23 +1,27 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Chart } from "primereact/chart";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const ProjectDetails = () => {
-  const project = [
-    {
-      jd: "1",
-      projectName: "PCIe Host FPGA-SSD bridging- Stage 2",
-      plannedStartDate: "2024-05-02T18:30:00.000Z",
-      plannedEndDate: "2024-05-24T18:30:00.000Z",
-      actualStartDate: "2024-05-09T18:30:00.000Z",
-      currentStage: "MS 1.2/MS 1.3",
-      projectBudget: "$2000",
-      invoicedToClient: "$5000",
-      projectOverallHealth: "Delay",
-      projectDescription:
-        "LFT Self Funded JESD 204C IP development Project targeted for Xilinx FPGA and tested with Xilinx IP",
-    },
-  ];
+  // const project = [
+  //   {
+  //     jd: "1",
+  //     projectName: "PCIe Host FPGA-SSD bridging- Stage 2",
+  //     plannedStartDate: "2024-05-02T18:30:00.000Z",
+  //     plannedEndDate: "2024-05-24T18:30:00.000Z",
+  //     actualStartDate: "2024-05-09T18:30:00.000Z",
+  //     currentStage: "MS 1.2/MS 1.3",
+  //     projectBudget: "$2000",
+  //     invoicedToClient: "$5000",
+  //     projectOverallHealth: "Delay",
+  //     projectDescription:
+  //       "LFT Self Funded JESD 204C IP development Project targeted for Xilinx FPGA and tested with Xilinx IP",
+  //   },
+  // ];
+  const { projectId } = useParams();
+  const [project, setProject] = useState(null);
   const [products, setProducts] = useState([]);
   const dt = useRef(null);
 
@@ -25,6 +29,7 @@ const ProjectDetails = () => {
   const [chartOptions, setChartOptions] = useState({});
   const [pieChartData, setPieChartData] = useState({});
   const [pieChartOptions, setPieChartOptions] = useState({});
+  
 
   const formatDate = (value) => {
     const date = new Date(value);
@@ -65,6 +70,27 @@ const ProjectDetails = () => {
     return formatDate(rowData.actualStartDate);
   };
 
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const port = process.env.REACT_APP_BACKEND_PORT;
+  const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`;
+  const apiUrl1 = `http://${baseURL}:${port}/projects/${projectId}`;
+
+  useEffect(() => {
+    const fetchProjectDetails = async () => {
+      try {
+        const response = await axios.get(
+          `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`
+        );
+        setProject(response.data.project);
+      } catch (error) {
+        console.error("Error fetching project details:", error);
+      }
+    };
+
+    fetchProjectDetails();
+  }, [projectId]);
+
+  
   useEffect(() => {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue("--text-color");
@@ -182,20 +208,24 @@ const ProjectDetails = () => {
     setPieChartOptions(options);
   }, []);
 
+  if (!project) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="bg-white p-4 rounded ">
       <h1 className="text-2xl font-bold mb-4">Project Details</h1>
 
       <div className="flex flex-row justify-center items-center gap-2">
         <div className="border-r-4 border-black p-2">
-          <span className="text-5xl font-bold">Rockwell Collins</span>
+          <span className="text-5xl font-bold">{project.clientName}</span>
         </div>
         <div>
           <span className="text-5xl font-bold">
-            PCIe Host FPGA-SSD bridging
+          {project.projectName}
           </span>
           <span className="text-5xl font-bold">-</span>
-          <span className="text-5xl font-bold"> Stage 2</span>
+          <span className="text-5xl font-bold"> {"N/A"}</span>
         </div>
       </div>
       <div className="table w-full rounded">
@@ -247,15 +277,15 @@ const ProjectDetails = () => {
             <tbody>
               <tr>
                 <td className="border p-2">
-                  PCIe Host FPGA-SSD bridging- Stage 2
+                  {project.projectName}
                 </td>
-                <td className="border p-2">03 May 2024</td>
-                <td className="border p-2">03 May 2024</td>
-                <td className="border p-2">10 May 2024</td>
-                <td className="border p-2">MS 1.2/MS 1.3</td>
-                <td className="border p-2">$2000</td>
-                <td className="border p-2">$5000</td>
-                <td className="border p-2">Delay</td>
+                <td className="border p-2">{"N/A"}</td>
+                <td className="border p-2">{"N/A"}</td>
+                <td className="border p-2">{"N/A"}</td>
+                <td className="border p-2">{"N/A"}</td>
+                <td className="border p-2">{"N/A"}</td>
+                <td className="border p-2">{"N/A"}</td>
+                <td className="border p-2">{"N/A"}</td>
               </tr>
             </tbody>
           </table>
@@ -266,10 +296,7 @@ const ProjectDetails = () => {
         <div className="projectBrief bg-gray-200 p-2 rounded-lg">
           <h3 className="text-xl font-semibold mb-2 rounded">Project Brief:</h3>
           <span>
-            Develop bridge application between HOST & NVMe SSD running at PCIe
-            Gen4x4 which allows AES-XTS encryption/decryption during data
-            transfer from HOST to SSD and SSD to HOST. To be implemented using
-            Achronix Speedster AC7t1500 FPGA on S7t-VG6 Vector Path board
+           {project.projectDescription}
           </span>
         </div>
         <div className="projectStatusTable bg-white col-span-2 rounded-lg">

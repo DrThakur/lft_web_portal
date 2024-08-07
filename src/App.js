@@ -445,7 +445,7 @@ const protectedRoutes = [
                 <Route path="/all-projects" element={<AllProjects />} />
                 <Route path="/create-project" element={<CreateProjectForm />} />
                 <Route path="/purchase-order" element={<PurchaseOrder />} />
-                <Route path="/project-dashboard" element={<ProjectDetails />} />
+                <Route path="/project-dashboard/:projectId" element={<ProjectDetails />} />
                 <Route path="/user-profile" element={<UserProfilePage />} />
                 <Route path="/test1" element={<ProjectCarousel />} />
                 <Route path="/test2" element={<ProjectCard project={projects[1]} />} />
@@ -459,7 +459,7 @@ const protectedRoutes = [
                 <Route path="/test10" element={<NewMilestoneForm />} />
                 <Route path="/test11" element={<TestCreateProjectForm />} />
                 <Route path="/test12" element={<TestMilestoneForm />} />
-                <Route path="/project-details" element={<ProjectDetailsPage project={projects[0]} />} />
+                <Route path="/project-details/:projectId" element={<ProjectDetailsPage  />} />
                 <Route path="/test13" element={<ColumnToggleDemo />} />
                 <Route path="/holiday-calender" element={<HolidayCalendarPage holidays={holidays} />} />
                 <Route path="/announcements" element={<AnnouncementsPage announcements={announcements} />} />

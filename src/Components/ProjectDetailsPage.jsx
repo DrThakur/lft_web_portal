@@ -1,40 +1,66 @@
 import { Avatar } from "primereact/avatar";
 import { AvatarGroup } from "primereact/avatargroup";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import TeamDialogBox from "./TeamDialogBox";
+import axios from "axios";
 
+const ProjectDetailsPage = () => {
+  // const {
+  //   id,
+  //   name,
+  //   status,
+  //   manager,
+  //   plannedStartDate,
+  //   plannedEndDate,
+  //   actualStartDate,
+  //   actualEndDate,
+  //   smLeadId,
+  //   location,
+  //   clientName,
+  //   clientAddress,
+  //   pointOfContact,
+  //   clientPhone,
+  //   clientEmail,
+  //   duration,
+  //   milestones,
+  //   teams,
+  //   totalBudget,
+  //   repository,
+  //   description,
+  // } = project;
 
-const ProjectDetailsPage = ({ project }) => {
-  const {
-    id,
-    name,
-    status,
-    manager,
-    plannedStartDate,
-    plannedEndDate,
-    actualStartDate,
-    actualEndDate,
-    smLeadId,
-    location,
-    clientName,
-    clientAddress,
-    pointOfContact,
-    clientPhone,
-    clientEmail,
-    duration,
-    milestones,
-    teams,
-    totalBudget,
-    repository,
-    description,
-  } = project;
-
-  const showEditDeleteButtons = status === "Unpublish";
-
+  const { projectId } = useParams();
+  const [project, setProject] = useState(null);
   const [teamDetails, setTeamDetails] = useState({});
   const [visible, setVisible] = useState(false);
+
+  console.log("my project id", projectId);
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const port = process.env.REACT_APP_BACKEND_PORT;
+  const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`;
+  const apiUrl1 = `http://${baseURL}:${port}/projects/${projectId}`;
+
+  useEffect(() => {
+    const fetchProjectDetails = async () => {
+      try {
+        const response = await axios.get(
+          `https://lft-web-portal-backend-1.onrender.com/projects/${projectId}`
+        );
+        setProject(response.data.project);
+      } catch (error) {
+        console.error("Error fetching project details:", error);
+      }
+    };
+
+    fetchProjectDetails();
+  }, [projectId]);
+
+  if (!project) {
+    return <div>Loading...</div>;
+  }
+
   const staticTeamData = [
     {
       name: "Software",
@@ -157,23 +183,22 @@ const ProjectDetailsPage = ({ project }) => {
   ];
 
   const handleSeeAllClick = (teamName) => {
-     // Find the team from staticTeamData based on teamName
-  const team = staticTeamData.find((team) => team.name === teamName);
-  
-  // Set the teamDetails state
-  setTeamDetails(team);
-  
-  // Show the dialog
-  setVisible(true);
-    
+    // Find the team from staticTeamData based on teamName
+    const team = staticTeamData.find((team) => team.name === teamName);
+
+    // Set the teamDetails state
+    setTeamDetails(team);
+
+    // Show the dialog
+    setVisible(true);
   };
 
-  const onHide = ()=> {
-     setVisible(!visible);
-  }
+  const onHide = () => {
+    setVisible(!visible);
+  };
 
-  console.log("My team Details", teamDetails)
-
+  const showEditDeleteButtons = project.status === "Active";
+  console.log("My team Details", teamDetails);
 
   return (
     <div className="container mx-auto bg-white h-screen w-full p-8 rounded-b-xl">
@@ -181,23 +206,23 @@ const ProjectDetailsPage = ({ project }) => {
         <div className="flex flex-row justify-start items-center gap-8">
           <div className="flex flex-row justify-start items-center gap-4">
             <h1 className="text-3xl font-bold text-blue-500">Project: </h1>
-            <h1 className="text-3xl font-bold">
-              LFT {id} / {name}
+            <h1 className="text-2xl font-bold">
+              {project.projectId} / {project.projectName}
             </h1>
           </div>
           <div className="flex flex-row justify-start items-center gap-4">
             <h1 className="text-3xl font-bold text-center text-blue-500">
               Status:
             </h1>
-            <h1 className="text-3xl font-semibold text-center text-green-500">
-              {status || "Active"}{" "}
+            <h1 className="text-2xl font-semibold text-center text-green-500">
+              {project.status || "Active"}{" "}
             </h1>
           </div>
           <div className="flex flex-row justify-start items-center gap-4">
             <h1 className="text-3xl font-bold text-center text-blue-500">
               Progress:
             </h1>
-            <h1 className="text-3xl font-semibold text-center text-orange-900">
+            <h1 className="text-2xl font-semibold text-center text-orange-900">
               20%
             </h1>
           </div>
@@ -205,7 +230,7 @@ const ProjectDetailsPage = ({ project }) => {
 
         <div className="space-x-4 flex flex-row justify-start items-center ">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            {status==="Unpublish"? "Publish": "Unpublish"}
+            {project.status === "Unpublish" ? "Publish" : "Unpublish"}
           </button>
           <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             Export
@@ -231,37 +256,41 @@ const ProjectDetailsPage = ({ project }) => {
                   <td className="font-semibold">Project Manager</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{manager}</td>
+                  <td className="text-blue-500">
+                    {project.projectManager.fullName}
+                  </td>
                 </tr>
                 <tr>
                   <td className="font-semibold">Planned Start Date</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{plannedStartDate}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold">Planned End Date</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{plannedEndDate}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold">Actual Start Date</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{actualStartDate}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold">Actual End Date</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{actualEndDate}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold">S&M Lead Id</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{smLeadId}</td>
+                  <td className="text-blue-500">
+                    {project.smLeadId?.employeeId}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -271,37 +300,37 @@ const ProjectDetailsPage = ({ project }) => {
                   <td className="font-semibold">Location</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{location}</td>
+                  <td className="text-blue-500">{"Gurgaon"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold">Client Name</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{clientName}</td>
+                  <td className="text-blue-500">{project.clientName}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold">Client Address</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{clientAddress}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold">Point of Contact</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{pointOfContact}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold">Phone</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{clientPhone}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold ">Email</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{clientEmail}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
               </tbody>
             </table>
@@ -311,31 +340,34 @@ const ProjectDetailsPage = ({ project }) => {
                   <td className="font-semibold p-1">Project Duration</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{duration}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold p-1">Total Milestones</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{milestones}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold p-1">Teams</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{teams.join(", ")}</td>
+                  {/*<td className="text-blue-500">{teams.join(", ")}</td>*/}
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold p-1">Total Budget</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-blue-500">{totalBudget}</td>
+                  <td className="text-blue-500">{"N/A"}</td>
                 </tr>
                 <tr>
                   <td className="font-semibold p-1">Status</td>
                   <td>:</td>
                   <td>&nbsp; &nbsp; </td>
-                  <td className="text-green-500">{status || "Active"}</td>
+                  <td className="text-green-500">
+                    {project.status || "Active"}
+                  </td>
                 </tr>
                 <tr>
                   <td className="font-semibold p-1">Project Repository</td>
@@ -343,11 +375,11 @@ const ProjectDetailsPage = ({ project }) => {
                   <td>&nbsp; &nbsp; </td>
                   <td className="text-green-500 hover:text-green-900">
                     <Link
-                      to={repository}
+                      to={"/dashboard"}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {repository}
+                      {"N/A"}
                     </Link>
                   </td>
                 </tr>
@@ -358,7 +390,7 @@ const ProjectDetailsPage = ({ project }) => {
 
         <div className="p-4 mt-2 bg-green-100 rounded-xl">
           <h2 className="text-lg font-bold">Description</h2>
-          <p>{description}</p>
+          <p>{project.projectDescription}</p>
         </div>
 
         {/* Add other sections for teams, budget details, and milestones similarly */}
@@ -408,67 +440,67 @@ const ProjectDetailsPage = ({ project }) => {
             </table>
           </div>
           <div className="box-2 h-48">
-          <div className="projectStatusTable bg-white col-span-2 rounded-xl">
-          <table className="table-auto border-collapse border w-full rounded-xl">
-            <tbody>
-              <tr>
-                <td
-                  colSpan={7}
-                  className="text-center text-xl font-semibold bg-gray-200"
-                >
-                  Project Mielstones Tracking
-                </td>
-              </tr>
-              <tr>
-                <td className="border p-2 bg-blue-200 font-semibold ">
-                  Milestones{" "}
-                </td>
-                <td className="border p-2 bg-green-200">1.1</td>
-                <td className="border p-2 bg-yellow-200">1.2</td>
-                <td className="border p-2 bg-yellow-300">1.3</td>
-                <td className="border p-2 bg-red-200">1.4</td>
-                <td className="border p-2">1.5</td>
-                <td className="border p-2">1.6</td>
-              </tr>
-              <tr>
-                <td className="border p-2 bg-blue-200 font-semibold">
-                  Planned
-                </td>
-                <td className="border p-2 bg-green-200">31 Jan 24</td>
-                <td className="border p-2 bg-yellow-200">29 Feb 24</td>
-                <td className="border p-2 bg-yellow-300">31 Mar 24</td>
-                <td className="border p-2 bg-red-200">30 Apr 24</td>
-                <td className="border p-2">31 May 24</td>
-                <td className="border p-2">30 Jun 24</td>
-              </tr>
-              <tr>
-                <td className="border p-2 bg-blue-200 font-semibold">
-                  Actual / Estimated
-                </td>
-                <td className="border p-2 bg-green-200">6 Mar 24</td>
-                <td className="border p-2 bg-yellow-200">31 Mar 24*</td>
-                <td className="border p-2 bg-yellow-300">23 May 24*</td>
-                <td className="border p-2 bg-red-200">30 Apr 24*</td>
-                <td className="border p-2"></td>
-                <td className="border p-2"></td>
-              </tr>
-              <tr>
-                <td className="border p-2 bg-blue-200 font-semibold">
-                  C-Sat Level
-                </td>
-                <td className="border p-2 bg-green-200">+ve</td>
-                <td className="border p-2 bg-yellow-200">Neutral</td>
-                <td className="border p-2 bg-yellow-300"></td>
-                <td className="border p-2 bg-red-200"></td>
-                <td className="border p-2"></td>
-                <td className="border p-2"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+            <div className="projectStatusTable bg-white col-span-2 rounded-xl">
+              <table className="table-auto border-collapse border w-full rounded-xl">
+                <tbody>
+                  <tr>
+                    <td
+                      colSpan={7}
+                      className="text-center text-xl font-semibold bg-gray-200"
+                    >
+                      Project Mielstones Tracking
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="border p-2 bg-blue-200 font-semibold ">
+                      Milestones{" "}
+                    </td>
+                    <td className="border p-2 bg-green-200">1.1</td>
+                    <td className="border p-2 bg-yellow-200">1.2</td>
+                    <td className="border p-2 bg-yellow-300">1.3</td>
+                    <td className="border p-2 bg-red-200">1.4</td>
+                    <td className="border p-2">1.5</td>
+                    <td className="border p-2">1.6</td>
+                  </tr>
+                  <tr>
+                    <td className="border p-2 bg-blue-200 font-semibold">
+                      Planned
+                    </td>
+                    <td className="border p-2 bg-green-200">31 Jan 24</td>
+                    <td className="border p-2 bg-yellow-200">29 Feb 24</td>
+                    <td className="border p-2 bg-yellow-300">31 Mar 24</td>
+                    <td className="border p-2 bg-red-200">30 Apr 24</td>
+                    <td className="border p-2">31 May 24</td>
+                    <td className="border p-2">30 Jun 24</td>
+                  </tr>
+                  <tr>
+                    <td className="border p-2 bg-blue-200 font-semibold">
+                      Actual / Estimated
+                    </td>
+                    <td className="border p-2 bg-green-200">6 Mar 24</td>
+                    <td className="border p-2 bg-yellow-200">31 Mar 24*</td>
+                    <td className="border p-2 bg-yellow-300">23 May 24*</td>
+                    <td className="border p-2 bg-red-200">30 Apr 24*</td>
+                    <td className="border p-2"></td>
+                    <td className="border p-2"></td>
+                  </tr>
+                  <tr>
+                    <td className="border p-2 bg-blue-200 font-semibold">
+                      C-Sat Level
+                    </td>
+                    <td className="border p-2 bg-green-200">+ve</td>
+                    <td className="border p-2 bg-yellow-200">Neutral</td>
+                    <td className="border p-2 bg-yellow-300"></td>
+                    <td className="border p-2 bg-red-200"></td>
+                    <td className="border p-2"></td>
+                    <td className="border p-2"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-
-          {/*    {staticTeamData.map((team, index) => (
+            {/*
+          {staticTeamData.map((team, index) => (
             <div
               key={index}
               className="mb-2 flex flex-row justify-start items-center gap-4"
@@ -506,10 +538,14 @@ const ProjectDetailsPage = ({ project }) => {
               </div>
             </div>
           ))}
-*/}
+              */} 
         </div>
       </div>
-      <TeamDialogBox teamDetails={teamDetails} visible={visible} onHide={onHide}/>
+      <TeamDialogBox
+        teamDetails={teamDetails}
+        visible={visible}
+        onHide={onHide}
+      />
     </div>
   );
 };

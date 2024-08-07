@@ -32,9 +32,9 @@ const ResourcePool = () => {
     const fetchUserInformation = async (page, limit) => {
       try {
         // const res = await axios.get(`http://${baseURL}:${port}/users?page=${page}&limit=${limit}`);
-        // const res = await axios.get(`http://${baseURL}:${port}/users/all`);
+        const res = await axios.get(`http://${baseURL}:${port}/users/all`);
         // const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users?page=${page}&limit=${limit}`);
-        const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users/all`);
+        // const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users/all`);
         // const employeeData = res.data.users;
         const { users, totalPages } = res.data;
         // console.log("response data", res.data);
