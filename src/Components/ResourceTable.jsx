@@ -14,6 +14,7 @@ import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Tag } from "primereact/tag";
+import { Dropdown } from "primereact/dropdown";
 
 const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pageSize, onPageChange, onPageSizeChange  }) => {
   let emptyProduct = {
@@ -30,6 +31,9 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
   console.log("my employees data", employees);
 
   // const [employees, setEmployees] = useState(employees);
+  const [designationFilter, setDesignationFilter] = useState(null);
+  const [locationFilter, setLocationFilter] = useState(null);
+  const [statusFilter, setStatusFilter] = useState(null);
   const [products, setProducts] = useState(null);
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
@@ -306,9 +310,21 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
     }
   };
 
+  const getFilteredEmployees = () => {
+    return employees.filter(employee => {
+      return (
+        (!designationFilter || employee.designation === designationFilter) &&
+        (!locationFilter || employee.location === locationFilter) &&
+        (!statusFilter || employee.status === statusFilter)
+      );
+    });
+  };
+
+  
+
   const header = (
     <div className="flex flex-row justify-between items-center">
-      <h4 className="m-0">{title} Department-- </h4>
+      <h4 className="m-0">{title} Department ({employees.length} Employees)  </h4>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText
@@ -317,6 +333,26 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
           placeholder="Search..."
         />
       </span>
+      <div className="flex gap-2">
+      <Dropdown
+        value={designationFilter}
+        options={["Manager", "Developer", "Designer"]}
+        onChange={(e) => setDesignationFilter(e.value)}
+        placeholder="Select Designation"
+      />
+      <Dropdown
+        value={locationFilter}
+        options={["Banglore", "Gurgaon", "Other"]}
+        onChange={(e) => setLocationFilter(e.value)}
+        placeholder="Select Location"
+      />
+      <Dropdown
+        value={statusFilter}
+        options={["Active", "Left"]}
+        onChange={(e) => setStatusFilter(e.value)}
+        placeholder="Select Status"
+      />
+    </div>
     </div>
   );
   const productDialogFooter = (
