@@ -15,6 +15,7 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Tag } from "primereact/tag";
 import axios from "axios";
+import { Dropdown } from "primereact/dropdown";
 
 const EmployeeManagement = () => {
   let emptyProduct = {
@@ -28,9 +29,14 @@ const EmployeeManagement = () => {
     rating: 0,
     inventoryStatus: "INSTOCK",
   };
-  
 
   // const [employees, setEmployees] = useState(employees);
+  const [designationFilter, setDesignationFilter] = useState(null);
+  const [locationFilter, setLocationFilter] = useState(null);
+  const [statusFilter, setStatusFilter] = useState(null);
+  const [designationOptions, setDesignationOptions] = useState([]);
+  const [locationOptions, setLocationOptions] = useState([]);
+  const [statusOptions, setStatusOptions] = useState([]);
   const [products, setProducts] = useState(null);
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
@@ -42,18 +48,15 @@ const EmployeeManagement = () => {
   const toast = useRef(null);
   const dt = useRef(null);
 
-  const [employees, setEmployees] = useState("");
+  const [employees, setEmployees] = useState([]);
   const [employeesByDepartment, setEmployeesByDepartment] = useState({});
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
- 
-
   const baseURL = process.env.REACT_APP_BASE_URL;
   const port = process.env.REACT_APP_BACKEND_PORT;
-
 
   // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
   // const apiUrl1 = `http://${baseURL}:${port}/users`
@@ -120,13 +123,13 @@ const EmployeeManagement = () => {
     setLoading(true);
   };
 
-//   const handlePageChange = (event) => {
-//     onPageChange(event.page + 1);
-//   };
+  //   const handlePageChange = (event) => {
+  //     onPageChange(event.page + 1);
+  //   };
 
-//   const handlePageSizeChange = (event) => {
-//     onPageSizeChange(event.rows);
-//   };
+  //   const handlePageSizeChange = (event) => {
+  //     onPageSizeChange(event.rows);
+  //   };
 
   const openNew = () => {
     setProduct(emptyProduct);
@@ -374,9 +377,30 @@ const EmployeeManagement = () => {
     }
   };
 
+  const getUniqueValues = (key) => {
+    const values = employees.map((employee) => employee[key]);
+    return [...new Set(values)];
+  };
+
+  const getFilteredEmployees = () => {
+    return employees.filter((employee) => {
+      return (
+        (!designationFilter || employee.designation === designationFilter) &&
+        (!locationFilter || employee.location === locationFilter) &&
+        (!statusFilter || employee.status === statusFilter)
+      );
+    });
+  };
+
+  useEffect(() => {
+    setDesignationOptions(getUniqueValues("designation"));
+    setLocationOptions(getUniqueValues("location"));
+    setStatusOptions(getUniqueValues("status"));
+  }, [employees]);
+
   const header = (
     <div className="flex flex-row justify-between items-center">
-      <h4 className="m-0">HR Department -All Employees</h4>
+      <h4 className="m-0">HR Department -All Employees ({employees.length})</h4>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText
@@ -385,6 +409,32 @@ const EmployeeManagement = () => {
           placeholder="Search..."
         />
       </span>
+      <div className="flex gap-2">
+        <Dropdown
+          value={designationFilter}
+          options={designationOptions}
+          onChange={(e) => setDesignationFilter(e.value)}
+          placeholder="Select Designation"
+          className="mr-2"
+          showClear
+        />
+        <Dropdown
+          value={locationFilter}
+          options={locationOptions}
+          onChange={(e) => setLocationFilter(e.value)}
+          placeholder="Select Location"
+          className="mr-2"
+          showClear
+        />
+        <Dropdown
+          value={statusFilter}
+          options={statusOptions}
+          onChange={(e) => setStatusFilter(e.value)}
+          placeholder="Select Status"
+          className="mr-2"
+          showClear
+        />
+      </div>
     </div>
   );
   const productDialogFooter = (
@@ -497,7 +547,7 @@ const EmployeeManagement = () => {
 
         <DataTable
           ref={dt}
-          value={employees}
+          value={getFilteredEmployees()}
           selectionMode={"checkbox"}
           selection={selectedProducts}
           onSelectionChange={(e) => setSelectedProducts(e.value)}
@@ -505,9 +555,9 @@ const EmployeeManagement = () => {
           paginator
           rows={10}
           rowsPerPageOptions={[5, 10, 25]}
-        //   totalRecords={totalPages * pageSize}
-        //   onPage={handlePageChange}
-        //   onRowToggle={handlePageSizeChange}
+          //   totalRecords={totalPages * pageSize}
+          //   onPage={handlePageChange}
+          //   onRowToggle={handlePageSizeChange}
           paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
           globalFilter={globalFilter}

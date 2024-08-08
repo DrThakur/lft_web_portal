@@ -16,7 +16,16 @@ import { InputText } from "primereact/inputtext";
 import { Tag } from "primereact/tag";
 import { Dropdown } from "primereact/dropdown";
 
-const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pageSize, onPageChange, onPageSizeChange  }) => {
+const ResourceTable = ({
+  title,
+  employees,
+  loading,
+  currentPage,
+  totalPages,
+  pageSize,
+  onPageChange,
+  onPageSizeChange,
+}) => {
   let emptyProduct = {
     id: null,
     name: "",
@@ -34,6 +43,9 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
   const [designationFilter, setDesignationFilter] = useState(null);
   const [locationFilter, setLocationFilter] = useState(null);
   const [statusFilter, setStatusFilter] = useState(null);
+  const [designationOptions, setDesignationOptions] = useState([]);
+  const [locationOptions, setLocationOptions] = useState([]);
+  const [statusOptions, setStatusOptions] = useState([]);
   const [products, setProducts] = useState(null);
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
@@ -310,8 +322,13 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
     }
   };
 
+  const getUniqueValues = (key) => {
+    const values = employees.map((employee) => employee[key]);
+    return [...new Set(values)];
+  };
+
   const getFilteredEmployees = () => {
-    return employees.filter(employee => {
+    return employees.filter((employee) => {
       return (
         (!designationFilter || employee.designation === designationFilter) &&
         (!locationFilter || employee.location === locationFilter) &&
@@ -320,11 +337,17 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
     });
   };
 
-  
+  useEffect(() => {
+    setDesignationOptions(getUniqueValues("designation"));
+    setLocationOptions(getUniqueValues("location"));
+    setStatusOptions(getUniqueValues("status"));
+  }, [employees]);
 
   const header = (
     <div className="flex flex-row justify-between items-center">
-      <h4 className="m-0">{title} Department ({employees.length} Employees)  </h4>
+      <h4 className="m-0">
+        {title} Department ({employees.length} Active Employees){" "}
+      </h4>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText
@@ -334,25 +357,31 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
         />
       </span>
       <div className="flex gap-2">
-      <Dropdown
-        value={designationFilter}
-        options={["Manager", "Developer", "Designer"]}
-        onChange={(e) => setDesignationFilter(e.value)}
-        placeholder="Select Designation"
-      />
-      <Dropdown
-        value={locationFilter}
-        options={["Banglore", "Gurgaon", "Other"]}
-        onChange={(e) => setLocationFilter(e.value)}
-        placeholder="Select Location"
-      />
-      <Dropdown
-        value={statusFilter}
-        options={["Active", "Left"]}
-        onChange={(e) => setStatusFilter(e.value)}
-        placeholder="Select Status"
-      />
-    </div>
+        <Dropdown
+          value={designationFilter}
+          options={designationOptions}
+          onChange={(e) => setDesignationFilter(e.value)}
+          placeholder="Select Designation"
+          className="mr-2"
+          showClear
+        />
+        <Dropdown
+          value={locationFilter}
+          options={locationOptions}
+          onChange={(e) => setLocationFilter(e.value)}
+          placeholder="Select Location"
+          className="mr-2"
+          showClear
+        />
+        <Dropdown
+          value={statusFilter}
+          options={statusOptions}
+          onChange={(e) => setStatusFilter(e.value)}
+          placeholder="Select Status"
+          className="mr-2"
+          showClear
+        />
+      </div>
     </div>
   );
   const productDialogFooter = (
@@ -465,7 +494,7 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
 
         <DataTable
           ref={dt}
-          value={employees}
+          value={getFilteredEmployees()}
           selectionMode={"checkbox"}
           selection={selectedProducts}
           onSelectionChange={(e) => setSelectedProducts(e.value)}
@@ -473,9 +502,9 @@ const ResourceTable = ({ title, employees, loading, currentPage, totalPages, pag
           paginator
           rows={pageSize}
           rowsPerPageOptions={[5, 10, 25]}
-        //   totalRecords={totalPages * pageSize}
-        //   onPage={handlePageChange}
-        //   onRowToggle={handlePageSizeChange}
+          //   totalRecords={totalPages * pageSize}
+          //   onPage={handlePageChange}
+          //   onRowToggle={handlePageSizeChange}
           paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
           globalFilter={globalFilter}

@@ -25,6 +25,11 @@ const ResourcePool = () => {
     return employees.filter((employee) => employee.department === department);
   };
 
+
+  const filterEmployeesByStatus = (employees, status) => {
+    return employees.filter((employee) => employee.status === status);
+  };
+
   // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
   // const apiUrl1 = `http://${baseURL}:${port}/users`
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -46,11 +51,13 @@ const ResourcePool = () => {
         // console.log("Type of data-222:", typeof res.data.users);
 
         // const filteredEmployees = filterEmployeesByDepartment(employeeData, department);
+          // Filter employees by status first
+          const activeEmployees = filterEmployeesByStatus(users, "Active");
 
         //  // Organize employees by department
         const departmentMap = departments.reduce((acc, department) => {
           acc[department] = filterEmployeesByDepartment(
-            users,
+            activeEmployees,
             department
           );
           return acc;
