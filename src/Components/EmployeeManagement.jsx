@@ -555,6 +555,7 @@ const EmployeeManagement = () => {
           paginator
           rows={10}
           rowsPerPageOptions={[5, 10, 25]}
+          removableSort
           //   totalRecords={totalPages * pageSize}
           //   onPage={handlePageChange}
           //   onRowToggle={handlePageSizeChange}

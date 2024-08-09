@@ -12,6 +12,10 @@ const ProjectCard = ({ project }) => {
     setIsExpanded(!isExpanded);
   };
 
+  const handleToggleProjectName = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   // Function to truncate description to 24 words
   const truncateDescription = (description, wordLimit) => {
     const words = description.split(" ");
@@ -20,21 +24,34 @@ const ProjectCard = ({ project }) => {
     }
     return words.slice(0, wordLimit).join(" ") + "...";
   };
+
+  const truncateProjectName = (projectName, wordLimit) => {
+    const words = projectName.split("_");
+    if (words.length <= wordLimit) {
+      return projectName;
+    }
+    return words.slice(0, wordLimit).join("_") + "...";
+  };
+
+  // Determine if the description exceeds the word limit
+  const words = project.projectDescription.split(" ");
+  const exceedsWordLimit = words.length > 15;
+
   return (
-    <div className="cardContainer border-2 rounded-lg shadow-lg w-1/5 mt-4 bg-gray-50 p-4 h-full">
+    <div className="cardContainer border-2 rounded-lg shadow-lg mt-4 bg-gray-50 p-4 w-[430px]  max-w-3xl h-[500px] overflow-hidden flex flex-col">
       <div className="cardHeading p-2">
         <span className="flex flex-row justify-start items-center text-red-400 bg-red-50 rounded-lg w-[200px] font-semibold text-sm">
           <BsDot className="text-xl" /> Deadline : 10 Feb 2024
         </span>
-        <h3 className="font-bold text-2xl -ml-2 overflow-wrap break-words">
+        <h3 className="font-bold text-xl -ml-2 overflow-wrap break-words">
           {project.projectName}
         </h3>
       </div>
-      <div className="cardBody flex flex-col gap-2">
-        <div className="flex rounded-lg ">
+      <div className="cardBody flex flex-col flex-grow gap-2">
+        <div className="flex  rounded-lg ">
           <div className="flex-1 bg-blue-100 rounded-s p-1 flex flex-col justify-center items-center gap-1">
             <span className="font-bold text-2xl">
-              {project.milestones || "M/A"}
+              {project.milestones || "N/A"}
             </span>
             <span>Milestones</span>
           </div>
@@ -60,13 +77,16 @@ const ProjectCard = ({ project }) => {
         <div className="description flex flex-wrap">
           {isExpanded
             ? project.projectDescription
-            : truncateDescription(project.projectDescription, 14)}
-          <button
-            onClick={handleToggleDescription}
-            className="text-blue-600 font-semibold hover:text-blue-800"
-          >
-            {isExpanded ? "Read less" : "Read more"}
-          </button>
+            : truncateDescription(project.projectDescription, 15)}
+          {/* Only show the button if the description exceeds 14 words */}
+          {exceedsWordLimit && (
+            <button
+              onClick={handleToggleDescription}
+              className="text-blue-600 font-semibold hover:text-blue-800"
+            >
+              {isExpanded ? " Read less" : "Read more"}
+            </button>
+          )}
         </div>
         <div className="flex flex-row justify-start items-center gap-2 mb-1 mt-1">
           <h3 className="font-bold">Project Manager: </h3>

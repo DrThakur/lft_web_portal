@@ -502,6 +502,7 @@ const ResourceTable = ({
           paginator
           rows={pageSize}
           rowsPerPageOptions={[5, 10, 25]}
+          removableSort
           //   totalRecords={totalPages * pageSize}
           //   onPage={handlePageChange}
           //   onRowToggle={handlePageSizeChange}

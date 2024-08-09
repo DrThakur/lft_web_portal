@@ -77,7 +77,6 @@ const AllProjects = () => {
   const [projectNameColumnFrozen, setprojectNameColumnFrozen] = useState(false);
   const navigate = useNavigate();
 
-
   const baseURL = process.env.REACT_APP_BASE_URL;
   const port = process.env.REACT_APP_BACKEND_PORT;
 
@@ -90,20 +89,17 @@ const AllProjects = () => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
-
   useEffect(() => {
     // ProjectData.getProjetcts().then((data) => setProjects(data));
     const fetchProjects = async () => {
       try {
         const response = await axios.get(`${apiUrl}/projects`);
-        // const response = await axios.get(`http://${baseURL}:${port}/projects`);
-       
-       const projectsData= response.data.projects
-        console.log("My projects", response.data);
-        console.log("My projects---333", response.data.projects[0]);
+
+        const projectsData = response.data.projects;
+
         setProjects(projectsData);
       } catch (error) {
-        console.error('Error fetching projects:', error);
+        console.error("Error fetching projects:", error);
       }
     };
 
@@ -118,7 +114,6 @@ const AllProjects = () => {
   };
   const formatDate = (value) => {
     const date = new Date(value);
-    console.log("my date", date);
 
     const months = [
       "Jan",
@@ -444,22 +439,18 @@ const AllProjects = () => {
   };
 
   const plannedStartDateTemplate = (rowData) => {
-    console.log("my rowDate", rowData);
     // return formatDate(rowData.plannedStartDate);
     return "Not Available";
   };
   const plannedEndDateTemplate = (rowData) => {
-    console.log("my rowDate", rowData);
     // return formatDate(rowData.plannedStartDate);
     return "Not Available";
   };
   const actualStartDateTemplate = (rowData) => {
-    console.log("my rowDate", rowData);
     // return formatDate(rowData.actualStartDate);
     return "Not Available";
   };
   const actualEndDateTemplate = (rowData) => {
-    console.log("my rowDate", rowData);
     // return formatDate(rowData.actualEndDate);
     return "Not Available";
   };
@@ -478,8 +469,6 @@ const AllProjects = () => {
   };
 
   const userBodyTemplate = (rowData) => {
-    console.log("project maager rowdata",rowData.projectManager);
-
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
         <div className="flex flex-row items-center justify-start">
@@ -499,12 +488,15 @@ const AllProjects = () => {
 
   const dashboardBodyTemplate = (rowData) => {
     // const createdBy = rowData.projectManager;
-    console.log(rowData);
+   
 
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
-        <Link to={`/project-dashboard/${rowData._id}`}className="ml-2 text-green-500 hover:text-green-900">
-         View Dashbaord
+        <Link
+          to={`/project-dashboard/${rowData._id}`}
+          className="ml-2 text-green-500 hover:text-green-900"
+        >
+          View Dashbaord
         </Link>
       </div>
     );
@@ -512,12 +504,14 @@ const AllProjects = () => {
 
   const projectNameBodyTemplate = (rowData) => {
     // const createdBy = rowData.projectManager;
-    console.log(rowData);
 
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
-        <Link to={`/project-details/${rowData._id}`} className="ml-2 text-blue-500 hover:text-blue-900">
-         {rowData.projectName}
+        <Link
+          to={`/project-details/${rowData._id}`}
+          className="ml-2 text-blue-500 hover:text-blue-900"
+        >
+          {rowData.projectName}
         </Link>
       </div>
     );
@@ -543,11 +537,12 @@ const AllProjects = () => {
     );
   };
 
-  
   const sNoBodyTemplate = (rowData) => {
-    console.log("my console log s number", rowData);
-    const sNo =projects.findIndex(project=>project.projectName===rowData.projectName ) +1;
-    return sNo  ;
+    const sNo =
+      projects.findIndex(
+        (project) => project.projectName === rowData.projectName
+      ) + 1;
+    return sNo;
   };
 
   const ContactPersonBodyTemplate = (rowData) => {
@@ -637,7 +632,6 @@ const AllProjects = () => {
 
   const header = (
     <div className="flex flex-row justify-start gap-8 align-items-center justify-content-between">
-      
       <span className="p-input-icon-left flex flex-row items-center">
         <i className="pi pi-search ml-4 text-center opacity-50" />
         <InputText
@@ -723,12 +717,12 @@ const AllProjects = () => {
   );
 
   return (
-    <div className="p-4 rounded overflow-y-auto overflow-x-scroll bg-white">
-    <h1 className="font-bold text-2xl mb-4">All Projects</h1>
+    <div className="p-4 rounded overflow-y-auto  bg-white">
+      <h1 className="font-bold text-2xl mb-4">All Projects</h1>
       <Toast ref={toast} />
       <div className="card">
         <Toolbar
-          className="mb-4 bg-gray-50"
+          className="bg-gray-50"
           left={leftToolbarTemplate}
           right={rightToolbarTemplate}
         ></Toolbar>
@@ -755,7 +749,7 @@ const AllProjects = () => {
             scrollHeight="600px"
             className=""
           >
-            <Column selectionMode="multiple" exportable={false}></Column>
+            <Column selectionMode="multiple" exportable={false}  frozen={projectNameColumnFrozen}></Column>
             <Column
               field="sno"
               header="S.No"

@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.css"; // Import your CSS file for styling
 import { LuLayoutDashboard } from "react-icons/lu";
-import { BsPeople, BsLaptop } from "react-icons/bs";
+import { BsPeople} from "react-icons/bs";
 import { RiOrganizationChart } from "react-icons/ri";
 import {
   MdAttachMoney,
   MdOutlineCancel,
-  MdAddTask,
   MdDashboardCustomize,
   MdOutlineApproval,
   MdManageAccounts,
@@ -30,7 +29,6 @@ import {
 } from "react-icons/io5";
 import {
   IoIosPeople,
-  IoIosArrowDropright,
   IoIosTime,
   IoMdLaptop,
 } from "react-icons/io";
@@ -39,7 +37,7 @@ import { useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import { GoProjectRoadmap, GoMilestone, GoGoal } from "react-icons/go";
 import { BiPurchaseTag } from "react-icons/bi";
-import { TbListDetails, TbReportSearch } from "react-icons/tb";
+import {  TbReportSearch } from "react-icons/tb";
 
 import { ImProfile } from "react-icons/im";
 import { GrMonitor, GrResources, GrDocumentPerformance } from "react-icons/gr";
@@ -119,37 +117,25 @@ const Sidebar = () => {
     setActiveRightSidebar(!activeRightSidebar);
   };
 
-  if (
-    selectedMainItem === "Dashboard" ||
-    selectedMainItem === "Admin" ||
-    selectedMainItem === "Learning & Developement"
-    // selectedMainItem === "Document Center"
-  ) {
-    // If selectedMainItem is "Dashboard", set activeRightSidebar to false
-    setActiveRightSidebar(false);
-  }
+  // if (
+  //   selectedMainItem === "Dashboard" ||
+  //   selectedMainItem === "Admin" ||
+  //   selectedMainItem === "Learning & Developement"
+  //   // selectedMainItem === "Document Center"
+  // ) {
+  //   // If selectedMainItem is "Dashboard", set activeRightSidebar to false
+  //   setActiveRightSidebar(false);
+  // }
 
-  // const sidebarMainItem = ({icon: IconComponent, title, selectedMainItem, handleMainItemClick}) => (
-  //   <React.Fragment>
-  //     <Tooltip title={title} placement="right" arrow>
-  //       <div
-  //         className={`sidebar-item ${
-  //           selectedMainItem === title ? "active" : ""
-  //         }`}
-  //         onClick={() => handleMainItemClick(title)}
-  //       >
-  //         <div className="sidebar-item-content">
-  //           <span className="sidebar-icon">
-  //           {IconComponent && <IconComponent />}
-  //           </span>
-  //           <span className="sidebar-text">{title}</span>
-  //         </div>
-  //       </div>
-  //     </Tooltip>
-  //   </React.Fragment>
-  // );
-
-  // <sidebarMainItem icon={LuLayoutDashboard}  title="Dashboard" selectedMainItem="Dashboard" handleMainItemClick ={handleMainItemClick} />
+  useEffect(() => {
+    if (
+      selectedMainItem === "Dashboard" ||
+      selectedMainItem === "Admin" ||
+      selectedMainItem === "Learning & Developement"
+    ) {
+      setActiveRightSidebar(false);
+    } 
+  }, [selectedMainItem, setActiveRightSidebar]);
 
   return (
     <div className="app">
@@ -285,23 +271,6 @@ const Sidebar = () => {
               </div>
             </div>
           </Tooltip>
-
-          {/*   <Tooltip title="IT" placement="right" arrow>
-            <div
-              className={`sidebar-item ${
-                selectedMainItem === "IT" ? "active" : ""
-              }`}
-              onClick={() => handleMainItemClick("IT")}
-            >
-              <div className="sidebar-item-content">
-                <span className="sidebar-icon">
-                  <BsLaptop />
-                </span>
-                <span className="sidebar-text">IT</span>
-              </div>
-            </div>
-          </Tooltip>
-          */}
 
           <Tooltip title="Document Center" placement="right" arrow>
             <div
@@ -803,18 +772,6 @@ const Sidebar = () => {
                   <span className="right-sidebar-text"> Create Project</span>
                 </div>
 
-                {/*<div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Purchase Order" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Purchase Order")}
-                >
-                  <span className="right-sidebar-icon">
-                    <BiPurchaseTag />
-                  </span>
-                  <span className="right-sidebar-text">Purchase Order</span>
-                </div>
-                */}
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "Project Milestones" ? "active" : ""
@@ -876,148 +833,8 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text">Assessment & Goals</span>
                 </div>
-
-                {/*
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Project Details" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Project Details")}
-                >
-                  <span className="right-sidebar-icon">
-                    <TbListDetails />
-                  </span>
-                  <span className="right-sidebar-text">Project Details</span>
-                </div>
-                */}
-                {/*
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Add Task" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Add Task")}
-                >
-                  <span className="right-sidebar-icon">
-                    <MdAddTask />
-                  </span>
-                  <span className="right-sidebar-text">Add Task</span>
-                </div>
-                */}
               </div>
             )}
-
-            {/*{selectedMainItem === "IT" && (
-              <div className="right-sidebar-item">
-              
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Ticketing" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Ticketing")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text"> Ticketing</span>
-                </div>
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Asset Management" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Asset Management")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text"> Assets</span>
-                </div>
-
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Accessories" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Accessories")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">Accessories</span>
-                </div>
-
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Consumables" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Consumables")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">Consumables</span>
-                </div>
-
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Components" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Components")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">Components</span>
-                </div>
-
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Licences" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Licences")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">Licences</span>
-                </div>
-
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Self Support" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Self Support")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text"> Self Support</span>
-                </div>
-
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Users" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Users")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text"> Users</span>
-                </div>
-
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Reports" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Reports")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text"> Reports</span>
-                </div>
-              </div>
-            )}
-          */}
 
             {selectedMainItem === "Sales and Marketing" && (
               <div className="right-sidebar-item">
@@ -1110,234 +927,6 @@ const Sidebar = () => {
                 </div>
               </div>
             )}
-
-            {/* 
-               {selectedMainItem === "Admin" && (
-              <div className="right-sidebar-item">
-                <div
-                  className={`right-sidebar-item-content dropdown  ${
-                    selectedMenuItem === "Compliance & Poicies" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Compliance & Poicies")}
-                  onMouseEnter={() => handleSubmenu(true)}
-                  onMouseLeave={() => handleSubmenu(false)}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">
-                    Compliance & Poicies
-                  </span>
-                </div>
-
-              
-              <div className={`submenu ${showSubmenu ? "active" : ""}`}>
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Compliance Management" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Compliance Management")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">
-                    Compliance Management
-                  </span>
-                </div>
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "Policy Documentaion" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Policy Documentaion")}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">
-                    Policy Documentaion
-                  </span>
-                </div>
-              </div>
-              
-
-                <div
-                  className={`right-sidebar-item-content dropdown ${
-                    selectedMenuItem === "Analytics & Reports" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("Analytics & Reports")}
-                  onMouseEnter={() => handleSubmenu(true)}
-                  onMouseLeave={() => handleSubmenu(false)}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">
-                    
-                    Analytics & Reports
-                  </span>
-                </div>
-                {selectedMainItem === "Analytics & Reports" && (
-                  <div className={`submenu ${showSubmenu ? "active" : ""}`}>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "Custom Reports" ? "active" : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("Custom Reports")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text">
-                        {" "}
-                        Custom Reports
-                      </span>
-                    </div>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "Data Analysis Tools"
-                          ? "active"
-                          : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("Data Analysis Tools")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text">
-                        Data Analysis Tools
-                      </span>
-                    </div>
-                  </div>
-                
-        
-
-                <div
-                  className={`right-sidebar-item-content dropdown ${
-                    selectedMenuItem === " Communication & Collaboration"
-                      ? "active"
-                      : ""
-                  }`}
-                  onClick={() =>
-                    handleMenuItemClick(" Communication & Collaboration")
-                  }
-                  onMouseEnter={() => handleSubmenu(true)}
-                  onMouseLeave={() => handleSubmenu(false)}
-                >
-                  <span className="right-sidebar-icon">
-                    <IoIosPeople />
-                  </span>
-                  <span className="right-sidebar-text">
-                    Communication & Collaboration
-                  </span>
-                </div>
-                {selectedMainItem === "Communication and Collaboration" && (
-                  <div className={`submenu ${showSubmenu ? "active" : ""}`}>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "Email" ? "active" : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("Email")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text"> Email</span>
-                    </div>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "Chat" ? "active" : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("Chat")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text"> Chat</span>
-                    </div>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "File Sharing" ? "active" : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("File Sharing")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text"> File Sharing</span>
-                    </div>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "Collaboration Tools"
-                          ? "active"
-                          : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("Collaboration Tools")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text">
-                        Collaboration Tools
-                      </span>
-                      <span>
-                        <IoIosArrowDropright />
-                      </span>
-                    </div>
-                  </div>
-                )}
-                {selectedMainItem === "Collaboration Tools" && (
-                  <div>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "Docs" ? "active" : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("Docs")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text"> Docs</span>
-                    </div>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "Sheets" ? "active" : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("Sheets")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text"> Sheets</span>
-                    </div>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "Presentation" ? "active" : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("Presentation")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text"> Presentation</span>
-                    </div>
-                    <div
-                      className={`right-sidebar-item-content ${
-                        selectedMenuItem === "Drawing Board" ? "active" : ""
-                      }`}
-                      onClick={() => handleMenuItemClick("Drawing Board")}
-                    >
-                      <span className="right-sidebar-icon">
-                        <IoIosPeople />
-                      </span>
-                      <span className="right-sidebar-text"> Drawing Board</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-                */}
 
             {selectedMainItem === "Settings" && (
               <div className="ml-4 mt-6">

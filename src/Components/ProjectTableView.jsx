@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
 import axios from "axios";
+import { FixedSizeGrid as Grid } from "react-window";
 
 // const projects = [
 //   {
@@ -190,9 +191,11 @@ import axios from "axios";
 
 const ProjectTableView = ({ selectedView }) => {
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const baseURL = process.env.REACT_APP_BASE_URL;
-  const port = process.env.REACT_APP_BACKEND_PORT;
+  // const baseURL = process.env.REACT_APP_BASE_URL;
+  // const port = process.env.REACT_APP_BACKEND_PORT;
   // const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects`;
   // const apiUrl1 = `http://${baseURL}:${port}/projects`;
 
@@ -201,32 +204,63 @@ const ProjectTableView = ({ selectedView }) => {
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(`${apiUrl}/projects`);
-        const projectsData= response.data.projects
+        const projectsData = response.data.projects;
         console.log("my projects", response.data.projects);
         setProjects(projectsData);
       } catch (error) {
         console.error("Error fetching project details:", error);
+        setError(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProjectDetails();
-  });
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error fetching projects: {error.message}</p>;
+
+  // Render function for Grid items
+  const renderRow = ({ columnIndex, rowIndex, style }) => {
+    const index = rowIndex * 4 + columnIndex; // Calculate the correct index for the grid
+    const project = projects[index];
+
+    return project ? (
+      <div
+        style={{
+          ...style,
+          padding: "0px 10px",
+          boxSizing: "border-box", // Ensure padding is included in width calculation
+        }}
+        key={project.projectId}
+      >
+        <ProjectCard project={project} />
+      </div>
+    ) : null;
+  };
 
   return (
-    <div>
+    <div className="overflow-y-auto overflow-x-hidden bg-white h-full mt-1 p-4">
       {selectedView && selectedView === "table" ? (
         ""
       ) : (
-        <h2 className="font-bold text-2xl mt-2 ml-2 ">PMS Dashboard</h2>
+        <h2 className="font-bold text-2xl mt-2 ml-2 mb-2">PMS Dashboard</h2>
       )}
-
-      <div className="grid grid-cols-4 gap-2 overflow-x-hidden">
-        {projects.map((project) => (
-          <div key={project.projectId} className="w-screen">
-            <ProjectCard project={project} />
-          </div>
-        ))}
+      <div className="">
+        <Grid
+          columnCount={4}
+          columnWidth={450}
+          height={750}
+          rowCount={Math.ceil(projects.length / 4)}
+          rowHeight={520}
+          width={1920}
+          style={{ padding: '10px' }}
+        >
+          {renderRow}
+        </Grid>
       </div>
     </div>
   );

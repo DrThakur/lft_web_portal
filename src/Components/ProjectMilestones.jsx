@@ -15,6 +15,7 @@ import { Calendar } from "primereact/calendar";
 import EmployeeDropdown from "./EmployeeDropdown";
 import { useNavigate } from "react-router-dom";
 import TestMilestoneForm from "./TestMilestoneForm";
+import axios from "axios";
 
 const ProjectMilestones = () => {
   let emptyTask = {
@@ -34,6 +35,7 @@ const ProjectMilestones = () => {
   };
 
   const [value, setValue] = useState("");
+  const[projects,setProjects]=useState([])
   const [selectedProject, setSelectedProject] = useState(null);
   const [tasks, setTasks] = useState(null);
   const [selectedTasks, setSelectedTasks] = useState(null);
@@ -194,6 +196,9 @@ const ProjectMilestones = () => {
     },
   ];
 
+
+
+
   const handleMilestoneFormOpen = () => {
     if (selectedProject === null) {
       alert("Please Select a Project before proceeding");
@@ -235,127 +240,146 @@ const ProjectMilestones = () => {
     </div>
   );
 
-  const projects = [
-    {
-      id: 1,
-      name: "LFT Intranet Web Portal",
-      deadline: "01 Jan 2024",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-      manager: "Dhruv Kumar Saxena",
-      teams: ["Software", "Hardware", "FPGA"],
-      progress: 50,
-      milestones: "10",
-      completed: "5",
-      active: "1",
-      pending: "4",
-    },
-    {
-      id: 2,
-      name: "Corvett",
-      deadline: "10 Feb 2024",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-      manager: "Jonn Doe",
-      teams: ["Software", "Hardware", "FPGA"],
-      progress: 60,
-      milestones: "6",
-      completed: "4",
-      active: "1",
-      pending: "1",
-    },
-    {
-      id: 3,
-      name: "Lattice",
-      deadline: "02 Apr 2024",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-      manager: "Vishal Singh",
-      teams: ["Software", "Hardware", "FPGA"],
-      progress: 70,
-      milestones: "8",
-      completed: "5",
-      active: "1",
-      pending: "2",
-    },
-    {
-      id: 4,
-      name: "Keysight",
-      deadline: "15 May 2024",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-      manager: "Ankit Kumar Thakur",
-      teams: ["Software", "Hardware"],
-      progress: 80,
-      milestones: "3",
-      completed: "2",
-      active: "1",
-      pending: "0",
-    },
-    {
-      id: 5,
-      name: "Analyser",
-      deadline: "30 June 2024",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-      manager: "Pardeep Kumar",
-      teams: ["Software", "Hardware", "FPGA"],
-      progress: 90,
-      milestones: "9",
-      completed: "4",
-      active: "2",
-      pending: "3",
-    },
-    {
-      id: 6,
-      name: "Debugger",
-      deadline: "11 July 2024",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-      manager: "Fuzail Qamar",
-      teams: ["Software", "Hardware"],
-      progress: 95,
-      milestones: "13",
-      completed: "7",
-      active: "3",
-      pending: "3",
-    },
-    {
-      id: 7,
-      name: "Chatbot",
-      deadline: "15 Aug 2024",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-      manager: "Vineet Goyal",
-      teams: ["Software", "Hardware", "FPGA"],
-      progress: 10,
-      milestones: "11",
-      completed: "5",
-      active: "2",
-      pending: "4",
-    },
-    {
-      id: 8,
-      name: "AI Car",
-      deadline: "23 Sep 2024",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-      manager: "Sanjeev Kumar",
-      teams: ["Software", "Hardware", "FPGA"],
-      progress: 20,
-      milestones: "15",
-      completed: "5",
-      active: "5",
-      pending: "5",
-    },
-    // Add more project data as needed
-  ];
+  // const projects = [
+  //   {
+  //     id: 1,
+  //     name: "LFT Intranet Web Portal",
+  //     deadline: "01 Jan 2024",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+  //     manager: "Dhruv Kumar Saxena",
+  //     teams: ["Software", "Hardware", "FPGA"],
+  //     progress: 50,
+  //     milestones: "10",
+  //     completed: "5",
+  //     active: "1",
+  //     pending: "4",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Corvett",
+  //     deadline: "10 Feb 2024",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+  //     manager: "Jonn Doe",
+  //     teams: ["Software", "Hardware", "FPGA"],
+  //     progress: 60,
+  //     milestones: "6",
+  //     completed: "4",
+  //     active: "1",
+  //     pending: "1",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Lattice",
+  //     deadline: "02 Apr 2024",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+  //     manager: "Vishal Singh",
+  //     teams: ["Software", "Hardware", "FPGA"],
+  //     progress: 70,
+  //     milestones: "8",
+  //     completed: "5",
+  //     active: "1",
+  //     pending: "2",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Keysight",
+  //     deadline: "15 May 2024",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+  //     manager: "Ankit Kumar Thakur",
+  //     teams: ["Software", "Hardware"],
+  //     progress: 80,
+  //     milestones: "3",
+  //     completed: "2",
+  //     active: "1",
+  //     pending: "0",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Analyser",
+  //     deadline: "30 June 2024",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+  //     manager: "Pardeep Kumar",
+  //     teams: ["Software", "Hardware", "FPGA"],
+  //     progress: 90,
+  //     milestones: "9",
+  //     completed: "4",
+  //     active: "2",
+  //     pending: "3",
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Debugger",
+  //     deadline: "11 July 2024",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+  //     manager: "Fuzail Qamar",
+  //     teams: ["Software", "Hardware"],
+  //     progress: 95,
+  //     milestones: "13",
+  //     completed: "7",
+  //     active: "3",
+  //     pending: "3",
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "Chatbot",
+  //     deadline: "15 Aug 2024",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+  //     manager: "Vineet Goyal",
+  //     teams: ["Software", "Hardware", "FPGA"],
+  //     progress: 10,
+  //     milestones: "11",
+  //     completed: "5",
+  //     active: "2",
+  //     pending: "4",
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "AI Car",
+  //     deadline: "23 Sep 2024",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+  //     manager: "Sanjeev Kumar",
+  //     teams: ["Software", "Hardware", "FPGA"],
+  //     progress: 20,
+  //     milestones: "15",
+  //     completed: "5",
+  //     active: "5",
+  //     pending: "5",
+  //   },
+  //   // Add more project data as needed
+  // ];
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  useEffect(() => {
+    // ProjectData.getProjetcts().then((data) => setProjects(data));
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/projects`);
+
+        const projectsData = response.data.projects;
+
+        setProjects(projectsData);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchProjects();
+  }, [apiUrl]);
 
   const selectedProjectTemplate = (option, props) => {
     if (option) {
       return (
         <div className="flex flex-row justify-center items-center gap-2">
-          <span className="text-black">{option.id}</span>
+          <span className="text-black">{option.projectId}</span>
         </div>
       );
     }
@@ -366,9 +390,9 @@ const ProjectMilestones = () => {
   const projectOptionTemplate = (option) => {
     return (
       <div className="flex flex-row justify-start items-center gap-2">
-        <span>{option.id}</span>
+        <span>{option.projectId}</span>
         <span>:</span>
-        <span>{option.name}</span>
+        <span>{option.projectName}</span>
       </div>
     );
   };
@@ -396,7 +420,7 @@ const ProjectMilestones = () => {
         <label htmlFor="" className="font-semibold text-xl">
           Project Name
         </label>
-        <InputText value={selectedProject?.name} readOnly />
+        <InputText value={selectedProject?.projectName} readOnly />
       </div>
       <div className="flex flex-row justify-start items-center gap-2">
         <label htmlFor="team" className="font-semibold text-xl">

@@ -11,8 +11,6 @@ import WelcomeCard from "../Components/WelcomeCard";
 import Events from "../Components/Events";
 
 const Dashboard = () => {
-
-  console.log("My dashbaord")
   const holidays = [
     { day: 1, month: 1, name: "New Year's Day" }, // January 1st
     { day: 26, month: 1, name: "Australia Day" }, // January 26th
@@ -32,50 +30,44 @@ const Dashboard = () => {
     <div className="h-screen w-full overflow-hidden rounded-lg p-2 mt-1">
       <Header title="Dashboard" />
 
-        {/* */}
-        <div className="big h-screen grid grid-cols-6 grid-rows-4 gap-2 -mt-8">
-          <div
-            key=""
-            className={`col-start-1 col-end-2 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
-          >
-            <Events/>
-          </div>
-          <div
-            key=""
-            className={`col-start-2 col-end-3 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
-          >
-            <QuickAccess />
-          </div>
+      {/* */}
+      <div className="big h-screen grid grid-cols-6 grid-rows-4 gap-2 -mt-8">
+        <div
+          className={`col-start-1 col-end-2 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
+        >
+          <Events />
+        </div>
+        <div
+          className={`col-start-2 col-end-3 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
+        >
+          <QuickAccess />
+        </div>
 
-          <div
-            key=""
-            className={`w-72 col-start-3 col-end-4 row-start-1 row-end-2 rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer bg-white hover:shadow-xl hover:z-50`}
-          >
-            <JobVacancy />
-          </div>
+        <div
+          className={`w-72 col-start-3 col-end-4 row-start-1 row-end-2 rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer bg-white hover:shadow-xl hover:z-50`}
+        >
+          <JobVacancy />
+        </div>
 
-          <div
-            key=""
-            className={`w-72 col-start-4 col-end-5 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
-          >
-            <HolidayCalendar holidays={holidays} />
-          </div>
+        <div
+          className={`w-72 col-start-4 col-end-5 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
+        >
+          <HolidayCalendar holidays={holidays} />
+        </div>
 
-          <div
-          key=""
+        <div
           className={`w-72 col-start-5 col-end-6 row-start-1 row-end-2  rounded-lg shadow-md cursor-pointer p-1 bg-white hover:shadow-xl hover:z-50`}
         >
           <AnnouncementList />
         </div>
 
         <div
-        key=""
-        className={`w-72 col-start-6 col-end-7 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50 `}
-      >
-        <BirthdaysAndAnniversaries />
-      </div>
+          className={`w-72 col-start-6 col-end-7 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50 `}
+        >
+          <BirthdaysAndAnniversaries />
+        </div>
 
-          {/*
+        {/*
         <div
             key=""
             className={`col-start-1 col-end-2 row-start-1 row-end-2 rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
@@ -355,21 +347,19 @@ const Dashboard = () => {
           </div>
         */}
 
-          <div
-            key=""
-            className={`rounded-lg col-start-1 col-end-4 row-start-2 row-end-4  shadow-md  cursor-pointer p-2 bg-white hover:shadow-xl hover:z-50`}
-          >
-            <NewHire />
-          </div>
+        <div
+          className={`rounded-lg col-start-1 col-end-4 row-start-2 row-end-4  shadow-md  cursor-pointer p-2 bg-white hover:shadow-xl hover:z-50`}
+        >
+          <NewHire />
+        </div>
 
-          <div
-            key=""
-            className={`rounded-lg col-start-4 col-end-7 row-start-2 row-end-4  shadow-md  cursor-pointer bg-black hover:shadow-xl hover:z-50 `}
-          >
-            <AwardsRecognition />
-          </div>
+        <div
+          className={`rounded-lg col-start-4 col-end-7 row-start-2 row-end-4  shadow-md  cursor-pointer bg-black hover:shadow-xl hover:z-50 `}
+        >
+          <AwardsRecognition />
+        </div>
 
-          {/*
+        {/*
           <div
             key=""
             className={`rounded-lg col-start-1 col-end-6 row-start-7 row-end-9  shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
@@ -397,8 +387,8 @@ const Dashboard = () => {
             </p>
           </div>
           */}
-    
-      {/*
+
+        {/*
         <div className="small col-start-6 col-end-7 grid grid-cols-1 grid-rows-8 gap-2">
          
         
