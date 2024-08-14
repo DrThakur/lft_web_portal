@@ -68,6 +68,7 @@ const FinalEmployeeDropdown = ({
   }));
 
   const handleSelectChange = (selectedOption) => {
+    console.log("my selected option", selectedOption);
     onChange(selectedOption);
   };
 

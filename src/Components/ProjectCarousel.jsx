@@ -11,9 +11,9 @@ const projects = [
     id: 1,
     name: "LFT Intranet Web Portal",
     deadline: "01 Jan 2024",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    manager: "Dhruv Kumar Saxena",
+    projectDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+    projectManager: {fullName:"Dhruv Kumar Saxena"},
     teams: ["Software", "Hardware", "FPGA"],
     progress: 50,
     milestones: "10",
@@ -25,9 +25,9 @@ const projects = [
     id: 2,
     name: "Corvett",
     deadline: "10 Feb 2024",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    manager: "Jonn Doe",
+    projectDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+    projectManager: {fullName:"Jonn Doe"},
     teams: ["Software", "Hardware", "FPGA"],
     progress: 60,
     milestones: "6",
@@ -39,9 +39,9 @@ const projects = [
     id: 3,
     name: "Lattice",
     deadline: "02 Apr 2024",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    manager: "Vishal Singh",
+    projectDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+    projectManager: {fullName:"Vishal Singh"},
     teams: ["Software", "Hardware", "FPGA"],
     progress: 70,
     milestones: "8",
@@ -53,9 +53,9 @@ const projects = [
     id: 4,
     name: "Keysight",
     deadline: "15 May 2024",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    manager: "Ankit Kumar Thakur",
+    projectDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+    projectManager:{fullName: "Ankit Kumar Thakur"},
     teams: ["Software", "Hardware"],
     progress: 80,
     milestones: "3",
@@ -67,9 +67,9 @@ const projects = [
     id: 5,
     name: "Analyser",
     deadline: "30 June 2024",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    manager: "Pardeep Kumar",
+    projectDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+    projectManager: {fullName:"Pardeep Kumar"},
     teams: ["Software", "Hardware", "FPGA"],
     progress: 90,
     milestones: "9",
@@ -81,9 +81,9 @@ const projects = [
     id: 6,
     name: "Debugger",
     deadline: "11 July 2024",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    manager: "Fuzail Qamar",
+    projectDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+    projectManager:{ fullName:"Fuzail Qamar"},
     teams: ["Software", "Hardware"],
     progress: 95,
     milestones: "13",
@@ -95,9 +95,9 @@ const projects = [
     id: 7,
     name: "Chatbot",
     deadline: "15 Aug 2024",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    manager: "Vineet Goyal",
+    projectDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+    projectManager: {fullName:"Vineet Goyal"},
     teams: ["Software", "Hardware", "FPGA"],
     progress: 10,
     milestones: "11",
@@ -109,9 +109,9 @@ const projects = [
     id: 8,
     name: "AI Car",
     deadline: "23 Sep 2024",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    manager: "Sanjeev Kumar",
+    projectDescription:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
+    projectManager: {fullName:"Sanjeev Kumar"},
     teams: ["Software", "Hardware", "FPGA"],
     progress: 20,
     milestones: "15",
@@ -122,7 +122,7 @@ const projects = [
   // Add more project data as needed
 ];
 
-const ProjectCarousel = ({ title }) => {
+const ProjectCarousel = ({ title, userDetails }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -167,6 +167,8 @@ const ProjectCarousel = ({ title }) => {
     );
   };
 
+  console.log("my very user details", userDetails)
+
   return (
     <div className="relative mt-4 rounded-lg py-10">
       <h3 className="font-bold text-xl ml-2">{title}</h3>
@@ -182,40 +184,10 @@ const ProjectCarousel = ({ title }) => {
         // customTransition="transform 300ms ease-in-out"
         partialVisible={true}
       >
-        {/*<div className="w-screen">
-          <ProjectCard />
-        </div>
-        <div className="w-screen">
-          <ProjectCard />
-        </div>
-        <div className="w-screen">
-          <ProjectCard />
-        </div>
-        <div className="w-screen">
-          <ProjectCard />
-        </div>
-        <div className="w-screen">
-          <ProjectCard />
-        </div>
-        <div className="w-screen">
-          <ProjectCard />
-        </div>
-        <div className="w-screen">
-          <ProjectCard />
-        </div>
-        <div className="w-screen">
-          <ProjectCard />
-        </div>
-        <div className="w-screen">
-          <ProjectCard />
-        </div>
-        <div className="w-screen">
-          <ProjectCard />
-        </div>
-  */}
-        {projects.map((project) => (
+      
+        {userDetails.projects.map((project) => (
           <div key={project.id} className="w-screen">
-            <ProjectCard project={project} />
+            <ProjectCard project={project.project} />
           </div>
         ))}
       </Carousel>

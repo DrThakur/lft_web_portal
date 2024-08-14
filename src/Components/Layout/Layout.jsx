@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
         }}
       >
         <div
-          style={{ overflowY: "auto", height: "calc(100% - 4rem)" }}
+          style={{ overflowY: "auto",overflowX:"hidden", height: "calc(100% - 4rem)" }}
           className="children w-full"
         >
           {children}

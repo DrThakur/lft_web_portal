@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MonthYearPicker from "./MonthYearPicker";
 import { useStateContext } from "../Contexts/ContextProvider";
+import axios from "axios";
 
 const EosUpdate = () => {
   // State to keep track of the number of project rows
@@ -9,6 +10,7 @@ const EosUpdate = () => {
   const [projects, setProjects] = useState([]);
   const [activities, setActivities] = useState([]);
   const [salesLeadError, setSalesLeadError] = useState("");
+  const [userDetails, setUserDetails] = useState({});
 
   // State to manage the form data
   const [formData, setFormData] = useState({
@@ -27,6 +29,34 @@ const EosUpdate = () => {
   });
 
   const { user } = useStateContext();
+
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+  console.log("mydakskj", user);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/users/${user._id}`);
+        console.log("my userdeatils--111", response.data);
+        setUserDetails(response.data);
+
+        console.log("activities Array",Array.isArray(response.data.activities));
+        setActivities(response.data.activities)
+        console.log("Projects Array",Array.isArray(response.data.projects));
+        setProjects(response.data.projects);
+      } catch (error) {
+        console.error("Failed to fetch user details:", error);
+      }
+    };
+
+    if (user && user._id) {
+      fetchUserDetails();
+    }
+  }, [user, apiUrl]);
+
+
+
 
   //   const projectManagers = [
   //     "Mohammad Rafi",
@@ -121,8 +151,8 @@ const EosUpdate = () => {
     ];
 
     setUserData(defaultEmployeeDetails);
-    setProjects(projectsData);
-    setActivities(activitiesData);
+    // setProjects(projectsData);
+    // setActivities(activitiesData);
 
     setFormData({
       ...defaultEmployeeDetails,
@@ -269,6 +299,11 @@ const EosUpdate = () => {
     setErrorMessage("");
   };
 
+  if (!userDetails) return <div>Loading...</div>;
+
+  console.log("My userDeatiols for proejcts", userDetails);
+
+
   return (
     <div className="max-w-full mx-auto p-6 bg-white rounded-lg shadow-md">
       <div className="flex flex-row justify-between items-center mb-2 bg-gray-200 p-2 rounded-lg">
@@ -291,7 +326,7 @@ const EosUpdate = () => {
       <form className="space-y-6" >
         {/* Employee Details Section */}
 
-        {user && (
+        {userDetails && (
           <div className="bg-green-200 rounded-lg p-4 -mb-4">
             <h2 className="text-xl font-semibold mb-4">Employee Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
@@ -299,7 +334,7 @@ const EosUpdate = () => {
               <div>
                 <p className="text-sm font-medium text-gray-700">Employee ID</p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {user.employeeId}
+                  {userDetails.employeeId}
                 </p>
               </div>
 
@@ -309,14 +344,14 @@ const EosUpdate = () => {
                   Employee Name
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {user.fullName}
+                  {userDetails.fullName}
                 </p>
               </div>
 
               {/* Email */}
               <div>
                 <p className="text-sm font-medium text-gray-700">Email</p>
-                <p className="mt-2 text-blue-500 font-bold">{user.email}</p>
+                <p className="mt-2 text-blue-500 font-bold">{userDetails.email}</p>
               </div>
 
               {/* Reporting Manager */}
@@ -325,7 +360,7 @@ const EosUpdate = () => {
                   Reporting Manager
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {user.reportingManager}
+                  {userDetails.reportingManager}
                 </p>
               </div>
 
@@ -335,7 +370,7 @@ const EosUpdate = () => {
                   Project Manager
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {user.projectManager || "N/A"}
+                  {userDetails.projectManager || "N/A"}
                 </p>
               </div>
 
@@ -355,7 +390,7 @@ const EosUpdate = () => {
         <div className="bg-gray-100 rounded-lg p-2">
           <h2 className="text-xl font-semibold mb-4">Work Information</h2>
           <div>
-            {formData.projects.map((project, index) => (
+            {projects.map((project, index) => (
               <div
                 key={index}
                 className="col-span-1 grid grid-cols-3 gap-4 mb-2"
@@ -372,7 +407,7 @@ const EosUpdate = () => {
                     className="mt-2 text-blue-500 font-semibold"
                   >
                     {" "}
-                    {projects[index]}
+                    {project.project.projectName}
                   </p>
                 </div>
                 <div className="col-start-2 col-end-3 flex flex-col justify-start gap-2">
@@ -427,7 +462,7 @@ const EosUpdate = () => {
                     className="block text-sm font-medium text-gray-700"
                     htmlFor={`activity${index + 1}`}
                   >
-                    Work {formData.projects.length + index + 1}
+                    Work {projects.length + index + 1}
                   </label>
                   <p
                     id={`activity${index + 1}`}

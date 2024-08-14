@@ -285,6 +285,46 @@ const ResourceTable = ({
     );
   };
 
+  const projectBodyTemplate = (rowData) => {
+
+    console.log("my row dtaa prpjects", rowData)
+    return (
+      <div>
+        {rowData.projects.map((project, index) => (
+          <div key={index} className="mb-2">
+            <strong>{project.project.projectName}</strong>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const allocatedBandwidthBodyTemplate = (rowData) => {
+
+    console.log("my row dtaa prpjects", rowData)
+    return (
+      <div>
+        {rowData.projects.map((project, index) => (
+          <div key={index} className="mb-2">
+            <strong>{project.occupancy} %</strong>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const availableBandWidthBodyTemplate = (rowData) => {
+    // Calculate the total occupancy
+    const totalOccupancy = rowData.projects.reduce((acc, project) => {
+      return acc + project.occupancy;
+    }, 0);
+  
+    // Calculate the available bandwidth
+    const availableBandwidth = 100 - totalOccupancy;
+  
+    return <strong>{availableBandwidth.toFixed(2)} %</strong>;
+  };
+
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
@@ -482,6 +522,8 @@ const ResourceTable = ({
     );
   };
 
+  console.log("my employee data2654353", employees);
+
   return (
     <div>
       <Toast ref={toast} />
@@ -503,6 +545,8 @@ const ResourceTable = ({
           rows={pageSize}
           rowsPerPageOptions={[5, 10, 25]}
           removableSort
+          scrollable
+          scrollHeight="600px"
           //   totalRecords={totalPages * pageSize}
           //   onPage={handlePageChange}
           //   onRowToggle={handlePageSizeChange}
@@ -538,56 +582,56 @@ const ResourceTable = ({
             style={{ minWidth: "10rem" }}
           ></Column>
           <Column
-            field="rating"
+            field="performance"
             header="Employee Performance"
             body={ratingBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="inventoryStatus"
+            field="projects"
             header="Projects"
-            body={statusBodyTemplate}
+            body={projectBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="inventoryStatus"
+            field="role"
             header="Project Role"
             body={statusBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="inventoryStatus"
+            field="duration"
             header="Duration"
             body={statusBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="inventoryStatus"
+            field="allocatedBandWidth"
             header="Allocated Bandwidth"
-            body={statusBodyTemplate}
+            body={allocatedBandwidthBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="inventoryStatus"
+            field="availableBandWidth"
             header="Available Bandwidth"
-            body={statusBodyTemplate}
+            body={availableBandWidthBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="inventoryStatus"
+            field="techSkills"
             header="Tech Skills"
             body={statusBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="inventoryStatus"
+            field="remarks"
             header="Remarks"
             body={statusBodyTemplate}
             sortable

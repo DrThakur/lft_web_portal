@@ -517,6 +517,21 @@ const AllProjects = () => {
     );
   };
 
+  
+  const teamBodyTemplate = (rowData) => {
+
+    console.log("my row dtaa prpjects", rowData)
+    return (
+      <div>
+        {rowData.teams.map((team, index) => (
+          <div key={index} className="mb-2">
+            <strong>{team.name}</strong>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   const clientBodyTemplate = (rowData) => {
     // const createdBy = rowData.projectManager;
 
@@ -740,7 +755,7 @@ const AllProjects = () => {
             rows={10}
             rowsPerPageOptions={[5, 10, 25]}
             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} projects"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Projects"
             globalFilter={globalFilter}
             header={header}
             removableSort
@@ -804,7 +819,7 @@ const AllProjects = () => {
             <Column
               field="teams"
               header="Team(s)"
-              // body={statusBodyTemplate}
+              body={teamBodyTemplate}
               sortable
               style={{ minWidth: "12rem" }}
             ></Column>

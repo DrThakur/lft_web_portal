@@ -7,6 +7,7 @@ import { FaPlus } from "react-icons/fa6";
 import NewMilestoneForm from "./NewMilestoneForm";
 import NewAddTeamForm from "./NewAddTeamForm";
 import FinalEmployeeDropdown from "./FinalEmployeeDropdown";
+import axios from "axios";
 
 const CreateProjectForm = () => {
   const [projectName, setProjectName] = useState("");
@@ -82,7 +83,7 @@ const CreateProjectForm = () => {
 
   // State variables for milestones, project manager, team, repository, etc.
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission here
 
@@ -112,6 +113,62 @@ const CreateProjectForm = () => {
       projectManager,
       // Add more fields as needed
     };
+
+     // POST request to backend API
+     try {
+      const response = await axios.post("http://localhost:8002/projects", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log("Project created successfully:", response.data);
+      // Handle success (e.g., show a success message, reset form, etc.)
+
+      // Handle success (e.g., show a success message)
+    
+    // Reset form fields
+    setProjectName("");
+    setProjectId("");
+    setDescription("");
+    setKeywords("");
+    setClientName("");
+    setClientAddress("");
+    setPointOfContact("");
+    setContactDetails("");
+    setSmLeadId("");
+    setLocation("");
+    setStartDate("");
+    setEndDate("");
+    setDuration("");
+    setSoftwareBQ("");
+    setHardwareBQ("");
+    setFpgaBQ("");
+    setQaBQ("");
+    setTotalBQ("");
+    setLink("");
+    setTeams([]);
+    setMilestones([]);
+    setMilestoneNumber(1);
+    setProjectManager("");
+
+    console.log("Project Name after reset:", projectName);
+
+    } catch (error) {
+      if (error.response) {
+        // Server responded with a status other than 2xx
+        console.error("Error creating project:", error.response.data);
+        // Handle server-side error (e.g., show an error message)
+      } else if (error.request) {
+        // Request was made but no response received
+        console.error("No response received:", error.request);
+        // Handle network error (e.g., show a network error message)
+      } else {
+        // Something went wrong setting up the request
+        console.error("Error setting up request:", error.message);
+        // Handle other types of errors
+      }
+    }
 
     // Here you can send formData to your mock backend
     console.log("Form data:", formData);
@@ -228,7 +285,7 @@ const CreateProjectForm = () => {
   return (
     <div className="container mx-auto bg-white p-4 rounded-md mt-2">
       <h2 className="text-2xl font-bold mb-4">Create New Project</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col mt-8">
+      <form  className="flex flex-col mt-8">
         {/* Project Information */}
         <div className="projectInformation">
           <h3 className="text-xl font-semibold">Project Information</h3>
@@ -762,7 +819,7 @@ const CreateProjectForm = () => {
           <hr className="border-2 mt-2 mb-2 rounded border-dashed" />
           <h3 className="text-xl font-semibold">Add Project Repository</h3>
           <div className="grid grid-cols-2 gap-4 mt-2">
-            <div className="projectRepositoryLink flex flex-col">
+            <div className="projectRepositoryLink flex flex-row justify-start items-center gap-4">
               <label>Link</label>
               <input
                 type="url"
@@ -772,15 +829,15 @@ const CreateProjectForm = () => {
                 className="border w-full rounded px-2 py-2 mt-1"
               />
             </div>
-            <div className="flex flex-col mt-7 w-1/3">
-              <button className="border rounded bg-purple-500 p-2 text-white font-semibold hover:bg-purpel-700">
+            <div className="flex flex-col  mt-1 w-1/3">
+              <button className="border rounded-full bg-purple-500 p-2 text-white font-semibold hover:bg-purpel-700">
                 Add New Link
               </button>
             </div>
           </div>
         </div>
         {/* Save Button */}
-        <div className="saveButtons flex flex-row justify-center items-center gap-8 mt-4">
+        <div className="saveButtons flex flex-row justify-center items-center gap-8 mt-8">
           <button
             type=""
             className="border-2 border-blue-500 rounded px-4 py-2 hover:bg-blue-600 hover:text-white w-1/5"

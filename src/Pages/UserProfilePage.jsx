@@ -11,9 +11,31 @@ import { format } from "date-fns";
 const UserProfilePage = () => {
   const [resume, setResume] = useState(null);
   const [users, setUsers] = useState("");
+  const [userDetails, setUserDetails] = useState({});
   const uploadInputRef = useRef(null);
 
   const { user } = useStateContext();
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+  console.log("mydakskj", user);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/users/${user._id}`);
+        console.log("my userdeatils", response.data);
+        setUserDetails(response.data);
+      } catch (error) {
+        console.error("Failed to fetch user details:", error);
+      }
+    };
+
+    if (user && user._id) {
+      fetchUserDetails();
+    }
+  }, [user, apiUrl]);
+
+  if (!userDetails) return <div>Loading...</div>;
 
   console.log("My user---1122", user);
 
@@ -574,7 +596,7 @@ const UserProfilePage = () => {
             </TabPanel>
             <TabPanel header="Projects">
               <div className="-mt-10 -ml-5">
-                <ProjectCarousel title="On Going Projects" />
+                <ProjectCarousel title="On Going Projects" userDetails={userDetails} />
               </div>
             </TabPanel>
             <TabPanel header="Bank & Statuatory(Admin Only)">
