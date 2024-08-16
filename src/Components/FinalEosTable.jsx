@@ -416,7 +416,7 @@ const FinalEosTable = () => {
 
   const header = (
     <div className="flex flex-row justify-between items-center">
-      <h4 className="m-0">Final EoS- Aug 2024 ({employees.length})</h4>
+      <h4 className="m-0">Final EoS- Aug 2024 ({eosData.length})</h4>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText
@@ -425,7 +425,7 @@ const FinalEosTable = () => {
           placeholder="Search..."
         />
       </span>
-      <div className="flex gap-2">
+      {/*    <div className="flex gap-2">
         <Dropdown
           value={designationFilter}
           options={designationOptions}
@@ -451,6 +451,7 @@ const FinalEosTable = () => {
           showClear
         />
       </div>
+      */}
     </div>
   );
   const productDialogFooter = (
@@ -555,77 +556,86 @@ const FinalEosTable = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get(`${apiUrl}/eos`); // Adjust the API endpoint as per your backend
-            const { eosList } = response.data;
-
-            // Ensure that eosList is an array
-            if (!Array.isArray(eosList)) {
-                throw new Error('Unexpected data format: eosList should be an array');
-            }
-
-            // console.log("my eos Data", data)
-            setEosData(eosList);
-
-            // Extract unique projects and activities
-            const projectSet = new Set();
-            const activitySet = new Set();
-
-            eosList.forEach(eos => {
-                if (eos.projects) {
-                  eos.projects.forEach(projectObj => {
-                    if (projectObj.project && projectObj.project.projectName) {
-                      projectSet.add(projectObj.project.projectName);
-                    }
-                  });
-                }
-              
-                if (eos.activities) {
-                  eos.activities.forEach(activityObj => {
-                    if (activityObj.activity && activityObj.activity.name) {
-                      activitySet.add(activityObj.activity.name);
-                    }
-                  });
-                }
-              });
-
-
-              console.log("my projects", projectSet);
-              console.log("my activities", activitySet);
-            // Combine projects and activities into columns
-            const columns = [
-                { field: 'EmpId', header: 'Employee ID' },
-                { field: 'Name', header: 'Name' },
-                { field: 'Department', header: 'Department' },
-                ...Array.from(projectSet).map(project => ({ field: `Projects.${project}`, header: project })),
-                ...Array.from(activitySet).map(activity => ({ field: `Activities.${activity}`, header: activity }))
-            ];
-
-            setColumns(columns);
-        } catch (error) {
-            setError('Failed to fetch EOS data. Please try again later.');
-            console.error('Error fetching EOS data:', error);
-        } finally {
-            setLoading(false);
+      try {
+        setLoading(true);
+        const response = await axios.get(`${apiUrl}/eos`); // Adjust the API endpoint as per your backend
+        const { eosList } = response.data;
+        console.log("my eos lengeth", eosList.length);
+        // Ensure that eosList is an array
+        if (!Array.isArray(eosList)) {
+          throw new Error("Unexpected data format: eosList should be an array");
         }
+
+        // console.log("my eos Data", data)
+        setEosData(eosList);
+
+        // Extract unique projects and activities
+        const projectSet = new Set();
+        const activitySet = new Set();
+
+        eosList.forEach((eos) => {
+          if (eos.projects) {
+            eos.projects.forEach((projectObj) => {
+              if (projectObj.project && projectObj.project.projectName) {
+                projectSet.add(projectObj.project.projectName);
+              }
+            });
+          }
+
+          if (eos.activities) {
+            eos.activities.forEach((activityObj) => {
+              if (activityObj.activity && activityObj.activity.name) {
+                activitySet.add(activityObj.activity.name);
+              }
+            });
+          }
+        });
+
+        console.log("my projects", projectSet);
+        console.log("my activities", activitySet);
+        // Combine projects and activities into columns
+        const columns = [
+          { field: "employee.employeeId", header: "Employee ID" },
+          { field: "employee.fullName", header: "Name" },
+          { field: "employee.status", header: "Status" },
+          { field: "employee.department", header: "Department" },
+          { field: "employee.reportingManager", header: "Reporting Manager" },
+          ...Array.from(projectSet).map((project) => ({
+            field: `Projects.${project}`,
+            header: project,
+          })),
+          ...Array.from(activitySet).map((activity) => ({
+            field: `Activities.${activity}`,
+            header: activity,
+          })),
+        ];
+
+        setColumns(columns);
+      } catch (error) {
+        setError("Failed to fetch EOS data. Please try again later.");
+        console.error("Error fetching EOS data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
-}, []);
+  }, []);
 
-const fallbackValue = (rowData, field) => {
-    const [category, name] = field.split('.');
-    return rowData[category] && rowData[category][name] ? rowData[category][name] : 0;
-};
+  const fallbackValue = (rowData, field) => {
+    const [category, name] = field.split(".");
+    return rowData[category] && rowData[category][name]
+      ? rowData[category][name]
+      : 0;
+  };
 
-if (loading) {
+  if (loading) {
     return <div>Loading...</div>;
-}
+  }
 
-if (error) {
+  if (error) {
     return <div>{error}</div>;
-}
+  }
 
   return (
     <div>
@@ -639,7 +649,7 @@ if (error) {
 
         <DataTable
           ref={dt}
-          value={getFilteredEmployees()}
+          value={eosData}
           selectionMode={"checkbox"}
           selection={selectedProducts}
           onSelectionChange={(e) => setSelectedProducts(e.value)}
@@ -648,104 +658,46 @@ if (error) {
           rows={10}
           rowsPerPageOptions={[5, 10, 25]}
           removableSort
-          //   totalRecords={totalPages * pageSize}
-          //   onPage={handlePageChange}
-          //   onRowToggle={handlePageSizeChange}
+          showGridlines
+          columnResizeMode="expand"
+          resizableColumns
           paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
           globalFilter={globalFilter}
           header={header}
         >
-          <Column selectionMode="multiple" exportable={false}></Column>
           <Column
-            field="employeeId"
-            header="Employee Id"
-            sortable
-            style={{ minWidth: "12rem" }}
+            selectionMode="multiple"
+            exportable={false}
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+            style={{ textAlign: "center" }}
           ></Column>
+          {columns.map((col) => (
+            <Column
+              key={col.field}
+              field={col.field}
+              header={col.header}
+              body={(rowData) => fallbackValue(rowData, col.field)}
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ textAlign: "center" }}
+            />
+          ))}
+
           <Column
-            field="fullName"
-            header="Employee Name"
-            sortable
-            style={{ minWidth: "16rem" }}
-          ></Column>
-          <Column field="designation" header="Designation"></Column>
-          <Column field="department" header="Department"></Column>
-          <Column
-            field="location"
-            header="Location"
-            sortable
-            style={{ minWidth: "8rem" }}
-          ></Column>
-          <Column
-            field="status"
-            header="Status"
-            sortable
-            style={{ minWidth: "10rem" }}
-          ></Column>
-          <Column
-            field="rating"
-            header="Employee Performance"
-            body={ratingBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          {/*<Column
-            field="inventoryStatus"
-            header="Projects"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="inventoryStatus"
-            header="Project Role"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="inventoryStatus"
-            header="Duration"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="inventoryStatus"
-            header="Allocated Bandwidth"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="inventoryStatus"
-            header="Available Bandwidth"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          */}
-          <Column
-            field="inventoryStatus"
-            header="Tech Skills"
-            body={techSkillsBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="inventoryStatus"
-            header="Remarks"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-            editor={(options) => cellEditor(options)}
-            onCellEditComplete={onCellEditComplete}
-          ></Column>
-          <Column
+            header="Actions"
             body={actionBodyTemplate}
             exportable={false}
-            style={{ minWidth: "12rem" }}
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+            style={{ textAlign: "center", minWidth: "12rem" }}
           ></Column>
         </DataTable>
       </div>
