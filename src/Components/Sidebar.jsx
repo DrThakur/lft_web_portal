@@ -102,6 +102,8 @@ const Sidebar = () => {
       navigate("/resource-pool");
     } else if (menuItem === "Employee Management") {
       navigate("/employee-management");
+    } else if (menuItem === "EoS") {
+      navigate("/final-eos");
     }
 
     // Perform any other actions upon main item click
@@ -571,6 +573,17 @@ const Sidebar = () => {
                     <FaMoneyCheckDollar />
                   </span>
                   <span className="right-sidebar-text"> Project Budgeting</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "EoS" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("EoS")}
+                >
+                  <span className="right-sidebar-icon">
+                  <MdIncompleteCircle />
+                  </span>
+                  <span className="right-sidebar-text"> EoS</span>
                 </div>
                 <div
                   className={`right-sidebar-item-content ${

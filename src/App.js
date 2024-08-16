@@ -37,6 +37,7 @@ import ResourceTable from "./Components/ResourceTable";
 import Login from "./Components/Login";
 import ForgotPassword from "./Components/ForgotPassword";
 import EmployeeManagement from "./Components/EmployeeManagement";
+import FinalEosTable from "./Components/FinalEosTable";
 
 
 // const LayoutRoutes = () => (
@@ -475,6 +476,7 @@ const protectedRoutes = [
                 <Route path="/resource-pool" element={<ResourcePool />} />
                 <Route path="/resource-table" element={<ResourceTable />} />
                 <Route path="/employee-management" element={<EmployeeManagement />} />
+                <Route path="/final-eos" element={<FinalEosTable />} />
               </Routes>
             </Layout>
           }

@@ -14,18 +14,10 @@ import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Tag } from "primereact/tag";
+import axios from "axios";
 import { Dropdown } from "primereact/dropdown";
 
-const ResourceTable = ({
-  title,
-  employees,
-  loading,
-  currentPage,
-  totalPages,
-  pageSize,
-  onPageChange,
-  onPageSizeChange,
-}) => {
+const FinalEosTable = () => {
   let emptyProduct = {
     id: null,
     name: "",
@@ -37,9 +29,10 @@ const ResourceTable = ({
     rating: 0,
     inventoryStatus: "INSTOCK",
   };
-  console.log("my employees data", employees);
 
   // const [employees, setEmployees] = useState(employees);
+  const [eosData, setEosData] = useState([]);
+  const [columns, setColumns] = useState([]);
   const [designationFilter, setDesignationFilter] = useState(null);
   const [locationFilter, setLocationFilter] = useState(null);
   const [statusFilter, setStatusFilter] = useState(null);
@@ -57,6 +50,60 @@ const ResourceTable = ({
   const toast = useRef(null);
   const dt = useRef(null);
 
+  const [employees, setEmployees] = useState([]);
+  const [employeesByDepartment, setEmployeesByDepartment] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  const baseURL = process.env.REACT_APP_BASE_URL;
+  const port = process.env.REACT_APP_BACKEND_PORT;
+
+  // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
+  // const apiUrl1 = `http://${baseURL}:${port}/users`
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  useEffect(() => {
+    const fetchUserInformation = async (page, limit) => {
+      try {
+        // const res = await axios.get(`http://${baseURL}:${port}/users?page=${page}&limit=${limit}`);
+        // const res = await axios.get(`http://${baseURL}:${port}/users/all`);
+        // const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users?page=${page}&limit=${limit}`);
+        const res = await axios.get(`${apiUrl}/users/all`);
+        // const employeeData = res.data.users;
+        const { users, totalPages } = res.data;
+        // console.log("response data", res.data);
+        console.log("response data---final", users);
+        // console.log("response data-2", res.data.users);
+        // console.log("response data-3", res.data.users);
+        // console.log("Type of data:", typeof res.data);
+        // console.log("Type of data-222:", typeof res.data.users);
+
+        // const filteredEmployees = filterEmployeesByDepartment(employeeData, department);
+
+        //  // Organize employees by department
+        // const departmentMap = departments.reduce((acc, department) => {
+        //   acc[department] = filterEmployeesByDepartment(
+        //     users,
+        //     department
+        //   );
+        //   return acc;
+        // }, {});
+        setEmployees(users);
+        // setEmployeesByDepartment(departmentMap);
+        setTotalPages(totalPages);
+      } catch (error) {
+        console.error("Error", error);
+      } finally {
+        setLoading(false); // Set loading to false when data is fetched
+      }
+    };
+
+    fetchUserInformation(currentPage, pageSize);
+  }, [currentPage, pageSize]);
+
   useEffect(() => {
     ProductService.getProducts().then((data) => setProducts(data));
   }, []);
@@ -68,13 +115,24 @@ const ResourceTable = ({
     });
   };
 
-  const handlePageChange = (event) => {
-    onPageChange(event.page + 1);
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    setLoading(true);
   };
 
-  const handlePageSizeChange = (event) => {
-    onPageSizeChange(event.rows);
+  const handlePageSizeChange = (newSize) => {
+    setPageSize(newSize);
+    setCurrentPage(1);
+    setLoading(true);
   };
+
+  //   const handlePageChange = (event) => {
+  //     onPageChange(event.page + 1);
+  //   };
+
+  //   const handlePageSizeChange = (event) => {
+  //     onPageSizeChange(event.rows);
+  //   };
 
   const openNew = () => {
     setProduct(emptyProduct);
@@ -273,7 +331,7 @@ const ResourceTable = ({
   // };
 
   const ratingBodyTemplate = (rowData) => {
-    return <Rating value={rowData.performance} readOnly cancel={false} />;
+    return <Rating value={rowData.rating} readOnly cancel={false} />;
   };
 
   const statusBodyTemplate = (rowData) => {
@@ -285,22 +343,8 @@ const ResourceTable = ({
     );
   };
 
-  const projectBodyTemplate = (rowData) => {
-
-    console.log("my row dtaa prpjects", rowData)
-    return (
-      <div>
-        {rowData.projects.map((project, index) => (
-          <div key={index} className="mb-2">
-            <strong>{project.project.projectName}</strong>
-          </div>
-        ))}
-      </div>
-    );
-  };
   const techSkillsBodyTemplate = (rowData) => {
-
-    console.log("my row dtaa skills", rowData)
+    console.log("my row dtaa skills", rowData);
     return (
       <div>
         {rowData.techSkills.map((skill, index) => (
@@ -310,32 +354,6 @@ const ResourceTable = ({
         ))}
       </div>
     );
-  };
-
-  const allocatedBandwidthBodyTemplate = (rowData) => {
-
-    console.log("my row dtaa prpjects", rowData)
-    return (
-      <div>
-        {rowData.projects.map((project, index) => (
-          <div key={index} className="mb-2">
-            <strong>{project.occupancy} %</strong>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  const availableBandWidthBodyTemplate = (rowData) => {
-    // Calculate the total occupancy
-    const totalOccupancy = rowData.projects.reduce((acc, project) => {
-      return acc + project.occupancy;
-    }, 0);
-  
-    // Calculate the available bandwidth
-    const availableBandwidth = 100 - totalOccupancy;
-  
-    return <strong>{availableBandwidth.toFixed(2)} %</strong>;
   };
 
   const actionBodyTemplate = (rowData) => {
@@ -398,9 +416,7 @@ const ResourceTable = ({
 
   const header = (
     <div className="flex flex-row justify-between items-center">
-      <h4 className="m-0">
-        {title} Department ({employees.length} Active Employees){" "}
-      </h4>
+      <h4 className="m-0">Final EoS- Aug 2024 ({employees.length})</h4>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText
@@ -535,7 +551,81 @@ const ResourceTable = ({
     );
   };
 
-  console.log("my employee data2654353", employees);
+  console.log("my api url currentkly", apiUrl);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${apiUrl}/eos`); // Adjust the API endpoint as per your backend
+            const { eosList } = response.data;
+
+            // Ensure that eosList is an array
+            if (!Array.isArray(eosList)) {
+                throw new Error('Unexpected data format: eosList should be an array');
+            }
+
+            // console.log("my eos Data", data)
+            setEosData(eosList);
+
+            // Extract unique projects and activities
+            const projectSet = new Set();
+            const activitySet = new Set();
+
+            eosList.forEach(eos => {
+                if (eos.projects) {
+                  eos.projects.forEach(projectObj => {
+                    if (projectObj.project && projectObj.project.projectName) {
+                      projectSet.add(projectObj.project.projectName);
+                    }
+                  });
+                }
+              
+                if (eos.activities) {
+                  eos.activities.forEach(activityObj => {
+                    if (activityObj.activity && activityObj.activity.name) {
+                      activitySet.add(activityObj.activity.name);
+                    }
+                  });
+                }
+              });
+
+
+              console.log("my projects", projectSet);
+              console.log("my activities", activitySet);
+            // Combine projects and activities into columns
+            const columns = [
+                { field: 'EmpId', header: 'Employee ID' },
+                { field: 'Name', header: 'Name' },
+                { field: 'Department', header: 'Department' },
+                ...Array.from(projectSet).map(project => ({ field: `Projects.${project}`, header: project })),
+                ...Array.from(activitySet).map(activity => ({ field: `Activities.${activity}`, header: activity }))
+            ];
+
+            setColumns(columns);
+        } catch (error) {
+            setError('Failed to fetch EOS data. Please try again later.');
+            console.error('Error fetching EOS data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    fetchData();
+}, []);
+
+const fallbackValue = (rowData, field) => {
+    const [category, name] = field.split('.');
+    return rowData[category] && rowData[category][name] ? rowData[category][name] : 0;
+};
+
+if (loading) {
+    return <div>Loading...</div>;
+}
+
+if (error) {
+    return <div>{error}</div>;
+}
 
   return (
     <div>
@@ -555,11 +645,9 @@ const ResourceTable = ({
           onSelectionChange={(e) => setSelectedProducts(e.value)}
           dataKey="employeeId"
           paginator
-          rows={pageSize}
+          rows={10}
           rowsPerPageOptions={[5, 10, 25]}
           removableSort
-          scrollable
-          scrollHeight="600px"
           //   totalRecords={totalPages * pageSize}
           //   onPage={handlePageChange}
           //   onRowToggle={handlePageSizeChange}
@@ -582,6 +670,7 @@ const ResourceTable = ({
             style={{ minWidth: "16rem" }}
           ></Column>
           <Column field="designation" header="Designation"></Column>
+          <Column field="department" header="Department"></Column>
           <Column
             field="location"
             header="Location"
@@ -595,56 +684,57 @@ const ResourceTable = ({
             style={{ minWidth: "10rem" }}
           ></Column>
           <Column
-            field="performance"
+            field="rating"
             header="Employee Performance"
             body={ratingBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
-          <Column
-            field="projects"
+          {/*<Column
+            field="inventoryStatus"
             header="Projects"
-            body={projectBodyTemplate}
+            body={statusBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="role"
+            field="inventoryStatus"
             header="Project Role"
             body={statusBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="duration"
+            field="inventoryStatus"
             header="Duration"
             body={statusBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="allocatedBandWidth"
+            field="inventoryStatus"
             header="Allocated Bandwidth"
-            body={allocatedBandwidthBodyTemplate}
+            body={statusBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="availableBandWidth"
+            field="inventoryStatus"
             header="Available Bandwidth"
-            body={availableBandWidthBodyTemplate}
+            body={statusBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
+          */}
           <Column
-            field="techSkills"
+            field="inventoryStatus"
             header="Tech Skills"
             body={techSkillsBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="remarks"
+            field="inventoryStatus"
             header="Remarks"
             body={statusBodyTemplate}
             sortable
@@ -705,4 +795,4 @@ const ResourceTable = ({
   );
 };
 
-export default ResourceTable;
+export default FinalEosTable;

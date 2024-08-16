@@ -340,6 +340,20 @@ const EmployeeManagement = () => {
     );
   };
 
+  const techSkillsBodyTemplate = (rowData) => {
+
+    console.log("my row dtaa skills", rowData)
+    return (
+      <div>
+        {rowData.techSkills.map((skill, index) => (
+          <div key={index} className="mb-2">
+            <p>{skill}</p>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
@@ -578,6 +592,7 @@ const EmployeeManagement = () => {
             style={{ minWidth: "16rem" }}
           ></Column>
           <Column field="designation" header="Designation"></Column>
+          <Column field="department" header="Department"></Column>
           <Column
             field="location"
             header="Location"
@@ -636,7 +651,7 @@ const EmployeeManagement = () => {
           <Column
             field="inventoryStatus"
             header="Tech Skills"
-            body={statusBodyTemplate}
+            body={techSkillsBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
