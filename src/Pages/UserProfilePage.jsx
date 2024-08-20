@@ -7,6 +7,7 @@ import ProjectCarousel from "../Components/ProjectCarousel";
 import axios from "axios";
 import { useStateContext } from "../Contexts/ContextProvider";
 import { format } from "date-fns";
+import MySkills from "../Components/MySkills";
 
 const UserProfilePage = () => {
   const [resume, setResume] = useState(null);
@@ -17,13 +18,12 @@ const UserProfilePage = () => {
   const { user } = useStateContext();
 
   const apiUrl = process.env.REACT_APP_API_URL;
-  console.log("mydakskj", user);
+
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(`${apiUrl}/users/${user._id}`);
-        console.log("my userdeatils", response.data);
         setUserDetails(response.data);
       } catch (error) {
         console.error("Failed to fetch user details:", error);
@@ -62,10 +62,6 @@ const UserProfilePage = () => {
     return format(date, "dd-MMM-yyyy");
   };
 
-  // const baseURL = process.env.REACT_APP_BASE_URL;
-  // const port = process.env.REACT_APP_BACKEND_PORT;
-  const baseURL = process.env.REACT_APP_BASE_URL;
-  const port = process.env.REACT_APP_BACKEND_PORT;
 
   // console.log("baseUrl", baseURL);
   // console.log("port", port);
@@ -166,6 +162,8 @@ const UserProfilePage = () => {
       </div>
     );
   };
+
+ const initialSkills = userDetails.techSkills;
 
   return (
     <div className="bg-white p-2 h-screen w-full mt-2 overflow-y-auto border rounded-lg shadow-lg">
@@ -596,7 +594,7 @@ const UserProfilePage = () => {
             </TabPanel>
             <TabPanel header="My Skills">
               <div className="-mt-10 -ml-5">
-                <ProjectCarousel title="On Going Projects" userDetails={userDetails} />
+                <MySkills initialSkills={initialSkills} userId={user._id}/>
               </div>
             </TabPanel>
             <TabPanel header="Projects">
