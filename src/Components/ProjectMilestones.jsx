@@ -15,6 +15,7 @@ import { Calendar } from "primereact/calendar";
 import EmployeeDropdown from "./EmployeeDropdown";
 import { useNavigate } from "react-router-dom";
 import TestMilestoneForm from "./TestMilestoneForm";
+import Select from "react-select";
 import axios from "axios";
 
 const ProjectMilestones = () => {
@@ -35,8 +36,10 @@ const ProjectMilestones = () => {
   };
 
   const [value, setValue] = useState("");
-  const[projects,setProjects]=useState([])
+  const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  // const [teams, setTeams] = useState(["Software", "Hardware", "Verification","FPGA", "QA"]);
+  const [selectedTeam, setSelectedTeam] = useState(null);
   const [tasks, setTasks] = useState(null);
   const [selectedTasks, setSelectedTasks] = useState(null);
   const [task, setTask] = useState(emptyTask);
@@ -45,6 +48,14 @@ const ProjectMilestones = () => {
   const [deleteTaskDialog, setDeleteTaskDialog] = useState(false);
   const [deleteTasksDialog, setDeleteTasksDialog] = useState(false);
   const navigate = useNavigate("");
+
+  const teams = [
+    { name: 'Software', code: 'software' },
+    { name: 'Hardware', code: 'hardware' },
+    { name: 'Verification', code: 'verification' },
+    { name: 'FPGA', code: 'fpga' },
+    { name: 'QA', code: 'qa' }
+];
 
   const milestones = [
     {
@@ -195,9 +206,6 @@ const ProjectMilestones = () => {
       ],
     },
   ];
-
-
-
 
   const handleMilestoneFormOpen = () => {
     if (selectedProject === null) {
@@ -406,10 +414,14 @@ const ProjectMilestones = () => {
         <Dropdown
           value={selectedProject}
           onChange={(e) => setSelectedProject(e.value)}
-          options={projects}
-          optionLabel="name"
+          options={projects.map(project => ({
+            ...project,
+            label: `${project.projectId} - ${project.projectName}`
+          }))}
+          optionLabel="label"
           placeholder="Select a Project"
           filter
+          
           valueTemplate={selectedProjectTemplate}
           itemTemplate={projectOptionTemplate}
           virtualScrollerOptions={{ itemSize: 38 }}
@@ -426,10 +438,15 @@ const ProjectMilestones = () => {
         <label htmlFor="team" className="font-semibold text-xl">
           Team
         </label>
-        <InputText
-          id="team"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+
+        <Dropdown
+          value={selectedTeam}
+          onChange={(e) => setSelectedTeam(e.target.value)}
+          options={teams}
+          optionLabel="name"
+          placeholder="Select a Team"
+          filter
+          className="w-64"
         />
       </div>
     </div>
@@ -820,9 +837,9 @@ const ProjectMilestones = () => {
 
   const header = (
     <div className="flex flex-wrap justify-between items-center gap-2 ">
-    <div className ="flex flex-row justify-start items-center gap-4">
-      <h4 className="m-0">Milestone 1</h4>
-      <p className="font-normal">loremipsum</p>
+      <div className="flex flex-row justify-start items-center gap-4">
+        <h4 className="m-0">Milestone 1</h4>
+        <p className="font-normal">loremipsum</p>
       </div>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
@@ -896,8 +913,8 @@ const ProjectMilestones = () => {
           <div className="card">
             <Toolbar
               className="mb-4"
-              left={leftToolbarTemplate}
-              right={rightToolbarTemplate}
+              start={leftToolbarTemplate}
+              end={rightToolbarTemplate}
             ></Toolbar>
 
             <DataTable
@@ -1165,7 +1182,6 @@ const ProjectMilestones = () => {
               projectId={selectedProject?.id}
               existingMilestones={milestones}
             />
-            
           </Dialog>
 
           <Dialog

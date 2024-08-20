@@ -151,13 +151,13 @@ const NewAddTeamForm = ({ toggleForm, onSave }) => {
               <div key={member.value} className="px-4 py-2">
                 <div className="flex justify-center items-center h-10">
                   <img
-                    src={member.data.photo}
-                    alt={member.data.name}
+                    src={`https://puneautoexpo.in/wp-content/uploads/2017/10/speaker3-min.jpg`} // memebe.data.photo
+                    alt={member.data.fullName}
                     className="w-8 h-8 rounded-full"
                   />
                   <div>
                     <div>
-                      {member.data.name} ({member.data.employeeId})
+                      {member.data.fullName} ({member.data.employeeId})
                     </div>
                     <div className="text-gray-500 text-sm">
                       {member.data.designation}
@@ -202,13 +202,13 @@ const NewAddTeamForm = ({ toggleForm, onSave }) => {
                           >
                             <div className="flex justify-center items-center h-10 ">
                               <img
-                                src={member.data.photo}
+                                src={`https://puneautoexpo.in/wp-content/uploads/2017/10/speaker3-min.jpg`} // memeber.data.photo
                                 alt={member.data.name}
                                 className="w-8 h-8 rounded-full"
                               />
                               <div>
                                 <div>
-                                  {member.data.name} ({member.data.employeeId})
+                                  {member.data.fullName} ({member.data.employeeId})
                                 </div>
                                 <div className="text-gray-500 text-sm">
                                   {member.data.designation}

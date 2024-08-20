@@ -594,6 +594,11 @@ const UserProfilePage = () => {
                 </div>
               </div>
             </TabPanel>
+            <TabPanel header="My Skills">
+              <div className="-mt-10 -ml-5">
+                <ProjectCarousel title="On Going Projects" userDetails={userDetails} />
+              </div>
+            </TabPanel>
             <TabPanel header="Projects">
               <div className="-mt-10 -ml-5">
                 <ProjectCarousel title="On Going Projects" userDetails={userDetails} />

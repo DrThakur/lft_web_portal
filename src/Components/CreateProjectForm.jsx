@@ -513,7 +513,7 @@ const CreateProjectForm = () => {
                   pattern="^\d{5}(-\d{4})?$"
                   value={softwareBQ}
                   onChange={handleSoftwareBQ}
-                  required
+                  
                 />
               </div>
             </div>
@@ -535,7 +535,7 @@ const CreateProjectForm = () => {
                   pattern="^\d{5}(-\d{4})?$"
                   value={hardwareBQ}
                   onChange={handleHardwareBQ}
-                  required
+                  
                 />
               </div>
             </div>
@@ -557,7 +557,7 @@ const CreateProjectForm = () => {
                   pattern="^\d{5}(-\d{4})?$"
                   value={fpgaBQ}
                   onChange={handleFpgaBQ}
-                  required
+                  
                 />
               </div>
             </div>
@@ -578,7 +578,7 @@ const CreateProjectForm = () => {
                   pattern="^\d{5}(-\d{4})?$"
                   value={qaBQ}
                   onChange={handleQaBQ}
-                  required
+                  
                 />
               </div>
             </div>
@@ -760,13 +760,13 @@ const CreateProjectForm = () => {
                               >
                                 <div className="flex justify-center items-center h-10 ">
                                   <img
-                                    src={member.data.photo}
-                                    alt={member.data.name}
+                                    src={`https://puneautoexpo.in/wp-content/uploads/2017/10/speaker3-min.jpg`} //memeber.data.photo
+                                    alt={member.data.fullName}
                                     className="w-8 h-8 rounded-full"
                                   />
                                   <div>
                                     <div>
-                                      {member.data.name} (
+                                      {member.data.fullName} (
                                       {member.data.employeeId})
                                     </div>
                                     <div className="text-gray-500 text-sm">
