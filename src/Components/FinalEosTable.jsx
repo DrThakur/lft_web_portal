@@ -54,55 +54,13 @@ const FinalEosTable = () => {
   const [employeesByDepartment, setEmployeesByDepartment] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
 
-  const baseURL = process.env.REACT_APP_BASE_URL;
-  const port = process.env.REACT_APP_BACKEND_PORT;
+
+
 
   // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
   // const apiUrl1 = `http://${baseURL}:${port}/users`
   const apiUrl = process.env.REACT_APP_API_URL;
-
-  useEffect(() => {
-    const fetchUserInformation = async (page, limit) => {
-      try {
-        // const res = await axios.get(`http://${baseURL}:${port}/users?page=${page}&limit=${limit}`);
-        // const res = await axios.get(`http://${baseURL}:${port}/users/all`);
-        // const res = await axios.get(`https://lft-web-portal-backend-1.onrender.com/users?page=${page}&limit=${limit}`);
-        const res = await axios.get(`${apiUrl}/users/all`);
-        // const employeeData = res.data.users;
-        const { users, totalPages } = res.data;
-        // console.log("response data", res.data);
-        console.log("response data---final", users);
-        // console.log("response data-2", res.data.users);
-        // console.log("response data-3", res.data.users);
-        // console.log("Type of data:", typeof res.data);
-        // console.log("Type of data-222:", typeof res.data.users);
-
-        // const filteredEmployees = filterEmployeesByDepartment(employeeData, department);
-
-        //  // Organize employees by department
-        // const departmentMap = departments.reduce((acc, department) => {
-        //   acc[department] = filterEmployeesByDepartment(
-        //     users,
-        //     department
-        //   );
-        //   return acc;
-        // }, {});
-        setEmployees(users);
-        // setEmployeesByDepartment(departmentMap);
-        setTotalPages(totalPages);
-      } catch (error) {
-        console.error("Error", error);
-      } finally {
-        setLoading(false); // Set loading to false when data is fetched
-      }
-    };
-
-    fetchUserInformation(currentPage, pageSize);
-  }, [currentPage, pageSize]);
 
   useEffect(() => {
     ProductService.getProducts().then((data) => setProducts(data));
@@ -115,24 +73,6 @@ const FinalEosTable = () => {
     });
   };
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    setLoading(true);
-  };
-
-  const handlePageSizeChange = (newSize) => {
-    setPageSize(newSize);
-    setCurrentPage(1);
-    setLoading(true);
-  };
-
-  //   const handlePageChange = (event) => {
-  //     onPageChange(event.page + 1);
-  //   };
-
-  //   const handlePageSizeChange = (event) => {
-  //     onPageSizeChange(event.rows);
-  //   };
 
   const openNew = () => {
     setProduct(emptyProduct);
@@ -552,81 +492,86 @@ const FinalEosTable = () => {
     );
   };
 
-  console.log("my api url currentkly", apiUrl);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchEosData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${apiUrl}/eos`); // Adjust the API endpoint as per your backend
-        const { eosList } = response.data;
-        console.log("my eos lengeth", eosList.length);
-        // Ensure that eosList is an array
-        if (!Array.isArray(eosList)) {
-          throw new Error("Unexpected data format: eosList should be an array");
-        }
+        const res = await axios.get(`${apiUrl}/eos`);
+        const eosList = res.data.eosList;
 
-        // console.log("my eos Data", data)
-        setEosData(eosList);
-
-        // Extract unique projects and activities
-        const projectSet = new Set();
-        const activitySet = new Set();
+        const uniqueProjects = new Set();
+        const uniqueActivities = new Set();
 
         eosList.forEach((eos) => {
-          if (eos.projects) {
-            eos.projects.forEach((projectObj) => {
-              if (projectObj.project && projectObj.project.projectName) {
-                projectSet.add(projectObj.project.projectName);
-              }
-            });
-          }
-
-          if (eos.activities) {
-            eos.activities.forEach((activityObj) => {
-              if (activityObj.activity && activityObj.activity.name) {
-                activitySet.add(activityObj.activity.name);
-              }
-            });
-          }
+          eos.projects.forEach((project) =>
+            uniqueProjects.add(project.project.projectName)
+          );
+          eos.activities.forEach((activity) =>
+            uniqueActivities.add(activity.activity.name)
+          );
         });
 
-        console.log("my projects", projectSet);
-        console.log("my activities", activitySet);
-        // Combine projects and activities into columns
-        const columns = [
-          { field: "employee.employeeId", header: "Employee ID" },
-          { field: "employee.fullName", header: "Name" },
-          { field: "employee.status", header: "Status" },
-          { field: "employee.department", header: "Department" },
-          { field: "employee.reportingManager", header: "Reporting Manager" },
-          ...Array.from(projectSet).map((project) => ({
-            field: `Projects.${project}`,
-            header: project,
-          })),
-          ...Array.from(activitySet).map((activity) => ({
-            field: `Activities.${activity}`,
-            header: activity,
-          })),
-        ];
+        const projectColumns = Array.from(uniqueProjects).map((project) => ({
+          field: `project.${project}`,
+          header: project,
+        }));
 
-        setColumns(columns);
+        const activityColumns = Array.from(uniqueActivities).map(
+          (activity) => ({
+            field: `activity.${activity}`,
+            header: activity,
+          })
+        );
+
+        console.log("my unique...projects", uniqueProjects);
+        console.log("my unique...activities", uniqueActivities);
+
+        setColumns([...projectColumns, ...activityColumns]);
+        setEosData(eosList);
       } catch (error) {
-        setError("Failed to fetch EOS data. Please try again later.");
         console.error("Error fetching EOS data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchEosData();
   }, []);
 
-  const fallbackValue = (rowData, field) => {
-    const [category, name] = field.split(".");
-    return rowData[category] && rowData[category][name]
-      ? rowData[category][name]
-      : 0;
+ 
+
+  const getOccupancyValue = (rowData, columnField) => {
+    console.log("my rowData", rowData);
+    // console.log("my column field", columnField);
+    if (rowData.employee.employeeId === "23026") {
+      console.log("my employee id", rowData.employee.employeeId);
+      console.log("my employee name", rowData.employee.fullName);
+    }
+
+    const [type, name] = columnField.split(".");
+    console.log("my project name", name);
+    if (name === "LFT_Internal_Web_Portal_161") {
+      console.log("my ankit project", name);
+    }
+
+    if (type === "project") {
+      const project = rowData.projects.find(
+        (p) => p.project.projectName.trim() === name.trim()
+      );
+      if (rowData.employee.employeeId === "23026") {
+        console.log("my ankit project", project);
+        console.log("my ankit project", rowData.projects);
+      }
+      return project ? project.occupancy : 0;
+    } else if (type === "activity") {
+      const activity = rowData.activities.find(
+        (a) => a.activity.name.trim() === name.trim()
+      );
+      return activity ? activity.occupancy : 0;
+    }
+
+    return 0;
   };
 
   if (loading) {
@@ -653,7 +598,7 @@ const FinalEosTable = () => {
           selectionMode={"checkbox"}
           selection={selectedProducts}
           onSelectionChange={(e) => setSelectedProducts(e.value)}
-          dataKey="employeeId"
+          dataKey="employee.employeeId"
           paginator
           rows={10}
           rowsPerPageOptions={[5, 10, 25]}
@@ -675,12 +620,57 @@ const FinalEosTable = () => {
             }}
             style={{ textAlign: "center" }}
           ></Column>
+          <Column
+            field="employee.employeeId"
+            header="Employee Id"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+            style={{ textAlign: "center" }}
+          />
+          <Column
+            field="employee.fullName"
+            header="Employee Name"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+            style={{ textAlign: "center" }}
+          />
+          <Column
+            field="employee.status"
+            header="Status"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+            style={{ textAlign: "center" }}
+          />
+          <Column
+            field="employee.department"
+            header="Department"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+            style={{ textAlign: "center" }}
+          />
+          <Column
+            field="employee.reportingManager"
+            header="Reporting Manager"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+            style={{ textAlign: "center" }}
+          />
           {columns.map((col) => (
             <Column
               key={col.field}
               field={col.field}
               header={col.header}
-              body={(rowData) => fallbackValue(rowData, col.field)}
+              body={(rowData) => getOccupancyValue(rowData, col.field)}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
