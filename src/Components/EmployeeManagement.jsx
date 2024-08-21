@@ -328,7 +328,7 @@ const EmployeeManagement = () => {
   // };
 
   const ratingBodyTemplate = (rowData) => {
-    return <Rating value={rowData.rating} readOnly cancel={false} />;
+    return <Rating value={rowData.performance} readOnly cancel={false} />;
   };
 
   const statusBodyTemplate = (rowData) => {
@@ -555,8 +555,8 @@ const EmployeeManagement = () => {
       <div className="card">
         <Toolbar
           className="mb-4"
-          left={leftToolbarTemplate}
-          right={rightToolbarTemplate}
+          start={leftToolbarTemplate}
+          end={rightToolbarTemplate}
         ></Toolbar>
 
         <DataTable
@@ -612,42 +612,6 @@ const EmployeeManagement = () => {
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
-          {/*<Column
-            field="inventoryStatus"
-            header="Projects"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="inventoryStatus"
-            header="Project Role"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="inventoryStatus"
-            header="Duration"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="inventoryStatus"
-            header="Allocated Bandwidth"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="inventoryStatus"
-            header="Available Bandwidth"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          */}
           <Column
             field="inventoryStatus"
             header="Tech Skills"

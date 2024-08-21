@@ -13,6 +13,9 @@ import { VscFilter } from "react-icons/vsc";
 import { VscFilterFilled } from "react-icons/vsc";
 import { FcApproval } from "react-icons/fc";
 import { MdCancel } from "react-icons/md";
+import axios from "axios";
+import { InputNumber } from "primereact/inputnumber";
+import { Tag } from "primereact/tag";
 
 
 // Assuming eosData is an array of objects with the required fields
@@ -25,31 +28,33 @@ const EosApprovalHod = () => {
   const [filteredEosData, setFilteredEosData] = useState(null);
   const [filterType, setFilterType] = useState("all");
   const [activeButton, setActiveButton] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    setEosData(EosData);
-    setFilteredEosData(EosData);
-  }, []);
+  // useEffect(() => {
+  //   setEosData(EosData);
+  //   setFilteredEosData(EosData);
+  // }, []);
 
-  useEffect(() => {
-    if (eosData) {
-      let filteredData = eosData;
-      if (filterType === "filled") {
-        filteredData = eosData.filter((eos) => {
-          return Object.values(eos).every(
-            (value) => value !== null && value !== ""
-          );
-        });
-      } else if (filterType === "empty") {
-        filteredData = eosData.filter((eos) => {
-          return Object.values(eos).some(
-            (value) => value === null || value === ""
-          );
-        });
-      }
-      setFilteredEosData(filteredData);
-    }
-  }, [filterType, eosData]);
+  // useEffect(() => {
+  //   if (eosData) {
+  //     let filteredData = eosData;
+  //     if (filterType === "filled") {
+  //       filteredData = eosData.filter((eos) => {
+  //         return Object.values(eos).every(
+  //           (value) => value !== null && value !== ""
+  //         );
+  //       });
+  //     } else if (filterType === "empty") {
+  //       filteredData = eosData.filter((eos) => {
+  //         return Object.values(eos).some(
+  //           (value) => value === null || value === ""
+  //         );
+  //       });
+  //     }
+  //     setFilteredEosData(filteredData);
+  //   }
+  // }, [filterType, eosData]);
 
   const handleAction = (id, action, remarks) => {
     const updatedData = eosData.map((item) =>
@@ -178,45 +183,79 @@ const EosApprovalHod = () => {
   //   );
 
   const emloyeeBodyTemplate = (rowData) => {
+
+    console.log("row data", rowData)
+
     return (
       <div className="flex flex-row justify-start items-center gap-2">
         <img
-          alt={rowData.employeeName}
+          alt={rowData.employee.fullName}
           src={`https://wl-incrivel.cf.tsp.li/resize/728x/webp/0ec/140/d189845022bb6eddb88bb5279a.jpg.webp`}
           width={30}
           height={30}
           className="rounded-full"
         />
-        <span className="font-bold">{rowData.employeeName}</span>
+        <span className="font-bold">{rowData.employee.fullName}</span>
       </div>
     );
   };
   const reportingManagerBodyTemplate = (rowData) => {
     return (
-      <div className="flex flex-row justify-center items-center gap-2">
+      <div className="flex flex-row justify-start items-center gap-2">
         <img
-          alt={rowData.reportingManager}
+          alt={rowData.employee.reportingManager}
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
           width={30}
           height={30}
           className="rounded-full"
         />
-        <span className="font-bold">{rowData.reportingManager}</span>
+        <span className="font-bold">{rowData.employee.reportingManager}</span>
       </div>
     );
   };
 
   const projectManagerBodyTemplate = (rowData) => {
     return (
+      <div className="flex flex-col justify-start items-start gap-2">
+      {rowData.projects.map((project, index) => (
       <div className="flex flex-row justify-center items-center gap-2">
         <img
-          alt={rowData.projectManager}
+          alt={project.project.projectManager.fullName}
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
           width={30}
           height={30}
           className="rounded-full"
         />
-        <span className="font-bold">{rowData.projectManager}</span>
+        <span className="font-bold">{project.project.projectManager.fullName}</span>
+      </div>
+    ))}
+      </div>
+    );
+  };
+
+  const projectsBodyTemplate = (rowData) => {
+
+    console.log("my row dtaa projects", rowData.projects)
+    return (
+      <div className="flex flex-col justify-start items-start gap-2">
+        {rowData.projects.map((project, index) => (
+          <div key={index} className="mb-2">
+            <p>{project.project.projectName}</p>
+          </div>
+        ))}
+      </div>
+    );
+  };
+  const worksBodyTemplate = (rowData) => {
+
+    console.log("my row dtaa projects", rowData.projects)
+    return (
+      <div>
+        {rowData.projects.map((project, index) => (
+          <div key={index} className="mb-2">
+            <p>{project.occupancy}</p>
+          </div>
+        ))}
       </div>
     );
   };
@@ -228,6 +267,94 @@ const EosApprovalHod = () => {
       </div>
     );
   };
+
+  const getSeverity = (product) => {
+    switch (product.inventoryStatus) {
+      case "INSTOCK":
+        return "success";
+
+      case "LOWSTOCK":
+        return "warning";
+
+      case "OUTOFSTOCK":
+        return "danger";
+
+      default:
+        return null;
+    }
+  };
+
+  const statusBodyTemplate = (rowData) => {
+    return (
+      <Tag
+        value={rowData.inventoryStatus}
+        severity={getSeverity(rowData)}
+      ></Tag>
+    );
+  };
+
+  const isPositiveInteger = (val) => {
+    let str = String(val);
+
+    str = str.trim();
+
+    if (!str) {
+      return false;
+    }
+
+    str = str.replace(/^0+/, "") || "0";
+    let n = Math.floor(Number(str));
+
+    return n !== Infinity && String(n) === str && n >= 0;
+  };
+
+
+  const onCellEditComplete = (e) => {
+    let { rowData, newValue, field, originalEvent: event } = e;
+
+    switch (field) {
+      case "quantity":
+      case "price":
+        if (isPositiveInteger(newValue)) rowData[field] = newValue;
+        else event.preventDefault();
+        break;
+
+      default:
+        if (newValue.trim().length > 0) rowData[field] = newValue;
+        else event.preventDefault();
+        break;
+    }
+  };
+
+
+  const cellEditor = (options) => {
+    if (options.field === "price") return priceEditor(options);
+    else return textEditor(options);
+  };
+
+  const textEditor = (options) => {
+    return (
+      <InputText
+        type="text"
+        value={options.value}
+        onChange={(e) => options.editorCallback(e.target.value)}
+      />
+    );
+  };
+
+  const priceEditor = (options) => {
+    return (
+      <InputNumber
+        value={options.value}
+        onValueChange={(e) => options.editorCallback(e.value)}
+        mode="currency"
+        currency="USD"
+        locale="en-US"
+      />
+    );
+  };
+
+
 
   const [approvedIds, setApprovedIds] = useState([]);
   const [rejectedIds, setRejectedIds] = useState([]);
@@ -296,6 +423,25 @@ const EosApprovalHod = () => {
       </div>
     );
   };
+ const apiUrl = process.env.REACT_APP_API_URL;
+
+    useEffect(() => {
+    const fetchEosData = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`${apiUrl}/eos`);
+        const eosList = res.data.eosList;
+
+               setEosData(eosList);
+      } catch (error) {
+        console.error("Error fetching EOS data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEosData();
+  }, [apiUrl]);
 
   return (
     <div className="p-grid p-fluid bg-white p-6 rpunded-lg shadow-md h-full w-full rounded-lg">
@@ -339,7 +485,7 @@ const EosApprovalHod = () => {
             end={rightToolbarTemplate}
           ></Toolbar>
           <DataTable
-            value={filteredEosData}
+            value={eosData}
             rowGroupMode="rowspan"
             groupRowsBy="employeeId"
             sortMode="single"
@@ -365,17 +511,17 @@ const EosApprovalHod = () => {
               body={(data, options) => options.rowIndex + 1}
             ></Column>
             <Column
-              field="employeeId"
+              field="employee.employeeId"
               header="Employee Id"
               alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
-              style={{ fontWeight: "bold", textAlign: "center" }}
+              style={{ width: "8rem",fontWeight: "bold", textAlign: "center" }}
             ></Column>
             <Column
-              field="employeeId"
+              field="employee.fullName"
               header="Employee Name"
               alignHeader={"center"}
               headerStyle={{
@@ -383,11 +529,11 @@ const EosApprovalHod = () => {
                 textAlign: "center",
               }}
               body={emloyeeBodyTemplate}
-              style={{ width: "10rem", textAlign: "center" }}
+              style={{ width: "20rem", textAlign: "center" }}
             ></Column>
 
             <Column
-              field="employeeId"
+              field="employee.reportingManager"
               header="Reporting Manager"
               alignHeader={"center"}
               body={reportingManagerBodyTemplate}
@@ -398,7 +544,7 @@ const EosApprovalHod = () => {
               }}
             ></Column>
             <Column
-              field="projectManager"
+              field="project.projectManager"
               header="Project Manager"
               alignHeader={"center"}
               body={projectManagerBodyTemplate}
@@ -410,18 +556,21 @@ const EosApprovalHod = () => {
             ></Column>
 
             <Column
-              field="projectName"
+              field="projects.project.projectName"
               header="Project Name"
               alignHeader={"center"}
+              body={projectsBodyTemplate}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
+              
               style={{ textAlign: "center" }}
             ></Column>
             <Column
               field="workPercentage"
               header="Work %"
+              body={worksBodyTemplate}
               alignHeader={"center"}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
@@ -481,11 +630,13 @@ const EosApprovalHod = () => {
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
               }}
-              body={inputTextareaBodyTemplate}
-              style={{ textAlign: "center" }}
+              body={statusBodyTemplate}
+              style={{ minWidth: "12rem" }}
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
             ></Column>
             <Column
-              field="employeeId"
+              field="action"
               header="Actions"
               alignHeader={"center"}
               headerStyle={{

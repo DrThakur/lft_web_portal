@@ -83,61 +83,118 @@ const UserProfilePage = () => {
 
   const events = [
     {
-      institutionName: "Guru Gobind Singh Indraprastha University",
-      courseName: "B.Tech(Mechatronics)",
-      duration: "2013-2017",
-      date: "15/10/2020 10:30",
+      institutionName: "N/A",
+      courseName: "N/A",
+      duration: "N/A",
+      date: "N/A",
       icon: "pi pi-shopping-cart",
       color: "#9C27B0",
       image: "game-controller.jpg",
     },
     {
-      institutionName: "Dr. Rajendra Prasad Sarvodya Vidyalya",
-      courseName: "12th CBSE(Science Stream)",
-      duration: "2011-2012",
-      date: "15/10/2020 14:00",
+      institutionName: "N/A",
+      courseName: "N/A",
+      duration: "N/A",
+      date: "N/A",
       icon: "pi pi-cog",
       color: "#673AB7",
     },
     {
-      institutionName: "Rajkiya Pratibha Vikas Vidyalya",
-      courseName: "10th CBSE(General)",
-      duration: "2009-2010",
-      date: "15/10/2020 16:15",
+      institutionName: "N/A",
+      courseName: "N/A",
+      duration: "N/A",
+      date: "N/A",
       icon: "pi pi-shopping-cart",
       color: "#FF9800",
     },
   ];
+  // const events = [
+  //   {
+  //     institutionName: "ABC University",
+  //     courseName: "B.Tech(CSE)",
+  //     duration: "2013-2017",
+  //     date: "15/10/2020 10:30",
+  //     icon: "pi pi-shopping-cart",
+  //     color: "#9C27B0",
+  //     image: "game-controller.jpg",
+  //   },
+  //   {
+  //     institutionName: "XYZ School",
+  //     courseName: "12th CBSE(Science Stream)",
+  //     duration: "2011-2012",
+  //     date: "15/10/2020 14:00",
+  //     icon: "pi pi-cog",
+  //     color: "#673AB7",
+  //   },
+  //   {
+  //     institutionName: "ABC School",
+  //     courseName: "10th CBSE(General)",
+  //     duration: "2009-2010",
+  //     date: "15/10/2020 16:15",
+  //     icon: "pi pi-shopping-cart",
+  //     color: "#FF9800",
+  //   },
+  // ];
   const experienceEvents = [
     {
-      designation: "R&D Engineer",
-      companyName: "Logic Fruit Technologies Pvt. Ltd",
-      joiningDate: "Sep 2023",
-      leavingDate: "Present",
-      date: "15/10/2020 10:30",
+      designation: "N/A",
+      companyName: "N/A",
+      joiningDate: "N/A",
+      leavingDate: "N/A",
+      date: "N/A",
       icon: "pi pi-shopping-cart",
       color: "#9C27B0",
       image: "game-controller.jpg",
     },
     {
-      designation: "Full Stack Developer",
-      companyName: "Verifwala.com",
-      joiningDate: "July 2022",
-      leavingDate: "Aug 2023",
-      date: "15/10/2020 14:00",
+      designation: "N/A",
+      companyName: "N/A",
+      joiningDate: "N/A",
+      leavingDate: "N/A",
+      date: "N/A",
       icon: "pi pi-cog",
       color: "#673AB7",
     },
     {
-      designation: "Frontend Developer",
-      companyName: "Extramarks Education Pvt Ltd",
-      joiningDate: "Dec 2020",
-      leavingDate: "July 2023",
-      date: "15/10/2020 16:15",
+      designation: "N/A",
+      companyName: "N/A",
+      joiningDate: "N/A",
+      leavingDate: "N/A",
+      date: "N/A",
       icon: "pi pi-shopping-cart",
       color: "#FF9800",
     },
   ];
+  // const experienceEvents = [
+  //   {
+  //     designation: "Senior Software Engineer",
+  //     companyName: "XYZ Pvt. Ltd",
+  //     joiningDate: "Sep 2023",
+  //     leavingDate: "Present",
+  //     date: "15/10/2020 10:30",
+  //     icon: "pi pi-shopping-cart",
+  //     color: "#9C27B0",
+  //     image: "game-controller.jpg",
+  //   },
+  //   {
+  //     designation: "Software Engineer",
+  //     companyName: "ABC Pvt. Ltd",
+  //     joiningDate: "July 2022",
+  //     leavingDate: "Aug 2023",
+  //     date: "15/10/2020 14:00",
+  //     icon: "pi pi-cog",
+  //     color: "#673AB7",
+  //   },
+  //   {
+  //     designation: "Frontend Developer",
+  //     companyName: "DEF Pvt Ltd",
+  //     joiningDate: "Dec 2020",
+  //     leavingDate: "July 2023",
+  //     date: "15/10/2020 16:15",
+  //     icon: "pi pi-shopping-cart",
+  //     color: "#FF9800",
+  //   },
+  // ];
 
   const customizedContent = (item) => {
     return (
@@ -354,31 +411,31 @@ const UserProfilePage = () => {
                         </td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">283024270867</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">Voter Id</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">RBII33267</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">PAN No.</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">AXJPT6178J</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">Nationality</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">Indian</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">Religion</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">Hindu</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">
@@ -386,7 +443,7 @@ const UserProfilePage = () => {
                         </td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">Unmarried</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">
@@ -394,7 +451,7 @@ const UserProfilePage = () => {
                         </td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">-N/A-</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">
@@ -402,7 +459,7 @@ const UserProfilePage = () => {
                         </td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">-N/A-</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                     </table>
                   </div>
@@ -424,7 +481,7 @@ const UserProfilePage = () => {
                           <td className="font-semibold px-2 py-2">Name</td>
                           <td className="px-2 py-2">:</td>
                           <td className="px-2 py-2">&nbsp;</td>
-                          <td className="px-2 py-2">Abhishek Kumar Thakur</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
                         </tr>
                         <tr>
                           <td className="font-semibold px-2 py-2">
@@ -432,13 +489,13 @@ const UserProfilePage = () => {
                           </td>
                           <td className="px-2 py-2">:</td>
                           <td className="px-2 py-2">&nbsp;</td>
-                          <td className="px-2 py-2">Brother</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
                         </tr>
                         <tr>
                           <td className="font-semibold px-2 py-2">Phone</td>
                           <td className="px-2 py-2">:</td>
                           <td className="px-2 py-2">&nbsp;</td>
-                          <td className="px-2 py-2">9015447015</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
                         </tr>
                       </table>
                     </div>
@@ -451,7 +508,7 @@ const UserProfilePage = () => {
                           <td className="font-semibold px-2 py-2">Name</td>
                           <td className="px-2 py-2">:</td>
                           <td className="px-2 py-2">&nbsp;</td>
-                          <td className="px-2 py-2">Nikita</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
                         </tr>
                         <tr>
                           <td className="font-semibold px-2 py-2">
@@ -459,13 +516,13 @@ const UserProfilePage = () => {
                           </td>
                           <td className="px-2 py-2">:</td>
                           <td className="px-2 py-2">&nbsp;</td>
-                          <td className="px-2 py-2">Sister</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
                         </tr>
                         <tr>
                           <td className="font-semibold px-2 py-2">Phone</td>
                           <td className="px-2 py-2">:</td>
                           <td className="px-2 py-2">&nbsp;</td>
-                          <td className="px-2 py-2">9015447015</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
                         </tr>
                       </table>
                     </div>
@@ -488,25 +545,25 @@ const UserProfilePage = () => {
                         <td className="font-semibold px-2 py-2">Bank Name</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">Axis Bank</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">Branch</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">Gurgaon Branch</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">Account No.</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">2137843334845982345</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">IFSC Code</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">AXIBS260000879</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">
@@ -514,7 +571,7 @@ const UserProfilePage = () => {
                         </td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">Ankit Kumar Thakur</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                     </table>
                   </div>
@@ -534,13 +591,13 @@ const UserProfilePage = () => {
                         <td className="font-semibold px-2 py-2">UAN No.</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">1634568921662</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">Member Id:</td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">MRMAS0257889H</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                       <tr>
                         <td className="font-semibold px-2 py-2">
@@ -548,7 +605,7 @@ const UserProfilePage = () => {
                         </td>
                         <td className="px-2 py-2">:</td>
                         <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">Ankit Kumar Thakur</td>
+                        <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                     </table>
                   </div>

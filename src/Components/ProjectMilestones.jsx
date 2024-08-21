@@ -756,6 +756,43 @@ const ProjectMilestones = () => {
     </React.Fragment>
   );
 
+  const renderDataTables = () => {
+    return milestones.map((milestone, index) => (
+      <div key={index} className="mb-4">
+        <h3 className="rounded shadow border p-2">Milestone {index + 1}: {milestone.name}</h3>
+        <DataTable
+          value={milestone.tasks}
+          selection={selectedTasks}
+          onSelectionChange={(e) => setSelectedTasks(prev => ({ ...prev, [index]: e.value }))}
+          dataKey="task"
+          paginator
+          rows={10}
+          rowsPerPageOptions={[5, 10, 25]}
+          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tasks"
+          globalFilter={globalFilter}
+          showGridlines
+        >
+          <Column selectionMode="multiple" exportable={false}></Column>
+          <Column field="team.name" header="Team" sortable style={{ minWidth: "12rem" }}></Column>
+          <Column field="task" header="Task" sortable style={{ minWidth: "12rem" }}></Column>
+          <Column field="task_details" header="Task Details" sortable style={{ minWidth: "16rem" }}></Column>
+          <Column field="status" header="Status" body={taskStatusBodyTemplate}></Column>
+          <Column field="owner" header="Owner" body={ownerBodyTemplate} sortable style={{ minWidth: "8rem" }}></Column>
+          <Column field="performance" header="Performance" sortable style={{ minWidth: "10rem" }}></Column>
+          <Column field="state" header="State" body={taskHealthStatusBodyTemplate} sortable style={{ minWidth: "12rem" }}></Column>
+          <Column field="effort_days" header="Effort(Days)" sortable style={{ minWidth: "12rem" }}></Column>
+          <Column field="dependency" header="Dependency" sortable style={{ minWidth: "12rem" }}></Column>
+          <Column field="planned_start_date" header="Planned Start Date" body={plannedStartDateTemplate} sortable style={{ minWidth: "13rem" }}></Column>
+          <Column field="planned_end_date" header="Planned End Date" body={plannedEndDateTemplate} sortable style={{ minWidth: "12rem" }}></Column>
+          <Column field="actual_start_date" header="Actual Start Date" body={actualStartDateTemplate} sortable style={{ minWidth: "12rem" }}></Column>
+          <Column field="actual_end_date" header="Actual End Date" body={actualEndDateTemplate} sortable style={{ minWidth: "12rem" }}></Column>
+          <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: "12rem" }}></Column>
+        </DataTable>
+      </div>
+    ));
+  };
+
   return (
     <div className="bg-white p-4 rounded-lg">
       <h1 className="font-bold text-2xl">Project Milestones</h1>
@@ -776,7 +813,7 @@ const ProjectMilestones = () => {
               end={rightToolbarTemplate}
             ></Toolbar>
 
-            <DataTable
+            {/*<DataTable
               ref={dt}
               value={tasks}
               selection={selectedTasks}
@@ -881,6 +918,8 @@ const ProjectMilestones = () => {
                 style={{ minWidth: "12rem" }}
               ></Column>
             </DataTable>
+            */}
+            {renderDataTables()}
           </div>
 
           <Dialog
