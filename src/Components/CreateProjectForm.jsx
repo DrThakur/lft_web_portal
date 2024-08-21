@@ -513,7 +513,7 @@ const CreateProjectForm = () => {
                   pattern="^\d{5}(-\d{4})?$"
                   value={softwareBQ}
                   onChange={handleSoftwareBQ}
-                  
+                  required
                 />
               </div>
             </div>
@@ -535,7 +535,7 @@ const CreateProjectForm = () => {
                   pattern="^\d{5}(-\d{4})?$"
                   value={hardwareBQ}
                   onChange={handleHardwareBQ}
-                  
+                  required
                 />
               </div>
             </div>
@@ -557,7 +557,7 @@ const CreateProjectForm = () => {
                   pattern="^\d{5}(-\d{4})?$"
                   value={fpgaBQ}
                   onChange={handleFpgaBQ}
-                  
+                  required
                 />
               </div>
             </div>
@@ -578,7 +578,7 @@ const CreateProjectForm = () => {
                   pattern="^\d{5}(-\d{4})?$"
                   value={qaBQ}
                   onChange={handleQaBQ}
-                  
+                  required
                 />
               </div>
             </div>

@@ -50,12 +50,12 @@ const ProjectMilestones = () => {
   const navigate = useNavigate("");
 
   const teams = [
-    { name: 'Software', code: 'software' },
-    { name: 'Hardware', code: 'hardware' },
-    { name: 'Verification', code: 'verification' },
-    { name: 'FPGA', code: 'fpga' },
-    { name: 'QA', code: 'qa' }
-];
+    { name: "Software", code: "software" },
+    { name: "Hardware", code: "hardware" },
+    { name: "Verification", code: "verification" },
+    { name: "FPGA", code: "fpga" },
+    { name: "QA", code: "qa" },
+  ];
 
   const milestones = [
     {
@@ -72,6 +72,9 @@ const ProjectMilestones = () => {
           state: "Done",
           effort_days: 5,
           dependency: "None",
+          team: {
+            "name":"Software",
+          },
           planned_start_date: "2024-05-01",
           planned_end_date: "2024-05-05",
           actual_start_date: "2024-05-01",
@@ -88,6 +91,9 @@ const ProjectMilestones = () => {
           state: "Ongoing",
           effort_days: 7,
           dependency: "Task-1.1",
+          team: {
+            "name":"Software",
+          },
           planned_start_date: "2024-05-06",
           planned_end_date: "2024-05-13",
           actual_start_date: "2024-05-07",
@@ -104,6 +110,9 @@ const ProjectMilestones = () => {
           state: "Not Started",
           effort_days: 3,
           dependency: "None",
+          team: {
+            "name":"Software",
+          },
           planned_start_date: "2024-05-14",
           planned_end_date: "2024-05-16",
           actual_start_date: "2024-05-07",
@@ -124,6 +133,9 @@ const ProjectMilestones = () => {
           state: "Done",
           effort_days: 4,
           dependency: "None",
+          team: {
+            "name":"Hardware",
+          },
           planned_start_date: "2024-05-01",
           planned_end_date: "2024-05-04",
           actual_start_date: "2024-05-01",
@@ -139,6 +151,9 @@ const ProjectMilestones = () => {
           state: "Ongoing",
           effort_days: 6,
           dependency: "Task-2.1",
+          team: {
+            "name":"Hardware",
+          },
           planned_start_date: "2024-05-05",
           planned_end_date: "2024-05-10",
           actual_start_date: "2024-05-06",
@@ -153,6 +168,9 @@ const ProjectMilestones = () => {
           state: "Not Started",
           effort_days: 8,
           dependency: "None",
+          team: {
+            "name":"Hardware",
+          },
           planned_start_date: "2024-05-11",
           planned_end_date: "2024-05-18",
         },
@@ -248,122 +266,6 @@ const ProjectMilestones = () => {
     </div>
   );
 
-  // const projects = [
-  //   {
-  //     id: 1,
-  //     name: "LFT Intranet Web Portal",
-  //     deadline: "01 Jan 2024",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-  //     manager: "Dhruv Kumar Saxena",
-  //     teams: ["Software", "Hardware", "FPGA"],
-  //     progress: 50,
-  //     milestones: "10",
-  //     completed: "5",
-  //     active: "1",
-  //     pending: "4",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Corvett",
-  //     deadline: "10 Feb 2024",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-  //     manager: "Jonn Doe",
-  //     teams: ["Software", "Hardware", "FPGA"],
-  //     progress: 60,
-  //     milestones: "6",
-  //     completed: "4",
-  //     active: "1",
-  //     pending: "1",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Lattice",
-  //     deadline: "02 Apr 2024",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-  //     manager: "Vishal Singh",
-  //     teams: ["Software", "Hardware", "FPGA"],
-  //     progress: 70,
-  //     milestones: "8",
-  //     completed: "5",
-  //     active: "1",
-  //     pending: "2",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Keysight",
-  //     deadline: "15 May 2024",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-  //     manager: "Ankit Kumar Thakur",
-  //     teams: ["Software", "Hardware"],
-  //     progress: 80,
-  //     milestones: "3",
-  //     completed: "2",
-  //     active: "1",
-  //     pending: "0",
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Analyser",
-  //     deadline: "30 June 2024",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-  //     manager: "Pardeep Kumar",
-  //     teams: ["Software", "Hardware", "FPGA"],
-  //     progress: 90,
-  //     milestones: "9",
-  //     completed: "4",
-  //     active: "2",
-  //     pending: "3",
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Debugger",
-  //     deadline: "11 July 2024",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-  //     manager: "Fuzail Qamar",
-  //     teams: ["Software", "Hardware"],
-  //     progress: 95,
-  //     milestones: "13",
-  //     completed: "7",
-  //     active: "3",
-  //     pending: "3",
-  //   },
-  //   {
-  //     id: 7,
-  //     name: "Chatbot",
-  //     deadline: "15 Aug 2024",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-  //     manager: "Vineet Goyal",
-  //     teams: ["Software", "Hardware", "FPGA"],
-  //     progress: 10,
-  //     milestones: "11",
-  //     completed: "5",
-  //     active: "2",
-  //     pending: "4",
-  //   },
-  //   {
-  //     id: 8,
-  //     name: "AI Car",
-  //     deadline: "23 Sep 2024",
-  //     description:
-  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-  //     manager: "Sanjeev Kumar",
-  //     teams: ["Software", "Hardware", "FPGA"],
-  //     progress: 20,
-  //     milestones: "15",
-  //     completed: "5",
-  //     active: "5",
-  //     pending: "5",
-  //   },
-  //   // Add more project data as needed
-  // ];
-
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
@@ -414,14 +316,13 @@ const ProjectMilestones = () => {
         <Dropdown
           value={selectedProject}
           onChange={(e) => setSelectedProject(e.value)}
-          options={projects.map(project => ({
+          options={projects.map((project) => ({
             ...project,
-            label: `${project.projectId} - ${project.projectName}`
+            label: `${project.projectId} - ${project.projectName}`,
           }))}
           optionLabel="label"
           placeholder="Select a Project"
           filter
-          
           valueTemplate={selectedProjectTemplate}
           itemTemplate={projectOptionTemplate}
           virtualScrollerOptions={{ itemSize: 38 }}
@@ -683,21 +584,6 @@ const ProjectMilestones = () => {
     );
   };
 
-  const imageBodyTemplate = (rowData) => {
-    return (
-      <img
-        src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`}
-        alt={rowData.image}
-        className="shadow-2 border-round"
-        style={{ width: "64px" }}
-      />
-    );
-  };
-
-  const priceBodyTemplate = (rowData) => {
-    return formatCurrency(rowData.price);
-  };
-
   const ownerBodyTemplate = (rowData) => {
     // const createdBy = rowData.projectManager;
 
@@ -729,19 +615,6 @@ const ProjectMilestones = () => {
   };
   const actualEndDateTemplate = (rowData) => {
     return formatDate(rowData.actual_end_date);
-  };
-
-  const ratingBodyTemplate = (rowData) => {
-    return <Rating value={rowData.rating} readOnly cancel={false} />;
-  };
-
-  const statusBodyTemplate = (rowData) => {
-    return (
-      <Tag
-        value={rowData.inventoryStatus}
-        severity={getSeverity(rowData)}
-      ></Tag>
-    );
   };
 
   const taskStatusBodyTemplate = (rowData) => {
@@ -777,21 +650,6 @@ const ProjectMilestones = () => {
     );
   };
 
-  const getSeverity = (product) => {
-    switch (product.inventoryStatus) {
-      case "INSTOCK":
-        return "success";
-
-      case "LOWSTOCK":
-        return "warning";
-
-      case "OUTOFSTOCK":
-        return "danger";
-
-      default:
-        return null;
-    }
-  };
   const getSeverityTask = (task) => {
     switch (task.status) {
       case "Done":
@@ -908,6 +766,7 @@ const ProjectMilestones = () => {
         <div className="mt-4">
           <Toolbar start={startContentOfToolBar} className="border-none" />
         </div>
+        
         <div>
           <Toast ref={toast} />
           <div className="card">
@@ -933,6 +792,12 @@ const ProjectMilestones = () => {
               showGridlines
             >
               <Column selectionMode="multiple" exportable={false}></Column>
+              <Column
+                field="team.name"
+                header="Team"
+                sortable
+                style={{ minWidth: "12rem" }}
+              ></Column>
               <Column
                 field="task"
                 header="Task"

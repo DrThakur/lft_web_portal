@@ -23,10 +23,6 @@ const NewMilestoneForm = ({
   // State for displaying milestone details
   const [milestoneDetails, setMilestoneDetails] = useState([]);
 
-  console.log("milestone number", milestoneNumber);
-  console.log("milestone Name", milestoneName);
-
-
   const handleCancel = () => {
     if (toggleMilestoneForm) {
       toggleMilestoneForm();
@@ -68,11 +64,18 @@ const NewMilestoneForm = ({
 
     // Clear form inputs
     setMilestoneName(`MS-${milestoneNumber + 1}`);
-    
+
     setPlannedStartDate("");
     setPlannedEndDate("");
     setInvoiceValue("");
     setDescription("");
+  };
+
+  const handleSaveAllMilestones = () => {
+    if (milestoneDetails.length > 0) {
+      onSave(milestoneDetails);
+      toggleMilestoneForm(); // Close form if needed
+    }
   };
 
   return (
@@ -170,6 +173,14 @@ const NewMilestoneForm = ({
         >
           Save Milestone
         </button>
+        {milestoneDetails.length > 0 && (
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/8"
+            onClick={handleSaveAllMilestones}
+          >
+            Save All Milestones
+          </button>
+        )}
       </div>
 
       {errorMessage && (

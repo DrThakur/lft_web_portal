@@ -55,6 +55,13 @@ const NewAddTeamForm = ({ toggleForm, onSave }) => {
     setSelectedMembers(selectedOption);
   };
 
+  const handleSaveAllTeams = () => {
+    if (teamData.length > 0) {
+      onSave(teamData);
+      toggleForm();; // Close form if needed
+    }
+  };
+
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-4 gap-4 z-50">
@@ -141,6 +148,14 @@ const NewAddTeamForm = ({ toggleForm, onSave }) => {
         >
           Save Team
         </button>
+        {teamData.length > 0 && (
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/8"
+            onClick={handleSaveAllTeams}
+          >
+            Save All Milestones
+          </button>
+        )}
       </div>
 
       <div className="flex flex-col justify-start items-start gap-2">
