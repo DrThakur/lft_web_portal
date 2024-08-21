@@ -39,6 +39,7 @@ import ForgotPassword from "./Components/ForgotPassword";
 import EmployeeManagement from "./Components/EmployeeManagement";
 import FinalEosTable from "./Components/FinalEosTable";
 import EosTable from "./Components/EosTable";
+import EosApprovalByMonth from "./Components/EosApprovalByMonth";
 
 
 // const LayoutRoutes = () => (
@@ -467,7 +468,8 @@ const protectedRoutes = [
                 <Route path="/announcements" element={<AnnouncementsPage announcements={announcements} />} />
                 <Route path="/eos-update" element={<EosUpdate />} />
                 <Route path="/month" element={<MonthYearPicker />} />
-                <Route path="/eos-update-month/:year/:month" element={<EosUpdateByMonth />} />
+                <Route path="/eos-update/:year/:month" element={<EosUpdateByMonth />} />
+                <Route path="/eos-approval/:year/:month" element={<EosApprovalByMonth />} />
                 <Route path="/eos-approval" element={<EosApproval />} />
                 <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
                 <Route path="/eos-approval-hod" element={<EosApprovalHod />} />

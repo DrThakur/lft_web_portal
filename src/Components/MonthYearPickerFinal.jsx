@@ -10,14 +10,20 @@ import {
   parse,
 } from "date-fns";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const MonthYearPickerFinal = () => {
     const { year, month } = useParams();
+    const location = useLocation();
   const [showCalendar, setShowCalendar] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const today = new Date();
   const navigate = useNavigate("");
+
+  // Split the pathname by "/" and take the first two parts
+  const pathSegments = location.pathname.split('/').filter(Boolean);
+  const basePath = `/${pathSegments[0]}`;
+
 
   useEffect(() => {
     if (year && month) {
@@ -85,10 +91,10 @@ const MonthYearPickerFinal = () => {
 
   const handleNavigation = (newDate) => {
     if (isSameMonth(newDate, today) && isSameYear(newDate, today)) {
-      navigate("/eos-update");
+      navigate(basePath);
     } else {
       navigate(
-        `/eos-update-month/${format(newDate, "yyyy")}/${format(newDate, "MMM")}`
+        `${basePath}/${format(newDate, "yyyy")}/${format(newDate, "MMM")}`
       );
     }
   };

@@ -1,18 +1,78 @@
 import React, { useEffect, useState } from "react";
 import MonthYearPicker from "./MonthYearPicker";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { useStateContext } from "../Contexts/ContextProvider";
+import axios from "axios";
 
 const EosUpdateByMonth = () => {
-    const { year, month } = useParams();
+
+    const {month, year}= useParams();
   const selectedMonth = `${month} ${year}`;
+  const location = useLocation();
+
+  console.log("my location path",location.pathname); // Current path, e.g., "/user/123"
+  console.log(location.search);   // Query string, e.g., "?sort=name"
+  console.log(location.hash);     // Hash, e.g., "#section1"
+
+   // Split the pathname by "/" and take the first two parts
+   const pathSegments = location.pathname.split('/').filter(Boolean);
+   const basePath = `/${pathSegments[0]}`;
+ 
+   console.log("My basepath",basePath); // "/eos-update-month"
 
   // State to keep track of the number of project rows
   //   const [numProjects, setNumProjects] = useState(14);
   const [userData, setUserData] = useState(null);
   const [projects, setProjects] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [salesLeadError, setSalesLeadError] = useState("");
+  const [userDetails, setUserDetails] = useState({});
 
-  // State to manage the form data
+
+
+ // State to manage the form data
+  const [formData, setFormData] = useState({
+    // ...defaultEmployeeDetails,
+    // projects: [...Array(numProjects)].map(() => ({
+    //   project: "",
+    //   workPercentage: "",
+    //   remarks:"",
+    // })),
+    employeeId: "",
+    employeeName: "",
+    email: "",
+    reportingManager: "",
+    projects: [],
+    activities: [],
+  });
+
+  const { user } = useStateContext();
+
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+  console.log("mydakskj", user);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/users/${user._id}`);
+        console.log("my userdeatils--111", response.data);
+        setUserDetails(response.data);
+
+        console.log("activities Array",Array.isArray(response.data.activities));
+        setActivities(response.data.activities)
+        console.log("Projects Array",Array.isArray(response.data.projects));
+        setProjects(response.data.projects);
+      } catch (error) {
+        console.error("Failed to fetch user details:", error);
+      }
+    };
+
+    if (user && user._id) {
+      fetchUserDetails();
+    }
+  }, [user, apiUrl]);
+
 
   const defaultEmployeeDetails = {
     employeeId: "23026",
@@ -366,7 +426,7 @@ const EosUpdateByMonth = () => {
       <div className="space-y-6">
         {/* Employee Details Section */}
 
-        {defaultEmployeeDetails && (
+        {userDetails && (
           <div>
             <h2 className="text-xl font-semibold mb-4">Employee Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -376,7 +436,7 @@ const EosUpdateByMonth = () => {
                   Employee ID *
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {defaultEmployeeDetails.employeeId}
+                  {userDetails.employeeId}
                 </p>
               </div>
 
@@ -386,7 +446,7 @@ const EosUpdateByMonth = () => {
                   Employee Name *
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {defaultEmployeeDetails.employeeName}
+                {userDetails.fullName}
                 </p>
               </div>
 
@@ -394,7 +454,7 @@ const EosUpdateByMonth = () => {
               <div>
                 <p className="text-sm font-medium text-gray-700">Email *</p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {defaultEmployeeDetails.email}
+                {userDetails.email}
                 </p>
               </div>
 
@@ -404,7 +464,7 @@ const EosUpdateByMonth = () => {
                   Reporting Manager *
                 </p>
                 <p className="mt-2 text-blue-500 font-bold">
-                  {defaultEmployeeDetails.reportingManager}
+                {userDetails.reportingManager}
                 </p>
               </div>
             </div>
@@ -412,9 +472,12 @@ const EosUpdateByMonth = () => {
         )}
 
         {/* Project Information Section */}
+        {/* */}
         <div>
           <h2 className="text-xl font-semibold mb-4">Work Information</h2>
-          <div>
+
+          <h1 className="text-3xl font-semibold mb-4 text-center text-white bg-gray-500 rounded-lg border shadow-lg">No Work Information Available for  Month: {selectedMonth}</h1>
+           {/*<div>
             {projects.map((project, index) => (
               <div
                 key={index}
@@ -505,7 +568,7 @@ const EosUpdateByMonth = () => {
               </div>
             ))}
           </div>
-
+*/}
           {/*
           <div>
             <h2 className="text-xl font-semibold mb-4">
