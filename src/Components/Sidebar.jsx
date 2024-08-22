@@ -119,25 +119,26 @@ const Sidebar = () => {
     setActiveRightSidebar(!activeRightSidebar);
   };
 
-  // if (
-  //   selectedMainItem === "Dashboard" ||
-  //   selectedMainItem === "Admin" ||
-  //   selectedMainItem === "Learning & Developement"
-  //   // selectedMainItem === "Document Center"
-  // ) {
-  //   // If selectedMainItem is "Dashboard", set activeRightSidebar to false
-  //   setActiveRightSidebar(false);
-  // }
+  if (
+    selectedMainItem === "Dashboard" ||
+    selectedMainItem === "Admin" ||
+    selectedMainItem === "Learning & Developement"
+    // selectedMainItem === "Document Center"
+  ) {
+    // If selectedMainItem is "Dashboard", set activeRightSidebar to false
+    setActiveRightSidebar(false);
+  }
 
-  useEffect(() => {
-    if (
-      selectedMainItem === "Dashboard" ||
-      selectedMainItem === "Admin" ||
-      selectedMainItem === "Learning & Developement"
-    ) {
-      setActiveRightSidebar(false);
-    } 
-  }, [selectedMainItem, setActiveRightSidebar]);
+  // useEffect(() => {
+  //   if (
+  //     selectedMainItem === "Dashboard" ||
+  //     selectedMainItem === "Admin" ||
+  //     selectedMainItem === "Learning & Developement"
+  //   ) {
+  //     console.log("my selected main item", selectedMainItem)
+  //     setActiveRightSidebar(false);
+  //   } 
+  // }, [selectedMainItem, setActiveRightSidebar]);
 
   return (
     <div className="app">
