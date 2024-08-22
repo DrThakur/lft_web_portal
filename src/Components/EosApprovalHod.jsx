@@ -217,16 +217,16 @@ const EosApprovalHod = () => {
   const projectManagerBodyTemplate = (rowData) => {
     return (
       <div className="flex flex-col justify-start items-start gap-2">
-      {rowData.projects.map((project, index) => (
+      {rowData?.projects?.map((project, index) => (
       <div className="flex flex-row justify-center items-center gap-2">
         <img
-          alt={project.project.projectManager.fullName}
+          alt={project?.project?.projectManager?.fullName ||"N/A" }
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
           width={30}
           height={30}
           className="rounded-full"
         />
-        <span className="font-bold">{project.project.projectManager.fullName}</span>
+        <span className="font-bold">{project?.project?.projectManager?.fullName ||"N/A"}</span>
       </div>
     ))}
       </div>
