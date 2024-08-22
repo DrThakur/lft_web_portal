@@ -189,13 +189,13 @@ const EosApprovalHod = () => {
     return (
       <div className="flex flex-row justify-start items-center gap-2">
         <img
-          alt={rowData.employee.fullName}
+          alt={rowData?.employee?.fullName ||"N/A"}
           src={`https://wl-incrivel.cf.tsp.li/resize/728x/webp/0ec/140/d189845022bb6eddb88bb5279a.jpg.webp`}
           width={30}
           height={30}
           className="rounded-full"
         />
-        <span className="font-bold">{rowData.employee.fullName}</span>
+        <span className="font-bold">{rowData?.employee?.fullName ||"N/A"}</span>
       </div>
     );
   };
@@ -203,13 +203,13 @@ const EosApprovalHod = () => {
     return (
       <div className="flex flex-row justify-start items-center gap-2">
         <img
-          alt={rowData.employee.reportingManager}
+          alt={rowData?.employee?.reportingManager ||"N/A"}
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
           width={30}
           height={30}
           className="rounded-full"
         />
-        <span className="font-bold">{rowData.employee.reportingManager}</span>
+        <span className="font-bold">{rowData?.employee?.reportingManager ||"N/A"}</span>
       </div>
     );
   };
@@ -238,9 +238,9 @@ const EosApprovalHod = () => {
     console.log("my row dtaa projects", rowData.projects)
     return (
       <div className="flex flex-col justify-start items-start gap-2">
-        {rowData.projects.map((project, index) => (
+        {rowData?.projects?.map((project, index) => (
           <div key={index} className="mb-2">
-            <p>{project.project.projectName}</p>
+            <p>{project?.project?.projectName ||"N/A"}</p>
           </div>
         ))}
       </div>
@@ -251,9 +251,9 @@ const EosApprovalHod = () => {
     console.log("my row dtaa projects", rowData.projects)
     return (
       <div>
-        {rowData.projects.map((project, index) => (
+        {rowData?.projects?.map((project, index) => (
           <div key={index} className="mb-2">
-            <p>{project.occupancy}</p>
+            <p>{project?.occupancy ||"N/A"}</p>
           </div>
         ))}
       </div>
@@ -263,7 +263,7 @@ const EosApprovalHod = () => {
   const pmAprrovalBodyTemplate = (rowData) => {
     return (
       <div className="flex flex-row justify-center items-center gap-2">
-      {rowData.pmApproval==="Yes" ? (<FcApproval />): ( <MdCancel className="text-red-500" />)}
+      {rowData?.pmApproval==="Yes" ? (<FcApproval />): ( <MdCancel className="text-red-500" />)}
       </div>
     );
   };
@@ -287,7 +287,7 @@ const EosApprovalHod = () => {
   const statusBodyTemplate = (rowData) => {
     return (
       <Tag
-        value={rowData.inventoryStatus ||"Enter Remarks"}
+        value={rowData?.inventoryStatus ||"Enter Remarks"}
         severity={getSeverity(rowData)}
       ></Tag>
     );
