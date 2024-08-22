@@ -537,7 +537,7 @@ const EosApprovalHod = () => {
               header="Reporting Manager"
               alignHeader={"center"}
               body={reportingManagerBodyTemplate}
-              style={{ width: "14rem", textAlign: "center" }}
+              style={{ width: "18rem", textAlign: "center" }}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
@@ -548,7 +548,7 @@ const EosApprovalHod = () => {
               header="Project Manager"
               alignHeader={"center"}
               body={projectManagerBodyTemplate}
-              style={{ width: "14rem", textAlign: "center" }}
+              style={{ width: "18rem", textAlign: "center" }}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
                 textAlign: "center",
