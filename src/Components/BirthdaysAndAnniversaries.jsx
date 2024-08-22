@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { Badge } from 'primereact/badge';
 import { useNavigate } from 'react-router-dom';
 import annivarsaryGif  from "../data/icons8-confetti.gif"
 import birthdayGif from "../data/icons8-happy-birthday.gif"
+import axios from 'axios';
 
 const employees = [
   { name: 'John Doe', birthday: '1990-06-15', hireDate: '2015-06-03' },
@@ -21,42 +22,104 @@ const employees = [
   // Add more employees here
 ];
 
+
+const BirthdaysAndAnniversaries = () => {
+  const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  useEffect(() => {
+  const fetchEosData = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get(`${apiUrl}/users/all`);
+      const users = res.data.users;
+
+      setEmployees(users);
+    } catch (error) {
+      console.error("Error fetching EOS data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchEosData();
+}, [apiUrl]);
+
+
+console.log("employees", employees);
+
 const getCurrentMonthEmployees = () => {
+  if (!employees) return []; 
+
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1;
+
+  console.log("my current date", currentDate);
+  console.log("my current month", currentMonth);
+
+
   return employees.filter(employee => {
-    const birthdayMonth = new Date(employee.birthday).getMonth() + 1;
-    const hireDateMonth = new Date(employee.hireDate).getMonth() + 1;
+    const birthdayMonth = new Date(employee.dateOfBirth).getMonth() + 1;
+    const hireDateMonth = new Date(employee.dateOfJoining).getMonth() + 1;
     return birthdayMonth === currentMonth || hireDateMonth === currentMonth;
   });
 };
 
-const BirthdaysAndAnniversaries = () => {
-  const navigate = useNavigate();
+
   const currentMonthEmployees = getCurrentMonthEmployees();
+  console.log("my current month employees", currentMonthEmployees);
   const groupedEvents = {};
 
   currentMonthEmployees.forEach(employee => {
-    const birthdayDate = new Date(employee.birthday);
-    const anniversaryDate = new Date(employee.hireDate);
+    const birthdayDate = new Date(employee.dateOfBirth);
+    const anniversaryDate = new Date(employee.dateOfJoining);
+
+
     const birthdayKey = format(birthdayDate, 'dd MMM');
     const anniversaryKey = format(anniversaryDate, 'dd MMM');
 
-    if (!groupedEvents[birthdayKey]) {
-      groupedEvents[birthdayKey] = [];
-    }
-    if (!groupedEvents[anniversaryKey]) {
-      groupedEvents[anniversaryKey] = [];
+    // console.log("my birthday", birthdayDate);
+
+    // if (!groupedEvents[birthdayKey]) {
+    //   groupedEvents[birthdayKey] = [];
+    // }
+    // if (!groupedEvents[anniversaryKey]) {
+    //   groupedEvents[anniversaryKey] = [];
+    // }
+
+    // groupedEvents[birthdayKey].push({ type: 'Birthday', name: employee.fullName });
+    // groupedEvents[anniversaryKey].push({ type: 'Anniversary', name: employee.fullName, years: new Date().getFullYear() - anniversaryDate.getFullYear() });\
+
+
+     // Grouping birthday events
+     if (new Date().getMonth() + 1 === birthdayDate.getMonth() + 1) {
+      if (!groupedEvents[birthdayKey]) {
+        groupedEvents[birthdayKey] = [];
+      }
+      groupedEvents[birthdayKey].push({ type: 'Birthday', name: employee.fullName });
     }
 
-    groupedEvents[birthdayKey].push({ type: 'Birthday', name: employee.name });
-    groupedEvents[anniversaryKey].push({ type: 'Anniversary', name: employee.name, years: new Date().getFullYear() - anniversaryDate.getFullYear() });
+    // Grouping anniversary events
+    if (new Date().getMonth() + 1 === anniversaryDate.getMonth() + 1) {
+      if (!groupedEvents[anniversaryKey]) {
+        groupedEvents[anniversaryKey] = [];
+      }
+      groupedEvents[anniversaryKey].push({ type: 'Anniversary', name: employee.fullName, years: new Date().getFullYear() - anniversaryDate.getFullYear() });
+    }
   });
 
+  // console.log("Grouped Events:", groupedEvents);
   const displayedDates = Object.entries(groupedEvents).sort((a, b) => new Date(a[0]) - new Date(b[0]));
 
+
+  // console.log("Dispay date:", displayedDates);
   const handleViewAll = () => {
-    navigate("/test13")
+    // navigate("/test13")
   }
 
   return (
