@@ -473,6 +473,7 @@ const protectedRoutes = [
                 <Route path="/eos-approval" element={<EosApproval />} />
                 <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
                 <Route path="/eos-approval-hod" element={<EosApprovalHod />} />
+                <Route path="/eos-approval-hod/:year/:month" element={<EosApprovalByMonth />} />
                 <Route path="/document-center" element={<DocumentCenter />} />
                 <Route path="/org-chart" element={<OragnizationChart />} />
                 <Route path="/org-chart-page" element={<OrganizationChartPage />} />

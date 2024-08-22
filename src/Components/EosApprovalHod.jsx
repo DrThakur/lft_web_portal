@@ -287,7 +287,7 @@ const EosApprovalHod = () => {
   const statusBodyTemplate = (rowData) => {
     return (
       <Tag
-        value={rowData.inventoryStatus}
+        value={rowData.inventoryStatus ||"Enter Remarks"}
         severity={getSeverity(rowData)}
       ></Tag>
     );
@@ -623,7 +623,7 @@ const EosApprovalHod = () => {
             ></Column>
               */}
             <Column
-              field="approverRemarks"
+              field="inventoryStatus"
               header="Approver Remarks"
               alignHeader={"center"}
               headerStyle={{

@@ -864,6 +864,7 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text"> PO Entry</span>
                 </div>
+                {/* 
                 <Tooltip
                   title="Employee Occupancy Sheet"
                   placement="right"
@@ -881,6 +882,7 @@ const Sidebar = () => {
                     <span className="right-sidebar-text">EoS Approval</span>
                   </div>
                 </Tooltip>
+                */}
               </div>
             )}
 

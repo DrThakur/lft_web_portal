@@ -334,7 +334,7 @@ const EmployeeManagement = () => {
   const statusBodyTemplate = (rowData) => {
     return (
       <Tag
-        value={rowData.inventoryStatus}
+        value={rowData.inventoryStatus ||"Enter Remarks"}
         severity={getSeverity(rowData)}
       ></Tag>
     );
