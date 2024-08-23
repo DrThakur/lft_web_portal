@@ -20,6 +20,7 @@ import { ToggleButton } from "primereact/togglebutton";
 import { Link, useNavigate } from "react-router-dom";
 import ProjectTableView from "./ProjectTableView";
 import axios from "axios";
+import "./AllProjects.css";
 
 const AllProjects = () => {
   let emptyProduct = {
@@ -762,7 +763,8 @@ const AllProjects = () => {
             showGridlines
             scrollable
             scrollHeight="600px"
-            className=""
+            className="scrollable-component"
+            
           >
             <Column selectionMode="multiple" exportable={false}  frozen={projectNameColumnFrozen}></Column>
             <Column

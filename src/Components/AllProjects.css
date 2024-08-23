@@ -1,0 +1,18 @@
+/* Component-specific CSS */
+.scrollable-component {
+  -ms-overflow-style: auto; /* Show scrollbar in IE and Edge */
+  scrollbar-width: auto; /* Restore scrollbars in Firefox */
+  overflow: auto; /* Enable scrollbars for this component */
+}
+
+.scrollable-component::-webkit-scrollbar {
+  display: block; /* Show scrollbar in Chrome, Safari, and Opera */
+  /* Customize the width of the scrollbar if needed */
+}
+
+/* Optionally, style the scrollbar for better appearance */
+/* .scrollable-component::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);  
+    border-radius: 10px;
+  } */
+/* Customize the color */

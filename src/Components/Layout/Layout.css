@@ -1,6 +1,17 @@
-*{
+/* *{
   -ms-overflow-style: none;
 }
 ::-webkit-scrollbar {
   display: none;
 }
+ */
+
+/* Global CSS */
+/* body {
+  -ms-overflow-style: none; 
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+} */
