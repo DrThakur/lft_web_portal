@@ -124,7 +124,7 @@ const BirthdaysAndAnniversaries = () => {
   };
 
   return (
-    <div className="p-4 w-72 rounded -mt-2 my-component">
+    <div className="rounded p-3 w-full h-full -mt-1">
       <h2 className="text-lg font-bold mb-1 bg-purple-200 py-2 px-2 -ml-2 -mr-2 rounded-lg">
         Birthdays and Anniversaries
       </h2>

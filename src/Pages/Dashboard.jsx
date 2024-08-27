@@ -44,308 +44,28 @@ const Dashboard = () => {
         </div>
 
         <div
-          className={`w-72 col-start-3 col-end-4 row-start-1 row-end-2 rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer bg-white hover:shadow-xl hover:z-50`}
+          className={`col-start-3 col-end-4 row-start-1 row-end-2 rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer bg-white hover:shadow-xl hover:z-50`}
         >
           <JobVacancy />
         </div>
 
         <div
-          className={`w-72 col-start-4 col-end-5 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
+          className={`col-start-4 col-end-5 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
         >
           <HolidayCalendar holidays={holidays} />
         </div>
 
         <div
-          className={`w-72 col-start-5 col-end-6 row-start-1 row-end-2  rounded-lg shadow-md cursor-pointer p-1 bg-white hover:shadow-xl hover:z-50`}
+          className={`col-start-5 col-end-6 row-start-1 row-end-2  rounded-lg shadow-md cursor-pointer p-1 bg-white hover:shadow-xl hover:z-50`}
         >
           <AnnouncementList />
         </div>
 
         <div
-          className={`w-72 col-start-6 col-end-7 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50 `}
+          className={`col-start-6 col-end-7 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50 `}
         >
           <BirthdaysAndAnniversaries />
         </div>
-
-        {/*
-        <div
-            key=""
-            className={`col-start-1 col-end-2 row-start-1 row-end-2 rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4">
-                  Projects
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-  
-       <div
-            key=""
-            className={`rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-              
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4 ">
-                  Clients
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-
-
-
-
-          <div
-            key=""
-            className={`rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4 ">
-                  Milestones
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-    
-
-    
-          <div
-            key=""
-            className={`rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4 ">
-                  Tasks
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-
-          <div
-            key=""
-            className={`rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4 ">
-                  Openings
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-
-          <div
-            key=""
-            className={`rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4">
-                  New Hire
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-
-          <div
-            key=""
-            className={`rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4">
-                  Total Applicant
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-
-          <div
-            key=""
-            className={`rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4">
-                  Resigned Emlpoyees
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-
-          <div
-            key=""
-            className={`rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4">
-                  Total Employees
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-
-          <div
-            key=""
-            className={`rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4">
-                  Total Revenue
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-        */}
 
         <div
           className={`rounded-lg col-start-1 col-end-4 row-start-2 row-end-4  shadow-md  cursor-pointer p-2 bg-white hover:shadow-xl hover:z-50`}
@@ -358,42 +78,6 @@ const Dashboard = () => {
         >
           <AwardsRecognition />
         </div>
-
-        {/*
-          <div
-            key=""
-            className={`rounded-lg col-start-1 col-end-6 row-start-7 row-end-9  shadow-md flex flex-col justify-center items-center cursor-pointer p-4 pl-1 pb-6 bg-white`}
-          >
-            <div className="flex flex-row">
-              <div className="flex flex-col justify-center items-center">
-                <h3 className="font-bold text-xl transition-all duration-300 ease-in-out -mt-4">
-                  Awards and Recignition
-                </h3>
-              </div>
-
-              <div className="flex flex-col justify-start items-start mt-0 ml-4">
-                <div className="flex items-center" key="">
-                  <h2 className="text-white text-sm">Chat</h2>
-                  <span className="text-white text-sm mx-1">:</span>
-                  <h2 className="text-white text-sm">Key</h2>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`text-white font-bold pt-1 text-lg text-center transition-all duration-300 ease-in-out `}
-            >
-              Name
-            </p>
-          </div>
-          */}
-
-        {/*
-        <div className="small col-start-6 col-end-7 grid grid-cols-1 grid-rows-8 gap-2">
-         
-        
-        </div>
-      */}
       </div>
     </div>
   );

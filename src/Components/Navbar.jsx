@@ -17,6 +17,9 @@ import { FaGoogle } from "react-icons/fa";
 import { FaLaptopCode } from "react-icons/fa";
 import { SiZoho } from "react-icons/si";
 import greytHRLogo from "../data/greytHr-removebg-preview.png";
+import mantisLogo from "../data/mantis_logo.png";
+import lftLogo from "../data/LFT-Logo.svg";
+import sonicWallLogo from "../data/sonicwalllogo.svg";
 
 const NavButton = ({ title, position, customFunc, icon, color, dotColor }) => (
   <div>
@@ -190,7 +193,6 @@ const Navbar = () => {
               rel="noopener noreferrer"
             >
               <span>
-                {" "}
                 <SiZoho className="text-3xl" />
               </span>
               <span>ZohoCRM</span>
@@ -215,12 +217,7 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                src="http://10.0.0.10:8080/WebInterface/images/logo.png"
-                alt="LFTP"
-                width={70}
-                height={70}
-              />
+              <img src={lftLogo} alt="LFTP" width={70} height={70} />
               <span>LFTP</span>
             </a>
             <a
@@ -229,12 +226,7 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                src="http://10.0.0.7/mantis/images/mantis_logo.png"
-                alt="mantis"
-                width={70}
-                height={70}
-              />
+              <img src={mantisLogo} alt="mantis" width={70} height={70} />
               <span>Mantis-Bug Tracker</span>
             </a>
             <a
@@ -243,12 +235,7 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBkYXRhLXYtM2FiMWQ3YTA9IiIgdmlld0JveD0iMCAwIDIxMCAzNiIgY2xhc3M9ImRlZmF1bHQiIHN0eWxlPSJoZWlnaHQ6IDgwcHg7IiB2ZXJzaW9uPSIxLjEiPgogIDxwYXRoIGRhdGEtdi0zYWIxZDdhMD0iIiBkPSJtMzMuOSAyLjVjLTEuOCAwLTMuNCAwLjUtNSAxLjQgLTEuNSAwLjktMi43IDIuMS0zLjYgMy42IC0wLjkgMS41LTEuMyAzLjItMS4zIDUuMSAwIDIuOCAxIDUuMSAyLjkgNy4xIDEuOSAxLjkgNC4yIDIuOCA3IDIuOCAxLjggMCAzLjQtMC40IDUtMS4zIDEuNS0wLjkgMi43LTIuMSAzLjYtMy42IDAuOS0xLjUgMS4zLTMuMiAxLjMtNS4xIDAtMS44LTAuNC0zLjUtMS4zLTUgLTAuOS0xLjUtMi4xLTIuNy0zLjYtMy42IC0xLjYtMC45LTMuMy0xLjQtNS0xLjRsMCAwem0tMC4yLTIuM2MzLjYgMCA2LjYgMS4yIDguOSAzLjYgMi40IDIuNCAzLjYgNS4zIDMuNiA4LjcgMCAzLjQtMS4yIDYuMy0zLjYgOC43IC0yLjMgMi40LTUuMiAzLjYtOC43IDMuNiAtMy40IDAtNi40LTEuMi04LjctMy42IC0yLjQtMi4zLTMuNi01LjItMy42LTguNiAwLTIuMiAwLjUtNC4zIDEuNi02LjIgMS4xLTEuOSAyLjYtMy40IDQuNS00LjUgMS44LTEuMSAzLjktMS43IDYtMS43bDAgMHoiIHN0eWxlPSJmaWxsOiByZ2IoOTksIDEwMiwgMTA2KTsiIC8+CiAgPHBvbHlsaW5lIGRhdGEtdi0zYWIxZDdhMD0iIiBwb2ludHM9IjUyLjYgMjUgNTIuNiAwLjIgNTMuMSAwLjIgNjkuNiAxOS4yIDY5LjYgMC4yIDcyLjEgMC4yIDcyLjEgMjUgNzEuNSAyNSA1NS4xIDYuMiA1NS4xIDI1IDUyLjYgMjUgIiBzdHlsZT0iZmlsbDogcmdiKDk5LCAxMDIsIDEwNik7IiAvPgogIDxwb2x5Z29uIGRhdGEtdi0zYWIxZDdhMD0iIiBwb2ludHM9Ijc4LjggMjUgODEuMSAyNSA4MS4xIDAuMSA3OC44IDAuMSAiIHN0eWxlPSJmaWxsOiByZ2IoOTksIDEwMiwgMTA2KTsiIC8+CiAgPHBhdGggZGF0YS12LTNhYjFkN2EwPSIiIGQ9Im0xNTcuMiAxNS4ybDMuMy04LjUgMy4zIDguNSAtNi42IDAgMCAwem01LjctMTVsLTQuOCAwIC02LjcgMTcuOSAxMy41IDAgMi42IDYuOCA0LjkgMCAtOS41LTI0LjcgMCAweiIgc3R5bGU9ImZpbGw6IHJnYig5OSwgMTAyLCAxMDYpOyIgLz4KICA8cG9seWxpbmUgZGF0YS12LTNhYjFkN2EwPSIiIHBvaW50cz0iMTc3LjQgMC4yIDE4Mi4xIDAuMiAxODIuMSAyMC4zIDE5MS41IDIwLjMgMTkxLjUgMjQuOCAxNzcuNCAyNC44IDE3Ny40IDAuMiAiIHN0eWxlPSJmaWxsOiByZ2IoOTksIDEwMiwgMTA2KTsiIC8+CiAgPHBvbHlsaW5lIGRhdGEtdi0zYWIxZDdhMD0iIiBwb2ludHM9IjE5Ni41IDAuMiAyMDEuMiAwLjIgMjAxLjIgMjAuMyAyMTAuNSAyMC4zIDIxMC41IDI0LjggMTk2LjUgMjQuOCAxOTYuNSAwLjIgIiBzdHlsZT0iZmlsbDogcmdiKDk5LCAxMDIsIDEwNik7IiAvPgogIDxwYXRoIGRhdGEtdi0zYWIxZDdhMD0iIiBkPSJtMTQ0LjcgMjQuMmMtMi44LTcuNyA3LjctOS40IDE4LjQtOS4xIDUuOCAwLjIgMTIuOSAxIDEyLjkgMSAwIDAtMTYuNyAyLjItMjIuOCA3IC01LjkgNC44IDUuNSAxMi4yIDUuNSAxMi4yIDAgMC0xMS41LTQuMi0xNC0xMS4xeiIgc3R5bGU9ImZpbGw6IHJnYigyMjcsIDEwMCwgNDMpOyIgLz4KICA8cGF0aCBkYXRhLXYtM2FiMWQ3YTA9IiIgZD0ibTEwMC43IDIyLjdjLTMgMC01LjUtMS03LjQtMi45IC0yLTEuOS0zLTQuMy0zLTcuMiAwLTEuOSAwLjUtMy42IDEuMy01LjEgMC45LTEuNSAyLjItMi43IDMuOC0zLjYgMS41LTAuOSAzLjMtMS40IDUuMi0xLjQgMS43IDAgMy4zIDAuNCA0LjcgMS4xIDEuNCAwLjYgMi41IDEuNiAzLjUgMi44bDAtMy4yYy0wLjctMC41LTEuNS0xLjMtMi4zLTEuNyAtMS44LTAuOC0zLjgtMS4zLTYtMS4zIC0zLjYgMC02LjYgMS4yLTkgMy41IC0yLjUgMi40LTMuNyA1LjMtMy43IDguNyAwIDMuMyAxIDYuMSAzIDguNCAyLjQgMi43IDUuNiA0LjEgOS44IDQuMSAyLjEgMCA0LjEtMC40IDUuOC0xLjIgMC45LTAuNCAxLjctMS4xIDIuNC0xLjdsMC0zYy0yLjIgMi40LTQuOSAzLjctOC4xIDMuN3oiIHN0eWxlPSJmaWxsOiByZ2IoOTksIDEwMiwgMTA2KTsiIC8+CiAgPHBhdGggZGF0YS12LTNhYjFkN2EwPSIiIGQ9Im04LjkgMTEuNGMtNS42LTEuMi02LjctMi42LTYuNy00LjlsMC0wLjFjMC0yLjQgMi40LTQuMiA1LjUtNC4yIDIuNyAwIDQuOCAwLjggNi45IDIuNmwwLjIgMC4yIDAuMS0wLjEgMC0yLjdjLTIuMi0xLjQtNC4zLTItNy4xLTIgLTQuNCAwLTcuOCAyLjctNy44IDYuNGwwIDAuMWMwIDMuNyAyLjQgNS43IDguMSA2LjggNS41IDEuMSA2LjUgMi41IDYuNSA0LjhsMCAwLjFjMCAyLjYtMi40IDQuNC01LjcgNC40IC0zLjMgMC01LjYtMS04LjMtMy40bC0wLjItMC4yIDAgMCAwIDIuOWMyLjYgMS45IDUuMiAyLjggOC40IDIuOCA0LjcgMCA4LTIuOCA4LTYuN2wwLTAuMWMwLTMuNi0yLjMtNS42LTcuOS02LjciIHN0eWxlPSJmaWxsOiByZ2IoOTksIDEwMiwgMTA2KTsiIC8+CiAgPHBvbHlsaW5lIGRhdGEtdi0zYWIxZDdhMD0iIiBwb2ludHM9IjE0NC4zIDAuMiAxMzguNiAxNy4zIDEzMi45IDAuMSAxMjguNCAwLjEgMTIyLjggMTYuOSAxMjIuNyAxNy4zIDExNi45IDAuMiAxMTEuMyAwLjIgMTIwLjMgMjQuOSAxMjQuOCAyNC45IDEzMC40IDguOCAxMzAuNiA4LjQgMTMwLjcgOC44IDEzNi4zIDI0LjkgMTQwLjkgMjQuOSAxNDkuOCAwLjIgMTQ0LjMgMC4yICIgc3R5bGU9ImZpbGw6IHJnYig5OSwgMTAyLCAxMDYpOyIgLz4KPC9zdmc+Cg=="
-                alt="mantis"
-                width={70}
-                height={70}
-              />
+              <img src={sonicWallLogo} alt="mantis" width={70} height={70} />
               <span>SonicWall</span>
             </a>
           </div>

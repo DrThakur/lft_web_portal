@@ -98,15 +98,15 @@ const AnnouncementList = () => {
   ];
 
   return (
-    <div className="container mx-auto w-72 mt-1" >
-      <div className="flex flex-row justify-between items-center mb-4 bg-red-200 rounded-lg mr-3 ml-1 py-2 px-3">
+    <div className="rounded p-1 w-full h-full" >
+      <div className="flex flex-row justify-between items-center mb-4 bg-red-200 rounded-lg  py-2 px-2">
         <h1 className="text-lg font-bold">Announcements</h1>
         <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded text-xs ">
           + Add New
         </button>
       </div>
-      <div className="overflow-y-auto h-96" style={{ maxHeight: "136px", overflowY: "auto" , top: `-${announcementIndexRef.current * 100}%`, transition: 'top 1s cubic-bezier(0, 1, 0, 1)' }}  >
-        <div className="grid grid-cols-1 gap-2">
+      <div className="overflow-y-scroll max-h-96" style={{ maxHeight: "135px", overflowY: "auto" ,overflowX:"hidden", top: `-${announcementIndexRef.current * 100}%`, transition: 'top 1s cubic-bezier(0, 1, 0, 1)' }}  >
+        <div className="grid grid-cols-1 gap-1">
           {visibleAnnouncements.map((announcement, index) => (
             <Announcement
               key={index}

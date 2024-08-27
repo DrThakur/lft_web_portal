@@ -11,7 +11,7 @@ const handleViewAll = () => {
 }
 
   return (
-    <div className="rounded p-2 w-72">
+    <div className="rounded p-2 w-full h-full">
       <div className="mb-2">
         <h3 className="text-lg font-bold mb-2 bg-green-200  py-2 px-3 rounded-lg">Upcoming Holidays</h3>
         <div className="overflow-y-scroll max-h-96" style={{ maxHeight: "137px", overflowY: "auto" }}> {/* Set max height and overflow scroll here */}

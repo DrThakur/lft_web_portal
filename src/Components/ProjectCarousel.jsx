@@ -13,7 +13,7 @@ const projects = [
     deadline: "01 Jan 2024",
     projectDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    projectManager: {fullName:"Dhruv Kumar Saxena"},
+    projectManager: { fullName: "Dhruv Kumar Saxena" },
     teams: ["Software", "Hardware", "FPGA"],
     progress: 50,
     milestones: "10",
@@ -27,7 +27,7 @@ const projects = [
     deadline: "10 Feb 2024",
     projectDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    projectManager: {fullName:"Jonn Doe"},
+    projectManager: { fullName: "Jonn Doe" },
     teams: ["Software", "Hardware", "FPGA"],
     progress: 60,
     milestones: "6",
@@ -41,7 +41,7 @@ const projects = [
     deadline: "02 Apr 2024",
     projectDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    projectManager: {fullName:"Vishal Singh"},
+    projectManager: { fullName: "Vishal Singh" },
     teams: ["Software", "Hardware", "FPGA"],
     progress: 70,
     milestones: "8",
@@ -55,7 +55,7 @@ const projects = [
     deadline: "15 May 2024",
     projectDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    projectManager:{fullName: "Ankit Kumar Thakur"},
+    projectManager: { fullName: "Ankit Kumar Thakur" },
     teams: ["Software", "Hardware"],
     progress: 80,
     milestones: "3",
@@ -69,7 +69,7 @@ const projects = [
     deadline: "30 June 2024",
     projectDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    projectManager: {fullName:"Pardeep Kumar"},
+    projectManager: { fullName: "Pardeep Kumar" },
     teams: ["Software", "Hardware", "FPGA"],
     progress: 90,
     milestones: "9",
@@ -83,7 +83,7 @@ const projects = [
     deadline: "11 July 2024",
     projectDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    projectManager:{ fullName:"Fuzail Qamar"},
+    projectManager: { fullName: "Fuzail Qamar" },
     teams: ["Software", "Hardware"],
     progress: 95,
     milestones: "13",
@@ -97,7 +97,7 @@ const projects = [
     deadline: "15 Aug 2024",
     projectDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    projectManager: {fullName:"Vineet Goyal"},
+    projectManager: { fullName: "Vineet Goyal" },
     teams: ["Software", "Hardware", "FPGA"],
     progress: 10,
     milestones: "11",
@@ -111,7 +111,7 @@ const projects = [
     deadline: "23 Sep 2024",
     projectDescription:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....",
-    projectManager: {fullName:"Sanjeev Kumar"},
+    projectManager: { fullName: "Sanjeev Kumar" },
     teams: ["Software", "Hardware", "FPGA"],
     progress: 20,
     milestones: "15",
@@ -167,7 +167,7 @@ const ProjectCarousel = ({ title, userDetails }) => {
     );
   };
 
-  console.log("my very user details", userDetails)
+  console.log("my very user details", userDetails);
 
   return (
     <div className="relative mt-4 rounded-lg py-10">
@@ -184,9 +184,8 @@ const ProjectCarousel = ({ title, userDetails }) => {
         // customTransition="transform 300ms ease-in-out"
         partialVisible={true}
       >
-      
         {userDetails.projects.map((project) => (
-          <div key={project.id} className="w-screen">
+          <div key={project.id}>
             <ProjectCard project={project.project} />
           </div>
         ))}
