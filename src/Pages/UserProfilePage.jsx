@@ -405,6 +405,7 @@ const UserProfilePage = () => {
                       </div>
                     </div>
                     <table className="mt-2">
+                   {/* 
                       <tr>
                         <td className="font-semibold px-2 py-2">
                           Aadhar Number
@@ -425,6 +426,7 @@ const UserProfilePage = () => {
                         <td className="px-2 py-2">&nbsp;</td>
                         <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
+                       */}
                       <tr>
                         <td className="font-semibold px-2 py-2">Nationality</td>
                         <td className="px-2 py-2">:</td>
@@ -529,7 +531,7 @@ const UserProfilePage = () => {
                   </div>
                 </div>
               </div>
-              <div className="bankandepfo grid grid-cols-2 gap-4 mt-4 -ml-5">
+             {/* <div className="bankandepfo grid grid-cols-2 gap-4 mt-4 -ml-5">
                 <div className="bank border shadow-lg rounded p-4 px-8">
                   <div className="bankInforation">
                     <div className="flex flex-row justify-between items-start">
@@ -611,6 +613,7 @@ const UserProfilePage = () => {
                   </div>
                 </div>
               </div>
+               */}
               <div className="educationexperience grid grid-cols-2 gap-4 mt-4 -ml-5">
                 <div className="education border shadow-lg rounded p-4 px-8">
                   <div className="educationInforation flex flex-col">
@@ -654,12 +657,12 @@ const UserProfilePage = () => {
                 <MySkills initialSkills={initialSkills} userId={user._id}/>
               </div>
             </TabPanel>
-            <TabPanel header="Projects">
+            <TabPanel header="My Projects">
               <div className="-mt-10 -ml-5">
                 <ProjectCarousel title="On Going Projects" userDetails={userDetails} />
               </div>
             </TabPanel>
-            <TabPanel header="Bank & Statuatory(Admin Only)">
+         {/*   <TabPanel header="Bank & Statuatory(Admin Only)">
               <p className="m-0">
                 At vero eos et accusamus et iusto odio dignissimos ducimus qui
                 blanditiis praesentium voluptatum deleniti atque corrupti quos
@@ -719,6 +722,7 @@ const UserProfilePage = () => {
                 minus.
               </p>
             </TabPanel>
+             */}
           </TabView>
         </div>
         <div className="conatiner3"></div>

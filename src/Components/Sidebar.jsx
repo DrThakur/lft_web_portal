@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css"; // Import your CSS file for styling
 import { LuLayoutDashboard } from "react-icons/lu";
-import { BsPeople} from "react-icons/bs";
+import { BsPeople } from "react-icons/bs";
 import { RiOrganizationChart } from "react-icons/ri";
 import {
   MdAttachMoney,
@@ -27,17 +27,13 @@ import {
   IoCreateOutline,
   IoDocumentText,
 } from "react-icons/io5";
-import {
-  IoIosPeople,
-  IoIosTime,
-  IoMdLaptop,
-} from "react-icons/io";
+import { IoIosPeople, IoIosTime, IoMdLaptop } from "react-icons/io";
 import { useStateContext } from "../Contexts/ContextProvider";
 import { useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import { GoProjectRoadmap, GoMilestone, GoGoal } from "react-icons/go";
 import { BiPurchaseTag } from "react-icons/bi";
-import {  TbReportSearch } from "react-icons/tb";
+import { TbReportSearch } from "react-icons/tb";
 
 import { ImProfile } from "react-icons/im";
 import { GrMonitor, GrResources, GrDocumentPerformance } from "react-icons/gr";
@@ -137,7 +133,7 @@ const Sidebar = () => {
   //   ) {
   //     console.log("my selected main item", selectedMainItem)
   //     setActiveRightSidebar(false);
-  //   } 
+  //   }
   // }, [selectedMainItem, setActiveRightSidebar]);
 
   return (
@@ -375,6 +371,30 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text">Employee Dashboard</span>
                 </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "My Profile" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("My Profile")}
+                >
+                  <span className="right-sidebar-icon">
+                    <ImProfile />
+                  </span>
+                  <span className="right-sidebar-text">My Profile</span>
+                </div>
+                <Tooltip title="Measure Of Success" placement="right" arrow>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "My MoS" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("My MoS")}
+                >
+                  <span className="right-sidebar-icon">
+                    <FaMedal />
+                  </span>
+                  <span className="right-sidebar-text">My MoS</span>
+                </div>
+              </Tooltip>
                 <Tooltip
                   title="Employee Occupancy Sheet"
                   placement="right"
@@ -392,30 +412,9 @@ const Sidebar = () => {
                     <span className="right-sidebar-text">EoS Update</span>
                   </div>
                 </Tooltip>
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "My Profile" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("My Profile")}
-                >
-                  <span className="right-sidebar-icon">
-                    <ImProfile />
-                  </span>
-                  <span className="right-sidebar-text">My Profile</span>
-                </div>
-                <Tooltip title="Measure Of Success" placement="right" arrow>
-                  <div
-                    className={`right-sidebar-item-content ${
-                      selectedMenuItem === "My MoS" ? "active" : ""
-                    }`}
-                    onClick={() => handleMenuItemClick("My MoS")}
-                  >
-                    <span className="right-sidebar-icon">
-                      <FaMedal />
-                    </span>
-                    <span className="right-sidebar-text">My MoS</span>
-                  </div>
-                </Tooltip>
+
+               
+                {/*
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "My Assets" ? "active" : ""
@@ -427,7 +426,7 @@ const Sidebar = () => {
                   </span>
                   <span className="right-sidebar-text"> My Assets</span>
                 </div>
-
+                  */}
                 <div
                   className={`right-sidebar-item-content ${
                     selectedMenuItem === "Organization Chart" ? "active" : ""
@@ -582,7 +581,7 @@ const Sidebar = () => {
                   onClick={() => handleMenuItemClick("EoS")}
                 >
                   <span className="right-sidebar-icon">
-                  <MdIncompleteCircle />
+                    <MdIncompleteCircle />
                   </span>
                   <span className="right-sidebar-text"> EoS</span>
                 </div>

@@ -33,10 +33,16 @@ const EmployeeManagement = () => {
   // const [employees, setEmployees] = useState(employees);
   const [designationFilter, setDesignationFilter] = useState(null);
   const [locationFilter, setLocationFilter] = useState(null);
+  const [stateFilter, setStateFilter] = useState("Active");
   const [statusFilter, setStatusFilter] = useState(null);
   const [designationOptions, setDesignationOptions] = useState([]);
   const [locationOptions, setLocationOptions] = useState([]);
-  const [statusOptions, setStatusOptions] = useState([]);
+  const [stateOptions, setStateOptions] = useState(["All", "Active", "Left"]);
+  const [statusOptions, setStatusOptions] = useState([
+    "Resigned",
+    "On Notice",
+    "PIP",
+  ]);
   const [products, setProducts] = useState(null);
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
@@ -49,11 +55,20 @@ const EmployeeManagement = () => {
   const dt = useRef(null);
 
   const [employees, setEmployees] = useState([]);
+  const [activeEmployees, setActiveEmployees] = useState([]);
+  const [leftEmployees, setLeftEmployees] = useState([]);
   const [employeesByDepartment, setEmployeesByDepartment] = useState({});
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [showAll, setShowAll] = useState(false);
+
+  // Toggle the showAll state
+  const toggleShowAll = () => {
+    setShowAll((prevState) => !prevState);
+  };
+
 
   const baseURL = process.env.REACT_APP_BASE_URL;
   const port = process.env.REACT_APP_BACKEND_PORT;
@@ -89,6 +104,11 @@ const EmployeeManagement = () => {
         //   return acc;
         // }, {});
         setEmployees(users);
+        const activeUsers = users.filter(
+          (user) => user.status && user.status === "Active"
+        );
+        setActiveEmployees(activeUsers);
+        setLeftEmployees(users.filter((user) => user.status === "Left"));
         // setEmployeesByDepartment(departmentMap);
         setTotalPages(totalPages);
       } catch (error) {
@@ -150,6 +170,7 @@ const EmployeeManagement = () => {
     setDeleteProductsDialog(false);
   };
 
+  console.log("my active employees", activeEmployees);
   const saveProduct = () => {
     setSubmitted(true);
 
@@ -334,23 +355,28 @@ const EmployeeManagement = () => {
   const statusBodyTemplate = (rowData) => {
     return (
       <Tag
-        value={rowData.inventoryStatus ||"Enter Remarks"}
+        value={rowData.inventoryStatus || "Enter Remarks"}
         severity={getSeverity(rowData)}
       ></Tag>
     );
   };
 
   const techSkillsBodyTemplate = (rowData) => {
-
-    console.log("my row dtaa skills", rowData)
+    console.log("my row dtaa skills", rowData);
+    const skillsToShow = showAll ? rowData.techSkills : rowData.techSkills.slice(0, 3);
     return (
-      <div>
-        {rowData.techSkills.map((skill, index) => (
-          <div key={index} className="mb-2">
-            <p>{skill}</p>
-          </div>
-        ))}
-      </div>
+      <div className="flex flex-col justify-start items-start gap-1">
+      {skillsToShow.map((skill, index) => (
+        <div key={index} className="mb-2">
+          <p>{skill} {skillsToShow.length> 1 && ","}</p>
+        </div>
+      ))}
+      {rowData.techSkills.length > 3 && (
+        <button onClick={toggleShowAll} className="text-blue-500 hover:underline">
+          {showAll ? 'Show less' : 'Show more'}
+        </button>
+      )}
+    </div>
     );
   };
 
@@ -401,7 +427,7 @@ const EmployeeManagement = () => {
       return (
         (!designationFilter || employee.designation === designationFilter) &&
         (!locationFilter || employee.location === locationFilter) &&
-        (!statusFilter || employee.status === statusFilter)
+        (stateFilter === "All" || employee.status === stateFilter)
       );
     });
   };
@@ -409,12 +435,25 @@ const EmployeeManagement = () => {
   useEffect(() => {
     setDesignationOptions(getUniqueValues("designation"));
     setLocationOptions(getUniqueValues("location"));
-    setStatusOptions(getUniqueValues("status"));
+    // setStatusOptions(getUniqueValues("status"));
   }, [employees]);
+
+  const getEmployeeCountText = () => {
+    switch (stateFilter) {
+      case "All":
+        return `All Employees (${employees.length})`;
+      case "Active":
+        return `Current Employees (${activeEmployees.length})`;
+      case "Left":
+        return `Left Employees (${leftEmployees.length})`;
+      default:
+        return "";
+    }
+  };
 
   const header = (
     <div className="flex flex-row justify-between items-center">
-      <h4 className="m-0">HR Department -All Employees ({employees.length})</h4>
+      <h4 className="m-0">HR Department -{getEmployeeCountText()}</h4>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText
@@ -437,6 +476,14 @@ const EmployeeManagement = () => {
           options={locationOptions}
           onChange={(e) => setLocationFilter(e.value)}
           placeholder="Select Location"
+          className="mr-2"
+          showClear
+        />
+        <Dropdown
+          value={stateFilter}
+          options={stateOptions}
+          onChange={(e) => setStateFilter(e.value)}
+          placeholder="Select State"
           className="mr-2"
           showClear
         />
@@ -601,23 +648,39 @@ const EmployeeManagement = () => {
           ></Column>
           <Column
             field="status"
-            header="Status"
+            header="State"
             sortable
             style={{ minWidth: "10rem" }}
           ></Column>
           <Column
-            field="rating"
+            field="performance"
             header="Employee Performance"
             body={ratingBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-            field="inventoryStatus"
+            field="techSkills"
             header="Tech Skills"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             body={techSkillsBodyTemplate}
             sortable
-            style={{ minWidth: "12rem" }}
+            style={{ minWidth: "20rem" }}
+          ></Column>
+          <Column
+            field=""
+            header="Status"
+            sortable
+            style={{ minWidth: "10rem" }}
+          ></Column>
+          <Column
+            field=""
+            header="Hiring Manager"
+            sortable
+            style={{ minWidth: "10rem" }}
           ></Column>
           <Column
             field="inventoryStatus"

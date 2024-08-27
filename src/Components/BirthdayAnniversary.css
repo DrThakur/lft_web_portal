@@ -1,0 +1,6 @@
+.my-component{
+  -ms-overflow-style: none;
+}
+.my-component::-webkit-scrollbar {
+  display: none;
+}

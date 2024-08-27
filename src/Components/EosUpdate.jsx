@@ -30,7 +30,6 @@ const EosUpdate = () => {
 
   const { user } = useStateContext();
 
-
   const apiUrl = process.env.REACT_APP_API_URL;
   console.log("mydakskj", user);
 
@@ -41,9 +40,12 @@ const EosUpdate = () => {
         console.log("my userdeatils--111", response.data);
         setUserDetails(response.data);
 
-        console.log("activities Array",Array.isArray(response.data.activities));
-        setActivities(response.data.activities)
-        console.log("Projects Array",Array.isArray(response.data.projects));
+        console.log(
+          "activities Array",
+          Array.isArray(response.data.activities)
+        );
+        setActivities(response.data.activities);
+        console.log("Projects Array", Array.isArray(response.data.projects));
         setProjects(response.data.projects);
       } catch (error) {
         console.error("Failed to fetch user details:", error);
@@ -54,9 +56,6 @@ const EosUpdate = () => {
       fetchUserDetails();
     }
   }, [user, apiUrl]);
-
-
-
 
   //   const projectManagers = [
   //     "Mohammad Rafi",
@@ -207,7 +206,19 @@ const EosUpdate = () => {
   // Function to handle project input changes
   const handleProjectInputChange = (index, field, value) => {
     const newProjects = [...formData.projects];
+    const numValue = Number(value);
+
+    // Validation logic
+    let errorMessage = "";
+    if (numValue < 0) {
+      errorMessage = "Value cannot be negative.";
+    } else if (numValue > 100) {
+      errorMessage = "Value cannot exceed 100.";
+    }
+
+    // const newProjects = [...formData.projects];
     newProjects[index][field] = value;
+    newProjects[index].error = errorMessage;
     setFormData({ ...formData, projects: newProjects });
   };
 
@@ -303,6 +314,13 @@ const EosUpdate = () => {
 
   console.log("My userDeatiols for proejcts", userDetails);
 
+  const validateInput = (value) => {
+    const numValue = Number(value);
+    // Ensure the value is a positive number and not greater than 100
+    if (numValue < 0) return 0;
+    if (numValue > 100) return 100;
+    return numValue;
+  };
 
   return (
     <div className="max-w-full mx-auto p-6 bg-white rounded-lg shadow-md">
@@ -310,20 +328,20 @@ const EosUpdate = () => {
         <h1 className="text-2xl font-bold">EoS Update</h1>
         {/* Submit Button */}
         <div className="flex flex-row justify-start items-center gap-2">
-        <div className="text-center">
-          <button
-            type="submit"
-            className="px-4 py-2 w-[150px] bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
-        <MonthYearPicker />
+          <div className="text-center">
+            <button
+              type="submit"
+              className="px-4 py-2 w-[150px] bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          </div>
+          <MonthYearPicker />
         </div>
       </div>
 
-      <form className="space-y-6" >
+      <form className="space-y-6">
         {/* Employee Details Section */}
 
         {userDetails && (
@@ -351,7 +369,9 @@ const EosUpdate = () => {
               {/* Email */}
               <div>
                 <p className="text-sm font-medium text-gray-700">Email</p>
-                <p className="mt-2 text-blue-500 font-bold">{userDetails.email}</p>
+                <p className="mt-2 text-blue-500 font-bold">
+                  {userDetails.email}
+                </p>
               </div>
 
               {/* Reporting Manager */}
@@ -419,6 +439,8 @@ const EosUpdate = () => {
                   </label>
                   <input
                     type="number"
+                    min="0" 
+                    max="100" 
                     id={`workPercentage${index + 1}`}
                     value={project.workPercentage}
                     onChange={(e) =>
@@ -429,7 +451,9 @@ const EosUpdate = () => {
                       )
                     }
                     required={index < 1}
-                    className="-mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
+                    className={`-mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300 ${
+                      project.error ? "border-red-500" : "border-gray-300"
+                    }`}
                   />
                 </div>
                 <div className="col-start-3 col-end-4 flex flex-col justify-start">

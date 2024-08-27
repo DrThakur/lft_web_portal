@@ -136,7 +136,7 @@ const Login = () => {
           </div>
           <div className="text-3xl font-bold mb-6 text-center -mt-8 flex items-center">
             <hr className="flex-grow border-t-2 border-blue-400 rounded-lg shadow-md mb-4 mt-4" />
-            <span className="px-4">Welcome</span>
+            <span className="px-4">Web Portal</span>
             <hr className="flex-grow border-t-2 border-blue-400 rounded-lg shadow-md mb-4 mt-4" />
           </div>
           <h2 className="text-4xl font-bold mb-8">Login</h2>
