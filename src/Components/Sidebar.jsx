@@ -192,7 +192,7 @@ const Sidebar = () => {
             </div>
           </Tooltip>
 
-          <Tooltip title="Sales and Marketing" placement="right" arrow>
+          {/*    <Tooltip title="Sales and Marketing" placement="right" arrow>
             <div
               className={`sidebar-item ${
                 selectedMainItem === "Sales and Marketing" ? "active" : ""
@@ -207,6 +207,7 @@ const Sidebar = () => {
               </div>
             </div>
           </Tooltip>
+           */}
 
           <Tooltip title="HR Operations" placement="right" arrow>
             <div
@@ -383,18 +384,18 @@ const Sidebar = () => {
                   <span className="right-sidebar-text">My Profile</span>
                 </div>
                 <Tooltip title="Measure Of Success" placement="right" arrow>
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "My MoS" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("My MoS")}
-                >
-                  <span className="right-sidebar-icon">
-                    <FaMedal />
-                  </span>
-                  <span className="right-sidebar-text">My MoS</span>
-                </div>
-              </Tooltip>
+                  <div
+                    className={`right-sidebar-item-content ${
+                      selectedMenuItem === "My MoS" ? "active" : ""
+                    }`}
+                    onClick={() => handleMenuItemClick("My MoS")}
+                  >
+                    <span className="right-sidebar-icon">
+                      <FaMedal />
+                    </span>
+                    <span className="right-sidebar-text">My MoS</span>
+                  </div>
+                </Tooltip>
                 <Tooltip
                   title="Employee Occupancy Sheet"
                   placement="right"
@@ -413,7 +414,6 @@ const Sidebar = () => {
                   </div>
                 </Tooltip>
 
-               
                 {/*
                 <div
                   className={`right-sidebar-item-content ${
@@ -541,6 +541,17 @@ const Sidebar = () => {
                     <MdDashboardCustomize />
                   </span>
                   <span className="right-sidebar-text"> Finance Dashboard</span>
+                </div>
+                <div
+                  className={`right-sidebar-item-content ${
+                    selectedMenuItem === "PO Entry" ? "active" : ""
+                  }`}
+                  onClick={() => handleMenuItemClick("PO Entry")}
+                >
+                  <span className="right-sidebar-icon">
+                    <BiPurchaseTag />
+                  </span>
+                  <span className="right-sidebar-text"> PO Entry</span>
                 </div>
                 <Tooltip
                   title="Project Financila Record"
@@ -849,22 +860,10 @@ const Sidebar = () => {
               </div>
             )}
 
-            {selectedMainItem === "Sales and Marketing" && (
+            {/*        {selectedMainItem === "Sales and Marketing" && (
               <div className="right-sidebar-item">
-                {/* Sub-items for Finance Ops */}
-                {/* ... */}
-                <div
-                  className={`right-sidebar-item-content ${
-                    selectedMenuItem === "PO Entry" ? "active" : ""
-                  }`}
-                  onClick={() => handleMenuItemClick("PO Entry")}
-                >
-                  <span className="right-sidebar-icon">
-                    <BiPurchaseTag />
-                  </span>
-                  <span className="right-sidebar-text"> PO Entry</span>
-                </div>
-                {/* 
+             
+         
                 <Tooltip
                   title="Employee Occupancy Sheet"
                   placement="right"
@@ -881,10 +880,10 @@ const Sidebar = () => {
                     </span>
                     <span className="right-sidebar-text">EoS Approval</span>
                   </div>
-                </Tooltip>
-                */}
+         
               </div>
             )}
+            */}
 
             {selectedMainItem === "R&D" && (
               <div className="right-sidebar-item">
