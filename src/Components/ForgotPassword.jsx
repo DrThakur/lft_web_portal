@@ -1,12 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import logo from "../Images/LFT-Logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from "axios";
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [code, setCode] = useState("");
@@ -15,6 +17,7 @@ const ForgotPassword = () => {
   const [showFields, setShowFields] = useState(false);
   const [newPasswordShown, setNewPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const toggleNewPasswordVisiblity = () => {
     setNewPasswordShown(!newPasswordShown);
@@ -24,13 +27,27 @@ const ForgotPassword = () => {
     setConfirmPasswordShown(!confirmPasswordShown);
   };
 
-  const handleSendCode = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const handleSendCode = async () => {
+    setLoading(true);
     if (email.trim() !== "") {
       setShowFields(true);
-      toast.info(`Code sent to ${email}`, {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000, // 3 seconds
-      });
+      try {
+        const res = await axios.post(`${apiUrl}/api/v1/auth/forgotPassword`, {
+          email: email.trim(),
+        });
+        console.log("My login response", res);
+
+        toast.info(`Reset Code sent to ${email}`, {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000, // 3 seconds
+        });
+      } catch (error) {
+        console.log(error);
+        // setErrorMsg("*Incorrect email or password.");
+      } finally {
+        setLoading(false);
+      }
     } else {
       toast.error(`Please provide and email`, {
         position: toast.POSITION.TOP_CENTER,
@@ -39,7 +56,7 @@ const ForgotPassword = () => {
     }
   };
 
-  const handleResetPassword = () => {
+  const handleResetPassword = async () => {
     if (
       code.trim() === "" ||
       newPassword.trim() === "" ||
@@ -55,6 +72,27 @@ const ForgotPassword = () => {
         autoClose: 3000, // 3 seconds
       });
     } else {
+      setLoading(true);
+      try {
+        const res = await axios.patch(`${apiUrl}/api/v1/auth/resetPassword`, {
+          email: email.trim(),
+          resetCode:code.trim(),
+          newPassword:newPassword,
+          confirmPassword:confirmPassword
+        });
+        console.log("My login response", res);
+        setEmail("");
+        setCode("");
+        setNewPassword("");
+        setConfirmPassword("");
+        return navigate("/");
+      } catch (error) {
+        console.log(error);
+        // setErrorMsg("*Incorrect email or password.");
+      } finally {
+        setLoading(false);
+      }
+
       toast.success(`Password successfully reset`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000, // 3 seconds
@@ -127,7 +165,7 @@ const ForgotPassword = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-             <button
+              <button
                 type="button"
                 className="absolute -mt-2 top-1/2 right-2 transform -translate-y-1/2 text-gray-500 focus:outline-none text-2xl"
                 onClick={toggleConfirmPasswordVisiblity}
