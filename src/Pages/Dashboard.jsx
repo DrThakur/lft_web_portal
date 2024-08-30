@@ -31,7 +31,7 @@ const Dashboard = () => {
       <Header title="Dashboard" />
 
       {/* */}
-      <div className="big h-screen grid grid-cols-6 grid-rows-4 gap-2 -mt-8">
+      <div className="big h-screen grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 grid-rows-4 gap-2 -mt-8">
         <div
           className={`col-start-1 col-end-2 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
         >

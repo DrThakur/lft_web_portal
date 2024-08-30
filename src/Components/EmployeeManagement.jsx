@@ -69,7 +69,6 @@ const EmployeeManagement = () => {
     setShowAll((prevState) => !prevState);
   };
 
-
   const baseURL = process.env.REACT_APP_BASE_URL;
   const port = process.env.REACT_APP_BACKEND_PORT;
 
@@ -363,20 +362,27 @@ const EmployeeManagement = () => {
 
   const techSkillsBodyTemplate = (rowData) => {
     console.log("my row dtaa skills", rowData);
-    const skillsToShow = showAll ? rowData.techSkills : rowData.techSkills.slice(0, 3);
+    const skillsToShow = showAll
+      ? rowData.techSkills
+      : rowData.techSkills.slice(0, 3);
     return (
       <div className="flex flex-col justify-start items-start gap-1">
-      {skillsToShow.map((skill, index) => (
-        <div key={index} className="mb-2">
-          <p>{skill} {skillsToShow.length> 1 && ","}</p>
-        </div>
-      ))}
-      {rowData.techSkills.length > 3 && (
-        <button onClick={toggleShowAll} className="text-blue-500 hover:underline">
-          {showAll ? 'Show less' : 'Show more'}
-        </button>
-      )}
-    </div>
+        {skillsToShow.map((skill, index) => (
+          <div key={index} className="mb-2">
+            <p>
+              {skill} {skillsToShow.length > 1 && ","}
+            </p>
+          </div>
+        ))}
+        {rowData.techSkills.length > 3 && (
+          <button
+            onClick={toggleShowAll}
+            className="text-blue-500 hover:underline"
+          >
+            {showAll ? "Show less" : "Show more"}
+          </button>
+        )}
+      </div>
     );
   };
 
@@ -617,6 +623,7 @@ const EmployeeManagement = () => {
           rows={10}
           rowsPerPageOptions={[5, 10, 25]}
           removableSort
+          showGridlines
           //   totalRecords={totalPages * pageSize}
           //   onPage={handlePageChange}
           //   onRowToggle={handlePageSizeChange}
@@ -625,36 +632,77 @@ const EmployeeManagement = () => {
           globalFilter={globalFilter}
           header={header}
         >
-          <Column selectionMode="multiple" exportable={false}></Column>
+          <Column
+            selectionMode="multiple"
+            exportable={false}
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+          ></Column>
           <Column
             field="employeeId"
             header="Employee Id"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             sortable
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
             field="fullName"
             header="Employee Name"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             sortable
             style={{ minWidth: "16rem" }}
           ></Column>
-          <Column field="designation" header="Designation"></Column>
-          <Column field="department" header="Department"></Column>
+          <Column
+            field="designation"
+            header="Designation"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+          ></Column>
+          <Column
+            field="department"
+            header="Department"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
+          ></Column>
           <Column
             field="location"
             header="Location"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             sortable
             style={{ minWidth: "8rem" }}
           ></Column>
           <Column
             field="status"
             header="State"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             sortable
             style={{ minWidth: "10rem" }}
           ></Column>
           <Column
             field="performance"
             header="Employee Performance"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             body={ratingBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
@@ -668,23 +716,35 @@ const EmployeeManagement = () => {
             }}
             body={techSkillsBodyTemplate}
             sortable
-            style={{ minWidth: "20rem" }}
+            style={{ minWidth: "10rem" }}
           ></Column>
           <Column
             field=""
             header="Status"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             sortable
             style={{ minWidth: "10rem" }}
           ></Column>
           <Column
             field=""
             header="Hiring Manager"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             sortable
             style={{ minWidth: "10rem" }}
           ></Column>
           <Column
             field="inventoryStatus"
             header="Remarks"
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             body={statusBodyTemplate}
             sortable
             style={{ minWidth: "12rem" }}
@@ -693,6 +753,10 @@ const EmployeeManagement = () => {
           ></Column>
           <Column
             body={actionBodyTemplate}
+            headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}
             exportable={false}
             style={{ minWidth: "12rem" }}
           ></Column>

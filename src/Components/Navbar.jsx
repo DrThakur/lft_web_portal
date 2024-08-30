@@ -259,6 +259,7 @@ const Navbar = () => {
             />
           </div>
         </Tooltip>
+        {/*
         <NavButton
           title="Chat"
           position="bottom"
@@ -268,6 +269,7 @@ const Navbar = () => {
           icon={<BsChatLeft />}
           className="hover:drop-shadow-xl hover:bg-light-gray"
         />
+        */}
         <NavButton
           title="Notifications"
           position="bottom"

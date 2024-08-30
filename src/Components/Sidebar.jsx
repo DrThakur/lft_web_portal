@@ -100,6 +100,8 @@ const Sidebar = () => {
       navigate("/employee-management");
     } else if (menuItem === "EoS") {
       navigate("/final-eos");
+    } else if (menuItem === "HR Dashboard") {
+      navigate("/hr-dashboard");
     }
 
     // Perform any other actions upon main item click
