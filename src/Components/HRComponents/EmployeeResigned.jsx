@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { format, parseISO, isToday, isAfter, addDays } from 'date-fns';
+import { format, parseISO, isAfter, addDays } from 'date-fns';
 
 const EmployeesResigned = ({ data }) => {
   const [selectedDate, setSelectedDate] = useState('');
@@ -30,7 +30,7 @@ const EmployeesResigned = ({ data }) => {
 
   return (
     <div className="p-6 bg-gradient-to-r from-red-400 via-orange-500 to-yellow-500 shadow-lg rounded-xl text-white max-h-96 overflow-y-hidden">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-extrabold">Employees Resigned</h2>
         <input
           type="date"

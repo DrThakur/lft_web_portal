@@ -276,9 +276,9 @@ export const employeeStrengthDistribution = [
 ];
 
 export const newJoiningData = [
-  { name: 'Alice Johnson', joiningDate: 'August 1, 2024', department: 'Engineering', initials: 'AJ' },
-  { name: 'Bob Smith', joiningDate: 'August 5, 2024', department: 'Marketing', initials: 'BS' },
-  { name: 'Carol White', joiningDate: 'August 10, 2024', department: 'HR', initials: 'CW' },
+  { name: 'Alice Johnson', joiningDate: '2024-08-01', department: 'Engineering', initials: 'AJ' },
+  { name: 'Bob Smith', joiningDate: '2024-08-05', department: 'Marketing', initials: 'BS' },
+  { name: 'Carol White', joiningDate: '2024-08-10', department: 'HR', initials: 'CW' },
 ];
 
 export const resignedEmployeeData = [

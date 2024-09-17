@@ -46,6 +46,7 @@ import {
 
 import { FaMedal } from "react-icons/fa";
 import { MdAssignmentReturn } from "react-icons/md";
+import { FaHandsHelping } from "react-icons/fa";
 
 const Sidebar = () => {
   const [selectedMainItem, setSelectedMainItem] = useState("Dashboard"); // State to track selected main item
@@ -62,6 +63,8 @@ const Sidebar = () => {
       navigate(`/dashboard`);
     } else if (mainItem === "Document Center") {
       navigate(`/document-center`);
+    } else if (mainItem === "Helpdesk") {
+      navigate(`/helpdesk`);
     }
     // Perform any other actions upon main item click
   };
@@ -120,8 +123,8 @@ const Sidebar = () => {
   if (
     selectedMainItem === "Dashboard" ||
     selectedMainItem === "Admin" ||
-    selectedMainItem === "Learning & Developement"
-    // selectedMainItem === "Document Center"
+    selectedMainItem === "Learning & Developement",
+    selectedMainItem === "Helpdesk"
   ) {
     // If selectedMainItem is "Dashboard", set activeRightSidebar to false
     setActiveRightSidebar(false);
@@ -317,6 +320,21 @@ const Sidebar = () => {
                   <FaHeadSideVirus />
                 </span>
                 <span className="sidebar-text">L&D</span>
+              </div>
+            </div>
+          </Tooltip>
+          <Tooltip title="Helpdesk" placement="right" arrow>
+            <div
+              className={`sidebar-item ${
+                selectedMainItem === "Helpdesk" ? "active" : ""
+              }`}
+              onClick={() => handleMainItemClick("Helpdesk")}
+            >
+              <div className="sidebar-item-content">
+                <span className="sidebar-icon">
+                <FaHandsHelping />
+                </span>
+                <span className="sidebar-text">Helpdesk</span>
               </div>
             </div>
           </Tooltip>

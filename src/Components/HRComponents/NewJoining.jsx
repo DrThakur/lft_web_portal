@@ -38,6 +38,7 @@
 // export default NewJoining;
 
 import React, { useState }  from "react";
+import { format, parseISO, isAfter, addDays } from 'date-fns';
 
 const NewJoining = ({ data }) => {
   const [selectedTimePeriod, setSelectedTimePeriod] = useState("Last 30 Days");
@@ -97,7 +98,7 @@ const NewJoining = ({ data }) => {
 
   return (
     <div className="p-6 bg-gradient-to-r from-green-400 via-teal-500 to-blue-500 shadow-lg rounded-xl text-white max-h-96 overflow-y-hidden">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-extrabold">New Joinings</h2>
         <select
           className="p-2 bg-white text-gray-800 rounded-md shadow focus:outline-none"
@@ -119,13 +120,14 @@ const NewJoining = ({ data }) => {
               className="bg-white bg-opacity-10 p-4 rounded-lg shadow flex items-center justify-between"
             >
               <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-lg font-bold">
+               {/* <div className="w-12 h-10=2 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-lg font-bold">
                   {employee.initials}
                 </div>
-                <div className="ml-4">
+                 */}
+                <div className="">
                   <h3 className="text-lg font-semibold">{employee.name}</h3>
                   <p className="text-sm text-gray-200">
-                    Joining Date: {employee.joiningDate}
+                    Joining On: {format(parseISO(employee.joiningDate), 'dd-MMM-yyyy')}
                   </p>
                 </div>
               </div>
