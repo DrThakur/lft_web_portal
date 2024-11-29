@@ -108,14 +108,7 @@ const ProjectCard = ({ project }) => {
         <div className="teams flex flex-row justify-start items-center gap-2 mt-1 mb-1">
           <h3 className="font-bold">Teams:</h3>
           <div className="flex flex-wrap justify-start items-center gap-1 ml-8">
-            {project.teams.map((team, index) => (
-              <button
-                key={index}
-                className="bg-blue-400 rounded-full p-1 px-2 text-white font-bold"
-              >
-                {team}
-              </button>
-            ))}
+          {/*   {project.teams.map((team, index) => ({ team }))} */}
           </div>
         </div>
         <div className="teamMembersFromAllTeam mt-1 mb-1 flex flex-row justify-start items-center gap-2">

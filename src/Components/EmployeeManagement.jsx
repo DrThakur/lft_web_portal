@@ -631,6 +631,8 @@ const EmployeeManagement = () => {
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
           globalFilter={globalFilter}
           header={header}
+          scrollable
+          scrollHeight="600px"
         >
           <Column
             selectionMode="multiple"

@@ -123,7 +123,7 @@ const Sidebar = () => {
   if (
     selectedMainItem === "Dashboard" ||
     selectedMainItem === "Admin" ||
-    selectedMainItem === "Learning & Developement",
+    selectedMainItem === "Learning & Developement" ||
     selectedMainItem === "Helpdesk"
   ) {
     // If selectedMainItem is "Dashboard", set activeRightSidebar to false

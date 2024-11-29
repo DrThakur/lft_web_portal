@@ -10,14 +10,26 @@ const AddTeamForm = ({ onAddTeam, onSave }) => {
   const [showSelectedMembers, setShowSelectedMembers] = useState(false);
 
   const handleAddMember = (selectedOption) => {
-       setSelectedMembers([...selectedOption]);
+    setSelectedMembers([...selectedOption]);
   };
 
-  const handleFinalAddMember = ()=> {
+  const handleFinalAddMember = () => {
     setShowSelectedMembers(true);
-  }
-  
+  };
+
+  const removeMember = (memberValue) => {
+    setSelectedMembers((prevMembers) =>
+      prevMembers.filter((member) => member.value !== memberValue)
+    );
+  };
+
+
   const handleSaveTeam = () => {
+    if (!teamName || selectedMembers.length === 0 || !role) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
     const newTeam = {
       name: teamName,
       members: selectedMembers,
@@ -93,7 +105,7 @@ const AddTeamForm = ({ onAddTeam, onSave }) => {
               <span>Selected Members:</span>
               <ul>
                 {selectedMembers.map((member) => (
-                  <li key={member.value}>{member.label}</li>
+                  <li key={member.value}>{member.label} <button className="bg-red-500 rounded-lg shadow-md" onClick={() => removeMember(member.value)}>Remove</button></li>
                 ))}
               </ul>
             </div>

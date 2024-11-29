@@ -16,7 +16,6 @@ const AnnouncementList = () => {
     // Initially, display the first three announcements
     setVisibleAnnouncements(announcements.slice(0, 3));
 
-
     // Start auto-scrolling
     const intervalId = setInterval(scrollAnnouncements, 5000);
 
@@ -24,13 +23,13 @@ const AnnouncementList = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-
   const scrollAnnouncements = () => {
-    announcementIndexRef.current = (announcementIndexRef.current + 1) % announcements.length;
+    announcementIndexRef.current =
+      (announcementIndexRef.current + 1) % announcements.length;
     const nextAnnouncements = [
       announcements[announcementIndexRef.current],
       announcements[(announcementIndexRef.current + 1) % announcements.length],
-      announcements[(announcementIndexRef.current + 2) % announcements.length]
+      announcements[(announcementIndexRef.current + 2) % announcements.length],
     ];
     setVisibleAnnouncements(nextAnnouncements);
   };
@@ -97,16 +96,32 @@ const AnnouncementList = () => {
     // Add more announcements here as needed
   ];
 
+
+
   return (
-    <div className="rounded p-1 w-full h-full" >
-      <div className="flex flex-row justify-between items-center mb-4 bg-red-200 rounded-lg  py-2 px-2">
-        <h1 className="text-lg font-bold">Announcements</h1>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded text-xs ">
-          + Add New
+    <div className="w-full p-2 rounded-lg h-full">
+      {/* Header */}
+      <div className="flex justify-between items-center gap-2 mb-4 bg-red-200 rounded-lg py-2 px-2 ">
+        <h1 className="text-base md:text-xl font-bold">Announcements</h1>
+        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded text-xs flex items-center">
+        <span className="sm:hidden">+</span>   
+        {/* Show + on small screens */}
+          <span className="lg:flex xl:flex 2xl:flex">+ Add</span>
+          {/* Show + Add New on medium and larger screens */}
         </button>
       </div>
-      <div className="overflow-y-scroll max-h-96" style={{ maxHeight: "135px", overflowY: "auto" ,overflowX:"hidden", top: `-${announcementIndexRef.current * 100}%`, transition: 'top 1s cubic-bezier(0, 1, 0, 1)' }}  >
-        <div className="grid grid-cols-1 gap-1">
+      {/* Scrollable Announcement List */}
+      <div
+        ref={announcementContainerRef}
+        className="overflow-y-auto max-h-32 sm:max-h-40 md:max-h-48 lg:max-h-56 xl:max-h-64"
+        style={{
+          overflowX: "hidden",
+          top: `-${announcementIndexRef.current * 100}%`,
+          transition: "top 1s cubic-bezier(0, 1, 0, 1)",
+        }}
+        onScroll={handleScroll}
+      >
+        <div className="grid grid-cols-1 gap-2">
           {visibleAnnouncements.map((announcement, index) => (
             <Announcement
               key={index}
@@ -117,8 +132,11 @@ const AnnouncementList = () => {
           ))}
         </div>
       </div>
-      <div className="text-center -mt-3">
-        <button className="text-blue-500 hover:underline" onClick={handleViewAll}>
+      <div className="text-center mt-2 sm:mt-4">
+        <button
+          className="text-blue-500 hover:underline text-xs sm:text-sm md:text-base"
+          onClick={handleViewAll}
+        >
           View All
         </button>
       </div>
