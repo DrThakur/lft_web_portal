@@ -28,9 +28,16 @@ import React from 'react'
 
 const HREvents = ({data}) => {
   return (
-    <div className="p-6 bg-gradient-to-r from-purple-400 to-pink-400 text-white shadow-lg rounded-lg max-h-96">
+    <div className="p-6 bg-gradient-to-r from-purple-400 to-pink-400 text-white shadow-lg rounded-lg max-h-96 min-h-96">
       <h2 className="text-2xl font-extrabold mb-4">Events</h2>
       
+      <div className='overflow-y-hidden max-h-72 hover:overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500'>
+
       <div className="mb-6">
         <h3 className="text-xl font-bold mb-2">This Week</h3>
         <ul className="space-y-1">
@@ -57,6 +64,7 @@ const HREvents = ({data}) => {
             </li>
           ))}
         </ul>
+      </div>
       </div>
     </div>
   )

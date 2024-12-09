@@ -33,11 +33,18 @@ import React from 'react'
 
 const EmployeePIPNotice = ({data}) => {
   return (
-    <div className="p-6 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-500 text-white shadow-xl rounded-xl max-h-96 overflow-y-hidden">
-      <h2 className="text-2xl font-extrabold mb-6">Employees on PIP/Notice</h2>
+    <div className="p-6 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-500 text-white shadow-xl rounded-xl max-h-96 min-h-96">
+      <h2 className="text-2xl font-extrabold mb-6">PIP/Notice</h2>
       
+      <div className='overflow-y-hidden max-h-64 hover:overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500'>
+    
       <div className="mb-6">
-        <h3 className="text-xl font-bold mb-3 border-b-2 border-white pb-1">PIP/Notice</h3>
+        <h3 className="text-xl font-bold mb-3 border-b-2 border-white pb-1 overflow-y-auto">PIP/Notice</h3>
         <ul className="space-y-3">
           {data.pipNotice.map((emp, index) => (
             <li 
@@ -76,6 +83,7 @@ const EmployeePIPNotice = ({data}) => {
             </li>
           ))}
         </ul>
+      </div>
       </div>
     </div>
   )
