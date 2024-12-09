@@ -25,8 +25,9 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
 const DepartmentAttritionChart = ({data}) => {
   return (
-    <div className="p-6 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 shadow-lg rounded-xl text-white max-h-96">
-      <h2 className="text-2xl font-extrabold mb-4 text-center">Department-wise Attrition</h2>
+    <div className="p-6 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 shadow-lg rounded-xl text-white max-h-96 min-h-96">
+      <h2 className="text-2xl font-extrabold mb-4">Department-wise Attrition</h2>
+      <div className="flex justify-center items-center w-full" >
       <BarChart
         width={280}
         height={270}
@@ -48,6 +49,7 @@ const DepartmentAttritionChart = ({data}) => {
         />
         <Bar dataKey="attrition" fill="#201ae8" />
       </BarChart>
+      </div>
     </div>
   )
 }

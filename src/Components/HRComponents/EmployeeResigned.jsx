@@ -29,28 +29,35 @@ const EmployeesResigned = ({ data }) => {
   const filteredData = filterData();
 
   return (
-    <div className="p-6 bg-gradient-to-r from-red-400 via-orange-500 to-yellow-500 shadow-lg rounded-xl text-white max-h-96 overflow-y-hidden">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-extrabold">Employees Resigned</h2>
+    <div className="p-6 bg-gradient-to-r from-red-400 via-orange-500 to-yellow-500 shadow-lg rounded-xl text-white max-h-96 min-h-96 overflow-y-hidden">
+      
+      <div className=" flex justify-between mb-4 flex-col sm:flex-row sm:justify-between md:flex-col">
+        <h2 className="text-2xl font-extrabold mb-4 sm:mr-1">Employees Resigned</h2>
         <input
           type="date"
-          className="p-2 bg-white text-gray-800 rounded-md shadow focus:outline-none"
+          className="p-2 bg-white text-gray-800 rounded-md shadow focus:outline-none "
           value={selectedDate}
           onChange={handleDateChange}
         />
       </div>
-      <ul className="space-y-4">
+      <ul className="space-y-4 overflow-y-hidden max-h-56 hover:overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+
         {filteredData.length > 0 ? (
           filteredData.map((employee, index) => (
             <li
               key={index}
-              className="bg-white bg-opacity-10 p-4 rounded-lg shadow flex items-center justify-between"
+              className="bg-white bg-opacity-10 p-4 rounded-lg shadow flex flex-col sm:flex-row sm:justify-between lg:flex-col"
             >
               <div>
                 <h3 className="text-lg font-semibold">{employee.name}</h3>
                 <p className="text-sm text-gray-200">LWD: {format(parseISO(employee.lwd), 'dd-MMM-yyyy')}</p>
               </div>
-              <div className="text-sm font-medium text-right">
+              <div className="text-sm font-medium sm:min-w-24">
                 <p className="bg-white bg-opacity-20 px-2 py-1 rounded-lg">{employee.department}</p>
               </div>
             </li>
