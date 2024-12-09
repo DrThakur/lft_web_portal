@@ -282,7 +282,7 @@ const EosApproval = () => {
   const statusBodyTemplate = (rowData) => {
     return (
       <Tag
-        value={rowData.inventoryStatus ||"Enter Remarks"}
+        value={rowData.inventoryStatus || "Enter Remarks"}
         severity={getSeverity(rowData)}
       ></Tag>
     );
@@ -303,7 +303,6 @@ const EosApproval = () => {
     return n !== Infinity && String(n) === str && n >= 0;
   };
 
-
   const onCellEditComplete = (e) => {
     let { rowData, newValue, field, originalEvent: event } = e;
 
@@ -320,7 +319,6 @@ const EosApproval = () => {
         break;
     }
   };
-
 
   const cellEditor = (options) => {
     if (options.field === "price") return priceEditor(options);
@@ -349,8 +347,6 @@ const EosApproval = () => {
     );
   };
 
-
-
   const [approvedIds, setApprovedIds] = useState([]);
   const [rejectedIds, setRejectedIds] = useState([]);
 
@@ -364,9 +360,6 @@ const EosApproval = () => {
 
   const isApproved = (id) => approvedIds.includes(id);
   const isRejected = (id) => rejectedIds.includes(id);
-
- 
-
 
   const actionBodyTemplate = (rowData) => {
     const disableButtons =
@@ -430,7 +423,7 @@ const EosApproval = () => {
         <div className="card card-w-title">
           <div className="flex flex-wrap flex-row justify-between items-center bg-gray-100 p-2 rounded-lg mb-1">
             <h1 className="font-bold text-2xl white-space: nowrap flex-shrink: 0">
-              Eos Approval
+              EoS Approval
             </h1>
             <div className="flex  flex-wrap flex-row justify-between items-center gap-4">
               <div className="bg-yellow-100 hover:bg-yellow-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
@@ -486,6 +479,8 @@ const EosApproval = () => {
             showGridlines
             globalFilter={globalFilter}
             size="small"
+            scrollable
+            scrollHeight="600px"
           >
             <Column
               header="#"

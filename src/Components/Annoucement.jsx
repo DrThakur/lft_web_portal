@@ -1,14 +1,17 @@
 import React from "react";
 
 const Announcement = ({ date, title, content, fullWidth }) => {
-  const containerClasses = fullWidth ? "w-full" : "max-w-72";
+  const containerClasses = fullWidth ? "w-full" : "max-w-sm";
   return (
-    <div className={`${containerClasses} mx-auto bg-white rounded ml-1 p-2 `}>
-      <div className="flex flex-col rounded -ml-1 p-1 hover:bg-red-50 hover:shadow">
-        <span className="text-xs text-gray-500">{date}</span>
-        <h2 className="text-base font-semibold text-gray-800">{title}</h2>
+    <div className={`${containerClasses} mx-auto bg-white rounded-lg p-2 shadow-sm hover:bg-red-50 hover:shadow-md transition-all duration-300`}>
+      <div className="flex flex-col space-y-1">
+          {/* Date */}
+        <span className="text-xs sm:text-sm text-gray-500">{date}</span>
+             {/* Title */}
+        <h2 className="text-sm sm:text-base md:text-lg font-semibold text-gray-800">{title}</h2>
+         {/* Content */}
         <p
-          className={`${fullWidth ? "w-full" : "w-64"} text-gray-700 text-base`}
+          className={`text-xs sm:text-sm md:text-base text-gray-700 ${fullWidth ? "w-full" : "w-auto"}`}
         >
           {content}
         </p>

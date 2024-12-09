@@ -124,42 +124,41 @@ const BirthdaysAndAnniversaries = () => {
   };
 
   return (
-    <div className="rounded p-3 w-full h-full -mt-1">
-      <h2 className="text-lg font-bold mb-1 bg-purple-200 py-2 px-2 -ml-2 -mr-2 rounded-lg">
+    <div className="rounded p-3 w-full h-full bg-white shadow-md">
+      <h2 className="text-lg font-bold mb-1 bg-purple-200 py-2 px-2 rounded-lg">
         Birthdays and Anniversaries
       </h2>
       <div
-        className="h-96 overflow-y-auto"
-        style={{ maxHeight: "137px", overflowY: "auto" }}
+        className="overflow-y-auto overflow-x-auto max-h-32 sm:max-h-40 md:max-h-48 lg:max-h-56 xl:max-h-64"
       >
-        <ul className="space-y-1">
+        <ul className="space-y-1 p-1">
           {displayedDates.map(([date, events]) => (
             <li key={date}>
               <p className="font-semibold">{date}</p>
               <ul className="ml-2">
                 {events.map((event) => (
                   <li key={`${date}-${event.type}-${event.name}`}>
-                    <div className="flex flex-row justify-start gap-1">
-                      <span>{event.name}</span>
+                    <div className="flex flex-row justify-start gap-2 w-full">
+                      <span className="whitespace-nowrap">{event.name}</span>
                       <span>
                         <Badge
-                          style={{ fontSize: "9px" }}
                           value={event.type}
                           severity={
                             event.type === "Birthday" ? "success" : "warning"
                           }
+                            className="text-xs"
                         ></Badge>
                       </span>
                       {event.type === "Anniversary" && (
                         <span>
-                          {" "}
                           <Badge
-                            style={{ fontSize: "9px" }}
+                         
                             value={`${event.years} Year${
                               event.years !== 1 ? "s" : ""
                             }`}
                             severity="info"
-                          ></Badge>{" "}
+                             className="text-xs"
+                          ></Badge>
                         </span>
                       )}
                       <span>
@@ -190,9 +189,9 @@ const BirthdaysAndAnniversaries = () => {
           ))}
         </ul>
       </div>
-      <div className="text-center">
+      <div className="text-center mt-3">
         <button
-          className="text-blue-500 hover:underline"
+          className="text-blue-500 hover:underline text-xs sm:text-sm md:text-base"
           onClick={handleViewAll}
         >
           View All

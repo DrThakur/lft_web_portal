@@ -10,15 +10,18 @@ const Layout = ({ children }) => {
 
   return (
     <div
+      className="layout"
       style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
     >
       <div
+        className="navbar-container"
         style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100 }}
       >
         <Navbar />
       </div>
 
       <div
+        className="sidebar-container"
         style={{ position: "fixed", top: 0, left: 0, bottom: 0, zIndex: 99 }}
       >
         <Sidebar />
@@ -33,7 +36,11 @@ const Layout = ({ children }) => {
         }}
       >
         <div
-          style={{ overflowY: "auto",overflowX:"hidden", height: "calc(100% - 4rem)" }}
+          style={{
+            overflowY: "auto",
+            overflowX: "hidden",
+            height: "calc(100% - 4rem)",
+          }}
           className="children w-full"
         >
           {children}
@@ -57,6 +64,7 @@ const Layout = ({ children }) => {
             onClick={() => setThemeSettings(true)}
             style={{ background: currentColor, borderRadius: "50%" }}
             className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray settingsButton animate-spin-slow"
+            aria-label="Open settings"
           >
             <FiSettings />
           </button>

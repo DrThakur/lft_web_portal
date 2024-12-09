@@ -27,54 +27,51 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="h-screen w-full overflow-hidden rounded-lg p-2 mt-1">
+    <div className="h-full w-full overflow-hidden rounded-lg p-2">
       <Header title="Dashboard" />
-
-      {/* */}
-      <div className="big h-screen grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 grid-rows-4 gap-2 -mt-8">
+      <div className="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-2">
         <div
-          className={`col-start-1 col-end-2 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300`}
         >
           <Events />
         </div>
         <div
-          className={`col-start-2 col-end-3 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300`}
         >
           <QuickAccess />
         </div>
 
         <div
-          className={`col-start-3 col-end-4 row-start-1 row-end-2 rounded-lg shadow-md flex flex-col justify-center items-center cursor-pointer bg-white hover:shadow-xl hover:z-50`}
-        >
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300`}>
           <JobVacancy />
         </div>
 
         <div
-          className={`col-start-4 col-end-5 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50`}
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300`}
         >
           <HolidayCalendar holidays={holidays} />
         </div>
 
         <div
-          className={`col-start-5 col-end-6 row-start-1 row-end-2  rounded-lg shadow-md cursor-pointer p-1 bg-white hover:shadow-xl hover:z-50`}
+          className={`rounded-lg shadow-md cursor-pointer p-2 bg-white hover:shadow-xl transition duration-300`}
         >
           <AnnouncementList />
         </div>
 
         <div
-          className={`col-start-6 col-end-7 row-start-1 row-end-2 rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl hover:z-50 `}
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300`}
         >
           <BirthdaysAndAnniversaries />
         </div>
 
         <div
-          className={`rounded-lg col-start-1 col-end-4 row-start-2 row-end-4  shadow-md  cursor-pointer p-2 bg-white hover:shadow-xl hover:z-50`}
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300 col-span-1 md:col-span-2 lg:col-span-4 xl:col-span-3`}
         >
           <NewHire />
         </div>
 
         <div
-          className={`rounded-lg col-start-4 col-end-7 row-start-2 row-end-4  shadow-md  cursor-pointer bg-black hover:shadow-xl hover:z-50 `}
+          className={`rounded-lg shadow-md  cursor-pointer bg-black hover:shadow-xl  transition duration-300 col-span-1 md:col-span-2 lg:col-span-4 xl:col-span-3`}
         >
           <AwardsRecognition />
         </div>

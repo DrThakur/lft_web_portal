@@ -3,7 +3,7 @@ import ProjectCard from "./ProjectCard";
 import axios from "axios";
 import { FixedSizeGrid as Grid } from "react-window";
 
-// const projects = [
+
 //   {
 //     id: 1,
 //     name: "LFT Intranet Web Portal",
@@ -194,10 +194,7 @@ const ProjectTableView = ({ selectedView }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // const baseURL = process.env.REACT_APP_BASE_URL;
-  // const port = process.env.REACT_APP_BACKEND_PORT;
-  // const apiUrl2 = `https://lft-web-portal-backend-1.onrender.com/projects`;
-  // const apiUrl1 = `http://${baseURL}:${port}/projects`;
+ 
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -226,7 +223,11 @@ const ProjectTableView = ({ selectedView }) => {
   // Render function for Grid items
   const renderRow = ({ columnIndex, rowIndex, style }) => {
     const index = rowIndex * 4 + columnIndex; // Calculate the correct index for the grid
+    if (index >= projects.length) return null;
+
+
     const project = projects[index];
+    console.log("my project", project)
 
     return project ? (
       <div
@@ -235,7 +236,7 @@ const ProjectTableView = ({ selectedView }) => {
           padding: "0px 10px",
           boxSizing: "border-box", // Ensure padding is included in width calculation
         }}
-        key={project.projectId}
+        key={project._id}
       >
         <ProjectCard project={project} />
       </div>
