@@ -9,14 +9,19 @@ const JobVacancy = () => {
   };
 
   return (
-    <div className="p-4 w-full h-full bg-white rounded-lg shadow-lg">
+    <div className="p-4 w-full h-full bg-white rounded-lg shadow-lg max-h-96 min-h-96">
       <div>
         {/* Heading for Job Openings */}
         <h3 className="text-lg md:text-xl font-bold mb-2 bg-pink-200 py-2 px-3 rounded-lg">
           Job Openings
         </h3>
          {/* List of Job Openings with Badge */}
-        <div className="overflow-y-auto max-h-32 sm:max-h-40 md:max-h-48 lg:max-h-56 xl:max-h-64">
+        <div className="max-h-64 overflow-auto  sm:overflow-y-hidden sm:hover:overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
           <ul
             className="flex flex-col justify-start items-start w-full space-y-1 sm:space-y-2 md:space-y-3"
           >
