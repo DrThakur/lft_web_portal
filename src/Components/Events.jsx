@@ -38,13 +38,18 @@ const Events = () => {
   ];
 
   return (
-    <div className="p-4 w-full h-full bg-white rounded-lg shadow-lg">
+    <div className="p-4 w-full h-full bg-white rounded-lg shadow-lg max-h-96 min-h-96">
       <div>
         <h3 className="text-lg md:text-xl font-bold mb-4 bg-blue-100 py-2 px-3 rounded-lg">
           Upcoming Events
         </h3>
       </div>
-      <div className="space-y-2 max-h-32 sm:max-h-40 md:max-h-48 lg:max-h-56 xl:max-h-64 overflow-y-auto">
+      <div className="space-y-2 max-h-64  overflow-auto  lg:overflow-y-hidden sm:hover:overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
         {events.map((event, index) => (
           <div
             key={index}

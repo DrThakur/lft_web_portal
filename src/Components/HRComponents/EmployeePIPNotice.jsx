@@ -29,20 +29,67 @@
 // export default EmployeePIPNotice
 
 
-import React from 'react'
+import React,{ useState, useRef, useEffect } from 'react'
 
 const EmployeePIPNotice = ({data}) => {
+  const [isTouched, setIsTouched] = useState(false);
+  const scrollContainerRef = useRef(null);
+
+  // Timer to hide the scrollbar after a period of inactivity (e.g., 2 seconds)
+  const hideScrollbarTimeout = useRef(null);
+
+  // Function to handle touch or scroll event
+  const handleInteraction = () => {
+    if (!isTouched) {
+      setIsTouched(true);
+    }
+
+    // Clear the previous timeout and start a new one to hide the scrollbar
+    if (hideScrollbarTimeout.current) {
+      clearTimeout(hideScrollbarTimeout.current);
+    }
+
+    // Set timeout to hide the scrollbar after 2 seconds of inactivity
+    hideScrollbarTimeout.current = setTimeout(() => {
+      setIsTouched(false);
+    }, 2000); // 2000 ms = 2 seconds
+  };
+
+  const handleTouchEnd = () => {
+    setIsTouched(false); // Hide scrollbar when touch ends
+    if (hideScrollbarTimeout.current) {
+      clearTimeout(hideScrollbarTimeout.current);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      // Cleanup the timeout when the component unmounts
+      if (hideScrollbarTimeout.current) {
+        clearTimeout(hideScrollbarTimeout.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="p-6 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-500 text-white shadow-xl rounded-xl max-h-96 min-h-96">
       <h2 className="text-2xl font-extrabold mb-6">PIP/Notice</h2>
       
-      <div className='overflow-y-hidden max-h-64 hover:overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-2
-  [&::-webkit-scrollbar-track]:rounded-full
-  [&::-webkit-scrollbar-thumb]:rounded-full
-  [&::-webkit-scrollbar-thumb]:bg-gray-300
-  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500'>
-    
+      <div
+        ref={scrollContainerRef}
+        className={`overflow-y-hidden max-h-64 transition-all duration-300
+          ${isTouched ? 'overflow-y-auto' : 'overflow-y-hidden'}
+          hover:overflow-y-auto
+          [&::-webkit-scrollbar]:w-2 
+          [&::-webkit-scrollbar-track]:rounded-full 
+          [&::-webkit-scrollbar-thumb]:rounded-full 
+          [&::-webkit-scrollbar-thumb]:bg-white 
+          dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
+          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}
+        onTouchStart={handleInteraction}   // Trigger interaction on touch start
+        onTouchEnd={handleTouchEnd}        // Trigger interaction end on touch
+      >
+        
       <div className="mb-6">
         <h3 className="text-xl font-bold mb-3 border-b-2 border-white pb-1 overflow-y-auto">PIP/Notice</h3>
         <ul className="space-y-3">

@@ -99,7 +99,7 @@ const AnnouncementList = () => {
 
 
   return (
-    <div className="w-full p-2 rounded-lg h-full">
+    <div className="w-full p-2 rounded-lg h-full max-h-96 min-h-96">
       {/* Header */}
       <div className="flex justify-between items-center gap-2 mb-4 bg-red-200 rounded-lg py-2 px-2 ">
         <h1 className="text-base md:text-xl font-bold">Announcements</h1>
@@ -113,7 +113,12 @@ const AnnouncementList = () => {
       {/* Scrollable Announcement List */}
       <div
         ref={announcementContainerRef}
-        className="overflow-y-auto max-h-32 sm:max-h-40 md:max-h-48 lg:max-h-56 xl:max-h-64"
+        className=" max-h-64  overflow-y-hidden hover:overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
         style={{
           overflowX: "hidden",
           top: `-${announcementIndexRef.current * 100}%`,

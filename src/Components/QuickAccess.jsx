@@ -3,13 +3,18 @@ import { Link } from "react-router-dom";
 
 const QuickAccess = () => {
   return (
-    <div className="p-4 w-full h-full bg-white rounded-lg shadow-lg">
+    <div className="p-4 w-full h-full bg-white rounded-lg shadow-lg max-h-96 min-h-96">
       <div>
         <h3 className="text-lg md:text-xl font-bold mb-4 bg-yellow-100 py-2 px-3 rounded-lg">
           Quick Access
         </h3>
         {/* Quick Access List */}
-        <ul className="flex flex-col justify-start items-start w-full space-y-2 ">
+        <ul className="flex flex-col justify-start items-start w-full space-y-2 max-h-64  overflow-y-hidden hover:overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
           <li className="w-full">
             <Link
               to="/test13"
