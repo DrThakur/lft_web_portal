@@ -57,6 +57,8 @@ const Navbar = () => {
   } = useStateContext();
 
   const [visible, setVisible] = useState(false);
+  const [isSearchVisible, setIsSearchVisible] = useState(false); // Track search input visibility
+  const [searchText, setSearchText] = useState(""); // Track the search text
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -108,18 +110,31 @@ const Navbar = () => {
     handleClick(isClicked.userProfile ? "" : "userProfile");
   };
 
+  //small screen search icon visibility
+  const toggleSearch = () => {
+    setIsSearchVisible(!isSearchVisible);
+    setSearchText("");  // Clear search text when toggling
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
   return (
     <div className="flex flex-grow justify-between p-2 relative shadow-md bg-white rounded-bl-lg rounded-br-lg ">
-      <div className="flex flex-row flex-wrap justify-start items-center gap-6">
+      <div className="flex flex-row flex-wrap justify-start items-center gap-2 lg:gap-6">
         <img
           src={logo} // Replace with the path to your Omniflex logo
           alt="Omniflex Logo"
           className="w-10 h-10 mr-2"
         />
 
-        <p className="text-2xl font-bold" style={{ color: currentColor }}>
-          Omniflex
-        </p>
+        {/* Conditional rendering for "Omniflex" text */}
+        {screenSize > 900 && (
+          <p className="text-2xl font-bold" style={{ color: currentColor }}>
+            Omniflex
+          </p>
+        )}
 
         <NavButton
           title="Menu"
@@ -243,22 +258,66 @@ const Navbar = () => {
       </div>
 
       <div className="flex justify-evenly">
-        <Tooltip title="Search" placement="bottom" arrow>
-          <div
-            className={`flex justify-between items-center border-solid  rounded-[50px] border-gray-300 bg-white overflow-hidden max-w-96 shadow-md mr-2`}
-            style={{ borderColor: currentColor }}
-          >
-            <span>
-              <FaSearch style={{ color: currentColor }} className="m-2" />
-            </span>
-            <input
-              type="text"
-              id="search"
-              placeholder="Search here"
-              className="border-0 w-24 text-sm focus:outline-0"
-            />
-          </div>
-        </Tooltip>
+        {/* Show search icon on small screens */}
+        {screenSize < 767 && (
+          <>
+            <Tooltip title="Search" placement="bottom" arrow>
+              <div
+                className={`flex justify-between items-center border-solid rounded-[50px] border-gray-300 bg-white overflow-hidden max-w-96 md:shadow-md mr-2`}
+                style={{ borderColor: currentColor }}
+              >
+                {isSearchVisible ? (
+                  <>
+                    <button
+                      onClick={() => setIsSearchVisible(false)}
+                      className="p-2"
+                      style={{ color: currentColor }}
+                    >
+                      <FaSearch />
+                    </button>
+                    <input
+                      type="text"
+                      id="search"
+                      placeholder="Search here"
+                      className="border-0 w-24 text-sm focus:outline-0"
+                      value={searchText}
+                      onChange={handleSearchChange}
+                    />
+                  </>
+                ) : (
+                  <button
+                    onClick={toggleSearch}
+                    className="p-2"
+                    style={{ color: currentColor }}
+                  >
+                    <FaSearch />
+                  </button>
+                )}
+              </div>
+            </Tooltip>
+          </>
+        )}
+
+        {/* For large screens, keep the normal search bar */}
+        {screenSize > 767 && (
+          <Tooltip title="Search" placement="bottom" arrow>
+            <div
+              className={`flex justify-between items-center border-solid rounded-[50px] border-gray-300 bg-white overflow-hidden max-w-96 md:shadow-md mr-2`}
+              style={{ borderColor: currentColor }}
+            >
+              <span>
+                <FaSearch style={{ color: currentColor }} className="m-2" />
+              </span>
+              <input
+                type="text"
+                id="search"
+                placeholder="Search here"
+                className="border-0 w-24 text-sm focus:outline-0"
+              />
+            </div>
+          </Tooltip>
+        )}
+
         {/*
         <NavButton
           title="Chat"
@@ -270,15 +329,19 @@ const Navbar = () => {
           className="hover:drop-shadow-xl hover:bg-light-gray"
         />
         */}
-        <NavButton
-          title="Notifications"
-          position="bottom"
-          dotColor={currentColor}
-          customFunc={toggleNotification}
-          color={currentColor}
-          icon={<RiNotification3Line />}
-          className="hover:drop-shadow-xl hover:bg-light-gray"
-        />
+        {/* Notifications button */}
+        {screenSize > 900 && (
+          <NavButton
+            title="Notifications"
+            position="bottom"
+            dotColor={currentColor}
+            customFunc={toggleNotification}
+            color={currentColor}
+            icon={<RiNotification3Line />}
+            className="hover:drop-shadow-xl hover:bg-light-gray"
+          />
+        )}
+
         <Tooltip title="Profile" placement="bottom" arrow>
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg "
@@ -289,12 +352,13 @@ const Navbar = () => {
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy0OobsBilOGySRuaSpCmAMSiuupz02KRRgyDyM1308w&s"
               alt="user-profile"
             />
-            <p>
-              <span className="text-gray-400 text-14">Hi,</span>{" "}
-              <span className="text-gray-400 font-bold ml-1 text-14">
-                {user.fullName}
-              </span>
-            </p>
+            {screenSize > 900 &&
+              <p>
+                <span className="text-gray-400 text-14">Hi,</span>{" "}
+                <span className="text-gray-400 font-bold ml-1 text-14">
+                  {user.fullName}
+                </span>
+              </p>}
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </Tooltip>
