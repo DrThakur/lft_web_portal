@@ -229,6 +229,9 @@
 
 
 
+
+//bellow practice code
+
 import { useRef, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import logo from "../Images/LFT-Logo.svg";
@@ -330,8 +333,8 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    // If screen width is less than or equal to 1023px, hide the image section
-    if (screenSize <= 1023) {
+    // If screen width is less than or equal to 767px, hide the image section
+    if (screenSize <= 767) {
       setIsImageVisible(false);
     } else {
       setIsImageVisible(true);
@@ -352,7 +355,7 @@ const Login = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 h-screen w-auto">
+    <div className="grid grid-cols-1 md:grid-cols-2 h-screen w-auto">
       {/* Left Section: Image (conditionally rendered based on screen size) */}
       {isImageVisible && (
         <div className="bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center m-4 rounded-md">
@@ -365,7 +368,7 @@ const Login = () => {
                   alt={`Slide ${index}`}
                   className={`transition-opacity duration-500 ${index === currentImage ? "opacity-100" : "opacity-0"
                     }`}
-                  style={{ maxWidth: "80%", maxHeight: "80%", margin: "auto" }} // Ensure image scales to fit
+                  style={{ maxWidth: "80%", maxHeight: "80%", margin: "auto"  }} // Ensure image scales to fit
                 />
               ))}
             </div>
@@ -477,6 +480,5 @@ const Login = () => {
 };
 
 export default Login;
-
 
 
