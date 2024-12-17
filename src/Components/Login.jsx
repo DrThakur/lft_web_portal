@@ -8,8 +8,8 @@ import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const images = [
-  `man_with_laptop.png`,
-  `man_with_laptop.png`,
+  `PngItem_1620792.png`,
+  `PngItem_1403890.png`,
   `man_with_laptop.png`,
 ];
 
@@ -24,6 +24,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [isImageVisible, setIsImageVisible] = useState(true);
+  const [containerClass, setContainerClass] = useState("");
 
   // const baseURL = process.env.REACT_APP_BASE_URL;
   // const port = process.env.REACT_APP_BACKEND_PORT;
@@ -105,6 +106,17 @@ const Login = () => {
   }, [screenSize]);
 
   useEffect(() => {
+    // Update container class based on screen size
+    if (screenSize <= 420) {
+      setContainerClass("flex flex-col space-y-2"); // Small devices
+    } else if (screenSize >= 768 && screenSize <= 954) {
+      setContainerClass("flex flex-col space-y-2"); // Tablet-like layout
+    } else {
+      setContainerClass("flex flex-row justify-between items-center "); // Default large-screen layout
+    }
+  }, [screenSize]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prevImage) =>
         prevImage === images.length - 1 ? 0 : prevImage + 1
@@ -148,9 +160,8 @@ const Login = () => {
             {images.map((_, index) => (
               <button
                 key={index}
-                className={`w-2.5 h-2.5 rounded-full mx-1 ${
-                  index === currentImage ? "bg-white" : "bg-white opacity-50"
-                }`}
+                className={`w-2.5 h-2.5 rounded-full mx-1 ${index === currentImage ? "bg-white" : "bg-white opacity-50"
+                  }`}
                 onClick={() => handleSlideChange(index)}
               ></button>
             ))}
@@ -206,15 +217,15 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="mb-4 mt-4 flex  justify-between items-center">
-              <div className="flex items-center">
+            <div className={`mt-4 mb-4 ${containerClass}`}>
+              <div className="flex items-center ">
                 <input type="checkbox" id="remember" className="mr-2" />
-                <label htmlFor="remember" className="text-xl">
+                <label htmlFor="remember" className="text-lg">
                   Remember me
                 </label>
               </div>
-              <div className="font-bold text-blue-600 text-xl ml-4">
-                <Link to="/forgot-password">Forgot Password</Link>
+              <div className="font-bold text-blue-600 text-lg ">
+                <a href="/forgot-password">Forgot Password</a>
               </div>
             </div>
             <p className="text-red-500 text-xl font-bold mb-2">{errorMsg}</p>
@@ -224,8 +235,8 @@ const Login = () => {
               disabled={isFetching || loading}
               onClick={handleSignin}
               className={`w-full py-3 text-xl rounded-md ${isFetching || loading
-                  ? "bg-red-300 cursor-not-allowed"
-                  : "bg-blue-500 text-white hover:bg-blue-600"
+                ? "bg-red-300 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
                 }`}
             >
               {loading ? "Loading..." : "Login"}
