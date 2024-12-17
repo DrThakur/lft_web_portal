@@ -130,11 +130,11 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-r from-blue-500 to-purple-500">
+    <div className="flex min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 ">
       {/* Left Section: Image */}
       {isImageVisible && (
         <div className="w-full md:w-1/2 flex items-center justify-center bg-cover bg-center ml-4 relative overflow-hidden">
-          <div className="w-full h-full flex justify-center items-center relative">
+          <div className="w-full h-full flex justify-center items-center relative transition-all duration-500 ease-in-out transform hover:scale-105">
             {images.map((image, index) => (
               <div
                 key={index}
@@ -171,8 +171,8 @@ const Login = () => {
 
 
       {/* Right Section: Login Form */}
-      <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-8 md:px-12 md:py-16">
-        <div className="w-full max-w-md space-y-2 bg-white p-6 rounded-xl shadow-2xl">
+      <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-8 md:px-12 md:py-16 ">
+        <div className="w-full max-w-md space-y-2 bg-white p-6 rounded-xl shadow-2xl transition-all duration-500 ease-in-out transform hover:scale-105">
           <div className="flex justify-center">
             <img src={logo} alt="Logo" className="h-24 w-44 cursor-pointer" />
           </div>

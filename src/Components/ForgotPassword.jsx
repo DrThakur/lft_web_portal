@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import logo from "../Images/LFT-Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -101,93 +100,100 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center h-screen w-full">
-      <div className="w-1/3 bg-white p-8 shadow-lg rounded-md">
-        <div className="w-full mx-28 mt-4 flex items-center">
-          <img src={logo} alt="Logo" className="h-56 w-56 cursor-pointer" />
+    <div className="bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center min-h-screen min:w-full p-8">
+      <div className="w-full sm:w-11/12 md:w-8/12 lg:w-5/12 xl:w-4/12 bg-white p-8 shadow-xl rounded-xl transition-all duration-500 ease-in-out transform hover:scale-105">
+        <div className="w-full mx-auto mt-4 flex items-center justify-center">
+          <img src={logo} alt="Logo" className="h-28 w-28 sm:h-32 sm:w-32 cursor-pointer" />
         </div>
-        <h2 className="text-3xl font-bold mb-4">Forgot Password</h2>
+        <h2 className="text-3xl font-bold mb-4 text-center text-gray-800">Forgot Password</h2>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-2xl font-bold mb-4">
+          <label htmlFor="email" className="block text-lg font-bold mb-2 text-gray-700">
             Email
           </label>
           <input
             type="email"
             id="email"
-            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 text-2xl"
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 text-lg"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={showFields}
+            required
           />
         </div>
         {showFields ? (
           <div className="mt-4">
-            <label htmlFor="code" className="block text-2xl font-bold mb-4">
+            <label htmlFor="code" className="block text-lg font-bold mb-2 text-gray-700">
               Code
             </label>
             <input
               type="text"
               placeholder="Enter code"
-              className="w-full px-3 py-3 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring focus:ring-blue-500 text-2xl"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring focus:ring-blue-500 text-lg"
               value={code}
               onChange={(e) => setCode(e.target.value)}
+              required
             />
 
-            <label htmlFor="password" className="block text-2xl font-bold mb-4">
+            <label htmlFor="newPassword" className="block text-lg font-bold mb-2 text-gray-700">
               New Password
             </label>
             <div className="relative">
               <input
                 type={newPasswordShown ? "text" : "password"}
                 placeholder="New Password"
-                className="w-full px-3 py-3 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring focus:ring-blue-500 text-2xl"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring focus:ring-blue-500 text-lg"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
+                required
               />
               <button
                 type="button"
-                className="absolute -mt-1 top-1/2 right-2 transform -translate-y-1/2 text-gray-500 focus:outline-none text-2xl"
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 focus:outline-none text-xl"
                 onClick={toggleNewPasswordVisiblity}
               >
                 {newPasswordShown ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
 
-            <label htmlFor="password" className="block text-2xl font-bold mb-4">
+            <label htmlFor="confirmPassword" className="block text-lg font-bold mb-2 text-gray-700">
               Confirm New Password
             </label>
             <div className="relative">
               <input
                 type={confirmPasswordShown ? "text" : "password"}
                 placeholder="Confirm New Password"
-                className="w-full px-3 py-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring focus:ring-blue-500 text-2xl"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring focus:ring-blue-500 text-lg"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                required
               />
               <button
                 type="button"
-                className="absolute -mt-2 top-1/2 right-2 transform -translate-y-1/2 text-gray-500 focus:outline-none text-2xl"
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 focus:outline-none text-xl"
                 onClick={toggleConfirmPasswordVisiblity}
               >
                 {confirmPasswordShown ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
+
             <button
               onClick={handleResetPassword}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-md mb-2 focus:outline-none focus:ring focus:ring-blue-500 text-2xl"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md mb-2 focus:outline-none focus:ring focus:ring-blue-500 transition-all duration-300"
+              disabled={loading}
             >
-              Reset My Password
+              {loading ? "Resetting..." : "Reset My Password"}
             </button>
-            <div className="flex justify-between font-bold text-xl mt-4">
+            <div className="flex justify-between font-bold text-lg mt-4">
               <Link to="/" className="text-blue-500 hover:text-blue-800">
                 Back to Login
               </Link>
               <button
                 onClick={handleSendCode}
                 className="text-blue-500 hover:text-blue-800"
+                disabled={loading}
               >
-                Resend Code
+                {loading ? "Sending..." : "Resend Code"}
               </button>
             </div>
           </div>
@@ -195,12 +201,13 @@ const ForgotPassword = () => {
           <div>
             <button
               onClick={handleSendCode}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring focus:ring-blue-500 text-2xl"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring focus:ring-blue-500 transition-all duration-300"
+              disabled={loading}
             >
-              Send Code
+              {loading ? "Sending..." : "Send Code"}
             </button>
             {message && <p className="text-lg mt-4 text-gray-600">{message}</p>}
-            <div className="font-bold text-xl mt-4">
+            <div className="font-bold text-lg mt-4">
               <Link to="/" className="text-blue-500 hover:text-blue-800">
                 Go back to login
               </Link>
