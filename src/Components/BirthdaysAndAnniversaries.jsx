@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Badge } from "primereact/badge";
@@ -7,27 +8,11 @@ import birthdayGif from "../data/icons8-happy-birthday.gif";
 import axios from "axios";
 import "./BirthdayAnniversary.css";
 
-const employees = [
-  { name: "John Doe", birthday: "1990-06-15", hireDate: "2015-06-03" },
-  { name: "Jane Smith", birthday: "1985-06-25", hireDate: "2016-06-10" },
-  { name: "Bob Johnson", birthday: "1992-06-05", hireDate: "2017-06-20" },
-  { name: "Bobby John", birthday: "1992-06-05", hireDate: "2017-06-21" },
-  { name: "John Cena", birthday: "1992-06-06", hireDate: "2017-06-22" },
-
-  { name: "John Doe", birthday: "1990-07-15", hireDate: "2015-07-03" },
-  { name: "Jane Smith", birthday: "1985-07-25", hireDate: "2016-07-10" },
-  { name: "Bob Johnson", birthday: "1992-07-05", hireDate: "2017-07-20" },
-  { name: "Bobby John", birthday: "1992-07-05", hireDate: "2017-07-21" },
-  { name: "John Cena", birthday: "1992-07-06", hireDate: "2017-07-22" },
-  // Add more employees here
-];
-
 const BirthdaysAndAnniversaries = () => {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
@@ -48,16 +33,11 @@ const BirthdaysAndAnniversaries = () => {
     fetchEosData();
   }, [apiUrl]);
 
-  console.log("employees", employees);
-
   const getCurrentMonthEmployees = () => {
     if (!employees) return [];
 
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1;
-
-    console.log("my current date", currentDate);
-    console.log("my current month", currentMonth);
 
     return employees.filter((employee) => {
       const birthdayMonth = new Date(employee.dateOfBirth).getMonth() + 1;
@@ -67,7 +47,6 @@ const BirthdaysAndAnniversaries = () => {
   };
 
   const currentMonthEmployees = getCurrentMonthEmployees();
-  console.log("my current month employees", currentMonthEmployees);
   const groupedEvents = {};
 
   currentMonthEmployees.forEach((employee) => {
@@ -76,18 +55,6 @@ const BirthdaysAndAnniversaries = () => {
 
     const birthdayKey = format(birthdayDate, "dd MMM");
     const anniversaryKey = format(anniversaryDate, "dd MMM");
-
-    // console.log("my birthday", birthdayDate);
-
-    // if (!groupedEvents[birthdayKey]) {
-    //   groupedEvents[birthdayKey] = [];
-    // }
-    // if (!groupedEvents[anniversaryKey]) {
-    //   groupedEvents[anniversaryKey] = [];
-    // }
-
-    // groupedEvents[birthdayKey].push({ type: 'Birthday', name: employee.fullName });
-    // groupedEvents[anniversaryKey].push({ type: 'Anniversary', name: employee.fullName, years: new Date().getFullYear() - anniversaryDate.getFullYear() });\
 
     // Grouping birthday events
     if (new Date().getMonth() + 1 === birthdayDate.getMonth() + 1) {
@@ -113,51 +80,54 @@ const BirthdaysAndAnniversaries = () => {
     }
   });
 
-  // console.log("Grouped Events:", groupedEvents);
   const displayedDates = Object.entries(groupedEvents).sort(
     (a, b) => new Date(a[0]) - new Date(b[0])
   );
 
-  // console.log("Dispay date:", displayedDates);
   const handleViewAll = () => {
     // navigate("/test13")
   };
 
   return (
-    <div className="rounded p-3 w-full h-full bg-white shadow-md">
-      <h2 className="text-lg font-bold mb-1 bg-purple-200 py-2 px-2 rounded-lg">
+    <div className="p-4 w-full bg-white rounded-lg shadow-lg max-h-96 min-h-96">
+      <h2 className=" text-base sm:text-lg md:text-2xl lg:text-lg font-bold mb-4 bg-purple-200 py-2 px-3 rounded-lg ">
         Birthdays and Anniversaries
       </h2>
-      <div
-        className="overflow-y-auto overflow-x-auto max-h-32 sm:max-h-40 md:max-h-48 lg:max-h-56 xl:max-h-64"
-      >
+      <div className="space-y-4 max-h-64 min-h-64 overflow-y-auto overflow-x-hidden lg:overflow-x-hidden  lg:overflow-y-hidden sm:hover:overflow-y-auto transition-all duration-300 
+        [&::-webkit-scrollbar]:w-2
+        [&::-webkit-scrollbar-track]:rounded-full 
+        [&::-webkit-scrollbar-thumb]:rounded-full 
+        [&::-webkit-scrollbar-thumb]:bg-gray-300 
+        dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+        dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
         <ul className="space-y-1 p-1">
           {displayedDates.map(([date, events]) => (
             <li key={date}>
-              <p className="font-semibold">{date}</p>
+              <p className="font-semibold text-sm sm:text-base md:text-lg">{date}</p>
               <ul className="ml-2">
                 {events.map((event) => (
                   <li key={`${date}-${event.type}-${event.name}`}>
                     <div className="flex flex-row justify-start gap-2 w-full">
-                      <span className="whitespace-nowrap">{event.name}</span>
+                      <span className="whitespace-nowrap text-xs sm:text-sm md:text-base">
+                        {event.name}
+                      </span>
                       <span>
                         <Badge
                           value={event.type}
                           severity={
                             event.type === "Birthday" ? "success" : "warning"
                           }
-                            className="text-xs"
+                          className="text-xs sm:text-sm"
                         ></Badge>
                       </span>
                       {event.type === "Anniversary" && (
                         <span>
                           <Badge
-                         
                             value={`${event.years} Year${
                               event.years !== 1 ? "s" : ""
                             }`}
                             severity="info"
-                             className="text-xs"
+                            className="text-xs sm:text-sm"
                           ></Badge>
                         </span>
                       )}
@@ -166,8 +136,7 @@ const BirthdaysAndAnniversaries = () => {
                           <img
                             src={birthdayGif}
                             alt="🎉"
-                            width={25}
-                            height={25}
+                            className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
                           />
                         )}
                       </span>
@@ -176,8 +145,7 @@ const BirthdaysAndAnniversaries = () => {
                           <img
                             src={annivarsaryGif}
                             alt="🎂"
-                            width={25}
-                            height={25}
+                            className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
                           />
                         )}
                       </span>
@@ -189,9 +157,9 @@ const BirthdaysAndAnniversaries = () => {
           ))}
         </ul>
       </div>
-      <div className="text-center mt-3">
+      <div className="text-center ">
         <button
-          className="text-blue-500 hover:underline text-xs sm:text-sm md:text-base"
+          className=" text-blue-500 hover:underline text-sm sm:text-base font-semibold transition duration-300 ease-in-out"
           onClick={handleViewAll}
         >
           View All

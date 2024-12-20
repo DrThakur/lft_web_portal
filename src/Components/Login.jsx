@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useStateContext } from "../Contexts/ContextProvider";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const images = [
   `PngItem_1620792.png`,
@@ -43,6 +44,16 @@ const Login = () => {
 
   const handleSignin = async (e) => {
     e.preventDefault();
+
+    const email = userRef.current.value;
+    const password = passwordRef.current.value;
+
+    if (!email || !password) {
+      toast.error("Please fill in both email and password fields."); // Show toast on empty fields
+      return;
+    }
+    
+
     dispatch({ type: "LOGIN_START" });
     setLoading(true);
     try {

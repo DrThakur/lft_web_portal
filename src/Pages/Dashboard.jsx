@@ -53,7 +53,7 @@ const Dashboard = () => {
         </div>
 
         <div
-          className={`rounded-lg shadow-md cursor-pointer p-2 bg-white hover:shadow-xl transition duration-300`}
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300`}
         >
           <AnnouncementList />
         </div>
