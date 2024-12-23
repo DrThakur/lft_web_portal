@@ -1,5 +1,3 @@
-
-
 import React from "react";
 
 const AwardCard = ({
@@ -65,7 +63,7 @@ const AwardCard = ({
 
       {/* Right Section (Image on smaller screens) */}
       {imagePosition === "right" && (
-        <div className="w-full md:w-1/2 flex justify-center items-center md:h-full">
+        <div className="w-full md:w-1/2 flex justify-center items-center ">
           <img
             src={image}
             alt="Award"
@@ -73,6 +71,7 @@ const AwardCard = ({
           />
         </div>
       )}
+
     </div>
   );
 };

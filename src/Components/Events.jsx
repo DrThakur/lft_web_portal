@@ -1,15 +1,11 @@
-
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Events = () => {
   const navigate = useNavigate();
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
 
-  const handleViewAll = () => {
-    navigate("/announcements");
-  };
-
+  // Events Data
   const events = [
     {
       date: "29 Feb",
@@ -24,7 +20,7 @@ const Events = () => {
     {
       date: "30 Apr",
       time: "11:00-12:30 PM",
-      name: "Project Management Training ",
+      name: "Project Management Training",
     },
     {
       date: "31 May",
@@ -36,42 +32,56 @@ const Events = () => {
       time: "3:00-4:00 PM",
       name: "FPGA Training ..!!",
     },
-    // Add more events here as needed
   ];
+
+  // Handle Screen Size Change
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isWithinRange =(screenSize <=371) || (screenSize >= 766 && screenSize <= 854) || (screenSize >= 1536 && screenSize <= 1897);
+
+  // Navigate to Announcements
+  const handleViewAll = () => navigate("/announcements");
 
   return (
     <div className="p-4 w-full bg-white rounded-lg shadow-lg max-h-96 min-h-96">
-      <div>
-        <h3 className="text-base sm:text-lg md:text-2xl font-bold mb-4 bg-blue-100 py-2 px-3 rounded-lg">
-          Upcoming Events
-        </h3>
-      </div>
+      {/* Header */}
+      <h1
+        className={`${
+          screenSize <= 371 ? "py-0  min-h-16" : isWithinRange ? "py-1 min-h-20" : "py-2 min-h-10"
+  } flex items-center text-base sm:text-lg md:text-2xl lg:text-lg font-bold mb-4 bg-blue-100 px-3 rounded-lg`}
+      >
+        Upcoming Events
+      </h1>
 
       {/* Event List */}
       <div
-        className="space-y-4 max-h-64 min-h-64 overflow-y-auto lg:overflow-y-hidden sm:hover:overflow-y-auto transition-all duration-300 
+        className={`${
+          isWithinRange ? "max-h-60 min-h-60" : "max-h-64 min-h-64"
+        } space-y-4 overflow-y-auto transition-all duration-300 
           [&::-webkit-scrollbar]:w-2 
           [&::-webkit-scrollbar-track]:rounded-full 
           [&::-webkit-scrollbar-thumb]:rounded-full 
-          [&::-webkit-scrollbar-thumb]:bg-gray-300 
-          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+          [&::-webkit-scrollbar-thumb]:bg-gray-300`}
       >
         {events.map((event, index) => (
           <div
             key={index}
-            className="flex flex-col sm:flex-row items-center gap-4 p-3 bg-fuchsia-50 rounded-lg border-fuchsia-100 shadow-sm hover:bg-fuchsia-100 transition duration-300 ease-in-out"
+            className="flex  sm:flex-row items-center gap-4 p-2 bg-purple-50 rounded-lg border-purple-100 shadow-sm hover:bg-purple-100 transition duration-300 ease-in-out"
           >
-            <div className="flex flex-col text-sm sm:text-base font-semibold text-fuchsia-800 ml-2">
-              <span className="text-lg sm:text-xl">{event.date.split(" ")[0]} </span>
+            {/* Event Date */}
+            <div className="flex flex-col items-center sm:items-start text-sm sm:text-base font-semibold text-purple-800">
+              <span className="text-lg sm:text-xl">{event.date.split(" ")[0]}</span>
               <span className="text-sm sm:text-base">{event.date.split(" ")[1]}</span>
             </div>
 
             {/* Event Details */}
-            <div className="flex flex-col text-left sm:text-left">
-              <div className="text-xs sm:text-sm md:text-base font-semibold text-gray-500">
-                {event.time}
-              </div>
+            <div className="flex flex-col text-left">
+              <div className="text-xs sm:text-sm text-gray-500">{event.time}</div>
               <div className="text-sm sm:text-base md:text-lg font-semibold text-gray-800">
                 {event.name}
               </div>
@@ -81,10 +91,10 @@ const Events = () => {
       </div>
 
       {/* View All Button */}
-      <div className="text-center mt-4 ">
+      <div className={`${isWithinRange ? "mt-1" : "mt-4"} text-center`}>
         <button
-          className=" text-blue-500 hover:underline text-sm sm:text-base font-semibold transition duration-300 ease-in-out"
           onClick={handleViewAll}
+          className="text-blue-500 hover:underline text-sm sm:text-base font-semibold transition duration-300 ease-in-out"
         >
           View All
         </button>
