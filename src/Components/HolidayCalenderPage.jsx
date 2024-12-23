@@ -11,15 +11,16 @@ const HolidayCalendarPage = ({ holidays }) => {
     holidaysByMonth[monthKey].push(holiday);
   });
 
+  
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-4">Holiday Calendar</h1>
-      <div className="grid grid-cols-4 gap-2">
+      <h1 className="text-base sm:text-lg md:text-2xl lg:text-lg font-bold mb-4  py-2 px-3 rounded-lg">Holiday Calendar</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {Object.keys(holidaysByMonth).map((monthKey, index) => {
           const [month, year] = monthKey.split('-').map(Number);
           const monthName = new Date(year, month - 1).toLocaleString('en-us', { month: 'long' });
           return (
-            <div key={monthKey} className={`bg-white border rounded-lg m-4 p-4 w-100 h-52`}>
+            <div key={monthKey} className="bg-white border rounded-lg p-4 h-full min-h-[200px] max-h-[400px]">
               <h2 className="text-lg font-semibold mb-4">{monthName} {year}</h2>
               {holidaysByMonth[monthKey].length > 0 ? (
                 <ul className="list-none">

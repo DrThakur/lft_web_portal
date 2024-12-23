@@ -8,7 +8,6 @@ const NewHire = () => {
 
   const [recruitments, setRecruitments] = useState([]);
 
-
   const recruitmentData = [
     {
       fullName: "Ankit Kumar Thakur",
@@ -52,13 +51,12 @@ const NewHire = () => {
     },
   ];
 
+
   useEffect(() => {
     setRecruitments(recruitmentData);
   }, []);
 
   const recruitemntBodyTemplate = (rowData) => {
-    // const createdBy = rowData.projectManager;
-
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
         <div className="flex flex-row items-center justify-start ">
@@ -85,14 +83,12 @@ const NewHire = () => {
           rounded
           outlined
           className="mr-2 border border-blue-400 rounded-full"
-          //   onClick={() => editProduct(rowData)}
         />
         <Button
           icon="pi pi-trash text-red-400"
           rounded
           outlined
           severity="danger"
-          //   onClick={() => confirmDeleteProject(rowData)}
           className="border border-red-400 rounded-full"
         />
       </React.Fragment>
@@ -103,19 +99,14 @@ const NewHire = () => {
     switch (recruitmemt.status) {
       case "Onboarded":
         return "success";
-
       case "In Progress":
         return "warning";
-
       case "Pending":
         return "danger";
-
-
       default:
         return null;
     }
   };
-
 
   const statusBodyTemplate = (rowData) => {
     return (
@@ -126,20 +117,19 @@ const NewHire = () => {
     );
   };
 
-
   return (
-    <div className="w-full h-full">
-      <div className="flex flex-row justify-between items-center gap-2 px-3 py-1">
+    <div className="w-full h-full p-3">
+      <div className="flex justify-between items-center gap-1">
         <h3 className="font-bold text-lg">New Joinee</h3>
         <button className="bg-blue-500 hover:bg-blue-700 px-2 py-1 rounded-lg font-semibold text-white">
           View All
         </button>
       </div>
+
       <DataTable
         value={recruitments}
-        tableStyle={{ minWidth: "50rem"  }}
+        tableStyle={{ minWidth: "50rem" }}
         size="small"
-       
       >
         <Column
           field="fullName"
@@ -151,7 +141,7 @@ const NewHire = () => {
         <Column field="reportingManager" header="Reporting Manager" style={{ width: '15%' }}></Column>
         <Column field="status" header="Onboarding Status" body={statusBodyTemplate} style={{ width: '15%' }}></Column>
         <Column
-          field=""
+          field="action"
           header="Action"
           body={actionBodyTemplate}
           style={{ width: '15%' }}
