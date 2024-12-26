@@ -1,62 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const QuickAccess = () => {
+  // State for screen size
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+
+  // Handle screen size changes
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Determine if screen size is within a specific range
+  const isWithinRange =
+    (screenSize <=371) ||
+    (screenSize >= 766 && screenSize <= 854) ||
+    (screenSize >= 1536 && screenSize <= 1897);
+
+  // Links for quick access
+  const quickAccessLinks = [
+    { label: "Reimbursement Form", to: "/reimbursement-form" },
+    { label: "HR Documents", to: "/hr-documents" },
+    { label: "IT Documents", to: "/it-documents" },
+    { label: "IT Statement", to: "/it-statement" },
+    { label: "Salary Slip", to: "/salary-slip" },
+  ];
+
   return (
-    <div className="p-4 w-full h-full bg-white rounded-lg shadow-lg max-h-96 min-h-96">
-      <div>
-        <h3 className="text-lg md:text-xl font-bold mb-4 bg-yellow-100 py-2 px-3 rounded-lg">
-          Quick Access
-        </h3>
-        {/* Quick Access List */}
-        <ul className="flex flex-col justify-start items-start w-full space-y-2 max-h-64  overflow-y-hidden hover:overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-2
-  [&::-webkit-scrollbar-track]:rounded-full
-  [&::-webkit-scrollbar-thumb]:rounded-full
-  [&::-webkit-scrollbar-thumb]:bg-gray-300
-  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
-          <li className="w-full">
+    <div className="p-4 w-full bg-white rounded-lg shadow-lg max-h-96 min-h-96">
+      <h1
+  className={`${
+    screenSize <= 371 ? "py-0  min-h-16" : isWithinRange ? "py-1 min-h-20" : "py-2 min-h-10"
+  } flex items-center text-base sm:text-lg md:text-2xl lg:text-lg font-bold mb-4 bg-yellow-100 px-3 rounded-lg`}
+>
+  Quick Access
+</h1>
+
+      {/* Quick Access List */}
+      <ul
+        className={`${
+          isWithinRange ? "max-h-60 min-h-60" : "max-h-64 min-h-64"
+        } flex flex-col justify-start items-start w-full space-y-3 overflow-y-auto transition-all duration-300 
+          [&::-webkit-scrollbar]:w-2 
+          [&::-webkit-scrollbar-track]:rounded-full 
+          [&::-webkit-scrollbar-thumb]:rounded-full 
+          [&::-webkit-scrollbar-thumb]:bg-gray-300 
+          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}
+      >
+        {quickAccessLinks.map(({ label, to }, index) => (
+          <li key={index} className="w-full">
             <Link
-              to="/test13"
+              to={to}
               className="block py-2 px-4 w-full text-left rounded-lg hover:bg-blue-200 hover:text-red-700 transition-colors"
             >
-              Reimbursment Form
+              {label}
             </Link>
           </li>
-          <li className="w-full">
-            <Link
-              to="/test13"
-              className="block py-2 px-4 w-full text-left rounded-lg hover:bg-blue-200 hover:text-red-700 transition-colors"
-            >
-              HR Doc
-            </Link>
-          </li>
-          <li className="w-full">
-            <Link
-              to="/test13"
-              className="block py-2 px-4 w-full text-left rounded-lg hover:bg-blue-200 hover:text-red-700 transition-colors"
-            >
-              IT Doc
-            </Link>
-          </li>
-          <li className="w-full">
-            <Link
-              to="/test13"
-              className="block py-2 px-4 w-full text-left rounded-lg hover:bg-blue-200 hover:text-red-700 transition-colors"
-            >
-              IT Statement
-            </Link>
-          </li>
-          <li className="w-full">
-            <Link
-              to="/test13"
-              className="block py-2 px-4 w-full text-left rounded-lg hover:bg-blue-200 hover:text-red-700 transition-colors"
-            >
-              Salary Slip
-            </Link>
-          </li>
-        </ul>
-      </div>
+        ))}
+      </ul>
     </div>
   );
 };

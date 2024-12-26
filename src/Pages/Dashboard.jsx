@@ -29,7 +29,7 @@ const Dashboard = () => {
   return (
     <div className="h-full w-full overflow-hidden rounded-lg p-2">
       <Header title="Dashboard" />
-      <div className="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-2">
+      <div className="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-2">
         <div
           className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300`}
         >
@@ -53,7 +53,7 @@ const Dashboard = () => {
         </div>
 
         <div
-          className={`rounded-lg shadow-md cursor-pointer p-2 bg-white hover:shadow-xl transition duration-300`}
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300`}
         >
           <AnnouncementList />
         </div>
@@ -65,13 +65,13 @@ const Dashboard = () => {
         </div>
 
         <div
-          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300 col-span-1 md:col-span-2 lg:col-span-4 xl:col-span-3`}
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300 col-span-1 md:col-span-2 lg:col-span-3 `}
         >
           <NewHire />
         </div>
 
         <div
-          className={`rounded-lg shadow-md  cursor-pointer bg-black hover:shadow-xl  transition duration-300 col-span-1 md:col-span-2 lg:col-span-4 xl:col-span-3`}
+          className={`rounded-lg shadow-md  cursor-pointer bg-black hover:shadow-xl  transition duration-300 col-span-1 md:col-span-2 lg:col-span-3 `}
         >
           <AwardsRecognition />
         </div>
