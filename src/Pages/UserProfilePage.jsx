@@ -220,27 +220,28 @@ const UserProfilePage = () => {
     );
   };
 
- const initialSkills = userDetails.techSkills;
+  const initialSkills = userDetails.techSkills;
 
   return (
-    <div className="bg-white p-2 h-screen w-full mt-2 overflow-y-auto border rounded-lg shadow-lg">
+    <div className="bg-white p-2 h-full w-full mt-2 overflow-y-auto border rounded-lg shadow-lg ">
       <h1 className="text-xl font-bold">My Profile</h1>
 
       <div className="main Container flex flex-col">
         {/* Profile Section */}
         <div className="container1 flex flex-col lg:flex-row border rounded-lg shadow-md p-4 mt-4 mb-4 gap-4 ">
-          <div className="subContainer1 flex flex-col justify-start items-center w-full lg:w-1/2">
-            <div className="flex flex-col sm:flex-row justify-start items-center md:items-start gap-8">
 
+          <div className="subContainer1 flex flex-col items-center w-full lg:w-1/2">
+            <div className="flex flex-col xs:flex-row items-center md:items-start gap-8">
               {/* Image */}
-              <div className="flex flex-col sm:flex-justify-start items-center text-center -mt-3 ">
+              <div className="flex flex-col items-center text-center relative">
                 <img
                   src="https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
                   alt="userImage"
                   width={220}
                   height={220}
+                  className="rounded-full"
                 />
-                <button className="text-blue-500 rounded-full bg-gray-100 shadow-lg hover:bg-blue-500 hover:text-white p-2 -mt-12 ml-10 z-50 hover:cursor-pointer">
+                <button className="absolute top-0 lg:-top-2 xl:top-2 right-12 transform translate-x-1/2 translate-y-1/2 bg-gray-100 text-blue-500 rounded-full p-2 shadow-lg hover:bg-blue-500 hover:text-white z-50">
                   <label htmlFor="file-upload">
                     <MdModeEdit />
                   </label>
@@ -252,16 +253,10 @@ const UserProfilePage = () => {
                     onChange={handleFileChange}
                   />
                 </button>
-                <div>
-                  <button className="flex flex-row justify-start items-center gap-2 mt-6 p-2 px-6 bg-blue-500 hover:bg-blue-700 text-white rounded shadow">
-                    <BsFillSendFill />
-                    Send Message
-                  </button>
-                </div>
               </div>
 
-              {/*Profile Values*/}
-              <div className="profileValue flex flex-col justify-start items-start gap-1 col-span-1">
+              {/* Profile Values */}
+              <div className="profileValue flex flex-col justify-start md:justify-between items-start -mt-10 xs:mt-0 gap-1 col-span-1">
                 <p className="text-xl font-bold py-1 w-full">
                   {user.fullName || "Ankit Kumar Thakur"}
                 </p>
@@ -281,28 +276,34 @@ const UserProfilePage = () => {
                   Date of Join:{" "}
                   {user.dateOfJoining ? formatDate(user.dateOfJoining) : "N/A"}
                 </p>
-
               </div>
             </div>
-            <div className="buttons flex flex-col sm:flex-row justify-start items-center gap-4 mt-2">
-              <button className="bg-yellow-300 hover:bg-yellow-500 p-2 px-6 rounded shadow text-white font-medium">
-                Send Reset Password Link
+
+            <div className="buttons flex flex-col sm:flex-row justify-center items-center gap-4 mt-2 w-full">
+              <button className="flex items-center justify-center gap-2 w-full sm:w-auto h-14 p-2 px-6 bg-blue-500 hover:bg-blue-700 text-white rounded shadow">
+                <BsFillSendFill />
+                Send Message
               </button>
-              <button className="bg-red-300 hover:bg-red-500 p-2 px-6 rounded shadow text-white font-medium">
+              <button className="flex items-center justify-center gap-2 w-full sm:w-auto h-14 p-2 px-6 bg-red-300 hover:bg-red-500 text-white rounded shadow">
                 Reset Password
+              </button>
+              <button className="flex items-center justify-center w-full sm:w-auto h-14 p-2 px-6 bg-yellow-300 hover:bg-yellow-500 text-white font-medium rounded shadow">
+                Send Reset Password Link
               </button>
             </div>
           </div>
 
+
           {/* Divider for Layout */}
-          <div className="subContainer2  border-r-2 border-gray-300 md:mr-16"></div>
+          <div className="subContainer2 border-b-2 border-gray-300 lg:border-r-2 lg:border-gray-300 lg:h-1-2 md:mr-16"></div>
+
 
           {/*Other Profile Details*/}
-          <div className="subContainer3 col-span-1 md:col-span-2 lg:col-span-1 w-full lg:w-1/2 overflow-x-auto">
+          <div className="subContainer3 col-span-1 md:col-span-2 lg:col-span-1 w-full lg:w-1/2 overflow-x-auto relative">
             <table className="min-w-full table-auto">
               <tbody>
                 <tr>
-                  <td className="font-bold px-2 w-1/4">Phone&nbsp; </td>
+                  <td className="font-bold px-2 w-1/4">Phone&nbsp;</td>
                   <td className="px-2">:</td>
                   <td className="px-2">&nbsp; &nbsp; </td>
                   <td className="px-2 w-3/4">{user.phoneNumber || "7011711442"}</td>
@@ -314,25 +315,25 @@ const UserProfilePage = () => {
                   <td className="px-2">{user.email || "ankit.thakur@logic-fruit.com"}</td>
                 </tr>
                 <tr>
-                  <td className="font-bold px-2">Birthday&nbsp; </td>
+                  <td className="font-bold px-2">Birthday&nbsp;</td>
                   <td className="px-2">:</td>
                   <td className="px-2">&nbsp; &nbsp; </td>
                   <td className="px-2">{user.dateOfBirth ? formatDate(user.dateOfBirth) : "N/A"}</td>
                 </tr>
                 <tr>
-                  <td className="font-bold px-2">Address&nbsp; </td>
+                  <td className="font-bold px-2">Address&nbsp;</td>
                   <td className="px-2">: </td>
                   <td className="px-2"> &nbsp; &nbsp; </td>
                   <td className="px-2">{user.permanentAddress || "N/A"}</td>
                 </tr>
                 <tr>
-                  <td className="font-bold px-2">Gender&nbsp; </td>
+                  <td className="font-bold px-2">Gender&nbsp;</td>
                   <td className="px-2">:</td>
                   <td className="px-2">&nbsp; &nbsp; </td>
                   <td className="px-2">{user.gender || "N/A"}</td>
                 </tr>
                 <tr>
-                  <td className="font-bold px-2">Reports to&nbsp; </td>
+                  <td className="font-bold px-2">Reports to&nbsp;</td>
                   <td className="px-2">:</td>
                   <td className="px-2">&nbsp; &nbsp; </td>
                   <td className="px-2">
@@ -347,24 +348,25 @@ const UserProfilePage = () => {
                         {user.reportingManager}
                       </a>
                     </span>
-
                   </td>
                 </tr>
               </tbody>
             </table>
-          </div>
-          {/* Edit Button */}
-          <div className="subContainer4 flex flex-row justify-end items-start">
-            <button className="hover:text-blue-500 bg-gray-200 rounded-full p-2 ">
-              <MdModeEdit />
-            </button>
+
+            {/* Edit Button */}
+            <div className="absolute top-1 -right-14 xs:right-6 sm:top-4  sm:right-6 md:right-6 lg:right-6">
+              <button className="hover:text-blue-500 bg-gray-200 rounded-full p-2">
+                <MdModeEdit />
+              </button>
+            </div>
+
           </div>
         </div>
 
-        <div className="container2 w-full">
+        <div className="container2">
           <TabView>
             <TabPanel header="Profile">
-              <div className="resume border rounded shadow-lg p-2 md:p-4 -ml-5 mb-4 flex flex-row justify-between items-center flex-wrap">
+              <div className="resume border rounded shadow-lg p-2 sm:p-6 w-full mx-auto mb-4 flex flex-row justify-between items-center  ">
                 {resume ? (
                   <span className="font-bold text-xl ml-5 text-blue-500">
                     {resume.name}
@@ -383,16 +385,16 @@ const UserProfilePage = () => {
                   />
                   <label htmlFor="resume-upload"></label>
                   <button
-                    className="hover:text-blue-500 bg-gray-200 rounded-full p-2 sm:mr-7 ml-1"
+                    className="hover:text-blue-500 bg-gray-200 rounded-full p-2 sm:mr-5 ml-2"
                     onClick={handleEditClick}
                   >
                     <MdModeEdit />
                   </button>
                 </div>
               </div>
-              <div className="-ml-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="profile1 personalInformation border shadow-lg rounded p-4 px-8">
-                  <div className="tableInformation overflow-x-auto">
+              <div className="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="profile1 personalInformation border shadow-lg rounded  p-4 sm:px-8 min-h-96 max-h-96">
+                  <div className="tableInformation">
                     <div className="flex flex-row justify-between items-start ">
                       <h3 className="font-bold text-xl">Personal Information</h3>
                       <div className="editButton">
@@ -401,9 +403,10 @@ const UserProfilePage = () => {
                         </button>
                       </div>
                     </div>
-                    <table className="mt-2 ">
+                    <div className="overflow-x-auto">
+                      <table className="mt-2 ">
 
-{/* 
+                        {/* 
                       <tr>
                         <td className="font-semibold px-2 py-2">
                           Aadhar Number
@@ -425,40 +428,41 @@ const UserProfilePage = () => {
                         <td className="px-2 py-2">{"N/A"}</td>
                       </tr>
                        */}
-                      <tr>
-                        <td className="font-semibold px-2 py-2">Nationality</td>
-                        <td className="px-2 py-2">:</td>
-                        <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">{"N/A"}</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold px-2 py-2">Religion</td>
-                        <td className="px-2 py-2">:</td>
-                        <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">{"N/A"}</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold px-2 py-2">Marital Status</td>
-                        <td className="px-2 py-2">:</td>
-                        <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">{"N/A"}</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold px-2 py-2">Employed Spouse</td>
-                        <td className="px-2 py-2">:</td>
-                        <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">{"N/A"}</td>
-                      </tr>
-                      <tr>
-                        <td className="font-semibold px-2 py-2">No. of Children</td>
-                        <td className="px-2 py-2">:</td>
-                        <td className="px-2 py-2">&nbsp;</td>
-                        <td className="px-2 py-2">{"N/A"}</td>
-                      </tr>
-                    </table>
+                        <tr>
+                          <td className="font-semibold px-2 py-2">Nationality</td>
+                          <td className="px-2 py-2">:</td>
+                          <td className="px-2 py-2">&nbsp;</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
+                        </tr>
+                        <tr>
+                          <td className="font-semibold px-2 py-2">Religion</td>
+                          <td className="px-2 py-2">:</td>
+                          <td className="px-2 py-2">&nbsp;</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
+                        </tr>
+                        <tr>
+                          <td className="font-semibold px-2 py-2">Marital Status</td>
+                          <td className="px-2 py-2">:</td>
+                          <td className="px-2 py-2">&nbsp;</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
+                        </tr>
+                        <tr>
+                          <td className="font-semibold px-2 py-2">Employed Spouse</td>
+                          <td className="px-2 py-2">:</td>
+                          <td className="px-2 py-2">&nbsp;</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
+                        </tr>
+                        <tr>
+                          <td className="font-semibold px-2 py-2">No. of Children</td>
+                          <td className="px-2 py-2">:</td>
+                          <td className="px-2 py-2">&nbsp;</td>
+                          <td className="px-2 py-2">{"N/A"}</td>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
                 </div>
-                <div className="profile2 emergencyContact border shadow-lg rounded p-4 px-8">
+                <div className="profile2 emergencyContact border shadow-lg rounded p-4 sm:px-8 min-h-96 max-h-96">
                   <div className="emergencyInformation">
                     <div className="flex flex-row justify-between items-start">
                       <h3 className="font-bold text-xl">Emergency Contact</h3>
@@ -520,7 +524,7 @@ const UserProfilePage = () => {
                 </div>
               </div>
 
-{/* <div className="bankandepfo grid grid-cols-2 gap-4 mt-4 -ml-5">
+              {/* <div className="bankandepfo grid grid-cols-2 gap-4 mt-4 -ml-5">
                 <div className="bank border shadow-lg rounded p-4 px-8">
                   <div className="bankInforation">
                     <div className="flex flex-row justify-between items-start">
@@ -604,8 +608,8 @@ const UserProfilePage = () => {
               </div>
                */}
 
-              <div className="educationexperience flex flex-col sm:flex-row gap-4 mt-4 -ml-5">
-                <div className="education border shadow-lg rounded p-4 px-8 flex-1">
+              <div className="educationexperience flex flex-col sm:flex-row gap-4 mt-4 w-full mx-auto">
+                <div className="education border shadow-lg rounded p-4 sm:px-8 flex-1 min-h-96 max-h-96">
                   <div className="educationInformation flex flex-col">
                     <div className="flex flex-row justify-between items-start">
                       <h3 className="font-bold text-xl">Education Information</h3>
@@ -615,13 +619,13 @@ const UserProfilePage = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="educationTimeline mt-4 overflow-x-auto ">
+                    <div className="educationTimeline -ml-40 xs:-ml-[345px] sm:-ml-[164px] md:-ml-[235px] lg:-ml-[350px] xl:-ml-[490px] 2xl:-ml-[610px] mt-4 ">
                       <Timeline value={events} content={customizedContent}  />
                     </div>
                   </div>
                 </div>
 
-                <div className="experience border shadow-lg rounded p-4 px-8 flex-1">
+                <div className="experience border shadow-lg rounded p-4 sm:px-8 flex-1 min-h-96 max-h-96">
                   <div className="experienceInformation flex flex-col ">
                     <div className="flex flex-row justify-between items-start">
                       <h3 className="font-bold text-xl">Experience</h3>
@@ -631,7 +635,7 @@ const UserProfilePage = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="educationTimeline mt-4 overflow-x-auto">
+                    <div className="educationTimeline -ml-40 xs:-ml-[345px] sm:-ml-[164px] md:-ml-[235px] lg:-ml-[350px] xl:-ml-[490px] 2xl:-ml-[610px] mt-4">
                       <Timeline
                         value={experienceEvents}
                         content={customizedContentExperience}
@@ -640,7 +644,6 @@ const UserProfilePage = () => {
                   </div>
                 </div>
               </div>
-
 
             </TabPanel>
             <TabPanel header="My Skills">

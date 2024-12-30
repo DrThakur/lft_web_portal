@@ -57,7 +57,7 @@ const MySkills = ({ initialSkills, userId }) => {
           <div className="flex gap-4">
             <button
               onClick={handleAddSkill}
-              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
+              className="bg-green-500 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
             >
               Submit
             </button>
