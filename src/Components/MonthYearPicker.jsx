@@ -99,21 +99,30 @@ const MonthYearPicker = () => {
     }
   };
 
+
   return (
-    <div className="relative mr-6 w-80">
+    <div className="relative w-full min-w-36 sm:w-auto sm:max-w-xs ">
       <div
-        className="flex items-center space-x-2 p-2 border cursor-pointer bg-white w-full justify-center rounded-lg"
+        className="flex items-center px-2 xs:px-4 py-2 border cursor-pointer bg-white w-full justify-center rounded-lg"
         onClick={handleMonthYearClick}
       >
-        <FaChevronLeft onClick={handlePreviousMonth} />
+        <FaChevronLeft
+          onClick={handlePreviousMonth}
+          className="text-xl md:text-2xl"
+        />
         <span>{format(currentDate, "MMM yyyy")}</span>
         <FaChevronRight
           onClick={handleNextMonth}
-          className={isNextDisabled ? "text-gray-400 cursor-not-allowed" : ""}
+          className={`text-xl md:text-2xl ${
+            isNextDisabled ? "text-gray-400 cursor-not-allowed" : ""
+          }`}
         />
       </div>
+
       {showCalendar && (
-        <div className="absolute mt-2 z-10">{renderCalendar()}</div>
+        <div className="absolute mt-2 z-10 w-full sm:w-auto sm:max-w-xs ">
+          {renderCalendar()}
+        </div>
       )}
     </div>
   );

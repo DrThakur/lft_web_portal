@@ -323,21 +323,30 @@ const EosUpdate = () => {
   };
 
   return (
-    <div className="max-w-full mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div className="flex flex-row justify-between items-center mb-2 bg-gray-200 p-2 rounded-lg">
-        <h1 className="text-2xl font-bold">EoS Update</h1>
-        {/* Submit Button */}
-        <div className="flex flex-row justify-start items-center gap-2">
-          <div className="text-center">
+    <div className="max-w-full mx-auto p-6 bg-white rounded-lg shadow-md ">
+
+      <div className="flex flex-col sm:flex-row justify-between items-center md:items-center mb-2 bg-gray-200 py-2 px-4 rounded-lg">
+        <h1 className="text-2xl font-bold text-left md:text-left w-full md:w-auto">EoS Update</h1>
+
+        {/* Button and MonthYearPicker */}
+        <div className="flex flex-col xs:flex-row justify-evenly items-center gap-4 w-full md:w-auto mt-2">
+          {/* Submit Button */}
+          <div className="flex justify-start w-full min-w-36 md:w-auto">
             <button
               type="submit"
-              className="px-4 py-2 w-[150px] bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+              className="xs:px-2 px-4 py-2 w-full md:w-[150px] h-[40px] bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
               onClick={handleSubmit}
             >
               Submit
             </button>
           </div>
-          <MonthYearPicker />
+
+          {/* MonthYearPicker */}
+          <div className="w-full md:w-auto">
+            <div className=" w-full md:w-[150px] h-[40px]">
+              <MonthYearPicker />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -406,16 +415,17 @@ const EosUpdate = () => {
             </div>
           </div>
         )}
+
+
+
         {/* Project Information Section */}
         <div className="bg-gray-100 rounded-lg p-2">
           <h2 className="text-xl font-semibold mb-4">Work Information</h2>
           <div>
             {projects.map((project, index) => (
-              <div
-                key={index}
-                className="col-span-1 grid grid-cols-3 gap-4 mb-2"
-              >
-                <div className="col-start-1 col-end-2 text-left">
+              <div key={index} className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                {/* Work 1 Label and Project Name */}
+                <div className="text-left">
                   <label
                     className="block text-sm font-medium text-gray-700"
                     htmlFor={`project${index + 1}`}
@@ -426,21 +436,22 @@ const EosUpdate = () => {
                     id={`project${index + 1}`}
                     className="mt-2 text-blue-500 font-semibold"
                   >
-                    {" "}
                     {project.project.projectName}
                   </p>
                 </div>
-                <div className="col-start-2 col-end-3 flex flex-col justify-start gap-2">
+
+                {/* Occupancy Input */}
+                <div className="flex flex-col xs:flex-row md:flex-col xs:items-center md:items-start justify-evenly gap-2 ">
                   <label
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 xs:w-1/2 md:w-full"
                     htmlFor={`workPercentage${index + 1}`}
                   >
                     Occupancy (In %)
                   </label>
                   <input
                     type="number"
-                    min="0" 
-                    max="100" 
+                    min="0"
+                    max="100"
                     id={`workPercentage${index + 1}`}
                     value={project.workPercentage}
                     onChange={(e) =>
@@ -451,37 +462,35 @@ const EosUpdate = () => {
                       )
                     }
                     required={index < 1}
-                    className={`-mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300 ${
-                      project.error ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`-mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300 ${project.error ? "border-red-500" : "border-gray-300"}`}
                   />
                 </div>
-                <div className="col-start-3 col-end-4 flex flex-col justify-start">
+
+                {/* Remarks Input */}
+                <div className="flex flex-col xs:flex-row md:flex-col justify-evenly xs:items-center md:items-start gap-2 ">
                   <label
-                    className="block text-sm font-medium text-gray-700"
-                    htmlFor="remarks"
+                    className="block text-sm font-medium text-gray-700 xs:w-1/2 md:w-full"
+                    htmlFor={`remarks${index + 1}`}
                   >
                     Remarks
                   </label>
                   <input
                     type="text"
-                    id="remarks"
+                    id={`remarks${index + 1}`}
                     value={project.remark}
                     onChange={(e) =>
                       handleProjectInputChange(index, "remark", e.target.value)
                     }
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
+                    className="-mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
                   />
                 </div>
               </div>
             ))}
 
             {formData.activities.map((activity, index) => (
-              <div
-                key={index}
-                className="col-span-1 grid grid-cols-3 gap-4 mb-2"
-              >
-                <div className="col-start-1 col-end-2 text-left">
+              <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                {/* Work Label and Activity */}
+                <div className="text-left">
                   <label
                     className="block text-sm font-medium text-gray-700"
                     htmlFor={`activity${index + 1}`}
@@ -495,12 +504,12 @@ const EosUpdate = () => {
                     {activity.activity}
                   </p>
                 </div>
-                <div className="col-start-2 col-end-3 flex flex-col justify-start gap-2">
+
+                {/* Occupancy Input */}
+                <div className="flex flex-col xs:flex-row md:flex-col justify-evenly xs:items-center md:items-start gap-2 ">
                   <label
-                    className="block text-sm font-medium text-gray-700"
-                    htmlFor={`workPercentage${
-                      formData.projects.length + index + 1
-                    }`}
+                    className="block text-sm font-medium text-gray-700 xs:w-1/2 md:w-full"
+                    htmlFor={`workPercentage${formData.projects.length + index + 1}`}
                   >
                     Occupancy (In %)
                   </label>
@@ -518,9 +527,11 @@ const EosUpdate = () => {
                     className="-mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
                   />
                 </div>
-                <div className="col-start-3 col-end-4 flex flex-col justify-start gap-2">
+
+                {/* Remarks Input */}
+                <div className="flex flex-col xs:flex-row md:flex-col justify-evenly xs:items-center md:items-start gap-2 ">
                   <label
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 xs:w-1/2 md:w-full"
                     htmlFor={`remark${formData.projects.length + index + 1}`}
                   >
                     {activity.activity === "Sales Lead Investigation" ? (
@@ -552,41 +563,6 @@ const EosUpdate = () => {
               {errorMessage}
             </div>
           )}
-
-          {/* Button to add a new project row 
-          <div className="text-center mt-6">
-            <button
-              type="button"
-              onClick={addProjectRow}
-              className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-            >
-              Add Project
-            </button>
-          </div>
-*/}
-
-          {/*  <div>
-            <h2 className="text-xl font-semibold mb-4">
-              (Only for Sales Lead Investigation & Sales & Marketing Activities)
-            </h2>
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-700"
-                htmlFor="remarks"
-              >
-                Sales Remarks
-              </label>
-              <textarea
-                type="text"
-                id="remarks"
-                rows={5}
-                value={formData.remarks}
-                onChange={handleInputChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:border-indigo-300"
-              />
-            </div>
-          </div>
-        */}
         </div>
 
         {/* Display error messagem for sales lead investigation remarks */}
