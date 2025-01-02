@@ -418,8 +418,8 @@ const EosUpdateByMonth = () => {
 
   return (
     <div className="max-w-full mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div className="flex flex-row justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">EoS Update</h1>
+      <div className="flex flex-col sm:flex-row justify-between items-center md:items-center mb-2 bg-gray-200 py-2 px-4 rounded-lg">
+        <h1 className="text-2xl mb-2 font-bold text-left md:text-left w-full md:w-auto">EoS Update</h1>
         <MonthYearPicker />
       </div>
 

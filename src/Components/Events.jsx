@@ -44,6 +44,8 @@ const Events = () => {
 
   const isWithinRange =(screenSize <=371) || (screenSize >= 766 && screenSize <= 854) || (screenSize >= 1536 && screenSize <= 1897);
 
+  
+
   // Navigate to Announcements
   const handleViewAll = () => navigate("/announcements");
 
@@ -62,7 +64,7 @@ const Events = () => {
       <div
         className={`${
           isWithinRange ? "max-h-60 min-h-60" : "max-h-64 min-h-64"
-        } space-y-4 overflow-y-auto transition-all duration-300 
+        } space-y-4 overflow-y-hidden hover:overflow-y-auto transition-all duration-300 
           [&::-webkit-scrollbar]:w-2 
           [&::-webkit-scrollbar-track]:rounded-full 
           [&::-webkit-scrollbar-thumb]:rounded-full 

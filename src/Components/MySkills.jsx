@@ -31,45 +31,51 @@ const MySkills = ({ initialSkills, userId }) => {
   return (
     <div className="max-w-full mx-auto p-4 mt-4">
       <h2 className="text-xl font-bold mb-4">My Skills</h2>
-      <div className="flex flex-wrap mb-4">
+
+      {/* Skills list */}
+      <div className="flex flex-wrap gap-4 mb-4 justify-center sm:justify-start">
         {skills.map((skill, index) => (
           <div
             key={index}
-            className="bg-blue-500 text-white rounded-full px-4 py-4 m-2 cursor-pointer hover:bg-blue-800"
+            className="bg-blue-500 text-white rounded-full px-4 py-2 m-2 cursor-pointer hover:bg-blue-800 transition-colors"
           >
             {skill}
           </div>
         ))}
       </div>
+
+      {/* Add skill input */}
       {isAdding ? (
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-center sm:justify-start gap-4">
           <input
             type="text"
             value={newSkill}
             onChange={(e) => setNewSkill(e.target.value)}
-            className="border rounded-l px-4 py-4 w-64"
+            className="border rounded-lg px-4 py-2 w-full sm:w-64"
             placeholder="Enter a new skill"
           />
-          <button
-            onClick={handleAddSkill}
-            className="bg-green-500 text-white px-4 py-4 rounded-r hover:bg-green-800"
-          >
-            Submit
-          </button>
-          <button
-            onClick={() => setIsAdding(false)}
-            className="ml-2 text-red-500 hover:text-white hover:bg-red-500 px-4 py-4 rounded"
-          >
-            Cancel
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={handleAddSkill}
+              className="bg-green-500 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
+            >
+              Submit
+            </button>
+            <button
+              onClick={() => setIsAdding(false)}
+              className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       ) : (
         <div className="text-center">
           <button
             onClick={() => setIsAdding(true)}
-            className="bg-green-500 text-white px-4 py-4 rounded w-1/6 text-lg"
+            className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors text-lg"
           >
-           + Add New Skill
+            + Add New Skill
           </button>
         </div>
       )}

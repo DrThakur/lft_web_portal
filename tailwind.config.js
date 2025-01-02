@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        'xs': '540px', // This creates a custom breakpoint for screens under 430px
+      },
       animation: {
         "spin-slow": "spin 3s linear infinite",
         text: "text 5s ease infinite",
