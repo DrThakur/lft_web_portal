@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import { BsDot } from "react-icons/bs";
 import { Avatar } from "primereact/avatar";
 import { AvatarGroup } from "primereact/avatargroup";
@@ -150,6 +150,27 @@ const ProjectCard = ({ project, toggleModal }) => {
     };
   }, []);
 
+
+
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  const [tooltipContent, setTooltipContent] = useState("");
+
+  const tooltipTimer = useRef(null);
+
+  const handleAvatarTouchStart = (name) => {
+    tooltipTimer.current = setTimeout(() => {
+      setIsTooltipVisible(true);
+      setTooltipContent(name);
+    }, 1000);
+  };
+  
+  const handleAvatarTouchEnd = () => {
+    clearTimeout(tooltipTimer.current);
+    setIsTooltipVisible(false);
+    setTooltipContent("");
+  };
+  
+
   return (
     <div className="cardContainer border-2 rounded-lg shadow-lg mt-4 bg-gray-50 p-2 xs:p-3 2xl:p-4 w-[100%]  h-[384px]  lg:h-[450px] xl:h-[500px]  flex flex-col ">
 
@@ -277,6 +298,8 @@ const ProjectCard = ({ project, toggleModal }) => {
                   shape="circle"
                   style={{ borderRadius: "100px" }}
                   className={`avatar${index + 1}`}
+                  onTouchStart={() => handleAvatarTouchStart(avatarNames[index])}
+                  onTouchEnd={handleAvatarTouchEnd}
                 />
               ))}
 
@@ -306,7 +329,8 @@ const ProjectCard = ({ project, toggleModal }) => {
 
         <div className="progressbar mt-2 flex flex-col gap-1 2xl:gap-2 mb-0.5">
           <h3 className={`font-bold text-sm sm:text-base md:text-lg text-center xs:text-start ${containerClasses}`}>Progress:</h3>
-          <div><ProgressBar value={project.progress} ></ProgressBar></div>
+          <div><ProgressBar value={project.progress} showValue={true} />
+          </div>
         </div>
       </div>
     </div>
