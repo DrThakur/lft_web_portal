@@ -77,6 +77,54 @@ const AllProjects = () => {
   const dt = useRef(null);
   const [projectNameColumnFrozen, setprojectNameColumnFrozen] = useState(false);
   const navigate = useNavigate();
+  const [scrollHeight, setScrollHeight] = useState('600px'); 
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Update the scrollHeight dynamically based on the window height or container
+      const newHeight = window.innerHeight - 410; // adjust this as per your layout
+      setScrollHeight(`${newHeight}px`);
+    };
+
+    // Listen for window resize events
+    window.addEventListener('resize', handleResize);
+
+    // Call the handler immediately to set the initial height
+    handleResize();
+
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array ensures this effect runs once on mount
+
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Set the screen size on initial load
+    return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+  }, []);
+
+
+
+  let template;
+
+  if (screenSize < 468) {
+    template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
+  } else if (screenSize >= 468 && screenSize < 768) {
+    template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
+  } else {
+    template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
+  }
+
+
+  const currentPageReportTemplate = screenSize < 768 ? (
+    "{first}-{last} of {totalRecords}"
+  ) : (
+    "Showing {first} to {last} of {totalRecords} Projects"
+  );
 
   const baseURL = process.env.REACT_APP_BASE_URL;
   const port = process.env.REACT_APP_BACKEND_PORT;
@@ -384,60 +432,57 @@ const AllProjects = () => {
 
   const leftToolbarTemplate = () => {
     return (
-      <div className="flex flex-wrap gap-2">
+      <div className="flex gap-16 xxss:gap-24 xxs:gap-2 justify-between xxs:flex-wrap">
         <Button
-          label="Create New Project"
           icon="pi pi-plus"
           severity="success"
+          label={screenSize >= 768 ? "Create New Project" : ""}
           onClick={openNewProject}
         />
         <Button
-          label="Delete"
           icon="pi pi-trash"
           severity="danger"
+          label={screenSize >= 768 ? "Delete" : ""}
           onClick={confirmDeleteSelected}
           disabled={!selectedProjects || !selectedProjects.length}
         />
-        <SelectButton
-          value={size}
-          onChange={(e) => setSize(e.value)}
-          options={sizeOptions}
-          disabled
-        />
+        {screenSize >= 1024 && (
+          <SelectButton
+            value={size}
+            onChange={(e) => setSize(e.value)}
+            options={sizeOptions}
+            disabled
+          />
+        )}
       </div>
     );
   };
 
   const rightToolbarTemplate = () => {
     return (
-      <div className="flex flex-row justify-start items-center gap-2">
+      <div className="flex flex-row justify-start items-center gap-2 xxss:gap-6 xxs:gap-2 ">
         <Button
           icon="pi pi-list"
-          className={
-            selectedView === "list"
-              ? "primary-500 text-white"
-              : "bg-white text-black"
-          }
+          className={selectedView === "list" ? "primary-500 text-white" : "bg-white text-black"}
           onClick={() => setSelectedView("list")}
         />
         <Button
           icon="pi pi-table"
-          className={
-            selectedView === "table"
-              ? "primary-500 text-white"
-              : "bg-white text-black"
-          }
+          className={selectedView === "table" ? "primary-500 text-white" : "bg-white text-black"}
           onClick={() => setSelectedView("table")}
         />
+
         <Button
-          label="Export"
           icon="pi pi-upload"
+          label={screenSize >= 768 ? "Export" : ""}
           className="p-button-help bg-blue-500 p-3 px-4 text-white"
           onClick={exportCSV}
         />
       </div>
     );
   };
+
+
 
   const plannedStartDateTemplate = (rowData) => {
     // return formatDate(rowData.plannedStartDate);
@@ -489,7 +534,7 @@ const AllProjects = () => {
 
   const dashboardBodyTemplate = (rowData) => {
     // const createdBy = rowData.projectManager;
-   
+
 
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
@@ -518,7 +563,7 @@ const AllProjects = () => {
     );
   };
 
-  
+
   const teamBodyTemplate = (rowData) => {
 
     console.log("my row dtaa prpjects", rowData)
@@ -647,27 +692,34 @@ const AllProjects = () => {
   };
 
   const header = (
-    <div className="flex flex-row justify-start gap-8 align-items-center justify-content-between">
-      <span className="p-input-icon-left flex flex-row items-center">
+    <div className="flex flex-col sm:flex-row justify-content-between items-center gap-4 md:gap-8">
+      <span className="p-input-icon-left flex w-full md:w-auto items-center">
         <i className="pi pi-search ml-4 text-center opacity-50" />
         <InputText
           type="search"
           onInput={(e) => setGlobalFilter(e.target.value)}
           placeholder="Search..."
-          className="placeholder-gray-500 placeholder-opacity-50 text-center border border-gray-300 rounded-md px-2 py-2"
+          className="w-full md:w-auto placeholder-gray-500 placeholder-opacity-50 text-center border border-gray-300 rounded-md px-2 py-2"
         />
       </span>
-      <ToggleButton
-        checked={projectNameColumnFrozen}
-        onChange={(e) => setprojectNameColumnFrozen(e.value)}
-        onIcon="pi pi-lock"
-        offIcon="pi pi-lock-open"
-        onLabel="ProjectName"
-        offLabel="ProjectName"
-        className="border-2 rounded"
-      />
+
+      {screenSize < 640 ? (
+        ""
+      ) : (
+        <ToggleButton
+          checked={projectNameColumnFrozen}
+          onChange={(e) => setprojectNameColumnFrozen(e.value)}
+          onIcon="pi pi-lock"
+          offIcon="pi pi-lock-open"
+          onLabel="ProjectName"
+          offLabel="ProjectName"
+          className="w-full md:w-auto border-2 rounded"
+        />
+      )}
+
     </div>
   );
+
   const productDialogFooter = (
     <React.Fragment>
       <Button
@@ -733,12 +785,12 @@ const AllProjects = () => {
   );
 
   return (
-    <div className="p-4 rounded overflow-y-auto  bg-white">
-      <h1 className="font-bold text-2xl mb-4">All Projects</h1>
+    <div className="p-4 rounded  overflow-y-auto  bg-white mb-2" style={{ height: `calc(100vh - 10%)` }}>
+      <h1 className="font-bold text-2xl mb-4 ">All Projects</h1>
       <Toast ref={toast} />
-      <div className="card">
+      <div className="card ">
         <Toolbar
-          className="bg-gray-50"
+          className="bg-gray-50 w-full flex-col xxs:flex-row"
           left={leftToolbarTemplate}
           right={rightToolbarTemplate}
         ></Toolbar>
@@ -754,19 +806,18 @@ const AllProjects = () => {
             dataKey="projectId"
             paginator
             rows={10}
-            rowsPerPageOptions={[5, 10, 25]}
-            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Projects"
+            rowsPerPageOptions={[10, 20, 30]}
+            paginatorTemplate={template}
+            currentPageReportTemplate={currentPageReportTemplate}
             globalFilter={globalFilter}
             header={header}
             removableSort
             showGridlines
             scrollable
-            scrollHeight="600px"
-            className="scrollable-component"
-            
+            scrollHeight={scrollHeight} 
+            className="scrollable-component "
           >
-            <Column selectionMode="multiple" exportable={false}  frozen={projectNameColumnFrozen}></Column>
+            <Column selectionMode="multiple" exportable={false} frozen={projectNameColumnFrozen}></Column>
             <Column
               field="sno"
               header="S.No"

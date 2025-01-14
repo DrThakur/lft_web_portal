@@ -4,6 +4,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        'xxss': '350px',
+        'xxs': '444px',
         'xs': '540px', // This creates a custom breakpoint for screens under 430px
       },
       animation: {
