@@ -24,6 +24,9 @@ module.exports = {
           },
         },
       },
+      outline: {
+        'single': '2px solid #000', // Example: 2px solid black outline
+      },
     },
   },
   plugins: [
