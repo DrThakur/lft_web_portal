@@ -794,9 +794,9 @@
 //   };
 
 //   return (
-//     <div className="bg-white p-4 rounded-lg">
+//     <div className="bg-white p-4 rounded-lg -ml-2">
 //       <h1 className="font-bold text-2xl">Project Milestones</h1>
-//       <div className="mainContainerS mt-4">
+//       <div className="mainContainerS mt-4 overflow-y-auto h-[calc(100vh-198px)] xs:h-[calc(100vh-182px)] mb-3 xxs:mb-2 ">
 //         <div className="1">
 //           <Toolbar start={startContent} end={endContent} />
 //         </div>
@@ -1139,7 +1139,6 @@
 
 
 
-
 import React, { useState, useEffect, useRef } from "react";
 import { Toolbar } from "primereact/toolbar";
 import { Button } from "primereact/button";
@@ -1190,6 +1189,21 @@ const ProjectMilestones = () => {
   const [deleteTaskDialog, setDeleteTaskDialog] = useState(false);
   const [deleteTasksDialog, setDeleteTasksDialog] = useState(false);
   const navigate = useNavigate("");
+
+
+
+
+
+  const [tooltip, setTooltip] = useState('');
+
+  const handleTouchStart = (label) => {
+    setTooltip(label);
+  };
+
+  const handleTouchEnd = () => {
+    setTooltip('');
+  };
+  
 
   const teams = [
     { name: "Software", code: "software" },
@@ -1936,9 +1950,9 @@ const ProjectMilestones = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg">
+    <div className="bg-white p-4 rounded-lg -ml-2">
       <h1 className="font-bold text-2xl">Project Milestones</h1>
-      <div className="mainContainerS mt-4">
+      <div className="mainContainerS mt-4 overflow-y-auto h-[calc(100vh-198px)] xs:h-[calc(100vh-182px)] mb-3 xxs:mb-2 ">
         <div className="1">
           <Toolbar start={startContent} end={endContent} />
         </div>
