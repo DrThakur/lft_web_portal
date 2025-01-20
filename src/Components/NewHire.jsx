@@ -130,6 +130,8 @@ const NewHire = () => {
         value={recruitments}
         tableStyle={{ minWidth: "50rem" }}
         size="small"
+      scrollable
+        scrollHeight="400px"
       >
         <Column
           field="fullName"

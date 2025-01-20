@@ -226,7 +226,7 @@ const UserProfilePage = () => {
     <div className="bg-white p-2 h-full w-full mt-2 overflow-y-auto border rounded-lg shadow-lg ">
       <h1 className="text-xl font-bold">My Profile</h1>
 
-      <div className="main Container flex flex-col">
+      <div className="main Container flex flex-col overflow-y-auto h-[calc(100vh-172px)] xs:h-[calc(100vh-156px)] mb-3 xxs:mb-2">
         {/* Profile Section */}
         <div className="container1 flex flex-col lg:flex-row border rounded-lg shadow-md p-4 mt-4 mb-4 gap-4 ">
 

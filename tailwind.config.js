@@ -4,6 +4,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        'xxss': '350px',
+        'xxs': '444px',
         'xs': '540px', // This creates a custom breakpoint for screens under 430px
       },
       animation: {
@@ -21,6 +23,9 @@ module.exports = {
             "background-position": "right center",
           },
         },
+      },
+      outline: {
+        'single': '2px solid #000', // Example: 2px solid black outline
       },
     },
   },

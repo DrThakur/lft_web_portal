@@ -31,7 +31,7 @@ const AwardsRecognition = () => {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full ">
       {/* Navigation buttons */}
       <div className="flex flex-row justify-between items-center absolute top-1/2 z-10 w-full -mt-8 px-3 md:px-10">
         <button

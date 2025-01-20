@@ -329,7 +329,7 @@ const EosUpdate = () => {
         <h1 className="text-2xl font-bold text-left md:text-left w-full md:w-auto">EoS Update</h1>
 
         {/* Button and MonthYearPicker */}
-        <div className="flex flex-col xs:flex-row justify-evenly items-center gap-4 w-full md:w-auto mt-2">
+        <div className="flex flex-col xs:flex-row justify-evenly items-center gap-4 w-full md:w-auto mt-2 ">
           {/* Submit Button */}
           <div className="flex justify-start w-full min-w-36 md:w-auto">
             <button
@@ -350,7 +350,7 @@ const EosUpdate = () => {
         </div>
       </div>
 
-      <form className="space-y-6">
+      <form className="space-y-6 overflow-y-auto h-[calc(100vh-326px)] xxs:h-[calc(100vh-222px)] mb-3 xxs:mb-2 ">
         {/* Employee Details Section */}
 
         {userDetails && (

@@ -80,168 +80,149 @@ const NewMilestoneForm = ({
 
   return (
     <div>
-      <div className="grid grid-cols-4 gap-2">
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2 w-full"
-            htmlFor="milestoneName"
-          >
-            Milestone Name
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="milestoneName"
-            type="text"
-            value={milestoneName}
-            readOnly
-          />
-        </div>
-
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="plannedStartDate"
-          >
-            Planned Start Date
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="plannedStartDate"
-            type="date"
-            value={plannedStartDate}
-            onChange={(e) => setPlannedStartDate(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="plannedEndDate"
-          >
-            Planned End Date
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="plannedEndDate"
-            type="date"
-            value={plannedEndDate}
-            onChange={(e) => setPlannedEndDate(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="invoiceValue"
-          >
-            Invoice Value (INR)
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="invoiceValue"
-            type="number"
-            value={invoiceValue}
-            onChange={(e) => setInvoiceValue(e.target.value)}
-          />
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="description"
-        >
-          Description
-        </label>
-        <textarea
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows={5}
-        ></textarea>
-      </div>
-
-      <div className="flex flex-row justify-center items-center gap-2">
-        <button
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/12"
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/8"
-          onClick={handleSaveMilestone}
-        >
-          Save Milestone
-        </button>
-        {milestoneDetails.length > 0 && (
-          <button
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/8"
-            onClick={handleSaveAllMilestones}
-          >
-            Save All Milestones
-          </button>
-        )}
-      </div>
-
-      {errorMessage && (
-        <p className="text-red-500 font-bold mb-4">{errorMessage}</p>
-      )}
-
-      {milestoneDetails && milestoneDetails.length > 0 && (
-        <div className="mt-8 ">
-          <h2 className="text-xl font-semibold mb-4 text-center">
-            Milestone Details
-          </h2>
-          <table className="border-collapse border border-gray-400 w-full bg-white p-2">
-            <thead>
-              <tr>
-                <th className="border border-gray-400 px-4 py-2">
-                  Milestone Name
-                </th>
-                <th className="border border-gray-400 px-4 py-2">
-                  Planned Start Date
-                </th>
-                <th className="border border-gray-400 px-4 py-2">
-                  Planned End Date
-                </th>
-                <th className="border border-gray-400 px-4 py-2">
-                  Invoice Value (INR)
-                </th>
-                <th className="border border-gray-400 px-4 py-2">
-                  Description
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {milestoneDetails.map((milestone, index) => (
-                <tr key={index}>
-                  <td className="border border-gray-400 px-4 py-2 text-center">
-                    {milestone.milestoneName}
-                  </td>
-                  <td className="border border-gray-400 px-4 py-2 text-center">
-                    {milestone.plannedStartDate}
-                  </td>
-                  <td className="border border-gray-400 px-4 py-2 text-center">
-                    {milestone.plannedEndDate}
-                  </td>
-                  <td className="border border-gray-400 px-4 py-2 text-center">
-                    {milestone.invoiceValue}
-                  </td>
-                  <td className="border border-gray-400 px-4 py-2 text-center">
-                    {milestone.description}
-                  </td>
-                  <td className="border border-gray-400 px-4 py-2 text-center">
-                    <button className="border rounded-md bg-red-400 text-white hover:bg-red-700 p-2">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="mb-4">
+      <label
+        className="block text-gray-700 text-sm font-bold mb-2 w-full"
+        htmlFor="milestoneName"
+      >
+        Milestone Name
+      </label>
+      <input
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="milestoneName"
+        type="text"
+        value={milestoneName}
+        readOnly
+      />
     </div>
+
+    <div className="mb-4">
+      <label
+        className="block text-gray-700 text-sm font-bold mb-2"
+        htmlFor="plannedStartDate"
+      >
+        Planned Start Date
+      </label>
+      <input
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="plannedStartDate"
+        type="date"
+        value={plannedStartDate}
+        onChange={(e) => setPlannedStartDate(e.target.value)}
+      />
+    </div>
+    <div className="mb-4">
+      <label
+        className="block text-gray-700 text-sm font-bold mb-2"
+        htmlFor="plannedEndDate"
+      >
+        Planned End Date
+      </label>
+      <input
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="plannedEndDate"
+        type="date"
+        value={plannedEndDate}
+        onChange={(e) => setPlannedEndDate(e.target.value)}
+      />
+    </div>
+    <div className="mb-4">
+      <label
+        className="block text-gray-700 text-sm font-bold mb-2"
+        htmlFor="invoiceValue"
+      >
+        Invoice Value (INR)
+      </label>
+      <input
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="invoiceValue"
+        type="number"
+        value={invoiceValue}
+        onChange={(e) => setInvoiceValue(e.target.value)}
+      />
+    </div>
+  </div>
+
+  <div className="mb-4">
+    <label
+      className="block text-gray-700 text-sm font-bold mb-2"
+      htmlFor="description"
+    >
+      Description
+    </label>
+    <textarea
+      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="description"
+      value={description}
+      onChange={(e) => setDescription(e.target.value)}
+      rows={5}
+    ></textarea>
+  </div>
+
+  <div className="flex flex-col xxs:flex-row justify-center items-center gap-2 mt-4">
+    <button
+      className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline xxs:mr-4 w-full sm:w-1/4 lg:w-2/12 "
+      onClick={handleCancel}
+    >
+      Cancel
+    </button>
+    <button
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full sm:w-auto lg:w-2/12"
+      onClick={handleSaveMilestone}
+    >
+      Save Milestone
+    </button>
+    {milestoneDetails.length > 0 && (
+      <button
+        className="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full xl:w-2/12"
+        onClick={handleSaveAllMilestones}
+      >
+        Save All Milestones
+      </button>
+    )}
+  </div>
+
+  {errorMessage && (
+    <p className="text-red-500 font-bold mb-4">{errorMessage}</p>
+  )}
+
+  {milestoneDetails && milestoneDetails.length > 0 && (
+    <div className="mt-8">
+      <h2 className="text-xl font-semibold mb-4 text-center">
+        Milestone Details
+      </h2>
+      <table className="border-collapse border border-gray-400 w-full bg-white p-2">
+        <thead>
+          <tr>
+            <th className="border border-gray-400 px-4 py-2">Milestone Name</th>
+            <th className="border border-gray-400 px-4 py-2">Planned Start Date</th>
+            <th className="border border-gray-400 px-4 py-2">Planned End Date</th>
+            <th className="border border-gray-400 px-4 py-2">Invoice Value (INR)</th>
+            <th className="border border-gray-400 px-4 py-2">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {milestoneDetails.map((milestone, index) => (
+            <tr key={index}>
+              <td className="border border-gray-400 px-4 py-2 text-center">{milestone.milestoneName}</td>
+              <td className="border border-gray-400 px-4 py-2 text-center">{milestone.plannedStartDate}</td>
+              <td className="border border-gray-400 px-4 py-2 text-center">{milestone.plannedEndDate}</td>
+              <td className="border border-gray-400 px-4 py-2 text-center">{milestone.invoiceValue}</td>
+              <td className="border border-gray-400 px-4 py-2 text-center">{milestone.description}</td>
+              <td className="border border-gray-400 px-4 py-2 text-center">
+                <button className="border rounded-md bg-red-400 text-white hover:bg-red-700 p-2">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</div>
+
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
 import axios from "axios";
 import { FixedSizeGrid as Grid } from "react-window";
+import { Avatar } from "primereact/avatar";
 
 
 //   {
@@ -189,12 +190,16 @@ import { FixedSizeGrid as Grid } from "react-window";
 //   // Add more project data as needed
 // ];
 
+
 const ProjectTableView = ({ selectedView }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
- 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalAvatars, setModalAvatars] = useState([]);
+  const [modalAvatarNames, setModalAvatarNames] = useState([]);
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -203,11 +208,8 @@ const ProjectTableView = ({ selectedView }) => {
       try {
         setLoading(true);
         const response = await axios.get(`${apiUrl}/projects`);
-        const projectsData = response.data.projects;
-        console.log("my projects", response.data.projects);
-        setProjects(projectsData);
+        setProjects(response.data.projects);
       } catch (error) {
-        console.error("Error fetching project details:", error);
         setError(error);
       } finally {
         setLoading(false);
@@ -215,54 +217,137 @@ const ProjectTableView = ({ selectedView }) => {
     };
 
     fetchProjectDetails();
-  }, []);
+
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+      setViewportHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [apiUrl]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error fetching projects: {error.message}</p>;
 
-  // Render function for Grid items
+  const getAvailableWidth = () => {
+    const sidebarWidth = 106;
+    const availableWidth = screenWidth - sidebarWidth;
+    return availableWidth > 0 ? availableWidth : screenWidth;
+  };
+
+  const getColumnCount = () => {
+    if (screenWidth < 640) {
+      return 1;
+    } else if (screenWidth < 1024) {
+      return 2;
+    } else if (screenWidth < 1536) {
+      return 3;
+    }
+    else if (screenWidth < 2400) {
+      return 4;
+    }else if (screenWidth < 3100) {
+      return 5;
+    } else {
+      return 6;
+    }
+  };
+
+  const getColumnWidth = () => {
+    const padding = 20;
+    const margin = 10;
+    const availableWidth = getAvailableWidth();
+    const columnCount = getColumnCount();
+    return (availableWidth - padding - (columnCount - 1) * margin) / columnCount;
+  };
+
+  const getRowHeight = () => {
+    if (screenWidth < 640) {
+      return 400;
+    } else if (screenWidth < 1024) {
+      return 405;
+    } else if (screenWidth < 1280) {
+      return 470;
+    } else {
+      return 520;
+    }
+  };
+
+  const getRowCount = () => Math.ceil(projects.length / getColumnCount());
+
   const renderRow = ({ columnIndex, rowIndex, style }) => {
-    const index = rowIndex * 4 + columnIndex; // Calculate the correct index for the grid
+    const index = rowIndex * getColumnCount() + columnIndex;
     if (index >= projects.length) return null;
 
-
     const project = projects[index];
-    console.log("my project", project)
 
     return project ? (
       <div
         style={{
           ...style,
           padding: "0px 10px",
-          boxSizing: "border-box", // Ensure padding is included in width calculation
+          margin: "10px",
+          boxSizing: "border-box",
         }}
         key={project._id}
       >
-        <ProjectCard project={project} />
+        <ProjectCard project={project} toggleModal={toggleModal} />
       </div>
     ) : null;
   };
 
+  const dynamicHeight = viewportHeight - 178;
+
+  const toggleModal = (avatars, avatarNames) => {
+    setModalAvatars(avatars);
+    setModalAvatarNames(avatarNames);
+    setIsModalVisible(!isModalVisible);
+  };
+
   return (
-    <div className="overflow-y-auto overflow-x-hidden bg-white h-full mt-1 p-4">
-      {selectedView && selectedView === "table" ? (
-        ""
-      ) : (
+    <div className="overflow-x-hidden overflow-y-auto w-full bg-white mt-1 p-1 xs:p-3 2xl:p-4">
+      {selectedView !== "table" && (
         <h2 className="font-bold text-2xl mt-2 ml-2 mb-2">PMS Dashboard</h2>
       )}
-      <div className="">
+
+      <div>
         <Grid
-          columnCount={4}
-          columnWidth={450}
-          height={750}
-          rowCount={Math.ceil(projects.length / 4)}
-          rowHeight={520}
-          width={1920}
-          style={{ padding: '10px' }}
+          columnCount={getColumnCount()}
+          columnWidth={getColumnWidth()}
+          height={dynamicHeight}
+          rowCount={getRowCount()}
+          rowHeight={getRowHeight()}
+          width={getAvailableWidth()}
+          style={{ padding: '10px', overflowX: 'hidden' }}
         >
           {renderRow}
         </Grid>
       </div>
+
+      {/* Render modal conditionally here */}
+      {isModalVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
+          <div className="bg-white p-6 rounded-lg w-11/12 md:w-1/3 max-h-[80vh] relative ml-[106px] mr-7">
+            <button
+              className="absolute top-4 right-4 xs:right-6 text-xl font-bold text-gray-600 rounded-full border-4 border-violet-200 hover:bg-gray-400 hover:border-violet-200 hover:text-gray-800 h-10 w-10 flex items-center justify-center"
+              onClick={toggleModal}
+            >
+              <span className="-mt-1">&times;</span>
+            </button>
+            <h3 className="font-bold mb-4 text-start ">All Members:</h3>
+            <div className="overflow-y-auto max-h-60 md:max-h-80 lg:max-h-96 pb-4 ">
+              {modalAvatars.map((avatar, index) => (
+                <div key={index} className="flex items-center gap-2 mb-2">
+                  <Avatar image={avatar} shape="circle" />
+                  <span>{modalAvatarNames[index]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
