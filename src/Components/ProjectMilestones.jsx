@@ -515,145 +515,54 @@ const ProjectMilestones = () => {
     );
   };
 
-  // const startContentOfToolBar = (
-  //   <div className="flex flex-row justify-start items-center gap-4">
-  //     <div className="flex flex-row justify-start items-center gap-2 ">
-  //       <label htmlFor="" className="font-semibold text-xl">
-  //         Project Id
-  //       </label>
-  //       <Dropdown
-  //         value={selectedProject}
-  //         onChange={(e) => setSelectedProject(e.value)}
-  //         options={projects.map((project) => ({
-  //           ...project,
-  //           label: `${project.projectId} - ${project.projectName}`,
-  //         }))}
-  //         optionLabel="label"
-  //         placeholder="Select a Project"
-  //         filter
-  //         valueTemplate={selectedProjectTemplate}
-  //         itemTemplate={projectOptionTemplate}
-  //         virtualScrollerOptions={{ itemSize: 38 }}
-  //         className="w-64"
-  //       />
-  //     </div>
-  //     <div className="flex flex-row justify-start items-center gap-2">
-  //       <label htmlFor="" className="font-semibold text-xl">
-  //         Project Name
-  //       </label>
-  //       <InputText value={selectedProject?.projectName} readOnly />
-  //     </div>
-  //     <div className="flex flex-row justify-start items-center gap-2">
-  //       <label htmlFor="team" className="font-semibold text-xl">
-  //         Team
-  //       </label>
-
-  //       <Dropdown
-  //         value={selectedTeam}
-  //         onChange={(e) => setSelectedTeam(e.target.value)}
-  //         options={teams}
-  //         optionLabel="name"
-  //         placeholder="Select a Team"
-  //         filter
-  //         className="w-64"
-  //       />
-  //     </div>
-  //   </div>
-  // );
-
   // My new datatable
 
-  // const startContentOfToolBar = (
-  //   <div className="flex flex-row justify-start items-center gap-4">
-  //     <div className="flex flex-row justify-start items-center gap-2">
-  //       <label htmlFor="" className="font-semibold text-xl">
-  //         Project Id
-  //       </label>
-  //       <Dropdown
-  //         value={selectedProject}
-  //         onChange={(e) => setSelectedProject(e.value)}
-  //         options={projects.map((project) => ({
-  //           ...project,
-  //           label: `${project.projectId} - ${project.projectName}`,
-  //         }))}
-  //         optionLabel="label"
-  //         placeholder="Select a Project"
-  //         filter
-  //         valueTemplate={selectedProjectTemplate}
-  //         itemTemplate={projectOptionTemplate}
-  //         virtualScrollerOptions={{ itemSize: 38 }}
-  //         className="w-64"
-  //       />
-  //     </div>
-  //     <div className="flex flex-row justify-start items-center gap-2">
-  //       <label htmlFor="" className="font-semibold text-xl">
-  //         Project Name
-  //       </label>
-  //       <InputText value={selectedProject?.projectName} readOnly />
-  //     </div>
-  //     <div className="flex flex-row justify-start items-center gap-2">
-  //       <label htmlFor="team" className="font-semibold text-xl">
-  //         Team
-  //       </label>
-
-  //       <Dropdown
-  //         value={selectedTeam}
-  //         onChange={(e) => setSelectedTeam(e.target.value)}
-  //         options={teams}
-  //         optionLabel="name"
-  //         placeholder="Select a Team"
-  //         filter
-  //         className="w-64"
-  //       />
-  //     </div>
-  //   </div>
-  // );
-
   const startContentOfToolBar = (
-  <div className="flex flex-col md:grid md:grid-cols-3 md:gap-4 w-full lg:grid-cols-3 lg:gap-2">
-    <div className="flex  flex-col xs:flex-row justify-start items-center md:flex-col  md:items-start 2xl:flex-row 2xl:items-center gap-2 w-full">
-      <label htmlFor="" className="font-semibold text-xl">
-        Project Id
-      </label>
-      <Dropdown
-        value={selectedProject}
-        onChange={(e) => setSelectedProject(e.value)}
-        options={projects.map((project) => ({
-          ...project,
-          label: `${project.projectId} - ${project.projectName}`,
-        }))}
-        optionLabel="label"
-        placeholder="Select a Project"
-        filter
-        valueTemplate={selectedProjectTemplate}
-        itemTemplate={projectOptionTemplate}
-        virtualScrollerOptions={{ itemSize: 38 }}
-        className="w-full md:w-64"
-      />
+    <div className="flex flex-wrap justify-start items-center gap-4 p-4 md:p-6 ">
+      <div className="flex flex-col sm:flex-row justify-start items-center gap-1 sm:gap-4 w-full sm:w-auto">
+        <label htmlFor="" className="font-semibold text-xl mb-2 sm:mb-0 sm:text-lg md:w-1/3 lg:w-auto">
+          Project Id
+        </label>
+        <Dropdown
+          value={selectedProject}
+          onChange={(e) => setSelectedProject(e.value)}
+          options={projects.map((project) => ({
+            ...project,
+            label: `${project.projectId} - ${project.projectName}`,
+          }))}
+          optionLabel="label"
+          placeholder="Select a Project"
+          filter
+          valueTemplate={selectedProjectTemplate}
+          itemTemplate={projectOptionTemplate}
+          virtualScrollerOptions={{ itemSize: 38 }}
+          className="w-full sm:w-64 md:w-96 lg:w-64 xl:w-60 sm:ml-8 md:ml-2 lg:ml-0"
+        />
+      </div>
+  
+      <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto">
+        <label htmlFor="" className="font-semibold text-xl mb-2 sm:mb-0 sm:text-lg md:w-1/3 lg:w-auto">
+          Project Name
+        </label>
+        <InputText value={selectedProject?.projectName} readOnly className="w-full sm:w-64 md:w-[363px] lg:w-64 xl:w-60 " />
+      </div>
+  
+      <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto">
+        <label htmlFor="team" className="font-semibold text-xl mb-2 sm:mb-0 sm:text-lg md:w-1/3 lg:w-auto">
+          Team
+        </label>
+        <Dropdown
+          value={selectedTeam}
+          onChange={(e) => setSelectedTeam(e.target.value)}
+          options={teams}
+          optionLabel="name"
+          placeholder="Select a Team"
+          filter
+          className="w-full sm:w-64 md:w-[407px] lg:w-64 xl:w-60 sm:ml-16 md:ml-5 lg:ml-0"
+        />
+      </div>
     </div>
-    <div className="flex flex-col xs:flex-row  justify-start items-center md:flex-col  md:items-start 2xl:flex-row 2xl:items-center gap-2 w-full">
-      <label htmlFor="" className="font-semibold text-xl">
-        Project Name
-      </label>
-      <InputText value={selectedProject?.projectName} readOnly className="w-full md:w-64" />
-    </div>
-    <div className="flex flex-col xs:flex-row justify-start items-center md:flex-col  md:items-start 2xl:flex-row 2xl:items-center gap-2 w-full">
-      <label htmlFor="team" className="font-semibold text-xl">
-        Team
-      </label>
-      <Dropdown
-        value={selectedTeam}
-        onChange={(e) => setSelectedTeam(e.target.value)}
-        options={teams}
-        optionLabel="name"
-        placeholder="Select a Team"
-        filter
-        className="w-full md:w-64"
-      />
-    </div>
-  </div>
-);
-
+  );
   
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
