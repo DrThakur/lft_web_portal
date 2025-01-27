@@ -591,32 +591,32 @@ const EosApproval = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-4 w-full ">
               {/* Pending Eos Card */}
               <div className="bg-yellow-100 hover:bg-yellow-300 p-2 rounded-lg text-center cursor-pointer h-[64px] flex items-center justify-center">
-                <span className="font-bold">Pending Eos: &nbsp;</span>
-                <span className="font-semibold text-blue-500">4</span>
+                <span className="font-bold text-sm sm:text-base md:text-lg">Pending Eos: &nbsp;</span>
+                <span className="font-semibold text-blue-500 ">4</span>
               </div>
 
               {/* Approval Status Card */}
               <div className="bg-red-100 hover:bg-red-300 p-2 rounded-lg text-center cursor-pointer h-[64px] flex items-center justify-center">
-                <span className="font-bold">Approval Status: &nbsp;</span>
-                <span className="font-semibold text-red-500">Pending</span>
+                <span className="font-bold text-sm sm:text-base md:text-lg">Approval Status: &nbsp;</span>
+                <span className="font-semibold text-red-500 ">Pending</span>
               </div>
 
               {/* Cut-Off Date Card */}
               <div className="bg-orange-100 hover:bg-orange-300 p-2 rounded-lg text-center cursor-pointer h-[64px] flex items-center justify-center">
-                <span className="font-bold">Cut-Off Date: &nbsp;</span>
-                <span className="font-semibold text-orange-500">26 Jun 2024</span>
+                <span className="font-bold text-sm sm:text-base md:text-lg">Cut-Off Date: &nbsp;</span>
+                <span className="font-semibold text-orange-500 ">26 Jun 2024</span>
               </div>
 
               {/* Send Reminder Button */}
               <div className="shadow-md">
                 <button className="bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 flex flex-row justify-center items-center gap-4 w-full text-center h-[64px]">
-                  <MdOutlineEmail className="text-xl" /> Send Reminder
+                  <MdOutlineEmail className="test-xl" />  Send Reminder
                 </button>
               </div>
 
               {/* Submit Button */}
               <div className="shadow-md">
-                <button className="bg-green-500 p-2 rounded-lg text-white hover:bg-green-700 w-full text-center h-[64px]">
+                <button className="bg-green-500 p-2 rounded-lg text-white hover:bg-green-700 w-full text-center h-[64px] ">
                   Submit
                 </button>
               </div>
