@@ -56,6 +56,60 @@ const EosApprovalHod = () => {
   //   }
   // }, [filterType, eosData]);
 
+
+   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+    // Update window width on resize
+    useEffect(() => {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+  
+      window.addEventListener("resize", handleResize);
+  
+      // Cleanup the event listener on component unmount
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
+  
+  
+  
+    // Conditional text change based on screen size
+    const renderButtonText = (buttonType) => {
+      if (windowWidth >= 320 && windowWidth <= 1105) {
+        // Return shorter text (Filled, Pending, Clear) for this screen size
+        if (buttonType === "filled") return "";
+        if (buttonType === "empty") return "";
+        if (buttonType === "all") return "";
+      } else if (windowWidth >= 1106 && windowWidth <= 1280) {
+        // Return shorter text (Filled, Pending, Clear) for this screen size
+        if (buttonType === "filled") return "Filled";
+        if (buttonType === "empty") return "Pending";
+        if (buttonType === "all") return "Clear";
+      }
+      else if (windowWidth >= 540 && windowWidth <= 636) {
+        if (buttonType === "filled") return "Filled Eos";
+        if (buttonType === "empty") return "Pending Eos";
+        if (buttonType === "all") return "Clear Filter";
+      }
+       else {
+        // Return the full text (Filled Eos, Pending Eos, Clear Filter) for larger screen sizes
+        if (buttonType === "filled") return "Filled Eos";
+        if (buttonType === "empty") return "Pending Eos";
+        if (buttonType === "all") return "Clear Filter";
+      }
+    };
+  
+    // Icon width adjustment based on text visibility
+    const getIconWidth = (buttonType) => {
+      if (renderButtonText(buttonType) === "") {
+        return "w-8"; // Width of 30px (8 x 4px = 32px)
+      }
+      return "w-auto"; // Default width if text is shown
+    };
+  
+
   const handleAction = (id, action, remarks) => {
     const updatedData = eosData.map((item) =>
       item.id === id
@@ -86,14 +140,14 @@ const EosApprovalHod = () => {
 
   const leftToolbarTemplate = () => {
     return (
-      <div className="flex flex-wrap gap-2">
-        <span className="p-input-icon-left text-right w-fit">
+      <div className="flex flex-wrap gap-2 w-full">
+        <span className="p-input-icon-left text-right w-full sm:w-auto">
           <i className="pi pi-search" />
           <InputText
             type="search"
             onInput={(e) => setGlobalFilter(e.target.value)}
             placeholder="Search..."
-            className="placeholder-gray-500 placeholder-opacity-50 text-center border border-gray-300 rounded-md px-2 py-2"
+            className="placeholder-gray-500 placeholder-opacity-50 text-center border border-gray-300 rounded-md px-2 py-2 w-full xxs:w-96  sm:w-56 md:w-72 lg:w-96"
           />
         </span>
       </div>
@@ -102,52 +156,64 @@ const EosApprovalHod = () => {
 
   const rightToolbarTemplate = () => {
     return (
-      <div className="flex flex-row justify-start items-center gap-2">
+      <div className="flex flex-wrap justify-start items-center gap-2 w-full sm:flex-row sm:gap-4">
+        {/* Button 1: Filled */}
         <button
           className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
             activeButton === "filled" ? "bg-blue-500 text-white" : "bg-blue-300"
           }`}
           onClick={() => handleButtonClick("filled")}
         >
-        {activeButton === "filled" ? <VscFilterFilled /> : <VscFilter />} Filled Eos
+          {activeButton === "filled" ? <VscFilterFilled /> : <VscFilter />}
+          {renderButtonText("filled")}
         </button>
+    
+        {/* Button 2: Empty */}
         <button
-        className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
-          activeButton === "empty" ? "bg-green-500 text-white" : "bg-green-300"
-        }`}
+          className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
+            activeButton === "empty" ? "bg-green-500 text-white" : "bg-green-300"
+          }`}
           onClick={() => handleButtonClick("empty")}
         >
-         
-        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} Pending Eos
+          {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />}
+          {renderButtonText("empty")}
         </button>
+    
+        {/* Button 3: Another Empty */}
         <button
-        className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
-          activeButton === "empty" ? "bg-yellow-500 text-white" : "bg-yellow-300"
-        }`}
+          className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
+            activeButton === "empty" ? "bg-yellow-500 text-white" : "bg-yellow-300"
+          }`}
           onClick={() => handleButtonClick("empty")}
         >
-         
-        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} PM Approved Eos
+          {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />}
+          {renderButtonText("empty")}
         </button>
+    
+        {/* Button 4: Yet Another Empty */}
         <button
-        className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
-          activeButton === "empty" ? "bg-purple-500 text-white" : "bg-purple-300"
-        }`}
+          className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
+            activeButton === "empty" ? "bg-purple-500 text-white" : "bg-purple-300"
+          }`}
           onClick={() => handleButtonClick("empty")}
         >
-         
-        {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />} PM Pending Eos
+          {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />}
+          {renderButtonText("empty")}
         </button>
+    
+        {/* Button 5: All */}
         <button
-        className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
-         activeButton === "filled" || activeButton === "empty"? "bg-gray-500 text-white" : "bg-gray-300"
-        }`}
+          className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
+            activeButton === "filled" || activeButton === "empty" ? "bg-gray-500 text-white" : "bg-gray-300"
+          }`}
           onClick={() => handleButtonClick("all")}
         >
-          <MdFilterAltOff /> Clear Filter
+          <MdFilterAltOff />
+          {renderButtonText("all")}
         </button>
       </div>
     );
+    
   };
 
   //   const header = (
@@ -187,7 +253,7 @@ const EosApprovalHod = () => {
     console.log("row data", rowData)
 
     return (
-      <div className="flex flex-row justify-start items-center gap-2">
+      <div className="flex flex-col xl:flex-row  justify-start items-center gap-2">
         <img
           alt={rowData?.employee?.fullName ||"N/A"}
           src={`https://wl-incrivel.cf.tsp.li/resize/728x/webp/0ec/140/d189845022bb6eddb88bb5279a.jpg.webp`}
@@ -201,7 +267,7 @@ const EosApprovalHod = () => {
   };
   const reportingManagerBodyTemplate = (rowData) => {
     return (
-      <div className="flex flex-row justify-start items-center gap-2">
+      <div className="flex flex-col xl:flex-row justify-start items-center gap-2">
         <img
           alt={rowData?.employee?.reportingManager ||"N/A"}
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
@@ -218,7 +284,7 @@ const EosApprovalHod = () => {
     return (
       <div className="flex flex-col justify-start items-start gap-2">
       {rowData?.projects?.map((project, index) => (
-      <div className="flex flex-row justify-center items-center gap-2">
+      <div className="flex flex-row  justify-center items-center gap-2">
         <img
           alt={project?.project?.projectManager?.fullName ||"N/A" }
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
@@ -444,42 +510,48 @@ const EosApprovalHod = () => {
   }, [apiUrl]);
 
   return (
-    <div className="p-grid p-fluid bg-white p-6 rpunded-lg shadow-md h-full w-full rounded-lg">
-      <div className="p-col-12">
+    <div className="bg-white p-6 rounded-lg shadow-md h-full w-full -ml-1 mb-2">
+      <h1 className="font-bold text-2xl  mb-4">EoS Approval</h1>
+      <div className="p-col-12" style={{ height: `calc(100vh - 10%)` }}>
         <div className="card card-w-title">
-          <div className="flex flex-wrap flex-row justify-between items-center bg-gray-100 p-2 rounded-lg mb-1">
-            <h1 className="font-bold text-2xl">EoS Approval</h1>
-            <div className="flex flex-wrap flex-row justify-between items-center gap-4">
-              <div className="bg-yellow-100 hover:bg-yellow-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
+          <div className="flex flex-wrap justify-between items-center bg-gray-100 p-2 rounded-lg ">
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-4 w-full ">
+
+              <div className="bg-yellow-100 hover:bg-yellow-300 p-2 rounded-lg text-center cursor-pointer  h-[64px] flex items-center justify-center">
                 <span className="font-bold">Pending Eos: &nbsp; </span>
                 <span className="font-smmibold text-blue-500">4</span>
               </div>
-              <div className="bg-red-100 hover:bg-red-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
+
+              <div className="bg-red-100 hover:bg-red-300 p-2 rounded-lg text-center cursor-pointer  h-[64px] flex items-center justify-center">
                 <span className="font-bold">Approval Status: &nbsp;</span>
                 <span className="font-semibold  text-red-500">Pending</span>
               </div>
-              <div className="bg-orange-100 hover:bg-orange-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
+
+              <div className="bg-orange-100 hover:bg-orange-300 p-2 rounded-lg text-center cursor-pointer  h-[64px] flex items-center justify-center">
                 <span className="font-bold">Cut-Off Date: &nbsp;</span>
                 <span className="font-semibold  text-orange-500">28 Jun 2024</span>
               </div>
+
               <div className="shadow-md">
-                <button className="bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 flex flex-row justify-center items-center gap-4 w-[220px] text-center">
+                <button className="bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 flex flex-row justify-center items-center gap-4 w-full text-center h-[64px]">
                   <MdOutlineEmail className="text-xl" /> Send Reminder
                 </button>
               </div>
+
               <div className="shadow-md">
-                <button className="bg-green-500 p-2 rounded-lg text-white hover:bg-green-700 px-4 w-[220px] text-center">
+                <button className="bg-green-500 p-2 rounded-lg text-white hover:bg-green-700 w-full text-center h-[64px]">
                   Submit
                 </button>
               </div>
+              <div className="flex justify-center items-center shadow-md w-full">
               <MonthYearPickerFinal />
+              </div>
             </div>
           </div>
           <Toolbar
-            className="mb-2"
-            pt={{
-                    root: { style: {padding:"8px" } }
-                }}
+            className="flex flex-col sm:flex-row justify-between w-full"
+            pt={{ root: { style: { padding: "8px" } } }}
             
             start={leftToolbarTemplate}
             end={rightToolbarTemplate}
