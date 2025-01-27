@@ -57,6 +57,48 @@ const ResourceTable = ({
   const toast = useRef(null);
   const dt = useRef(null);
 
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  
+    // Update the screen width on window resize
+    useEffect(() => {
+      const handleResize = () => setScreenWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+
+
+     const [scrollHeight, setScrollHeight] = useState('600px');
+    
+    
+      useEffect(() => {
+        const handleResize = () => {
+          // Update the scrollHeight dynamically based on the window height or container
+          const newHeight = window.innerHeight - 355; // adjust this as per your layout
+          setScrollHeight(`${newHeight}px`);
+        };
+    
+        // Listen for window resize events
+        window.addEventListener('resize', handleResize);
+    
+        // Call the handler immediately to set the initial height
+        handleResize();
+    
+        // Cleanup the event listener
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []); // Empty dependency array ensures this effect runs once on mount
+    
+      const [screenSize, setScreenSize] = useState(window.innerWidth);
+      useEffect(() => {
+        const handleResize = () => setScreenSize(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Set the screen size on initial load
+        return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+      }, []);
+    
+
   useEffect(() => {
     ProductService.getProducts().then((data) => setProducts(data));
   }, []);
@@ -227,34 +269,63 @@ const ResourceTable = ({
   };
 
   const leftToolbarTemplate = () => {
+    if (screenWidth < 527) {
     return (
       <div className="flex flex-wrap gap-2">
         <Button
-          label="New"
+          
           icon="pi pi-plus"
           severity="success"
           onClick={openNew}
         />
         <Button
-          label="Delete"
+          
           icon="pi pi-trash"
           severity="danger"
           onClick={confirmDeleteSelected}
           disabled={!selectedProducts || !selectedProducts.length}
         />
       </div>
-    );
+    );} else {
+      return (
+        <div className="flex flex-wrap gap-2">
+          <Button
+            label="New"
+            icon="pi pi-plus"
+            severity="success"
+            onClick={openNew}
+          />
+          <Button
+            label="Delete"
+            icon="pi pi-trash"
+            severity="danger"
+            onClick={confirmDeleteSelected}
+            disabled={!selectedProducts || !selectedProducts.length}
+          />
+        </div>
+      );
+    }
   };
 
   const rightToolbarTemplate = () => {
+    if (screenWidth < 527) {
     return (
       <Button
-        label="Export"
+        
         icon="pi pi-upload"
         className="p-button-help"
         onClick={exportCSV}
       />
-    );
+    );} else {
+      return (
+        <Button
+          label="Export"
+          icon="pi pi-upload"
+          className="p-button-help"
+          onClick={exportCSV}
+        />
+      );
+    }
   };
 
   const imageBodyTemplate = (rowData) => {
@@ -397,25 +468,31 @@ const ResourceTable = ({
   }, [employees]);
 
   const header = (
-    <div className="flex flex-row justify-between items-center">
-      <h4 className="m-0">
-        {title} Department ({employees.length} Active Employees){" "}
+    <div className="flex flex-wrap justify-between items-center gap-4 overflow-y-auto">
+      {/* Title with Employee Count */}
+      <h4 className="m-0 w-full md:w-auto text-center md:text-left">
+        {title} Department ({employees.length} Active Employees)
       </h4>
-      <span className="p-input-icon-left">
+      
+      {/* Search Input */}
+      <span className="p-input-icon-left w-full md:w-auto">
         <i className="pi pi-search" />
         <InputText
           type="search"
           onInput={(e) => setGlobalFilter(e.target.value)}
           placeholder="Search..."
+          className="w-full"
         />
       </span>
-      <div className="flex gap-2">
+  
+      {/* Dropdowns - Wrapping for small screens */}
+      <div className="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-start">
         <Dropdown
           value={designationFilter}
           options={designationOptions}
           onChange={(e) => setDesignationFilter(e.value)}
           placeholder="Select Designation"
-          className="mr-2"
+          className="mr-2 mb-2 md:mb-0 w-full md:w-auto"
           showClear
         />
         <Dropdown
@@ -423,7 +500,7 @@ const ResourceTable = ({
           options={locationOptions}
           onChange={(e) => setLocationFilter(e.value)}
           placeholder="Select Location"
-          className="mr-2"
+          className="mr-2 mb-2 md:mb-0 w-full md:w-auto"
           showClear
         />
         <Dropdown
@@ -431,12 +508,13 @@ const ResourceTable = ({
           options={statusOptions}
           onChange={(e) => setStatusFilter(e.value)}
           placeholder="Select Status"
-          className="mr-2"
+          className="mr-2 mb-2 md:mb-0 w-full md:w-auto"
           showClear
         />
       </div>
     </div>
   );
+  
   const productDialogFooter = (
     <React.Fragment>
       <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
@@ -546,7 +624,7 @@ const ResourceTable = ({
           left={leftToolbarTemplate}
           right={rightToolbarTemplate}
         ></Toolbar>
-
+<div className="overflow-y-auto " style={{ height: `calc(100vh - 310px)` }}>
         <DataTable
           ref={dt}
           value={getFilteredEmployees()}
@@ -559,7 +637,7 @@ const ResourceTable = ({
           rowsPerPageOptions={[5, 10, 25]}
           removableSort
           scrollable
-          scrollHeight="600px"
+          scrollHeight={scrollHeight}
           //   totalRecords={totalPages * pageSize}
           //   onPage={handlePageChange}
           //   onRowToggle={handlePageSizeChange}
@@ -701,6 +779,7 @@ const ResourceTable = ({
           )}
         </div>
       </Dialog>
+    </div>
     </div>
   );
 };
