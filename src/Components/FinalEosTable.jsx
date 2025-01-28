@@ -56,6 +56,15 @@ const FinalEosTable = () => {
   const [error, setError] = useState(null);
 
 
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  
+    // Update the screen width on window resize
+    useEffect(() => {
+      const handleResize = () => setScreenWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
 
 
   // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
@@ -225,6 +234,23 @@ const FinalEosTable = () => {
   };
 
   const leftToolbarTemplate = () => {
+    if (screenWidth < 487) {
+    return (
+      <div className="flex flex-wrap gap-2">
+        <Button
+          icon="pi pi-plus"
+          severity="success"
+          onClick={openNew}
+        />
+        <Button
+          icon="pi pi-trash"
+          severity="danger"
+          onClick={confirmDeleteSelected}
+          disabled={!selectedProducts || !selectedProducts.length}
+        />
+      </div>
+    );
+  }else {
     return (
       <div className="flex flex-wrap gap-2">
         <Button
@@ -242,9 +268,19 @@ const FinalEosTable = () => {
         />
       </div>
     );
+  }
   };
 
   const rightToolbarTemplate = () => {
+    if (screenWidth < 487) {
+    return (
+      <Button
+        icon="pi pi-upload"
+        className="p-button-help"
+        onClick={exportCSV}
+      />
+    );
+  }else{
     return (
       <Button
         label="Export"
@@ -253,8 +289,8 @@ const FinalEosTable = () => {
         onClick={exportCSV}
       />
     );
-  };
-
+  }
+  }
   const imageBodyTemplate = (rowData) => {
     return (
       <img
@@ -355,44 +391,52 @@ const FinalEosTable = () => {
   }, [employees]);
 
   const header = (
-    <div className="flex flex-row justify-between items-center">
-      <h4 className="m-0">Final EoS- Aug 2024 ({eosData.length})</h4>
-      <span className="p-input-icon-left">
-        <i className="pi pi-search" />
-        <InputText
-          type="search"
-          onInput={(e) => setGlobalFilter(e.target.value)}
-          placeholder="Search..."
-        />
-      </span>
-      {/*    <div className="flex gap-2">
-        <Dropdown
-          value={designationFilter}
-          options={designationOptions}
-          onChange={(e) => setDesignationFilter(e.value)}
-          placeholder="Select Designation"
-          className="mr-2"
-          showClear
-        />
-        <Dropdown
-          value={locationFilter}
-          options={locationOptions}
-          onChange={(e) => setLocationFilter(e.value)}
-          placeholder="Select Location"
-          className="mr-2"
-          showClear
-        />
-        <Dropdown
-          value={statusFilter}
-          options={statusOptions}
-          onChange={(e) => setStatusFilter(e.value)}
-          placeholder="Select Status"
-          className="mr-2"
-          showClear
-        />
-      </div>
-      */}
-    </div>
+    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 md:gap-0">
+  <h4 className="m-0 text-center md:text-left">
+    Final EoS- Aug 2024 ({eosData.length})
+  </h4>
+
+  <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-2 w-full sm:w-auto">
+    <span className="p-input-icon-left w-full sm:w-auto">
+      <i className="pi pi-search" />
+      <InputText
+        type="search"
+        onInput={(e) => setGlobalFilter(e.target.value)}
+        placeholder="Search..."
+        className="w-full sm:w-auto"
+      />
+    </span>
+
+    {/* Uncomment the dropdown section and adjust for responsiveness */}
+    {/* <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+      <Dropdown
+        value={designationFilter}
+        options={designationOptions}
+        onChange={(e) => setDesignationFilter(e.value)}
+        placeholder="Select Designation"
+        className="mr-2 w-full sm:w-auto"
+        showClear
+      />
+      <Dropdown
+        value={locationFilter}
+        options={locationOptions}
+        onChange={(e) => setLocationFilter(e.value)}
+        placeholder="Select Location"
+        className="mr-2 w-full sm:w-auto"
+        showClear
+      />
+      <Dropdown
+        value={statusFilter}
+        options={statusOptions}
+        onChange={(e) => setStatusFilter(e.value)}
+        placeholder="Select Status"
+        className="mr-2 w-full sm:w-auto"
+        showClear
+      />
+    </div> */}
+  </div>
+</div>
+
   );
   const productDialogFooter = (
     <React.Fragment>
