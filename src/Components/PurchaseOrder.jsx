@@ -398,33 +398,40 @@ const PurchaseOrder = () => {
     <div className="flex flex-col">
   <hr className="border-2 mt-2 mb-2 rounded border-dashed" />
   <h3 className="text-xl font-semibold">Supporting Documents</h3>
-  <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2">
     
     {/* File Uploads */}
     {[...Array(4)].map((_, index) => (
-      <div 
-        className="flex flex-col mt-1" 
-        key={index}
-      >
-        <label 
-          htmlFor={`purchaseOrder-${index}`} 
-          className="font-semibold"
+      <div className="flex flex-col mt-1" key={index}>
+        <label
+          htmlFor={`purchaseOrder-${index}`}
+          className="font-semibold mb-2"
+          aria-label={`File upload for ${['Purchase Order', 'BQ Doc', 'Technical Specification', 'Misc. Docs'][index]}`}
         >
           {['Purchase Order', 'BQ Doc', 'Technical Specification', 'Misc. Docs'][index]}
         </label>
-        <Toast ref={toast}></Toast>
+        
+        <Toast ref={toast} />
         <FileUpload
           mode="basic"
           name={`purchaseOrder-${index}`}
           url="/api/upload"
           accept=".doc, .docx, .xls, .xlsx, .pdf, .ppt, .pptx"
-          maxFileSize={1000000}
+          maxFileSize={1000000} // 1MB size limit
           onUpload={onUpload}
+          chooseLabel="Select File"
+          uploadLabel="Upload"
+          cancelLabel="Cancel"
+          style={{
+            minHeight: '100px', // Set a minimum height for file input area
+            border: '2px dashed #ddd', // Add a dashed border to input box for visual cue
+          }}
         />
       </div>
     ))}
   </div>
 </div>
+
 
 
     {/* Special Note */}
