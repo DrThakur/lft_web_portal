@@ -310,9 +310,9 @@ const CreateProjectForm = () => {
   };
 
   return (
-    <div className=" mx-auto -ml-1 bg-white p-4 rounded-md mt-2 mb-3 sm:mb-2 w-full overflow-y-auto h-[calc(100vh-130px)] xs:h-[calc(100vh-110px)]">
+    <div className=" mx-auto  bg-white p-4 rounded-md mb-2 ">
       <h2 className="text-2xl font-bold mb-4">Create New Project</h2>
-      <form  className="flex flex-col mt-8">
+      <form  className="flex flex-col mt-8 overflow-y-auto h-[calc(100vh-210px)] xs:h-[calc(100vh-200px)]">
 
        {/* Project Information */}
 <div className="projectInformation">
