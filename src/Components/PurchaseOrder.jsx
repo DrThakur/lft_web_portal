@@ -422,7 +422,8 @@ const PurchaseOrder = () => {
           chooseLabel="Select File"
           uploadLabel="Upload"
           cancelLabel="Cancel"
-          style={{
+          className="flex items-center justify-center"
+          style={{ 
             minHeight: '100px', // Set a minimum height for file input area
             border: '2px dashed #ddd', // Add a dashed border to input box for visual cue
           }}

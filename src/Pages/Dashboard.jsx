@@ -29,7 +29,7 @@ const Dashboard = () => {
   return (
     <div className="h-full w-full overflow-hidden rounded-lg ">
       <Header title="Dashboard" />
-      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-2 overflow-y-auto h-[calc(100vh-226px)] xs:h-[calc(100vh-222px)] overflow-x-hidden mb-3 xxs:mb-1">
+      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-2  h-[calc(100vh-226px)] xs:h-[calc(100vh-222px)] overflow-x-hidden mb-3 xxs:mb-1 overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300 transition-all duration-300 ">
         <div
           className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300`}
         >
