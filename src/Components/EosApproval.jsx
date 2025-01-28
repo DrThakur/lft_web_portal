@@ -29,6 +29,101 @@ const EosApproval = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
+    const [scrollHeight, setScrollHeight] = useState('500px'); 
+  
+  
+    useEffect(() => {
+      const handleResize = () => {
+        // Update the scrollHeight dynamically based on the window height or container
+        const newHeight = window.innerHeight - 410; // adjust this as per your layout
+        setScrollHeight(`${newHeight}px`);
+      };
+  
+      // Listen for window resize events
+      window.addEventListener('resize', handleResize);
+  
+      // Call the handler immediately to set the initial height
+      handleResize();
+  
+      // Cleanup the event listener
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []); // Empty dependency array ensures this effect runs once on mount
+  
+    const [screenSize, setScreenSize] = useState(window.innerWidth);
+    useEffect(() => {
+      const handleResize = () => setScreenSize(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      handleResize(); // Set the screen size on initial load
+      return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+    }, []);
+
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Update window width on resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
+
+  // Conditional text change based on screen size
+  const renderButtonText = (buttonType) => {
+    if (windowWidth >= 320 && windowWidth <= 450) {
+      // Return shorter text (Filled, Pending, Clear) for this screen size
+      if (buttonType === "filled") return "";
+      if (buttonType === "empty") return "";
+      if (buttonType === "all") return "";
+    } else if (windowWidth >= 451 && windowWidth <= 539) {
+      // Return shorter text (Filled, Pending, Clear) for this screen size
+      if (buttonType === "filled") return "Filled";
+      if (buttonType === "empty") return "Pending";
+      if (buttonType === "all") return "Clear";
+    }
+    else if (windowWidth >= 540 && windowWidth <= 636) {
+      if (buttonType === "filled") return "Filled Eos";
+      if (buttonType === "empty") return "Pending Eos";
+      if (buttonType === "all") return "Clear Filter";
+    }
+    else if (windowWidth >= 640 && windowWidth < 768) {
+      // Return shorter text (Filled, Pending, Clear) for this screen size
+      if (buttonType === "filled") return "";
+      if (buttonType === "empty") return "";
+      if (buttonType === "all") return "";
+    } else if (windowWidth >= 768 && windowWidth <= 862) {
+      // Return shorter text (Filled, Pending, Clear) for this screen size
+      if (buttonType === "filled") return "Filled";
+      if (buttonType === "empty") return "Pending";
+      if (buttonType === "all") return "Clear";
+    } else {
+      // Return the full text (Filled Eos, Pending Eos, Clear Filter) for larger screen sizes
+      if (buttonType === "filled") return "Filled Eos";
+      if (buttonType === "empty") return "Pending Eos";
+      if (buttonType === "all") return "Clear Filter";
+    }
+  };
+
+  // Icon width adjustment based on text visibility
+  const getIconWidth = (buttonType) => {
+    if (renderButtonText(buttonType) === "") {
+      return "w-8"; // Width of 30px (8 x 4px = 32px)
+    }
+    return "w-auto"; // Default width if text is shown
+  };
+
+
   // useEffect(() => {
   //   setEosData(EosData);
   //   setFilteredEosData(EosData);
@@ -97,58 +192,57 @@ const EosApproval = () => {
     setFilterType(type); // Ensure this function is defined elsewhere in your code
   };
 
-  const leftToolbarTemplate = () => {
-    return (
-      <div className="flex flex-wrap gap-2">
-        <span className="p-input-icon-left text-right w-fit">
-          <i className="pi pi-search" />
-          <InputText
-            type="search"
-            onInput={(e) => setGlobalFilter(e.target.value)}
-            placeholder="Search..."
-            className="placeholder-gray-500 placeholder-opacity-50 text-center border border-gray-300 rounded-md px-2 py-2"
-          />
-        </span>
-      </div>
-    );
-  };
+  // const leftToolbarTemplate = () => {
+  //   return (
+  //     <div className="flex flex-wrap gap-2 w-full">
+  //       <span className="p-input-icon-left text-right w-full sm:w-auto">
+  //         <i className="pi pi-search" />
+  //         <InputText
+  //           type="search"
+  //           onInput={(e) => setGlobalFilter(e.target.value)}
+  //           placeholder="Search..."
+  //           className="placeholder-gray-500 placeholder-opacity-50 text-center border border-gray-300 rounded-md px-2 py-2 w-full " // Full width on small screens, fixed width on larger screens
+  //         />
+  //       </span>
+  //     </div>
+  //   );
+  // };
 
-  const rightToolbarTemplate = () => {
-    return (
-      <div className="flex flex-row justify-start items-center gap-2">
-        <button
-          className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
-            activeButton === "filled" ? "bg-blue-500 text-white" : "bg-blue-300"
-          }`}
-          onClick={() => handleButtonClick("filled")}
-        >
-          {activeButton === "filled" ? <VscFilterFilled /> : <VscFilter />}{" "}
-          Filled Eos
-        </button>
-        <button
-          className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
-            activeButton === "empty"
-              ? "bg-green-500 text-white"
-              : "bg-green-300"
-          }`}
-          onClick={() => handleButtonClick("empty")}
-        >
-          {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />}{" "}
-          Pending Eos
-        </button>
-        <button
-          className={`px-3 rounded-lg flex flex-row justify-start items-center gap-2 w-fit p-2 ${
-            activeButton === "filled" || activeButton === "empty"
-              ? "bg-gray-500 text-white"
-              : "bg-gray-300"
-          }`}
-          onClick={() => handleButtonClick("all")}
-        >
-          <MdFilterAltOff /> Clear Filter
-        </button>
-      </div>
-    );
-  };
+  // const rightToolbarTemplate = () => {
+  //   return (
+  //     <div className="flex flex-wrap justify-start items-center gap-2 w-full sm:flex-row sm:gap-4">
+  //       <button
+  //         className={`px-3 py-2 rounded-lg flex flex-row justify-start items-center gap-2 w-full sm:w-auto xxss:w-fit ${
+  //           activeButton === "filled" ? "bg-blue-500 text-white" : "bg-blue-300"
+  //         }`}
+  //         onClick={() => handleButtonClick("filled")}
+  //       >
+  //         {activeButton === "filled" ? <VscFilterFilled /> : <VscFilter />}{" "}
+  //         Filled Eos
+  //       </button>
+  //       <button
+  //         className={`px-3 py-2 rounded-lg flex flex-row justify-start items-center gap-2 w-full sm:w-auto xxss:w-fit ${
+  //           activeButton === "empty" ? "bg-green-500 text-white" : "bg-green-300"
+  //         }`}
+  //         onClick={() => handleButtonClick("empty")}
+  //       >
+  //         {activeButton === "filled" ? <VscFilter /> : <VscFilterFilled />}{" "}
+  //         Pending Eos
+  //       </button>
+  //       <button
+  //         className={`px-3 py-2 rounded-lg flex flex-row justify-start items-center gap-2 w-full sm:w-auto xxss:w-fit ${
+  //           activeButton === "filled" || activeButton === "empty"
+  //             ? "bg-gray-500 text-white"
+  //             : "bg-gray-300"
+  //         }`}
+  //         onClick={() => handleButtonClick("all")}
+  //       >
+  //         <MdFilterAltOff /> Clear Filter
+  //       </button>
+  //     </div>
+  //   );
+  // };
+
 
   // const renderHeader = () => {
   //   return (
@@ -188,10 +282,65 @@ const EosApproval = () => {
 
   // const header = renderHeader();
 
+
+  // Left Toolbar Template (Search Input)
+  const leftToolbarTemplate = () => {
+    return (
+      <div className="flex flex-wrap gap-2 w-full ">
+        <span className="p-input-icon-left text-right w-full sm:w-auto">
+          <i className="pi pi-search" />
+          <InputText
+            type="search"
+            onInput={(e) => setGlobalFilter(e.target.value)}
+            placeholder="Search..."
+            className="placeholder-gray-500 placeholder-opacity-50 text-center border border-gray-300 rounded-md px-2 py-2 w-full xxs:w-96  sm:w-56 md:w-72 lg:w-96" // Full width on small screens, fixed width on larger screens
+          />
+        </span>
+      </div>
+    );
+  };
+
+  // Right Toolbar Template (Buttons)
+  const rightToolbarTemplate = () => {
+    return (
+      <div className="flex flex-row justify-start items-center gap-2 w-full sm:flex-row sm:gap-4">
+        <button
+          className={`px-3 py-2 rounded-lg flex flex-row justify-start items-center gap-2 w-full sm:w-auto xxss:w-fit ${activeButton === "filled" ? "bg-blue-500 text-white" : "bg-blue-300"
+            }`}
+          onClick={() => handleButtonClick("filled")}
+        >
+          <VscFilterFilled className={getIconWidth("filled")} />
+          {renderButtonText("filled")}
+        </button>
+
+        <button
+          className={`px-3 py-2 rounded-lg flex flex-row justify-start items-center gap-2 w-full sm:w-auto xxss:w-fit ${activeButton === "empty" ? "bg-green-500 text-white" : "bg-green-300"
+            }`}
+          onClick={() => handleButtonClick("empty")}
+        >
+          <VscFilter className={getIconWidth("empty")} />
+          {renderButtonText("empty")}
+        </button>
+
+        <button
+          className={`px-3 py-2 rounded-lg flex flex-row justify-start items-center gap-2 w-full sm:w-auto xxss:w-fit ${activeButton === "filled" || activeButton === "empty"
+            ? "bg-gray-500 text-white"
+            : "bg-gray-300"
+            }`}
+          onClick={() => handleButtonClick("all")}
+        >
+          <MdFilterAltOff className={getIconWidth("all")} />
+          {renderButtonText("all")}
+        </button>
+      </div>
+    );
+  };
+
+
   const emloyeeBodyTemplate = (rowData) => {
     console.log("my row data", rowData);
     return (
-      <div className="flex flex-row justify-start items-center gap-1">
+      <div className="flex flex-col xl:flex-row justify-start items-center gap-1">
         <img
           alt={rowData.employee.fullName}
           src={`https://wl-incrivel.cf.tsp.li/resize/728x/webp/0ec/140/d189845022bb6eddb88bb5279a.jpg.webp`}
@@ -205,7 +354,7 @@ const EosApproval = () => {
   };
   const reportingManagerBodyTemplate = (rowData) => {
     return (
-      <div className="flex flex-row justify-start items-center gap-2">
+      <div className="flex flex-col xl:flex-row justify-start items-center gap-2">
         <img
           alt={rowData.employee.reportingManager}
           src={`https://assets-global.website-files.com/636b968ac38dd1495ec4edcd/63c97f9c86d126510abef78e_in-trees_Andrii%20AI%20photo%20avatar%20Dyvo.webp`}
@@ -213,7 +362,7 @@ const EosApproval = () => {
           height={30}
           className="rounded-full"
         />
-        <span className="font-bold">{rowData.employee.reportingManager}</span>
+        <span className="font-bold text-sm sm:text-base md:text-lg ">{rowData.employee.reportingManager}</span>
       </div>
     );
   };
@@ -230,7 +379,7 @@ const EosApproval = () => {
               height={30}
               className="rounded-full"
             />
-            <span className="font-bold">
+            <span className="font-bold ">
               {project.project.projectManager.fullName}
             </span>
           </div>
@@ -290,35 +439,50 @@ const EosApproval = () => {
 
   const isPositiveInteger = (val) => {
     let str = String(val);
-
+  
     str = str.trim();
-
+  
     if (!str) {
       return false;
     }
-
+  
     str = str.replace(/^0+/, "") || "0";
     let n = Math.floor(Number(str));
-
+  
     return n !== Infinity && String(n) === str && n >= 0;
   };
-
+  
   const onCellEditComplete = (e) => {
     let { rowData, newValue, field, originalEvent: event } = e;
-
+  
+    // Check if newValue is a valid string or null/undefined
+    if (newValue === null || newValue === undefined) {
+      event.preventDefault();
+      return;
+    }
+  
     switch (field) {
       case "quantity":
       case "price":
-        if (isPositiveInteger(newValue)) rowData[field] = newValue;
-        else event.preventDefault();
+        // Ensure newValue is a valid positive integer before updating rowData
+        if (isPositiveInteger(newValue)) {
+          rowData[field] = newValue;
+        } else {
+          event.preventDefault();  // Prevent invalid value
+        }
         break;
-
+  
       default:
-        if (newValue.trim().length > 0) rowData[field] = newValue;
-        else event.preventDefault();
+        // For other fields, check if newValue is a non-empty string
+        if (newValue.trim().length > 0) {
+          rowData[field] = newValue;
+        } else {
+          event.preventDefault();  // Prevent empty value
+        }
         break;
     }
   };
+  
 
   const cellEditor = (options) => {
     if (options.field === "price") return priceEditor(options);
@@ -374,9 +538,8 @@ const EosApproval = () => {
             onClick={() =>
               handleAction(rowData.id, "Approved", rowData.approverRemarks)
             }
-            className={`p-button-success ${
-              rowData.status === "Approved" ? "" : "p-button-outlined"
-            }`}
+            className={`p-button-success ${rowData.status === "Approved" ? "" : "p-button-outlined"
+              }`}
             disabled={disableButtons}
             rounded
           />
@@ -386,9 +549,8 @@ const EosApproval = () => {
             onClick={() =>
               handleAction(rowData.id, "Corrected", rowData.approverRemarks)
             }
-            className={`p-button-warning ${
-              rowData.status === "Corrected" ? "" : "p-button-outlined"
-            }`}
+            className={`p-button-warning ${rowData.status === "Corrected" ? "" : "p-button-outlined"
+              }`}
             disabled={disableButtons}
             rounded
           />
@@ -418,50 +580,64 @@ const EosApproval = () => {
   }, [apiUrl]);
 
   return (
-    <div className="bg-white p-6 rpunded-lg shadow-md h-full w-full rounded-lg">
-      <div className="p-col-12">
-        <div className="card card-w-title">
-          <div className="flex flex-wrap flex-row justify-between items-center bg-gray-100 p-2 rounded-lg mb-1">
-            <h1 className="font-bold text-2xl white-space: nowrap flex-shrink: 0">
-              EoS Approval
-            </h1>
-            <div className="flex  flex-wrap flex-row justify-between items-center gap-4">
-              <div className="bg-yellow-100 hover:bg-yellow-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
-                <span className="font-bold">Pending Eos: &nbsp; </span>
-                <span className="font-smmibold text-blue-500">4</span>
+    <div className="bg-white p-6 rounded-lg shadow-md h-full w-full -ml-1 mb-2 " >
+      <h1 className="font-bold text-2xl  mb-4">
+        EoS Approval
+      </h1>
+      <div className="p-col-12 " style={{ height: `calc(100vh - 10%)` }}>
+        <div className="card card-w-title " >
+          <div className="flex flex-wrap justify-between items-center bg-gray-100 p-2 rounded-lg ">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-4 w-full ">
+              {/* Pending Eos Card */}
+              <div className="bg-yellow-100 hover:bg-yellow-300 p-2 rounded-lg text-center cursor-pointer h-[64px] flex items-center justify-center">
+                <span className="font-bold text-sm sm:text-base md:text-lg">Pending Eos: &nbsp;</span>
+                <span className="font-semibold text-blue-500 ">4</span>
               </div>
-              <div className="bg-red-100 hover:bg-red-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
-                <span className="font-bold">Approval Status: &nbsp;</span>
-                <span className="font-semibold  text-red-500">Pending</span>
+
+              {/* Approval Status Card */}
+              <div className="bg-red-100 hover:bg-red-300 p-2 rounded-lg text-center cursor-pointer h-[64px] flex items-center justify-center">
+                <span className="font-bold text-sm sm:text-base md:text-lg">Approval Status: &nbsp;</span>
+                <span className="font-semibold text-red-500 ">Pending</span>
               </div>
-              <div className="bg-orange-100 hover:bg-orange-300 p-2 rounded-lg w-[220px] text-center cursor-pointer">
-                <span className="font-bold">Cut-Off Date: &nbsp;</span>
-                <span className="font-semibold  text-orange-500">
-                  26 Jun 2024
-                </span>
+
+              {/* Cut-Off Date Card */}
+              <div className="bg-orange-100 hover:bg-orange-300 p-2 rounded-lg text-center cursor-pointer h-[64px] flex items-center justify-center">
+                <span className="font-bold text-sm sm:text-base md:text-lg">Cut-Off Date: &nbsp;</span>
+                <span className="font-semibold text-orange-500 ">26 Jun 2024</span>
               </div>
+
+              {/* Send Reminder Button */}
               <div className="shadow-md">
-                <button className="bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 flex flex-row justify-center items-center gap-4 w-[220px] text-center">
-                  <MdOutlineEmail className="text-xl" /> Send Reminder
+                <button className="bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700 flex flex-row justify-center items-center gap-4 w-full text-center h-[64px]">
+                  <MdOutlineEmail className="test-xl" />  Send Reminder
                 </button>
               </div>
+
+              {/* Submit Button */}
               <div className="shadow-md">
-                <button className="bg-green-500 p-2 rounded-lg text-white hover:bg-green-700 px-4 w-[220px] text-center">
+                <button className="bg-green-500 p-2 rounded-lg text-white hover:bg-green-700 w-full text-center h-[64px] ">
                   Submit
                 </button>
               </div>
-              <MonthYearPickerFinal />
+
+              {/* Month Year Picker */}
+              <div className="flex justify-center items-center shadow-md w-full">
+                <MonthYearPickerFinal />
+              </div>
             </div>
           </div>
 
-          <Toolbar
-            className="mb-2"
-            pt={{
-              root: { style: { padding: "8px" } },
-            }}
-            start={leftToolbarTemplate}
-            end={rightToolbarTemplate}
-          ></Toolbar>
+          <div className="mb-2 w-full">
+            <Toolbar
+              className="flex flex-col sm:flex-row justify-between w-full"
+              pt={{ root: { style: { padding: "8px" } } }}
+              start={leftToolbarTemplate()}
+              end={rightToolbarTemplate()}
+            />
+          </div>
+
+          {/* Make the DataTable scrollable inside its container */}
           <DataTable
             value={eosData}
             rowGroupMode="rowspan"
@@ -474,13 +650,13 @@ const EosApproval = () => {
             className="p-datatable text-center"
             paginator
             rows={10}
-            rowsPerPageOptions={[5, 10, 25, 50]}
+            rowsPerPageOptions={[5, 10, 20, 50]}
             tableStyle={{ borderRadius: "20px" }}
             showGridlines
             globalFilter={globalFilter}
             size="small"
             scrollable
-            scrollHeight="600px"
+           scrollHeight={scrollHeight} 
           >
             <Column
               header="#"
@@ -512,7 +688,7 @@ const EosApproval = () => {
                 textAlign: "center",
               }}
               body={emloyeeBodyTemplate}
-              style={{ width: "20rem", textAlign: "center" }}
+              style={{ width: "20rem", textAlign: "center", }}
             ></Column>
             <Column
               field="employee.reportingManager"
@@ -604,6 +780,7 @@ const EosApproval = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

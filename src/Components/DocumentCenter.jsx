@@ -1328,179 +1328,144 @@ const DocumentCenter = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-gray-100">
-      <div className="w-full h-full mx-auto bg-white rounded-lg shadow-md p-6">
-        <div className="flex justify-between items-center bg-gray-100 rounded-lg p-2">
-          <h1 className="text-2xl font-bold">Document Center</h1>
-          <div className="flex items-center">
-            <button
-              onClick={() => setIsFileView(false)}
-              className={`flex items-center px-4 py-2 rounded-l-lg ${
-                !isGridView
-                  ? "bg-yellow-500 text-white"
-                  : "bg-white text-yellow-500 hover:bg-gray-200"
-              }`}
-            >
-            <GrDocumentText className="text-xl mr-2"  />
-            </button>
-            <button
-              onClick={() => setIsFileView(true)}
-              className={`flex items-center px-4 py-2 rounded-r-lg mr-2 ${
-                isGridView
-                  ? "bg-yellow-500 text-white"
-                  : "bg-white text-yellow-500 hover:bg-gray-200"
-              }`}
-            >
-            <FaFolder className="text-xl mr-2" />
-            
-            </button>
-            <button
-              onClick={() => setIsGridView(false)}
-              className={`flex items-center px-4 py-2 rounded-l-lg ${
-                !isGridView
-                  ? "bg-blue-500 text-white"
-                  : "bg-white text-blue-500 hover:bg-gray-200"
-              }`}
-            >
-              <FaList className="text-xl mr-2" />
-            </button>
-            <button
-              onClick={() => setIsGridView(true)}
-              className={`flex items-center px-4 py-2 rounded-r-lg ${
-                isGridView
-                  ? "bg-blue-500 text-white"
-                  : "bg-white text-blue-500 hover:bg-gray-200"
-              }`}
-            >
-              <FaTh className="text-xl mr-2" />
-            </button>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="bg-green-500 text-white px-4 py-2 rounded-lg ml-4 flex flex-row justify-start items-center gap-2"
-            >
-              <FaUpload className="text-xl mr-2" />
-              Upload
-            </button>
-          </div>
-        </div>
-        <div className="relative w-[75%] mx-auto bg-white p-6 flex flex-row justify-center items-center">
-        <FaSearch className="text-gray-300 absolute left-10 top-9 text-xl" />
-        <input
-          type="text"
-          placeholder="Search files or folders..."
-          className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-s-full rounded-e-full flex items-center text-base -mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-    
+<div className="h-screen w-full bg-gray-100">
+  <div className="w-full h-full mx-auto bg-white rounded-lg shadow-md p-6" >
+    <div className="flex flex-col sm:flex-row justify-between items-center bg-gray-100 rounded-lg p-2 " >
+      <h1 className="text-2xl font-bold mb-4 sm:mb-0">Document Center</h1>
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          onClick={() => setIsFileView(false)}
+          className={`flex items-center px-4 py-2 rounded-l-lg ${
+            !isGridView
+              ? "bg-yellow-500 text-white"
+              : "bg-white text-yellow-500 hover:bg-gray-200"
+          }`}
+        >
+          <GrDocumentText className="text-xl mr-2" />
+        </button>
+        <button
+          onClick={() => setIsFileView(true)}
+          className={`flex items-center px-4 py-2 rounded-r-lg mr-2 ${
+            isGridView
+              ? "bg-yellow-500 text-white"
+              : "bg-white text-yellow-500 hover:bg-gray-200"
+          }`}
+        >
+          <FaFolder className="text-xl mr-2" />
+        </button>
+        <button
+          onClick={() => setIsGridView(false)}
+          className={`flex items-center px-4 py-2 rounded-l-lg ${
+            !isGridView
+              ? "bg-blue-500 text-white"
+              : "bg-white text-blue-500 hover:bg-gray-200"
+          }`}
+        >
+          <FaList className="text-xl mr-2" />
+        </button>
+        <button
+          onClick={() => setIsGridView(true)}
+          className={`flex items-center px-4 py-2 rounded-r-lg ${
+            isGridView
+              ? "bg-blue-500 text-white"
+              : "bg-white text-blue-500 hover:bg-gray-200"
+          }`}
+        >
+          <FaTh className="text-xl mr-2" />
+        </button>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-green-500 text-white px-4 py-2 rounded-lg flex flex-row justify-start items-center gap-2"
+        >
+          <FaUpload className="text-xl mr-2" />
+          Upload
+        </button>
       </div>
-        {!isGridView ? (
-          <div className="space-y-4">
-            <div className="grid grid-cols-5 gap-4">
-              <span className="font-bold">Name</span>
-              <span className="font-bold">Last Modified</span>
-              <span className="font-bold">Department</span>
-              <span className="font-bold">Path</span>
-              <span className="font-bold">Actions</span>
-            </div>
-            {files.map((file, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-5 gap-4 items-center p-4 border rounded-lg bg-gray-50 hover:bg-gray-100"
-              >
-                <div className="flex items-center gap-2">
-                  {renderIcon(file.type)}
-                  <span>{file.name}</span>
-                </div>
-                <span className="text-sm text-gray-500">
-                  {formatDate(file.createdAt)}
-                </span>
-                <span className="text-sm text-gray-500">{file.department}</span>
-                <span className="text-sm text-gray-500">{file.path}</span>
-                <div className="relative flex items-center gap-4">
-                  <div className="relative group">
-                    <FaShare className="text-gray-500 hover:text-blue-500 cursor-pointer" />
-                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                      Share
-                    </span>
-                  </div>
-                  <div className="relative group">
-                    <FaDownload className="text-gray-500 hover:text-blue-500 cursor-pointer" />
-                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                      Download
-                    </span>
-                  </div>
-                  <div className="relative group">
-                    <FaEdit className="text-gray-500 hover:text-blue-500 cursor-pointer" />
-                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                      Edit
-                    </span>
-                  </div>
-                  <div className="relative group">
-                    <FaStar className="text-gray-500 hover:text-blue-500 cursor-pointer" />
-                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                      Star
-                    </span>
-                  </div>
-                  <button
-                    className="absolute -top-1 right-2"
-                    onClick={() =>
-                      setActiveMenu(activeMenu === index ? null : index)
-                    }
-                  >
-                    <FaEllipsisV className="text-gray-500" />
-                  </button>
-                  {activeMenu === index && renderMenu(index)}
-                </div>
-              </div>
-            ))}
+    </div>
+
+    <div className="relative w-full sm:w-3/4 mx-auto bg-white p-6 flex flex-row justify-center items-center mt-4 sm:mt-6" >
+      <FaSearch className="text-gray-300 absolute left-10 top-9 text-xl" />
+      <input
+        type="text"
+        placeholder="Search files or folders..."
+        className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-full flex items-center text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div className="overflow-y-auto h-[55%] md:h-[65%] mt-6"> {/* Add this div with overflow-y-auto */}
+      {!isGridView ? (
+        <div className="space-y-4 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
+            <span className="font-bold">Name</span>
+            <span className="font-bold">Last Modified</span>
+            <span className="font-bold">Department</span>
+            <span className="font-bold">Path</span>
+            <span className="font-bold">Actions</span>
           </div>
-        ) : (
-          <div className="grid grid-cols-5 gap-4">
-            {files.map((file, index) => (
-              <div
-                key={index}
-                className="relative border rounded-lg bg-gray-50 h-48 flex flex-col items-center justify-center gap-2 hover:bg-gray-100"
-              >
-                <div className="absolute top-2 right-2">
-                  <button
-                    onClick={() =>
-                      setActiveMenu(activeMenu === index ? null : index)
-                    }
-                  >
-                    <FaEllipsisV className="text-gray-500" />
-                  </button>
-                </div>
-                <div className="flex flex-row justify-start items-center gap-2">
-                  {renderIcon(file.type)}
-                  <span>{file.name}</span>
-                </div>
-                <span className="text-sm text-gray-500">
-                  {file.type === "folder" ? (
-                    <>
-                      Created on: {formatDate(file.createdAt)}
-                      <br />
-                      Last modified: {formatDate(file.createdAt)}
-                    </>
-                  ) : (
-                    <>
-                      Uploaded on: {formatDate(file.createdAt)}
-                      <br />
-                      Last modified: {formatDate(file.createdAt)}
-                    </>
-                  )}
-                </span>
+          {files.map((file, index) => (
+            <div
+              key={index}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 items-center p-4 border rounded-lg bg-gray-50 hover:bg-gray-100"
+            >
+              <div className="flex items-center gap-2">
+                {renderIcon(file.type)}
+                <span>{file.name}</span>
+              </div>
+              <span className="text-sm text-gray-500">{formatDate(file.createdAt)}</span>
+              <span className="text-sm text-gray-500">{file.department}</span>
+              <span className="text-sm text-gray-500">{file.path}</span>
+              <div className="relative flex items-center gap-4">
                 {activeMenu === index && renderMenu(index)}
               </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <UploadModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onUpload={handleUpload}
-      />
-    
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mt-6 ">
+          {files.map((file, index) => (
+            <div
+              key={index}
+              className="relative border rounded-lg bg-gray-50 h-48 flex flex-col items-center justify-center gap-2 hover:bg-gray-100"
+            >
+              <div className="absolute top-2 right-2">
+                <button onClick={() => setActiveMenu(activeMenu === index ? null : index)}>
+                  <FaEllipsisV className="text-gray-500" />
+                </button>
+              </div>
+              <div className="flex flex-row justify-start items-center gap-2">
+                {renderIcon(file.type)}
+                <span>{file.name}</span>
+              </div>
+              <span className="text-sm text-gray-500">
+                {file.type === "folder" ? (
+                  <>
+                    Created on: {formatDate(file.createdAt)}
+                    <br />
+                    Last modified: {formatDate(file.createdAt)}
+                  </>
+                ) : (
+                  <>
+                    Uploaded on: {formatDate(file.createdAt)}
+                    <br />
+                    Last modified: {formatDate(file.createdAt)}
+                  </>
+                )}
+              </span>
+              {activeMenu === index && renderMenu(index)}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
+  </div>
+
+  <UploadModal
+    isOpen={isModalOpen}
+    onClose={() => setIsModalOpen(false)}
+    onUpload={handleUpload}
+  />
+</div>
+
   );
 };
 

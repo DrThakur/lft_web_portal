@@ -141,7 +141,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 ">
+    <div className="flex min-h-[100vh] bg-gradient-to-r from-blue-500 to-purple-500 ">
       {/* Left Section: Image */}
       {isImageVisible && (
         <div className="w-full md:w-1/2 flex items-center justify-center bg-cover bg-center ml-4 relative overflow-hidden">
