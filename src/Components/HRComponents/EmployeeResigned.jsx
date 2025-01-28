@@ -28,46 +28,6 @@ const EmployeesResigned = ({ data }) => {
 
   const filteredData = filterData();
 
-  //here add functionality of show scrollbar touching/hover
-  const [isTouched, setIsTouched] = useState(false);
-  const scrollContainerRef = useRef(null);
-
-  // Timer to hide the scrollbar after a period of inactivity (e.g., 2 seconds)
-  const hideScrollbarTimeout = useRef(null);
-
-  // Function to handle touch or scroll event
-  const handleInteraction = () => {
-    if (!isTouched) {
-      setIsTouched(true);
-    }
-
-    // Clear the previous timeout and start a new one to hide the scrollbar
-    if (hideScrollbarTimeout.current) {
-      clearTimeout(hideScrollbarTimeout.current);
-    }
-
-    // Set timeout to hide the scrollbar after 2 seconds of inactivity
-    hideScrollbarTimeout.current = setTimeout(() => {
-      setIsTouched(false);
-    }, 2000); // 2000 ms = 2 seconds
-  };
-
-  const handleTouchEnd = () => {
-    setIsTouched(false); // Hide scrollbar when touch ends
-    if (hideScrollbarTimeout.current) {
-      clearTimeout(hideScrollbarTimeout.current);
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      // Cleanup the timeout when the component unmounts
-      if (hideScrollbarTimeout.current) {
-        clearTimeout(hideScrollbarTimeout.current);
-      }
-    };
-  }, []);
-
   return (
     <div className="p-6 bg-gradient-to-r from-red-400 via-orange-500 to-yellow-500 shadow-lg rounded-xl text-white max-h-96 min-h-96 overflow-y-hidden">
 
@@ -81,18 +41,9 @@ const EmployeesResigned = ({ data }) => {
         />
       </div>
       
-      <ul ref={scrollContainerRef}
-        className={`space-y-4 overflow-y-hidden max-h-56 transition-all duration-300
-          ${isTouched ? 'overflow-y-auto' : 'overflow-y-hidden'}
-          hover:overflow-y-auto
-          [&::-webkit-scrollbar]:w-2 
-          [&::-webkit-scrollbar-track]:rounded-full 
-          [&::-webkit-scrollbar-thumb]:rounded-full 
-          [&::-webkit-scrollbar-thumb]:bg-white 
-          dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
-          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}
-        onTouchStart={handleInteraction}   // Trigger interaction on touch start
-        onTouchEnd={handleTouchEnd}        // Trigger interaction end on touch>
+      <ul 
+        className={`space-y-4  max-h-56 transition-all duration-300 overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-white`}
+       
       >
         {filteredData.length > 0 ? (
           filteredData.map((employee, index) => (
