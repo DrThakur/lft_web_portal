@@ -703,7 +703,7 @@ const ProjectDetails = () => {
   }
 
   return (
-    <div className="bg-white p-4 rounded ">
+    <div className="bg-white p-4 rounded overflow-y-auto -ml-1 h-[calc(100vh-114px)] xxs:h-[calc(100vh-106px)] mb-2">
       <h1 className="text-2xl font-bold mb-4">Project Details</h1>
 
       <div className="flex flex-row justify-center items-center gap-2">
@@ -817,7 +817,7 @@ const ProjectDetails = () => {
       <div className="rolesContainer grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
 
 
-        <div className="mt-2  mb-2">
+        <div className="mt-2 ">
           <div className="text-center text-xl font-semibold bg-blue-200 p-2 ">
             Resource Planning
           </div>
@@ -863,7 +863,7 @@ const ProjectDetails = () => {
           </div>
         </div>
 
-        <div className="graph1  lg:mt-2">
+        <div className="graph1 mt-2">
           <h1 className="bg-gray-200 p-2  text-center font-semibold rounded">
             Milestone Status
           </h1>
@@ -875,7 +875,7 @@ const ProjectDetails = () => {
           />
 
         </div>
-        <div className="graph2  md:mt-2">
+        <div className="graph2  mt-2">
           <h1 className="bg-gray-200 p-2 text-center font-semibold rounded">
             Project Tasks Status
           </h1>
@@ -893,7 +893,7 @@ const ProjectDetails = () => {
 
       </div>
 
-      <div className="lastTable mt-2 rounded">
+      <div className="lastTable mt-4 rounded">
         <div className="text-center text-xl font-semibold bg-red-200 p-2" >
           Risk Mitigation Plan
         </div>
