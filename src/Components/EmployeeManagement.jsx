@@ -911,6 +911,7 @@ const EmployeeManagement = () => {
     };
   }, []); // Empty dependency array ensures this effect runs once on mount
 
+  
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -919,7 +920,21 @@ const EmployeeManagement = () => {
     return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
   }, []);
 
+  let template;
+  if (screenSize < 468) {
+    template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
+  } else if (screenSize >= 468 && screenSize < 768) {
+    template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
+  } else {
+    template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
+  }
 
+
+  const currentPageReportTemplate = screenSize < 768 ? (
+    "{first}-{last} of {totalRecords}"
+  ) : (
+    "Showing {first} to {last} of {totalRecords} Projects"
+  );
 
   // Toggle the showAll state
   const toggleShowAll = () => {
@@ -1278,6 +1293,7 @@ const EmployeeManagement = () => {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
+        <div className="flex justify-center gap-4">
         <Button
           icon="pi pi-pencil"
           rounded
@@ -1292,6 +1308,7 @@ const EmployeeManagement = () => {
           severity="danger"
           onClick={() => confirmDeleteProduct(rowData)}
         />
+        </div>
       </React.Fragment>
     );
   };
@@ -1525,8 +1542,8 @@ const EmployeeManagement = () => {
             //   totalRecords={totalPages * pageSize}
             //   onPage={handlePageChange}
             //   onRowToggle={handlePageSizeChange}
-            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+            paginatorTemplate={template}
+            currentPageReportTemplate={currentPageReportTemplate}
             globalFilter={globalFilter}
             header={header}
             scrollable
