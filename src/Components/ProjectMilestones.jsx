@@ -201,6 +201,32 @@ const ProjectMilestones = () => {
   const handleMouseLeave = () => setTooltipVisible(false);
   console.log('Tooltip Visible:', tooltipVisible);  // Debugging to check if state changes correctly
 
+ 
+    useEffect(() => {
+      const handleResize = () => setScreenSize(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      handleResize(); // Set the screen size on initial load
+      return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+    }, []);
+  
+  
+  
+    let template;
+  
+    if (screenSize < 468) {
+      template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
+    } else if (screenSize >= 468 && screenSize < 768) {
+      template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
+    } else {
+      template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
+    }
+  
+  
+    const currentPageReportTemplate = screenSize < 768 ? (
+      "{first}-{last} of {totalRecords}"
+    ) : (
+      "Showing {first} to {last} of {totalRecords} Projects"
+    );
 
   const teams = [
     { name: "Software", code: "software" },
@@ -507,18 +533,19 @@ const ProjectMilestones = () => {
 
   const projectOptionTemplate = (option) => {
     return (
-      <div className="flex flex-row justify-start items-center gap-2">
+      <div className="flex flex-row w-full justify-center items-center gap-2">
         <span>{option.projectId}</span>
         <span>:</span>
         <span>{option.projectName}</span>
       </div>
     );
   };
+  
 
   // My new datatable
 
   const startContentOfToolBar = (
-    <div className="flex flex-wrap justify-start items-center gap-4 p-4 md:p-6 ">
+    <div className="flex flex-wrap justify-start items-center sm:gap-4  md:p-6 ">
       <div className="flex flex-col sm:flex-row justify-start items-center gap-1 sm:gap-4 w-full sm:w-auto">
         <label htmlFor="" className="font-semibold text-xl mb-2 sm:mb-0 sm:text-lg md:w-1/3 lg:w-auto">
           Project Id
@@ -536,11 +563,11 @@ const ProjectMilestones = () => {
           valueTemplate={selectedProjectTemplate}
           itemTemplate={projectOptionTemplate}
           virtualScrollerOptions={{ itemSize: 38 }}
-          className="w-full sm:w-64 md:w-96 lg:w-64 xl:w-60 sm:ml-8 md:ml-2 lg:ml-0"
+          className="w-full sm:w-64 md:w-96 lg:w-64 xl:w-60 sm:ml-8 md:ml-2 lg:ml-0 mx-auto"
         />
       </div>
   
-      <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto">
+      <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto  mx-auto">
         <label htmlFor="" className="font-semibold text-xl mb-2 sm:mb-0 sm:text-lg md:w-1/3 lg:w-auto">
           Project Name
         </label>
@@ -558,7 +585,7 @@ const ProjectMilestones = () => {
           optionLabel="name"
           placeholder="Select a Team"
           filter
-          className="w-full sm:w-64 md:w-[407px] lg:w-64 xl:w-60 sm:ml-16 md:ml-5 lg:ml-0"
+          className="w-full sm:w-64 md:w-[407px] lg:w-64 xl:w-60 sm:ml-16 md:ml-5 lg:ml-0 "
         />
       </div>
     </div>
@@ -1022,8 +1049,8 @@ const ProjectMilestones = () => {
           paginator
           rows={10}
           rowsPerPageOptions={[5, 10, 25]}
-          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tasks"
+          paginatorTemplate={template}
+          currentPageReportTemplate={currentPageReportTemplate}
           globalFilter={globalFilter}
           showGridlines
         >
