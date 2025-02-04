@@ -877,6 +877,7 @@ const ProjectMilestones = () => {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
+        <div className="flex justify-center gap-4"> 
         <Button
           icon="pi pi-pencil"
           rounded
@@ -891,6 +892,7 @@ const ProjectMilestones = () => {
           severity="danger"
           onClick={() => confirmDeleteTask(rowData)}
         />
+         </div>
       </React.Fragment>
     );
   };
