@@ -225,7 +225,7 @@ const ProjectMilestones = () => {
     const currentPageReportTemplate = screenSize < 768 ? (
       "{first}-{last} of {totalRecords}"
     ) : (
-      "Showing {first} to {last} of {totalRecords} Projects"
+      "Showing {first} to {last} of {totalRecords} tasks"
     );
 
   const teams = [

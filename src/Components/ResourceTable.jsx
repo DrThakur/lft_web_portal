@@ -99,6 +99,24 @@ const ResourceTable = ({
       }, []);
     
 
+      let template;
+
+      if (screenSize < 468) {
+        template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
+      } else if (screenSize >= 468 && screenSize < 768) {
+        template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
+      } else {
+        template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
+      }
+    
+    
+      const currentPageReportTemplate = screenSize < 768 ? (
+        "{first}-{last} of {totalRecords}"
+      ) : (
+        "Showing {first} to {last} of {totalRecords} employees"
+      );
+
+
   useEffect(() => {
     ProductService.getProducts().then((data) => setProducts(data));
   }, []);
@@ -412,6 +430,7 @@ const ResourceTable = ({
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
+        <div className="flex justify-center items-center gap-4">
         <Button
           icon="pi pi-pencil"
           rounded
@@ -426,6 +445,7 @@ const ResourceTable = ({
           severity="danger"
           onClick={() => confirmDeleteProduct(rowData)}
         />
+        </div>
       </React.Fragment>
     );
   };
@@ -475,24 +495,24 @@ const ResourceTable = ({
       </h4>
       
       {/* Search Input */}
-      <span className="p-input-icon-left w-full md:w-auto">
+      <span className="p-input-icon-left w-full md:w-auto  ">
         <i className="pi pi-search" />
         <InputText
           type="search"
           onInput={(e) => setGlobalFilter(e.target.value)}
           placeholder="Search..."
-          className="w-full"
+          className="w-full mx-auto md:mx-0"
         />
       </span>
   
       {/* Dropdowns - Wrapping for small screens */}
-      <div className="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-start">
+      <div className="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-start ">
         <Dropdown
           value={designationFilter}
           options={designationOptions}
           onChange={(e) => setDesignationFilter(e.value)}
           placeholder="Select Designation"
-          className="mr-2 mb-2 md:mb-0 w-full md:w-auto"
+          className="mb-2 md:mb-0 w-full md:w-auto mx-auto md:mx-0"
           showClear
         />
         <Dropdown
@@ -500,7 +520,7 @@ const ResourceTable = ({
           options={locationOptions}
           onChange={(e) => setLocationFilter(e.value)}
           placeholder="Select Location"
-          className="mr-2 mb-2 md:mb-0 w-full md:w-auto"
+          className="mb-2 md:mb-0 w-full md:w-auto mx-auto md:mx-0"
           showClear
         />
         <Dropdown
@@ -508,7 +528,7 @@ const ResourceTable = ({
           options={statusOptions}
           onChange={(e) => setStatusFilter(e.value)}
           placeholder="Select Status"
-          className="mr-2 mb-2 md:mb-0 w-full md:w-auto"
+          className=" mb-2 md:mb-0 w-full md:w-auto mx-auto md:mx-0"
           showClear
         />
       </div>
@@ -641,8 +661,8 @@ const ResourceTable = ({
           //   totalRecords={totalPages * pageSize}
           //   onPage={handlePageChange}
           //   onRowToggle={handlePageSizeChange}
-          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+          paginatorTemplate={template}
+          currentPageReportTemplate={currentPageReportTemplate}
           globalFilter={globalFilter}
           header={header}
         >

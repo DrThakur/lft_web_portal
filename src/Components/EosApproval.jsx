@@ -74,7 +74,7 @@ const EosApproval = () => {
     const currentPageReportTemplate = screenSize < 768 ? (
       "{first}-{last} of {totalRecords}"
     ) : (
-      "Showing {first} to {last} of {totalRecords} Projects"
+      "Showing {first} to {last} of {totalRecords} "
     );
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
