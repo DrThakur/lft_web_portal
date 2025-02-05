@@ -120,6 +120,47 @@ const Navbar = () => {
     setSearchText(event.target.value);
   };
 
+//this is for show menu items
+  const [dialogStyle, setDialogStyle] = useState({});
+  useEffect(() => {
+    const updateDialogPosition = () => {
+      const isSmallScreen = window.innerWidth < 768; // Check for small screen size
+      const newStyle = isSmallScreen
+        ? {
+            background: "white",
+            borderRadius: "0 10px 10px 0",
+            padding: "10px",
+            top: "50%", 
+            left: `calc(50% + 35px)`, 
+            transform: "translate(-50%, -50%)", 
+            boxShadow: "0px 0px 5px 0px",
+            position: "fixed", 
+            zIndex: "1000", 
+            width: "75%", 
+  
+          }
+        : {
+            background: "white",
+            borderRadius: "0 10px 10px 0",
+            padding: "10px",
+            top: "16%", // Default positioning for medium screens
+            left: "80px", // Default left position for medium screens
+            boxShadow: "0px 0px 5px 0px",
+            position: "fixed", // Fixed positioning to stay in place
+            zIndex: "1000", // Ensure it's above other content
+            width: "auto", // Keep original width for larger screens
+          };
+      setDialogStyle(newStyle); // Update the dialog style
+    };
+
+    // Run on initial render and whenever the screen size changes
+    updateDialogPosition();
+    window.addEventListener("resize", updateDialogPosition);
+
+    // Cleanup event listener
+    return () => window.removeEventListener("resize", updateDialogPosition);
+  }, []);
+
   return (
     <div className="flex flex-grow justify-between p-2 relative shadow-md bg-white rounded-bl-lg rounded-br-lg ">
       <div className="flex flex-row flex-wrap justify-start items-center gap-2 lg:gap-6">
@@ -148,15 +189,20 @@ const Navbar = () => {
         <Dialog
           header="Menu"
           visible={visible}
-          style={{
-            background: "white",
-            borderRadius: "0 10px 10px 0",
-            padding: "10px",
-            top: "-62px",
-            left: "-700px",
-            boxShadow: "0px 0px 5px 0px",
-          }}
+          style={dialogStyle}
           onHide={() => setVisible(false)}
+          // style={{
+          //   background: "white",
+          //   borderRadius: "0 10px 10px 0",
+          //   padding: "10px",
+          //   top: "16%", // Change to 10px to ensure it's not off-screen
+          //   left: "85px", // Move to the top-right corner
+          //   boxShadow: "0px 0px 5px 0px",
+          //   position: "fixed", // Fixed positioning to stay in place even on scroll
+          //   zIndex: "1000", // Ensure it's above other content
+            
+          // }}
+
         >
           <div className="grid grid-cols-2 grid-rows-5 gap-2">
             <a
