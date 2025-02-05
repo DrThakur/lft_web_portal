@@ -56,7 +56,30 @@ const EosApprovalHod = () => {
   //   }
   // }, [filterType, eosData]);
 
+    const [screenSize, setScreenSize] = useState(window.innerWidth);
+    useEffect(() => {
+      const handleResize = () => setScreenSize(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      handleResize(); // Set the screen size on initial load
+      return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+    }, []);
 
+    let template;
+
+    if (screenSize < 468) {
+      template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
+    } else if (screenSize >= 468 && screenSize < 768) {
+      template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
+    } else {
+      template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
+    }
+  
+  
+    const currentPageReportTemplate = screenSize < 768 ? (
+      "{first}-{last} of {totalRecords}"
+    ) : (
+      "Showing {first} to {last} of {totalRecords} "
+    );
    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   
     // Update window width on resize
@@ -566,6 +589,8 @@ const EosApprovalHod = () => {
             className="p-datatable text-center"
             paginator
             rows={10}
+            paginatorTemplate={template}
+            currentPageReportTemplate={currentPageReportTemplate}
             rowsPerPageOptions={[5, 10, 25, 50]}
             tableStyle={{ borderRadius: "20px" }}
             showGridlines
@@ -640,6 +665,7 @@ const EosApprovalHod = () => {
               style={{ textAlign: "center" }}
             ></Column>
             <Column
+            
               field="workPercentage"
               header="Work %"
               body={worksBodyTemplate}
