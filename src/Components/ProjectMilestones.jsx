@@ -65,7 +65,7 @@ const ProjectMilestones = () => {
       const newGap = 10 + additionalGap;
       setGap(newGap);
     }
-   else if (screenWidth >= 444 && screenWidth < 768) {
+    else if (screenWidth >= 444 && screenWidth < 768) {
       // If screen width is >= 768px, calculate gap
       const additionalGap = Math.floor((screenWidth - 320) / 50);
       const newGap = 6 + additionalGap;
@@ -76,7 +76,7 @@ const ProjectMilestones = () => {
       const additionalGap = Math.floor((screenWidth - 768) / 3);
       const newGap = 36 + additionalGap;
       setGap(newGap);
-    }else if (screenWidth >= 900 && screenWidth < 1024) {
+    } else if (screenWidth >= 900 && screenWidth < 1024) {
       // If screen width is >= 768px, calculate gap
       const additionalGap = Math.floor((screenWidth - 768) / 2);
       const newGap = 36 + additionalGap;
@@ -104,8 +104,8 @@ const ProjectMilestones = () => {
   const updateGapRight = () => {
     const screenWidth = window.innerWidth;
     setScreenSize(screenWidth);  // Update screen size
-     // Gap logic for screen width between 320px and 444px
-     if (screenWidth >= 320 && screenWidth < 444) {
+    // Gap logic for screen width between 320px and 444px
+    if (screenWidth >= 320 && screenWidth < 444) {
       const additionalGap = Math.floor((screenWidth - 320) / 1); // Increase gap progressively
       const newGap = 64 + additionalGap;
       setGapRight(newGap);
@@ -115,7 +115,7 @@ const ProjectMilestones = () => {
       const additionalGap = Math.floor((screenWidth - 444) / 10); // Adjust the gap increase here
       const newGap = 6 + additionalGap;
       setGapRight(newGap);
-    }else if (screenWidth == 768 ) {
+    } else if (screenWidth == 768) {
       // If screen width is >= 768px, calculate gap
       const additionalGap = Math.floor((screenWidth - 768) / 1);
       const newGap = 250 + additionalGap;
@@ -163,15 +163,15 @@ const ProjectMilestones = () => {
   const importPlanBtnRef = useRef(null);
   const exportPlanBtnRef = useRef(null);
   const savePlanBtnRef = useRef(null);
-  
+
   const addMilestoneBtnRef = useRef(null);
   const publishPlanBtnRef = useRef(null);
-  
+
   const addTaskBtnRef = useRef(null);
   const deleteTaskBtnRef = useRef(null);
-  
+
   const exportBtnRef = useRef(null);
-  
+
   const touchStartTimeRef = useRef(0);
   const touchHoldTimeoutRef = useRef(null);
 
@@ -184,7 +184,7 @@ const ProjectMilestones = () => {
       console.log('Touch and Hold detected: Import Plan');
     }, 300);
   };
-  
+
   const handleTouchEnd = () => {
     const touchDuration = Date.now() - touchStartTimeRef.current;
 
@@ -201,32 +201,32 @@ const ProjectMilestones = () => {
   const handleMouseLeave = () => setTooltipVisible(false);
   console.log('Tooltip Visible:', tooltipVisible);  // Debugging to check if state changes correctly
 
- 
-    useEffect(() => {
-      const handleResize = () => setScreenSize(window.innerWidth);
-      window.addEventListener("resize", handleResize);
-      handleResize(); // Set the screen size on initial load
-      return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
-    }, []);
-  
-  
-  
-    let template;
-  
-    if (screenSize < 468) {
-      template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
-    } else if (screenSize >= 468 && screenSize < 768) {
-      template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
-    } else {
-      template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
-    }
-  
-  
-    const currentPageReportTemplate = screenSize < 768 ? (
-      "{first}-{last} of {totalRecords}"
-    ) : (
-      "Showing {first} to {last} of {totalRecords} tasks"
-    );
+
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Set the screen size on initial load
+    return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+  }, []);
+
+
+
+  let template;
+
+  if (screenSize < 468) {
+    template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
+  } else if (screenSize >= 468 && screenSize < 768) {
+    template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
+  } else {
+    template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
+  }
+
+
+  const currentPageReportTemplate = screenSize < 768 ? (
+    "{first}-{last} of {totalRecords}"
+  ) : (
+    "Showing {first} to {last} of {totalRecords} tasks"
+  );
 
   const teams = [
     { name: "Software", code: "software" },
@@ -414,7 +414,7 @@ const ProjectMilestones = () => {
   };
 
   const startContent = (
-    <div className="flex justify-between xxs:flex-wrap "style={{ gap: `${gap}px` }}>
+    <div className="flex justify-between xxs:flex-wrap " style={{ gap: `${gap}px` }}>
       {/* Import Plan Button */}
       <Button
         label={screenSize >= 768 ? "Import Plan" : ""}
@@ -432,7 +432,7 @@ const ProjectMilestones = () => {
       {tooltipVisible && (
         <Tooltip target={importPlanBtnRef} content="Import Plan" position="right" />
       )}
-    
+
       <Button
         label={screenSize >= 768 ? "Export Plan" : ""}
         icon="pi pi-upload"
@@ -449,7 +449,7 @@ const ProjectMilestones = () => {
       )}
 
       <Button
-      label={screenSize >= 768 ? "Save Plan" : ""}
+        label={screenSize >= 768 ? "Save Plan" : ""}
         icon="pi pi-save"
         className="p-button-warning md:w-[180px] lg:w-auto"
         ref={savePlanBtnRef}
@@ -467,7 +467,7 @@ const ProjectMilestones = () => {
 
   const endContent = (
     <div className=" flex flex-row justify-start items-center " style={{ gap: `${gapRight}px` }}>
-          <Button
+      <Button
         label={screenSize >= 768 ? "Add Milestone" : ""}
         icon="pi pi-plus"
         className="p-button-success md:w-[180px] lg:w-auto"
@@ -540,7 +540,7 @@ const ProjectMilestones = () => {
       </div>
     );
   };
-  
+
 
   // My new datatable
 
@@ -566,14 +566,14 @@ const ProjectMilestones = () => {
           className="w-full sm:w-64 md:w-96 lg:w-64 xl:w-60 sm:ml-8 md:ml-2 lg:ml-0 mx-auto"
         />
       </div>
-  
+
       <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto  mx-auto">
         <label htmlFor="" className="font-semibold text-xl mb-2 sm:mb-0 sm:text-lg md:w-1/3 lg:w-auto">
           Project Name
         </label>
         <InputText value={selectedProject?.projectName} readOnly className="w-full sm:w-64 md:w-[363px] lg:w-64 xl:w-60 " />
       </div>
-  
+
       <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto">
         <label htmlFor="team" className="font-semibold text-xl mb-2 sm:mb-0 sm:text-lg md:w-1/3 lg:w-auto">
           Team
@@ -590,7 +590,7 @@ const ProjectMilestones = () => {
       </div>
     </div>
   );
-  
+
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
   const toast = useRef(null);
@@ -797,7 +797,7 @@ const ProjectMilestones = () => {
     return (
       <div className="flex flex-wrap gap-2">
         <Button
-        label={screenSize >= 581 ? "Add Task" : ""}
+          label={screenSize >= 581 ? "Add Task" : ""}
           icon="pi pi-plus"
           severity="success"
           className="md:w-[180px] lg:w-auto"
@@ -810,10 +810,10 @@ const ProjectMilestones = () => {
           onMouseLeave={handleMouseLeave}
         />
         {tooltipVisible && (
-        <Tooltip target={addTaskBtnRef} content="Add Task" position="right" />
-      )}
+          <Tooltip target={addTaskBtnRef} content="Add Task" position="right" />
+        )}
         <Button
-        label={screenSize >= 581 ? "Delete Task" : ""}
+          label={screenSize >= 581 ? "Delete Task" : ""}
           icon="pi pi-trash"
           severity="danger"
           className="md:w-[180px] lg:w-auto"
@@ -827,8 +827,8 @@ const ProjectMilestones = () => {
           onMouseLeave={handleMouseLeave}
         />
         {tooltipVisible && (
-        <Tooltip target={addTaskBtnRef} content="Delete Task" position="right" />
-      )}
+          <Tooltip target={addTaskBtnRef} content="Delete Task" position="right" />
+        )}
       </div>
     );
   };
@@ -854,7 +854,7 @@ const ProjectMilestones = () => {
       </div>
     );
   };
-  
+
 
   const ownerBodyTemplate = (rowData) => {
     // const createdBy = rowData.projectManager;
@@ -904,22 +904,22 @@ const ProjectMilestones = () => {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
-        <div className="flex justify-center gap-4"> 
-        <Button
-          icon="pi pi-pencil"
-          rounded
-          outlined
-          className="mr-2"
-          onClick={() => editTask(rowData)}
-        />
-        <Button
-          icon="pi pi-trash"
-          rounded
-          outlined
-          severity="danger"
-          onClick={() => confirmDeleteTask(rowData)}
-        />
-         </div>
+        <div className="flex justify-center gap-4">
+          <Button
+            icon="pi pi-pencil"
+            rounded
+            outlined
+            className="mr-2"
+            onClick={() => editTask(rowData)}
+          />
+          <Button
+            icon="pi pi-trash"
+            rounded
+            outlined
+            severity="danger"
+            onClick={() => confirmDeleteTask(rowData)}
+          />
+        </div>
       </React.Fragment>
     );
   };
@@ -1035,8 +1035,8 @@ const ProjectMilestones = () => {
       [milestoneIndex]: selected,  // Store selected tasks for the specific milestone
     }));
   };
-  
-  const renderDataTables = () => { 
+
+  const renderDataTables = () => {
     return milestones.map((milestone, index) => (
       <div key={milestone.id || index} className="mb-4">
         <h3 className="rounded shadow border p-2">Milestone {index + 1}: {milestone.name}</h3>
@@ -1068,7 +1068,7 @@ const ProjectMilestones = () => {
           <Column field="planned_end_date" header="Planned End Date" body={plannedEndDateTemplate} sortable style={{ minWidth: "12rem" }}></Column>
           <Column field="actual_start_date" header="Actual Start Date" body={actualStartDateTemplate} sortable style={{ minWidth: "12rem" }}></Column>
           <Column field="actual_end_date" header="Actual End Date" body={actualEndDateTemplate} sortable style={{ minWidth: "12rem" }}></Column>
-          <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: "12rem" }}></Column>
+          <Column field="action" header="Actions" alignHeader={"center"} body={actionBodyTemplate} exportable={false} style={{ minWidth: "12rem" }}></Column>
         </DataTable>
       </div>
     ));
@@ -1080,9 +1080,9 @@ const ProjectMilestones = () => {
       <div className="mainContainerS mt-4 overflow-y-auto h-[calc(100vh-198px)] xxs:h-[calc(100vh-182px)] mb-3 xxs:mb-2 ">
         <div className="1">
           <Toolbar
-          className="bg-gray-50 w-full flex-col xxs:flex-row  md:flex-col  lg:flex-row"
-          start={startContent} 
-          end={endContent} 
+            className="bg-gray-50 w-full flex-col xxs:flex-row  md:flex-col  lg:flex-row"
+            start={startContent}
+            end={endContent}
           ></Toolbar>
 
         </div>

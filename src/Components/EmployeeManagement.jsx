@@ -852,6 +852,9 @@ const EmployeeManagement = () => {
               onCellEditComplete={onCellEditComplete}
             ></Column>
             <Column
+            field="action"
+            header="Actions"
+            alignHeader={"center"}
               body={actionBodyTemplate}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",

@@ -937,7 +937,9 @@ const AllProjects = () => {
             ></Column>
 
             <Column
-              header="Action"
+              field="action"
+              header="Actions"
+              alignHeader={"center"}
               body={actionBodyTemplate}
               exportable={false}
               style={{ minWidth: "12rem" }}
