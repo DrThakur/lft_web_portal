@@ -246,11 +246,29 @@ const DocumentCenter = () => {
       window.removeEventListener('resize', calculateScrollHeight);
     };
   }, []);
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Update the windowWidth state on resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
 <div className="h-[calc(100vh-115px)] xs:h-[calc(100vh-106px)] w-full bg-gray-100 mb-2">
   <div className="w-full h-full mx-auto bg-white rounded-lg shadow-md p-6" >
     <div className="flex flex-col sm:flex-row justify-between items-center bg-gray-100 rounded-lg py-1 xxss:p-2 " >
       <h1 className="text-lg xxss:text-2xl font-bold xxss:mb-4 sm:mb-0 py-2 xxss:py-0">Document Center</h1>
+
       <div className="flex flex-wrap items-center gap-2">
         <button
           onClick={() => setIsFileView(false)}
@@ -296,10 +314,13 @@ const DocumentCenter = () => {
           onClick={() => setIsModalOpen(true)}
           className="bg-green-500 text-white px-4 py-2 rounded-lg flex flex-row justify-start items-center gap-2"
         >
-          <FaUpload className="text-xl mr-2" />
-          Upload
+          <FaUpload className="text-xl mr-2 " />
+          <span>
+      {windowWidth > 530 ? "Upload" : null}
+    </span>
         </button>
       </div>
+      
     </div>
 
     <div className="relative w-full sm:w-3/4 mx-auto bg-white sm:p-6 flex flex-row justify-center items-center mt-4 sm:mt-6">

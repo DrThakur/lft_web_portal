@@ -565,13 +565,13 @@ const EmployeeManagement = () => {
       </span>
 
       {/* Dropdowns */}
-      <div className="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-start">
+      <div className="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-start ">
         <Dropdown
           value={designationFilter}
           options={designationOptions}
           onChange={(e) => setDesignationFilter(e.value)}
           placeholder="Select Designation"
-          className="mx-auto md:mx-0 mb-2 md:mb-0 w-full  md:w-auto"
+          className="mb-2 md:mb-0 w-full md:w-auto mx-auto md:mx-0"
           showClear
         />
         <Dropdown

@@ -198,7 +198,7 @@ const ProjectDetailsPage = () => {
 
 
   const onHide = () => {
-    setVisible(!visible);
+    setVisible(false);
   };
 
   const showEditDeleteButtons = project.status === "Active";

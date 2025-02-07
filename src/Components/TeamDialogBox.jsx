@@ -7,7 +7,7 @@ const TeamDialogBox = ({ teamDetails, visible, onHide }) => {
       <Dialog
         header={teamDetails?.name || "Team Details"}
         visible={visible}
-        className="ml-[70px]"
+        className="ml-[70px] md:ml-0 transition-none"
         style={{ width: "71%", maxWidth: "600px", height: "60vh" }} // Adjusted width and height
         breakpoints={{ "960px": "75vw", "641px": "100vw" }} // Responsive on smaller screens
         onHide={onHide}
