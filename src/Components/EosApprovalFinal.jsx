@@ -445,9 +445,6 @@ const EosApprovalFinal = () => {
             style={{ minWidth: "12rem" }}
           ></Column>
           <Column
-          field="action"
-          header="Actions"
-          alignHeader={"center"}
             body={actionBodyTemplate}
             exportable={false}
             style={{ minWidth: "12rem" }}
