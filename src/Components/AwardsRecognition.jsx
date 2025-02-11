@@ -8,7 +8,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import AwardCard from "./AwardsCard";
 import star from "../data/hand-star.jpg";
 // Import your images
-import trophy from "../assets/images/trophy-award.jpg";
+import trophy from "../assets/images/trophy-award-removebg-preview.png";
 import user1 from "../assets/images/user_image.avif";
 const AwardsRecognition = () => {
   let sliderRef = useRef(null);
