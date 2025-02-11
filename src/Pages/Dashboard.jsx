@@ -65,13 +65,13 @@ const Dashboard = () => {
         </div>
 
         <div
-          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300 col-span-1 md:col-span-2 lg:col-span-3  h-[455px] `}
+          className={`rounded-lg shadow-md cursor-pointer bg-white hover:shadow-xl transition duration-300 col-span-1 md:col-span-2 lg:col-span-3 h-96 md:h-[455px] `}
         >
           <NewHire />
         </div>
 
         <div
-          className={`rounded-lg shadow-md  cursor-pointer bg-black hover:shadow-xl  transition duration-300 col-span-1 md:col-span-2 lg:col-span-3  h-[455px]`}
+          className={`rounded-lg shadow-md  cursor-pointer bg-black hover:shadow-xl  transition duration-300 col-span-1 md:col-span-2 lg:col-span-3 h-96 md:h-[455px]`}
         >
           <AwardsRecognition />
         </div>
