@@ -7,7 +7,9 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import AwardCard from "./AwardsCard";
 import star from "../data/hand-star.jpg";
-
+// Import your images
+import trophy from "../assets/images/trophy-award.jpg";
+import user1 from "../assets/images/user_image.avif";
 const AwardsRecognition = () => {
   let sliderRef = useRef(null);
   const next = () => {
@@ -60,8 +62,8 @@ const AwardsRecognition = () => {
         {/* Slide 1 */}
         <div>
           <AwardCard
-            userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
-           image="https://img.freepik.com/free-vector/trophy-award-laurel-wreath-composition-with-realistic-image-golden-cup-decorated-with-garland-with-reflection_1284-32301.jpg"
+            userImage={user1}
+            image={trophy}
             imagePosition="right"
             message="Well done! We are really proud of the difference you have made which gives everybody the reason to applaud & appreciate."
             userName="John Doe"
@@ -75,8 +77,8 @@ const AwardsRecognition = () => {
         {/* Slide 2 */}
         <div>
           <AwardCard
-            userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
-            image="https://img.freepik.com/free-vector/trophy-award-laurel-wreath-composition-with-realistic-image-golden-cup-decorated-with-garland-with-reflection_1284-32301.jpg"
+            userImage={user1}
+            image={trophy}
             imagePosition="right"
             message="Well done! We are really proud of the difference you have made which gives everybody the reason to applaud & appreciate."
             userName="Jane Smith"
@@ -90,8 +92,8 @@ const AwardsRecognition = () => {
         {/* Slide 3 */}
         <div>
           <AwardCard
-            userImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
-            image="https://img.freepik.com/free-vector/trophy-award-laurel-wreath-composition-with-realistic-image-golden-cup-decorated-with-garland-with-reflection_1284-32301.jpg"
+            userImage={user1}
+            image={trophy}
             imagePosition="right"
             message="Well done! We are really proud of the difference you have made which gives everybody the reason to applaud & appreciate."
             userName="Jane Smith"

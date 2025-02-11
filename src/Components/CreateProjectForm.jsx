@@ -10,6 +10,7 @@ import FinalEmployeeDropdown from "./FinalEmployeeDropdown";
 import { FaChevronDown } from "react-icons/fa";
 import axios from "axios";
 
+
 const CreateProjectForm = () => {
   const [projectName, setProjectName] = useState("");
   const [projectId, setProjectId] = useState("");
@@ -696,7 +697,7 @@ const CreateProjectForm = () => {
   {/* Button for Adding New Milestone */}
   {!showMilestoneForm && (
     <button
-      className="border rounded-full bg-purple-500 text-white hover:bg-purple-700 px-4 py-2 flex flex-row justify-start items-center gap-2 -ml-2 mt-2 w-auto"  // Ensure it's full-width on mobile
+      className="border rounded-full bg-purple-500 text-white hover:bg-purple-700 px-4 py-2 flex flex-row justify-start items-center gap-2  mt-2 w-auto"  // Ensure it's full-width on mobile
       onClick={handleMilestoneClick}
     >
       <FaPlus />
@@ -783,7 +784,7 @@ const CreateProjectForm = () => {
   
   {!showAddTeamForm && (
     <button
-      className="border rounded-full bg-purple-500 text-white hover:bg-purple-700 px-4 py-2 flex flex-row justify-start items-center gap-2 w-auto -ml-2 mt-2"
+      className="border rounded-full bg-purple-500 text-white hover:bg-purple-700 px-4 py-2 flex flex-row justify-start items-center gap-2 w-auto  mt-2"
       onClick={handleAddTeamClick}
     >
       <FaPlus /> Add Team

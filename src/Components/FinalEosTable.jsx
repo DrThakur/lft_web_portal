@@ -65,7 +65,30 @@ const FinalEosTable = () => {
       return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const [screenSize, setScreenSize] = useState(window.innerWidth);
+    useEffect(() => {
+      const handleResize = () => setScreenSize(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      handleResize(); // Set the screen size on initial load
+      return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+    }, []);
 
+    let template;
+
+    if (screenSize < 468) {
+      template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
+    } else if (screenSize >= 468 && screenSize < 768) {
+      template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
+    } else {
+      template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
+    }
+  
+  
+    const currentPageReportTemplate = screenSize < 768 ? (
+      "{first}-{last} of {totalRecords}"
+    ) : (
+      "Showing {first} to {last} of {totalRecords} employes"
+    );
 
   // const apiUrl2 = "https://lft-web-portal-backend-1.onrender.com/users"
   // const apiUrl1 = `http://${baseURL}:${port}/users`
@@ -335,6 +358,7 @@ const FinalEosTable = () => {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
+        <div className="flex gap-4">
         <Button
           icon="pi pi-pencil"
           rounded
@@ -349,6 +373,7 @@ const FinalEosTable = () => {
           severity="danger"
           onClick={() => confirmDeleteProduct(rowData)}
         />
+        </div>
       </React.Fragment>
     );
   };
@@ -650,8 +675,8 @@ const FinalEosTable = () => {
           showGridlines
           columnResizeMode="expand"
           resizableColumns
-          paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+          paginatorTemplate={template}
+            currentPageReportTemplate={currentPageReportTemplate}
           globalFilter={globalFilter}
           header={header}
         >

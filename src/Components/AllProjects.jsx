@@ -641,23 +641,25 @@ const AllProjects = () => {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
+      <div className="flex justify-center gap-4"> {/* Added flex container with gap */}
         <Button
           icon="pi pi-pencil text-blue-400"
           rounded
           outlined
-          className="mr-2 border border-blue-400 rounded-full"
+          className="border border-blue-400 rounded-full"
           onClick={() => editProduct(rowData)}
         />
         <Button
-          icon="pi pi-trash text-red-400"
+          icon="pi pi-trash text-red-400 "
           rounded
           outlined
           severity="danger"
           onClick={() => confirmDeleteProject(rowData)}
           className="border border-red-400 rounded-full"
         />
-      </React.Fragment>
-    );
+      </div>
+    </React.Fragment>
+    )    
   };
 
   const getSeverity = (project) => {
@@ -935,7 +937,9 @@ const AllProjects = () => {
             ></Column>
 
             <Column
-              header="Action"
+              field="action"
+              header="Actions"
+              alignHeader={"center"}
               body={actionBodyTemplate}
               exportable={false}
               style={{ minWidth: "12rem" }}

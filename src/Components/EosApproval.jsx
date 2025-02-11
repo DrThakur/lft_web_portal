@@ -60,6 +60,22 @@ const EosApproval = () => {
       return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
     }, []);
 
+    let template;
+
+    if (screenSize < 468) {
+      template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
+    } else if (screenSize >= 468 && screenSize < 768) {
+      template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
+    } else {
+      template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
+    }
+  
+  
+    const currentPageReportTemplate = screenSize < 768 ? (
+      "{first}-{last} of {totalRecords}"
+    ) : (
+      "Showing {first} to {last} of {totalRecords} "
+    );
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -650,6 +666,8 @@ const EosApproval = () => {
             className="p-datatable text-center"
             paginator
             rows={10}
+            paginatorTemplate={template}
+            currentPageReportTemplate={currentPageReportTemplate}
             rowsPerPageOptions={[5, 10, 20, 50]}
             tableStyle={{ borderRadius: "20px" }}
             showGridlines

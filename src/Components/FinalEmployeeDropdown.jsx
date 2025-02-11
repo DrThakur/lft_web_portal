@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import makeAnimated from "react-select/animated";
 import employeesData from "../data/employeesData";
 import axios from "axios";
-
+import profile1 from "../assets/images/images.jpg";
 const animatedComponents = makeAnimated();
 
 const FinalEmployeeDropdown = ({
@@ -74,7 +74,7 @@ const FinalEmployeeDropdown = ({
 
   const formatOptionLabel = ({ label, data }) => (
     <div className="flex items-center h-10">
-      <img src={`https://puneautoexpo.in/wp-content/uploads/2017/10/speaker3-min.jpg`} alt={data.fullName} className="w-8 h-8 rounded-full" />
+      <img src={profile1} alt={data.fullName} className="w-8 h-8 rounded-full" />
       <div>
         <div>
           {data.fullName} ({data.employeeId})

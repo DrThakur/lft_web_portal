@@ -3,6 +3,8 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Tag } from "primereact/tag";
+// Import your images
+import profile1 from "../assets/images/images.jpg";
 
 const NewHire = () => {
 
@@ -11,42 +13,37 @@ const NewHire = () => {
   const recruitmentData = [
     {
       fullName: "Ankit Kumar Thakur",
-      profilePic:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
+      profilePic: profile1,
       roleAppliedFor: "Project Manager",
-      reportingManager:"Dhruv Kumar Saxena",
+      reportingManager: "Dhruv Kumar Saxena",
       status: "Onboarded",
     },
     {
       fullName: "Abhishek Kumar Thakur",
-      profilePic:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
+      profilePic: profile1,
       roleAppliedFor: "Web Developer",
-      reportingManager:"Amritpreet Singh",
+      reportingManager: "Amritpreet Singh",
       status: "In Progress",
     },
     {
       fullName: "Rajkumar Rao",
-      profilePic:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
+      profilePic: profile1,
       roleAppliedFor: "Data Sceientist",
-      reportingManager:"Dhruv Kumar Saxena",
+      reportingManager: "Dhruv Kumar Saxena",
       status: "Pending",
     },
     {
       fullName: "Bajirao Mastani",
-      profilePic:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
+      profilePic: profile1,
       roleAppliedFor: "FPGA Engineer",
-      reportingManager:"Amritpreet Singh",
+      reportingManager: "Amritpreet Singh",
       status: "Onboarded",
     },
     {
       fullName: "Rinku Jain",
-      profilePic:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
+      profilePic: profile1,
       roleAppliedFor: "Sr Verification Engineer",
-      reportingManager:"Dhruv Kumar Saxena",
+      reportingManager: "Dhruv Kumar Saxena",
       status: "In Progress",
     },
   ];
@@ -78,19 +75,21 @@ const NewHire = () => {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
-        <Button
-          icon="pi pi-pencil text-blue-400"
-          rounded
-          outlined
-          className="mr-2 border border-blue-400 rounded-full"
-        />
-        <Button
-          icon="pi pi-trash text-red-400"
-          rounded
-          outlined
-          severity="danger"
-          className="border border-red-400 rounded-full"
-        />
+        <div className="flex justify-center gap-4">
+          <Button
+            icon="pi pi-pencil text-blue-400"
+            rounded
+            outlined
+            className="mr-2 border border-blue-400 rounded-full"
+          />
+          <Button
+            icon="pi pi-trash text-red-400"
+            rounded
+            outlined
+            severity="danger"
+            className="border border-red-400 rounded-full"
+          />
+        </div>
       </React.Fragment>
     );
   };
@@ -130,7 +129,7 @@ const NewHire = () => {
         value={recruitments}
         tableStyle={{ minWidth: "50rem" }}
         size="small"
-      scrollable
+        scrollable
         scrollHeight="400px"
       >
         <Column
@@ -145,8 +144,9 @@ const NewHire = () => {
         <Column
           field="action"
           header="Action"
+          alignHeader={"center"}
           body={actionBodyTemplate}
-          style={{ width: '15%' }}
+          style={{ width: '15%', textAlign: "center" }}
         ></Column>
       </DataTable>
     </div>
