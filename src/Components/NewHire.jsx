@@ -13,37 +13,37 @@ const NewHire = () => {
   const recruitmentData = [
     {
       fullName: "Ankit Kumar Thakur",
-      profilePic:profile1,
+      profilePic: profile1,
       roleAppliedFor: "Project Manager",
-      reportingManager:"Dhruv Kumar Saxena",
+      reportingManager: "Dhruv Kumar Saxena",
       status: "Onboarded",
     },
     {
       fullName: "Abhishek Kumar Thakur",
-      profilePic:profile1,
+      profilePic: profile1,
       roleAppliedFor: "Web Developer",
-      reportingManager:"Amritpreet Singh",
+      reportingManager: "Amritpreet Singh",
       status: "In Progress",
     },
     {
       fullName: "Rajkumar Rao",
-      profilePic:profile1,
+      profilePic: profile1,
       roleAppliedFor: "Data Sceientist",
-      reportingManager:"Dhruv Kumar Saxena",
+      reportingManager: "Dhruv Kumar Saxena",
       status: "Pending",
     },
     {
       fullName: "Bajirao Mastani",
-      profilePic:profile1,
+      profilePic: profile1,
       roleAppliedFor: "FPGA Engineer",
-      reportingManager:"Amritpreet Singh",
+      reportingManager: "Amritpreet Singh",
       status: "Onboarded",
     },
     {
       fullName: "Rinku Jain",
-      profilePic:profile1,
+      profilePic: profile1,
       roleAppliedFor: "Sr Verification Engineer",
-      reportingManager:"Dhruv Kumar Saxena",
+      reportingManager: "Dhruv Kumar Saxena",
       status: "In Progress",
     },
   ];
@@ -75,20 +75,20 @@ const NewHire = () => {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
-        <div className="flex gap-4">
-        <Button
-          icon="pi pi-pencil text-blue-400"
-          rounded
-          outlined
-          className="mr-2 border border-blue-400 rounded-full"
-        />
-        <Button
-          icon="pi pi-trash text-red-400"
-          rounded
-          outlined
-          severity="danger"
-          className="border border-red-400 rounded-full"
-        />
+        <div className="flex justify-center gap-4">
+          <Button
+            icon="pi pi-pencil text-blue-400"
+            rounded
+            outlined
+            className="mr-2 border border-blue-400 rounded-full"
+          />
+          <Button
+            icon="pi pi-trash text-red-400"
+            rounded
+            outlined
+            severity="danger"
+            className="border border-red-400 rounded-full"
+          />
         </div>
       </React.Fragment>
     );
@@ -129,7 +129,7 @@ const NewHire = () => {
         value={recruitments}
         tableStyle={{ minWidth: "50rem" }}
         size="small"
-      scrollable
+        scrollable
         scrollHeight="400px"
       >
         <Column
@@ -144,8 +144,9 @@ const NewHire = () => {
         <Column
           field="action"
           header="Action"
+          alignHeader={"center"}
           body={actionBodyTemplate}
-          style={{ width: '15%' }}
+          style={{ width: '15%', textAlign: "center" }}
         ></Column>
       </DataTable>
     </div>
