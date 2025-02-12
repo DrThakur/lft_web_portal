@@ -15,7 +15,7 @@ const HolidayCalendarPage = ({ holidays }) => {
   return (
     <div>
       <h1 className="text-base sm:text-lg md:text-2xl lg:text-lg font-bold mb-4  py-2 px-3 rounded-lg">Holiday Calendar</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 -ml-0.5">
         {Object.keys(holidaysByMonth).map((monthKey, index) => {
           const [month, year] = monthKey.split('-').map(Number);
           const monthName = new Date(year, month - 1).toLocaleString('en-us', { month: 'long' });

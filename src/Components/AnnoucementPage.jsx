@@ -3,10 +3,10 @@ import Announcement from './Annoucement';
 
 const AnnouncementsPage = ({ announcements }) => {
   return (
-    <div className="container mx-auto">
+    <div className=" mx-auto ">
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Announcements</h1>
-      <div className="overflow-y-auto h-screen">
-        <div className="grid grid-cols-1 gap-4 p-4">
+      <div className="overflow-y-auto h-screen -ml-1">
+        <div className="grid grid-cols-1 gap-4 p-4 ">
           {announcements.map((announcement, index) => (
             <Announcement
               key={index}

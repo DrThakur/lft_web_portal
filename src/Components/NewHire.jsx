@@ -9,6 +9,27 @@ import profile1 from "../assets/images/images.jpg";
 const NewHire = () => {
 
   const [recruitments, setRecruitments] = useState([]);
+  const [scrollHeight, setScrollHeight] = useState("320px");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setScrollHeight("320px");
+      } else {
+        setScrollHeight("400px");
+      }
+    };
+
+    // Initialize the scroll height based on the current window size
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty dependency array means it runs once after initial render
+
 
   const recruitmentData = [
     {
@@ -130,7 +151,10 @@ const NewHire = () => {
         tableStyle={{ minWidth: "50rem" }}
         size="small"
         scrollable
-        scrollHeight="400px"
+        scrollHeight={scrollHeight}
+      responsiveLayout="scroll"
+
+        
       >
         <Column
           field="fullName"
