@@ -477,20 +477,20 @@ const EmployeeManagement = () => {
     return (
       <React.Fragment>
         <div className="flex justify-center gap-4">
-        <Button
-          icon="pi pi-pencil"
-          rounded
-          outlined
-          className="mr-2"
-          onClick={() => editProduct(rowData)}
-        />
-        <Button
-          icon="pi pi-trash"
-          rounded
-          outlined
-          severity="danger"
-          onClick={() => confirmDeleteProduct(rowData)}
-        />
+          <Button
+            icon="pi pi-pencil"
+            rounded
+            outlined
+            className="mr-2"
+            onClick={() => editProduct(rowData)}
+          />
+          <Button
+            icon="pi pi-trash"
+            rounded
+            outlined
+            severity="danger"
+            onClick={() => confirmDeleteProduct(rowData)}
+          />
         </div>
       </React.Fragment>
     );
@@ -546,14 +546,15 @@ const EmployeeManagement = () => {
     }
   };
 
+
   const header = (
-    <div className="flex flex-wrap justify-between items-center gap-4 overflow-y-auto">
-      {/* Header */}
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 overflow-y-auto">
+      {/* Left: Header */}
       <h4 className="m-0 w-full md:w-auto text-center md:text-left">
         HR Department - {getEmployeeCountText()}
       </h4>
 
-      {/* Search Input */}
+      {/* Middle: Search Input */}
       <span className="p-input-icon-left w-full md:w-auto">
         <i className="pi pi-search" />
         <InputText
@@ -564,22 +565,28 @@ const EmployeeManagement = () => {
         />
       </span>
 
-      {/* Dropdowns */}
-      <div className="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-start ">
+      {/* Right: Dropdowns */}
+      <div className="col-span-1  md:col-span-2 xl:col-span-3 grid grid-cols-1 md:grid-cols-4 xl:grid-cols-4 gap-2 justify-center md:justify-start">
         <Dropdown
           value={designationFilter}
           options={designationOptions}
           onChange={(e) => setDesignationFilter(e.value)}
           placeholder="Select Designation"
-          className="mb-2 md:mb-0 w-full md:w-auto mx-auto md:mx-0"
+          className="w-full md:w-auto mx-auto md:mx-0 mb-2 md:mb-0 "
           showClear
+          panelClassName="w-1/12 "  // Ensures dropdown options match input width
+          itemTemplate={(option) => (
+            <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
+              {option}
+            </div>
+          )}
         />
         <Dropdown
           value={locationFilter}
           options={locationOptions}
           onChange={(e) => setLocationFilter(e.value)}
           placeholder="Select Location"
-          className="mx-auto md:mx-0 mb-2 md:mb-0 w-full md:w-auto"
+          className="w-full md:w-auto mx-auto md:mx-0 mb-2 md:mb-0"
           showClear
         />
         <Dropdown
@@ -587,7 +594,7 @@ const EmployeeManagement = () => {
           options={stateOptions}
           onChange={(e) => setStateFilter(e.value)}
           placeholder="Select State"
-          className="mx-auto md:mx-0 mb-2 md:mb-0 w-full md:w-auto"
+          className="w-full md:w-auto mx-auto md:mx-0 mb-2 md:mb-0"
           showClear
         />
         <Dropdown
@@ -595,13 +602,14 @@ const EmployeeManagement = () => {
           options={statusOptions}
           onChange={(e) => setStatusFilter(e.value)}
           placeholder="Select Status"
-          className="mx-auto md:mx-0 mb-2 md:mb-0 w-full md:w-auto"
+          className="w-full md:w-auto mx-auto md:mx-0 mb-2 md:mb-0"
           showClear
         />
       </div>
     </div>
-
   );
+
+
   const productDialogFooter = (
     <React.Fragment>
       <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
@@ -852,9 +860,9 @@ const EmployeeManagement = () => {
               onCellEditComplete={onCellEditComplete}
             ></Column>
             <Column
-            field="action"
-            header="Actions"
-            alignHeader={"center"}
+              field="action"
+              header="Actions"
+              alignHeader={"center"}
               body={actionBodyTemplate}
               headerStyle={{
                 backgroundColor: "rgb(187 247 208)",
