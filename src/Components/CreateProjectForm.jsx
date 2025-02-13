@@ -696,6 +696,7 @@ const CreateProjectForm = () => {
   
   {/* Button for Adding New Milestone */}
   {!showMilestoneForm && (
+    <div className="flex justify-center sm:w-full md:justify-start md:w-auto">
     <button
       className="border rounded-full bg-purple-500 text-white hover:bg-purple-700 px-4 py-2 flex flex-row justify-start items-center gap-2  mt-2 w-auto"  // Ensure it's full-width on mobile
       onClick={handleMilestoneClick}
@@ -703,6 +704,7 @@ const CreateProjectForm = () => {
       <FaPlus />
       Add New Milestone
     </button>
+    </div>
   )}
 
   {/* Show New Milestone Form if the form is toggled */}
@@ -783,12 +785,14 @@ const CreateProjectForm = () => {
   <h3 className="text-xl font-semibold">Add Teams</h3>
   
   {!showAddTeamForm && (
+        <div className="flex justify-center sm:w-full md:justify-start md:w-auto">
     <button
       className="border rounded-full bg-purple-500 text-white hover:bg-purple-700 px-4 py-2 flex flex-row justify-start items-center gap-2 w-auto  mt-2"
       onClick={handleAddTeamClick}
     >
       <FaPlus /> Add Team
     </button>
+    </div>
   )}
   
   {showAddTeamForm && (
