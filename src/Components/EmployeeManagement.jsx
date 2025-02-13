@@ -576,7 +576,7 @@ const EmployeeManagement = () => {
           showClear
           panelClassName="w-1/12 "  // Ensures dropdown options match input width
           itemTemplate={(option) => (
-            <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
+            <div className="overflow-x-auto lg:overflow-x-hidden lg:hover:overflow-x-auto  scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
               {option}
             </div>
           )}
