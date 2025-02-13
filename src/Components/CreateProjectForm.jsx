@@ -396,7 +396,7 @@ const CreateProjectForm = () => {
         <ul className="absolute mt-1 w-full max-w-[80vw] bg-white border rounded shadow-lg z-10 ">
           <li
             onClick={() => handleOptionClick("")}
-            className="px-4 py-2 cursor-pointer  hover:bg-blue-600 hover:text-white"
+            className="px-4 py-2 cursor-pointer bg-blue-300 text-white font-semibold  hover:bg-blue-600 hover:text-white"
           >
             --Select--
           </li>
