@@ -31,13 +31,7 @@ const JobVacancy = () => {
         {/* List of Job Openings with Badge */}
         <div className={`${
          screenSize <= 371 ? "py-0  min-h-16" : isWithinRange ? "max-h-60 min-h-60" : "max-h-64 min-h-64"
-        } overflow-auto sm:overflow-y-hidden sm:hover:overflow-y-auto transition-all duration-300 
-          [&::-webkit-scrollbar]:w-2
-          [&::-webkit-scrollbar-track]:rounded-full
-          [&::-webkit-scrollbar-thumb]:rounded-full
-          [&::-webkit-scrollbar-thumb]:bg-gray-300
-          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}>
+        } overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent`}>
 
           <ul className="flex flex-col justify-start items-start w-full space-y-3 sm:space-y-2 md:space-y-3">
             <li className="hover:bg-green-200 rounded-lg py-2 px-4 w-full text-sm sm:text-base lg:text-lg">

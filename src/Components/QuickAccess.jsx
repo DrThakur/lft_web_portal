@@ -41,13 +41,7 @@ const QuickAccess = () => {
       <ul
         className={`${
           isWithinRange ? "max-h-60 min-h-60" : "max-h-64 min-h-64"
-        } flex flex-col justify-start items-start w-full space-y-3 overflow-y-auto transition-all duration-300 
-          [&::-webkit-scrollbar]:w-2 
-          [&::-webkit-scrollbar-track]:rounded-full 
-          [&::-webkit-scrollbar-thumb]:rounded-full 
-          [&::-webkit-scrollbar-thumb]:bg-gray-300 
-          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}
+        } flex flex-col justify-start items-start w-full space-y-3 overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent`}
       >
         {quickAccessLinks.map(({ label, to }, index) => (
           <li key={index} className="w-full">
