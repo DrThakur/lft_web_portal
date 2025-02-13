@@ -185,14 +185,15 @@ const ProjectCard = ({ project, toggleModal }) => {
 
       </div>
       <div
-        className={`cardBody flex flex-col gap-1 lg:gap-2 overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-1.5 
-          [&::-webkit-scrollbar-track]:rounded-full 
-          [&::-webkit-scrollbar-thumb]:rounded-full 
-          [&::-webkit-scrollbar-thumb]:bg-gray-300
-          ${showScrollbar ? 'overflow-y-auto' : 'overflow-y-hidden'} hover:overflow-y-auto`}
+        // className={`cardBody flex flex-col gap-1 lg:gap-2 overflow-y-auto transition-all duration-300 [&::-webkit-scrollbar]:w-1.5 
+        //   [&::-webkit-scrollbar-track]:rounded-full 
+        //   [&::-webkit-scrollbar-thumb]:rounded-full 
+        //   [&::-webkit-scrollbar-thumb]:bg-gray-300
+        //   ${showScrollbar ? 'overflow-y-auto' : 'overflow-y-hidden'} hover:overflow-y-auto`}
         style={{
           maxHeight: '100%', // Ensure it has a max-height for scrollability
         }}
+        className={`cardBody flex flex-col gap-1 lg:gap-2 overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto  scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent`}
       >
         <div className="flex  rounded-lg flex-wrap ">
           <div className="flex-1 bg-blue-100 rounded-s p-1 flex flex-col justify-center items-center gap-1 max-w-full">
