@@ -533,7 +533,7 @@ const ProjectMilestones = () => {
 
   const projectOptionTemplate = (option) => {
     return (
-      <div className="flex flex-row w-full justify-center items-center gap-2">
+      <div className="flex flex-row w-full justify-start items-center gap-2">
         <span>{option.projectId}</span>
         <span>:</span>
         <span>{option.projectName}</span>
@@ -563,11 +563,11 @@ const ProjectMilestones = () => {
           valueTemplate={selectedProjectTemplate}
           itemTemplate={projectOptionTemplate}
           virtualScrollerOptions={{ itemSize: 38 }}
-          className="w-full sm:w-64 md:w-96 lg:w-64 xl:w-60 sm:ml-8 md:ml-2 lg:ml-0 mx-auto"
+          className="w-full sm:w-64 md:w-96 lg:w-64 xl:w-60 sm:ml-8 md:ml-2 lg:ml-0 "
         />
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto  mx-auto">
+      <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto  ">
         <label htmlFor="" className="font-semibold text-xl mb-2 sm:mb-0 sm:text-lg md:w-1/3 lg:w-auto">
           Project Name
         </label>
