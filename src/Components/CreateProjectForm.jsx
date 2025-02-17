@@ -9,7 +9,8 @@ import NewAddTeamForm from "./NewAddTeamForm";
 import FinalEmployeeDropdown from "./FinalEmployeeDropdown";
 import { FaChevronDown } from "react-icons/fa";
 import axios from "axios";
-
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 const CreateProjectForm = () => {
   const [projectName, setProjectName] = useState("");
@@ -212,23 +213,36 @@ const CreateProjectForm = () => {
     setMilestoneNumber(milestones.length - 1);
   };
 
-  const handleStartDateChange = (event) => {
-    setStartDate(event.target.value);
-    setError("");
-    calculateDuration(event.target.value, endDate);
+  // const handleStartDateChange = (event) => {
+  //   setStartDate(event.target.value);
+  //   setError("");
+  //   calculateDuration(event.target.value, endDate);
+  // };
+
+  // const handleEndDateChange = (event) => {
+  //   const selectedEndDate = event.target.value;
+  //   if (startDate && selectedEndDate <= startDate) {
+  //     setError("End date must be greater than start date");
+  //   } else {
+  //     setError("");
+  //     setEndDate(selectedEndDate);
+  //     calculateDuration(startDate, selectedEndDate);
+  //   }
+  // };
+
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
   };
 
-  const handleEndDateChange = (event) => {
-    const selectedEndDate = event.target.value;
-    if (startDate && selectedEndDate <= startDate) {
-      setError("End date must be greater than start date");
+  // Handle end date change
+  const handleEndDateChange = (date) => {
+    // Ensure that date is not undefined or null
+    if (date) {
+      setEndDate(date);
     } else {
-      setError("");
-      setEndDate(selectedEndDate);
-      calculateDuration(startDate, selectedEndDate);
+      setEndDate(null); // Set to null if no date is selected
     }
   };
-
   const calculateDuration = (start, end) => {
     if (start && end) {
       const startDateObj = new Date(start);
@@ -518,14 +532,25 @@ const CreateProjectForm = () => {
       <label htmlFor="startDate" className="font-semibold">
         Start Date
       </label>
-      <input
+      {/* <input
         id="startDate"
         type="date"
         value={startDate}
         onChange={handleStartDateChange}
         className="border rounded px-2 py-2 mt-1 w-full"
         onClick={handleInputClick}
-      />
+      /> */}
+        <DatePicker
+          selected={startDate}
+          onChange={handleStartDateChange}
+          dateFormat="dd-MMM-yyyy"
+          showYearDropdown
+          yearDropdownItemNumber={25}
+          scrollableYearDropdown
+          className="border rounded px-2 py-2 mt-1 w-full"
+          placeholderText="Select Start Date"
+          isClearable
+        />
     </div>
 
     {/* End Date */}
@@ -533,13 +558,24 @@ const CreateProjectForm = () => {
       <label htmlFor="endDate" className="font-semibold">
         End Date
       </label>
-      <input
+      {/* <input
         type="date"
         id="endDate"
         value={endDate}
         onChange={handleEndDateChange}
         className="border rounded px-2 py-2 mt-1 w-full"
-      />
+      /> */}
+       <DatePicker
+          selected={endDate}
+          onChange={handleEndDateChange}
+          dateFormat="dd-MMM-yyyy"
+          showYearDropdown
+          yearDropdownItemNumber={25}
+          scrollableYearDropdown
+          className="border rounded px-2 py-2 mt-1 w-full "
+          placeholderText="Select End Date"
+          isClearable
+        />
       {error && (
         <p className="text-red-500 text-center font-semibold mt-1">
           {error}
