@@ -37,14 +37,14 @@ const AwardsRecognition = () => {
       {/* Navigation buttons */}
       <div className="flex flex-row justify-between items-center absolute top-1/2 z-10 w-full -mt-8 px-3 md:px-10">
         <button
-          className="button rounded-full p-2 text-white shadow"
+          className="button rounded-full p-2 text-gray-600 shadow"
           onClick={previous}
         >
           <IoIosArrowBack className="text-3xl sm:text-4xl md:text-5xl" />
         </button>
 
         <button
-          className="button rounded-full shadow p-2 text-white"
+          className="button rounded-full shadow p-2 text-gray-600"
           onClick={next}
         >
           <IoIosArrowForward className="text-3xl sm:text-4xl md:text-5xl" />
@@ -57,7 +57,7 @@ const AwardsRecognition = () => {
           sliderRef = slider;
         }}
         {...settings}
-        className="rounded-lg w-full h-full shadow-lg bg-red-300"
+        className="rounded-lg w-full h-full shadow-lg bg-white"
       >
         {/* Slide 1 */}
         <div>
