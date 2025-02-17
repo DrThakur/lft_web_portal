@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
@@ -64,16 +62,16 @@ const Dropdown = ({ options, selectedValue, onChange, label }) => {
           <ul className="">
             {filteredOptions.map((option) => (
               <li
-              key={option}
-              onClick={() => handleSelect(option)}
-              className={`px-4 py-1 font-sans cursor-pointer 
+                key={option}
+                onClick={() => handleSelect(option)}
+                className={`px-4 py-1 font-sans cursor-pointer 
                 ${selectedValue === option ? 'bg-blue-600 text-white' : 'bg-gray-200'}
                 hover:bg-blue-600 hover:text-white`}
-            >
-              {option}
-            </li>
-            
-            
+              >
+                {option}
+              </li>
+
+
             ))}
           </ul>
         </div>
@@ -88,11 +86,18 @@ const Helpdesk = () => {
   const [selectedItemType, setSelectedItemType] = useState("");
   const [selectedRequiredFor, setSelectedRequiredFor] = useState("");
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showMessage, setShowMessage] = useState("");
 
   const handleDepartmentChange = (value) => {
     setSelectedDepartment(value);
     if (value === "IT" || value === "Admin") {
       setShowConfirmation(true);
+    }
+
+    if (value === "IT" || value === "Admin") {
+      setShowMessage(`${value} page is opened in a new tab.`);
+    } else {
+      setShowMessage(""); // Hide message if department is changed
     }
   };
 
@@ -111,18 +116,18 @@ const Helpdesk = () => {
     <div className="max-h-2xl mx-auto p-4 bg-white overflow-y-auto -ml-1 h-[calc(100vh-114px)] xxs:h-[calc(100vh-106px)] mb-2">
       <h1 className="text-2xl font-bold mb-4">Helpdesk</h1>
       <div className="mb-4">
-  <label className="block text-md font-medium text-gray-700">
-    Select a department
-  </label>
-  <div className=" w-full sm:w-[60%] sm:mx-auto">
-    <Dropdown
-      options={["Select a department", "IT", "Admin", "HR", "Procurement", "Finance"]}
-      selectedValue={selectedDepartment}
-      onChange={handleDepartmentChange}
-      className="w-full sm:w-[60%] p-4"
-    />
-  </div>
-</div>
+        <label className="block text-md font-medium text-gray-700">
+          Select a department
+        </label>
+        <div className=" w-full sm:w-[60%] sm:mx-auto">
+          <Dropdown
+            options={["Select a department", "IT", "Admin", "HR", "Procurement", "Finance"]}
+            selectedValue={selectedDepartment}
+            onChange={handleDepartmentChange}
+            className="w-full sm:w-[60%] p-4"
+          />
+        </div>
+      </div>
 
 
       {showConfirmation && (
@@ -144,6 +149,14 @@ const Helpdesk = () => {
           </div>
         </div>
       )}
+
+      {!showConfirmation && showMessage && (
+        <div className="mt-4 p-4 bg-green-100 text-green-700 border-l-4 border-green-500 w-full sm:w-1/2 mx-auto">
+          {showMessage}
+        </div>
+      )}
+
+
 
       {selectedDepartment === "HR" && (
         <div>
@@ -309,7 +322,7 @@ const Helpdesk = () => {
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
+              <div>
                 <label className="block text-sm font-medium text-gray-700">Item Type</label>
                 <Dropdown
                   options={["Hardware", "Software"]}
