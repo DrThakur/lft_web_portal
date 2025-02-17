@@ -3,6 +3,8 @@ import { Toast } from "primereact/toast";
 import React, { useRef, useState, useEffect } from "react";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 import { FaChevronDown } from "react-icons/fa";
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 const PurchaseOrder = () => {
   const [title, setTitle] = useState("");
@@ -13,16 +15,16 @@ const PurchaseOrder = () => {
   const [pointOfContact, setPointOfContact] = useState("");
   const [contactDetails, setContactDetails] = useState("");
   const [location, setLocation] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [duration, setDuration] = useState("");
+  const [startDate, setStartDate] = useState(null); // Start Date state
+  const [endDate, setEndDate] = useState(null); // End Date state
+  const [duration, setDuration] = useState(null); // Duration state
   const [bqCost, setBqCost] = useState("");
   const [poValue, setPoValue] = useState("");
   const [roValue, setRoValue] = useState("");
   const [error, setError] = useState("");
   const [projectType, setProjectType] = useState("");
   const [poId, setPoId] = useState("");
-  const [poDate, setPoDate] = useState("");
+  const [poDate, setPoDate] = useState(null); // for date handling
   const [noOfMilestones, setNoOfMilestones] = useState("");
   const [specialNote, SetSpecialNote] = useState("");
   const toast = useRef(null);
@@ -30,6 +32,8 @@ const PurchaseOrder = () => {
   const [selectedProjectType, setSelectedProjectType] = useState(""); // For Project Type dropdown
   const [isOpenLocation, setIsOpenLocation] = useState(false); // For Location dropdown open/close state
   const [isOpenProjectType, setIsOpenProjectType] = useState(false); // For Project Type dropdown open/close state
+
+
 
   const locationDropdownRef = useRef(null); // Separate ref for location dropdown
   const projectTypeDropdownRef = useRef(null); // Separate ref for project type dropdown
@@ -81,89 +85,182 @@ const PurchaseOrder = () => {
   }, []);
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Handle form submission here
+  // };
 
-  const handleSelectLocation = (event) => {
-    // Update the selectedOption state variable with the value of the selected option
-    setLocation(event.target.value);
-  };
-  const handleSelectProjectType = (event) => {
-    // Update the selectedOption state variable with the value of the selected option
-    setProjectType(event.target.value);
-  };
+  // const handleSelectLocation = (event) => {
+  //   // Update the selectedOption state variable with the value of the selected option
+  //   setLocation(event.target.value);
+  // };
+  // const handleSelectProjectType = (event) => {
+  //   // Update the selectedOption state variable with the value of the selected option
+  //   setProjectType(event.target.value);
+  // };
 
-  const handleStartDateChange = (event) => {
-    setStartDate(event.target.value);
+  // const handleStartDateChange = (event) => {
+  //   setStartDate(event.target.value);
+  //   setError("");
+  //   calculateDuration(event.target.value, endDate);
+  // };
+
+  // const handleEndDateChange = (event) => {
+  //   const selectedEndDate = event.target.value;
+  //   if (startDate && selectedEndDate <= startDate) {
+  //     setError("End date must be greater than start date");
+  //   } else {
+  //     setError("");
+  //     setEndDate(selectedEndDate);
+  //     calculateDuration(startDate, selectedEndDate);
+  //   }
+  // };
+
+  // const calculateDuration = (start, end) => {
+  //   if (start && end) {
+  //     const startDateObj = new Date(start);
+  //     const endDateObj = new Date(end);
+
+  //     let years = endDateObj.getFullYear() - startDateObj.getFullYear();
+  //     let months = endDateObj.getMonth() - startDateObj.getMonth();
+  //     let days = endDateObj.getDate() - startDateObj.getDate();
+
+  //     if (months < 0) {
+  //       years--;
+  //       months += 12;
+  //     }
+
+  //     if (days < 0) {
+  //       months--;
+  //       const tempDate = new Date(
+  //         endDateObj.getFullYear(),
+  //         endDateObj.getMonth(),
+  //         0
+  //       );
+  //       days += tempDate.getDate();
+  //     }
+
+  //     setDuration({ years, months, days });
+  //   } else {
+  //     setDuration(null); // Reset duration if start or end date is not set
+  //   }
+  // };
+
+  // const formatDuration = () => {
+  //   if (!duration) {
+  //     return ""; // Return empty string if duration is not yet calculated
+  //   } else {
+  //     let formattedDuration = "";
+  //     if (duration.years > 0) {
+  //       formattedDuration += `${duration.years} years, `;
+  //     }
+  //     if (duration.months > 0) {
+  //       formattedDuration += `${duration.months} months, `;
+  //     }
+  //     if (duration.days > 0) {
+  //       formattedDuration += `${duration.days} days`;
+  //     }
+  //     return formattedDuration;
+  //   }
+  // };
+
+  // const handleInputClick = (e) => {
+  //   e.target.blur(); // Remove focus to hide virtual keyboard on mobile devices
+  //   e.target.focus(); // Focus to open the date picker
+  // };
+    // Handle form submission
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // Handle form submission here (e.g., send data to the server)
+      console.log("Form Submitted", { location, projectType, startDate, endDate });
+    };
+  
+    // Handle location selection
+    const handleSelectLocation = (event) => {
+      setLocation(event.target.value);
+    };
+  
+    // Handle project type selection
+    const handleSelectProjectType = (event) => {
+      setProjectType(event.target.value);
+    };
+  
+// Handle start date change
+const handleStartDateChange = (date) => {
+  setStartDate(date);
+  setError("");
+  
+  // If either date is empty, reset the duration
+  if (!date || !endDate) {
+    setDuration(null);
+  } else {
+    calculateDuration(date, endDate);
+  }
+};
+
+// Handle end date change
+const handleEndDateChange = (date) => {
+  if (startDate && date <= startDate) {
+    setError("End date must be greater than start date");
+  } else {
     setError("");
-    calculateDuration(event.target.value, endDate);
-  };
-
-  const handleEndDateChange = (event) => {
-    const selectedEndDate = event.target.value;
-    if (startDate && selectedEndDate <= startDate) {
-      setError("End date must be greater than start date");
+    setEndDate(date);
+    
+    // If either date is empty, reset the duration
+    if (!startDate || !date) {
+      setDuration(null);
     } else {
-      setError("");
-      setEndDate(selectedEndDate);
-      calculateDuration(startDate, selectedEndDate);
+      calculateDuration(startDate, date);
     }
-  };
+  }
+};
 
-  const calculateDuration = (start, end) => {
-    if (start && end) {
-      const startDateObj = new Date(start);
-      const endDateObj = new Date(end);
-
-      let years = endDateObj.getFullYear() - startDateObj.getFullYear();
-      let months = endDateObj.getMonth() - startDateObj.getMonth();
-      let days = endDateObj.getDate() - startDateObj.getDate();
-
-      if (months < 0) {
-        years--;
-        months += 12;
+  
+    // Calculate duration between start and end dates
+    const calculateDuration = (start, end) => {
+      if (start && end) {
+        const startDateObj = new Date(start);
+        const endDateObj = new Date(end);
+  
+        let years = endDateObj.getFullYear() - startDateObj.getFullYear();
+        let months = endDateObj.getMonth() - startDateObj.getMonth();
+        let days = endDateObj.getDate() - startDateObj.getDate();
+  
+        if (months < 0) {
+          years--;
+          months += 12;
+        }
+  
+        if (days < 0) {
+          months--;
+          const tempDate = new Date(endDateObj.getFullYear(), endDateObj.getMonth(), 0);
+          days += tempDate.getDate();
+        }
+  
+        setDuration({ years, months, days });
+      } else {
+        setDuration(null); // Reset duration if start or end date is not set
       }
-
-      if (days < 0) {
-        months--;
-        const tempDate = new Date(
-          endDateObj.getFullYear(),
-          endDateObj.getMonth(),
-          0
-        );
-        days += tempDate.getDate();
+    };
+  
+    // Format the duration to display
+    const formatDuration = () => {
+      if (!duration) {
+        return "";
+      } else {
+        let formattedDuration = "";
+        if (duration.years > 0) {
+          formattedDuration += `${duration.years} years, `;
+        }
+        if (duration.months > 0) {
+          formattedDuration += `${duration.months} months, `;
+        }
+        if (duration.days > 0) {
+          formattedDuration += `${duration.days} days`;
+        }
+        return formattedDuration;
       }
-
-      setDuration({ years, months, days });
-    } else {
-      setDuration(null); // Reset duration if start or end date is not set
-    }
-  };
-
-  const formatDuration = () => {
-    if (!duration) {
-      return ""; // Return empty string if duration is not yet calculated
-    } else {
-      let formattedDuration = "";
-      if (duration.years > 0) {
-        formattedDuration += `${duration.years} years, `;
-      }
-      if (duration.months > 0) {
-        formattedDuration += `${duration.months} months, `;
-      }
-      if (duration.days > 0) {
-        formattedDuration += `${duration.days} days`;
-      }
-      return formattedDuration;
-    }
-  };
-
-  const handleInputClick = (e) => {
-    e.target.blur(); // Remove focus to hide virtual keyboard on mobile devices
-    e.target.focus(); // Focus to open the date picker
-  };
+    };
 
   const onUpload = () => {
     toast.current.show({
@@ -287,12 +384,23 @@ const PurchaseOrder = () => {
             {/* PO Date */}
             <div className="flex flex-col">
               <label htmlFor="poDate" className="font-semibold">PO Date</label>
-              <input
+              {/* <input
                 type="date"
                 id="poDate"
                 value={poDate}
                 onChange={(e) => setPoDate(e.target.value)}
                 className="border rounded px-2 py-2 mt-1 w-full"  // Add w-full here
+              /> */}
+              <DatePicker
+                selected={poDate} // Set the value of poDate
+                onChange={(date) => setPoDate(date)} // Update poDate on date change
+                dateFormat="dd-MMM-yyyy" // Date format
+                showYearDropdown
+                yearDropdownItemNumber={25}
+                scrollableYearDropdown
+                className="border rounded px-2 py-2 mt-1 w-full" // Styling
+                placeholderText="Select PO Date" // Placeholder text
+                isClearable // Option to clear the selected date
               />
             </div>
 
@@ -421,25 +529,47 @@ const PurchaseOrder = () => {
             {/* Start Date */}
             <div className="flex flex-col">
               <label htmlFor="startDate" className="font-semibold">Start Date</label>
-              <input
+              {/* <input
                 id="startDate"
                 type="date"
                 value={startDate}
                 onChange={handleStartDateChange}
                 className="border rounded px-2 py-2 mt-1 w-full"
-              />
+              /> */}
+               <DatePicker
+          selected={startDate} // bind to the startDate state
+          onChange={handleStartDateChange} // update startDate when changed
+          dateFormat="dd-MMM-yyyy" // display date in a readable format
+          showYearDropdown
+          yearDropdownItemNumber={25}
+          scrollableYearDropdown
+          className="border rounded px-2 py-2 mt-1 w-full" // styling
+          placeholderText="Select Start Date" // placeholder text
+          isClearable // option to clear the selected date
+        />
             </div>
 
             {/* End Date */}
             <div className="flex flex-col">
               <label htmlFor="endDate" className="font-semibold">End Date</label>
-              <input
+              {/* <input
                 type="date"
                 id="endDate"
                 value={endDate}
                 onChange={handleEndDateChange}
                 className="border rounded px-2 py-2 mt-1 w-full"
-              />
+              /> */}
+                      <DatePicker
+          selected={endDate} // bind to the endDate state
+          onChange={handleEndDateChange} // update endDate when changed
+          dateFormat="dd-MMM-yyyy" // display date in a readable format
+          showYearDropdown
+          yearDropdownItemNumber={25}
+          scrollableYearDropdown
+          className="border rounded px-2 py-2 mt-1 w-full" // styling
+          placeholderText="Select End Date" // placeholder text
+          isClearable // option to clear the selected date
+        />
             </div>
 
             {/* Duration */}
