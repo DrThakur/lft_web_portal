@@ -168,99 +168,99 @@ const PurchaseOrder = () => {
   //   e.target.blur(); // Remove focus to hide virtual keyboard on mobile devices
   //   e.target.focus(); // Focus to open the date picker
   // };
-    // Handle form submission
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // Handle form submission here (e.g., send data to the server)
-      console.log("Form Submitted", { location, projectType, startDate, endDate });
-    };
-  
-    // Handle location selection
-    const handleSelectLocation = (event) => {
-      setLocation(event.target.value);
-    };
-  
-    // Handle project type selection
-    const handleSelectProjectType = (event) => {
-      setProjectType(event.target.value);
-    };
-  
-// Handle start date change
-const handleStartDateChange = (date) => {
-  setStartDate(date);
-  setError("");
-  
-  // If either date is empty, reset the duration
-  if (!date || !endDate) {
-    setDuration(null);
-  } else {
-    calculateDuration(date, endDate);
-  }
-};
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission here (e.g., send data to the server)
+    console.log("Form Submitted", { location, projectType, startDate, endDate });
+  };
 
-// Handle end date change
-const handleEndDateChange = (date) => {
-  if (startDate && date <= startDate) {
-    setError("End date must be greater than start date");
-  } else {
+  // Handle location selection
+  const handleSelectLocation = (event) => {
+    setLocation(event.target.value);
+  };
+
+  // Handle project type selection
+  const handleSelectProjectType = (event) => {
+    setProjectType(event.target.value);
+  };
+
+  // Handle start date change
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
     setError("");
-    setEndDate(date);
-    
+
     // If either date is empty, reset the duration
-    if (!startDate || !date) {
+    if (!date || !endDate) {
       setDuration(null);
     } else {
-      calculateDuration(startDate, date);
+      calculateDuration(date, endDate);
     }
-  }
-};
+  };
 
-  
-    // Calculate duration between start and end dates
-    const calculateDuration = (start, end) => {
-      if (start && end) {
-        const startDateObj = new Date(start);
-        const endDateObj = new Date(end);
-  
-        let years = endDateObj.getFullYear() - startDateObj.getFullYear();
-        let months = endDateObj.getMonth() - startDateObj.getMonth();
-        let days = endDateObj.getDate() - startDateObj.getDate();
-  
-        if (months < 0) {
-          years--;
-          months += 12;
-        }
-  
-        if (days < 0) {
-          months--;
-          const tempDate = new Date(endDateObj.getFullYear(), endDateObj.getMonth(), 0);
-          days += tempDate.getDate();
-        }
-  
-        setDuration({ years, months, days });
+  // Handle end date change
+  const handleEndDateChange = (date) => {
+    if (startDate && date <= startDate) {
+      setError("End date must be greater than start date");
+    } else {
+      setError("");
+      setEndDate(date);
+
+      // If either date is empty, reset the duration
+      if (!startDate || !date) {
+        setDuration(null);
       } else {
-        setDuration(null); // Reset duration if start or end date is not set
+        calculateDuration(startDate, date);
       }
-    };
-  
-    // Format the duration to display
-    const formatDuration = () => {
-      if (!duration) {
-        return "";
-      } else {
-        let formattedDuration = "";
-        if (duration.years > 0) {
-          formattedDuration += `${duration.years} years, `;
-        }
-        if (duration.months > 0) {
-          formattedDuration += `${duration.months} months, `;
-        }
-        if (duration.days > 0) {
-          formattedDuration += `${duration.days} days`;
-        }
-        return formattedDuration;
+    }
+  };
+
+
+  // Calculate duration between start and end dates
+  const calculateDuration = (start, end) => {
+    if (start && end) {
+      const startDateObj = new Date(start);
+      const endDateObj = new Date(end);
+
+      let years = endDateObj.getFullYear() - startDateObj.getFullYear();
+      let months = endDateObj.getMonth() - startDateObj.getMonth();
+      let days = endDateObj.getDate() - startDateObj.getDate();
+
+      if (months < 0) {
+        years--;
+        months += 12;
       }
-    };
+
+      if (days < 0) {
+        months--;
+        const tempDate = new Date(endDateObj.getFullYear(), endDateObj.getMonth(), 0);
+        days += tempDate.getDate();
+      }
+
+      setDuration({ years, months, days });
+    } else {
+      setDuration(null); // Reset duration if start or end date is not set
+    }
+  };
+
+  // Format the duration to display
+  const formatDuration = () => {
+    if (!duration) {
+      return "";
+    } else {
+      let formattedDuration = "";
+      if (duration.years > 0) {
+        formattedDuration += `${duration.years} years, `;
+      }
+      if (duration.months > 0) {
+        formattedDuration += `${duration.months} months, `;
+      }
+      if (duration.days > 0) {
+        formattedDuration += `${duration.days} days`;
+      }
+      return formattedDuration;
+    }
+  };
 
   const onUpload = () => {
     toast.current.show({
@@ -536,17 +536,17 @@ const handleEndDateChange = (date) => {
                 onChange={handleStartDateChange}
                 className="border rounded px-2 py-2 mt-1 w-full"
               /> */}
-               <DatePicker
-          selected={startDate} // bind to the startDate state
-          onChange={handleStartDateChange} // update startDate when changed
-          dateFormat="dd-MMM-yyyy" // display date in a readable format
-          showYearDropdown
-          yearDropdownItemNumber={25}
-          scrollableYearDropdown
-          className="border rounded px-2 py-2 mt-1 w-full" // styling
-          placeholderText="Select Start Date" // placeholder text
-          isClearable // option to clear the selected date
-        />
+              <DatePicker
+                selected={startDate} // bind to the startDate state
+                onChange={handleStartDateChange} // update startDate when changed
+                dateFormat="dd-MMM-yyyy" // display date in a readable format
+                showYearDropdown
+                yearDropdownItemNumber={25}
+                scrollableYearDropdown
+                className="border rounded px-2 py-2 mt-1 w-full" // styling
+                placeholderText="Select Start Date" // placeholder text
+                isClearable={startDate !== ""}
+              />
             </div>
 
             {/* End Date */}
@@ -559,17 +559,17 @@ const handleEndDateChange = (date) => {
                 onChange={handleEndDateChange}
                 className="border rounded px-2 py-2 mt-1 w-full"
               /> */}
-                      <DatePicker
-          selected={endDate} // bind to the endDate state
-          onChange={handleEndDateChange} // update endDate when changed
-          dateFormat="dd-MMM-yyyy" // display date in a readable format
-          showYearDropdown
-          yearDropdownItemNumber={25}
-          scrollableYearDropdown
-          className="border rounded px-2 py-2 mt-1 w-full" // styling
-          placeholderText="Select End Date" // placeholder text
-          isClearable // option to clear the selected date
-        />
+              <DatePicker
+                selected={endDate} // bind to the endDate state
+                onChange={handleEndDateChange} // update endDate when changed
+                dateFormat="dd-MMM-yyyy" // display date in a readable format
+                showYearDropdown
+                yearDropdownItemNumber={25}
+                scrollableYearDropdown
+                className="border rounded px-2 py-2 mt-1 w-full" // styling
+                placeholderText="Select End Date" // placeholder text
+                isClearable={endDate !== ""}
+              />
             </div>
 
             {/* Duration */}
