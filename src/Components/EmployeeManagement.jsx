@@ -550,9 +550,12 @@ const EmployeeManagement = () => {
   const header = (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 overflow-y-auto">
       {/* Left: Header */}
-      <h4 className="m-0 w-full md:w-auto text-center md:text-left">
-        HR Department - {getEmployeeCountText()}
-      </h4>
+
+<h4 className="m-0 w-full md:w-auto text-center md:text-left" style={{ display: 'table', width: '100%', height: '100%' }}>
+  <span style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+    HR Department - {getEmployeeCountText()}
+  </span>
+</h4>
 
       {/* Middle: Search Input */}
       <span className="p-input-icon-left w-full md:w-auto">
