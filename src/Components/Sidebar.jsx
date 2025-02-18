@@ -1122,7 +1122,6 @@ export default Sidebar;
 
 
 
-
 // import React, { useEffect, useState } from "react";
 // import "./Sidebar.css"; // Import your CSS file for styling
 // import { LuLayoutDashboard } from "react-icons/lu";
@@ -1177,19 +1176,17 @@ export default Sidebar;
 //   const [selectedMainItem, setSelectedMainItem] = useState("Dashboard"); // State to track selected main item
 //   const [selectedMenuItem, setSelectedMenuItem] = useState("");
 //   const [showSubmenu, setShowSubmenu] = useState(false);
-//   const { activeRightSidebar, setActiveRightSidebar } = useStateContext();
+//   const { activeRightSidebar, setActiveRightSidebar } = useStateContext(); // Fetching context values
 //   const navigate = useNavigate();
-// const location = useLocation(); // Hook to track location changes
+//   const location = useLocation(); // Hook to track location changes
 
 //   // Function to handle click on main items
 //   const handleMainItemClick = (mainItem) => {
 //     setSelectedMainItem(mainItem);
-//     setActiveRightSidebar(true);
+//     setActiveRightSidebar(true);  // Trigger sidebar to open on main item click
 //     if (mainItem === "Dashboard") {
 //       navigate(`/dashboard`);
-//     } else if (mainItem === "Document Center") {
-//       navigate(`/document-center`);
-//     } else if (mainItem === "Helpdesk") {
+//     }  else if (mainItem === "Helpdesk") {
 //       navigate(`/helpdesk`);
 //     }
 //     // Perform any other actions upon main item click
@@ -1197,10 +1194,64 @@ export default Sidebar;
 
 //   // useEffect hook to close the sidebar on route change
 //   useEffect(() => {
+//     // This will run after the route changes and closes the sidebar
 //     if (activeRightSidebar) {
-//       closeRightSidebar(); // Close the sidebar after the page navigation
+//       closeRightSidebar();
 //     }
-//   }, [location]);  // This will trigger whenever the route changes
+
+//     // Set the active state for main items based on the current route
+//     const currentPath = location.pathname;
+
+//     // Manage selectedMainItem state based on the current path
+//     if (currentPath === "/dashboard") {
+//       setSelectedMainItem("Dashboard");
+//     }
+//     // else if (currentPath === "/document-center") {
+//     //   setSelectedMainItem("Document Center");
+//     //   setActiveRightSidebar(true); // Ensure sidebar is opened for document center
+//     // }
+//      else if (currentPath === "/helpdesk") {
+//       setSelectedMainItem("Helpdesk");
+//     }
+
+//     // Logic to set active menu item based on the current path
+//     if (currentPath.includes("/pms-dashboard")) {
+//       setSelectedMenuItem("PMS Dashboard");
+//     } else if (currentPath.includes("/all-projects")) {
+//       setSelectedMenuItem("All Projects");
+//     } else if (currentPath.includes("/create-project")) {
+//       setSelectedMenuItem("Create Project");
+//     } else if (currentPath.includes("/purchase-order")) {
+//       setSelectedMenuItem("PO Entry");
+//     } else if (currentPath.includes("/project-details")) {
+//       setSelectedMenuItem("Project Details");
+//     } else if (currentPath.includes("/project-milestones")) {
+//       setSelectedMenuItem("Project Milestones");
+//     } else if (currentPath.includes("/add-task")) {
+//       setSelectedMenuItem("Add Task");
+//     } else if (currentPath.includes("/user-profile")) {
+//       setSelectedMenuItem("My Profile");
+//     } else if (currentPath.includes("/eos-update")) {
+//       setSelectedMenuItem("EoS Update");
+//     } else if (currentPath.includes("/eos-approval")) {
+//       setSelectedMenuItem("EoS Approval");
+//     } else if (currentPath.includes("/eos-approval-hod")) {
+//       setSelectedMenuItem("EoS Approval Hod");
+//     } else if (currentPath.includes("/org-chart-page")) {
+//       setSelectedMenuItem("Organization Chart");
+//     } else if (currentPath.includes("/resource-pool")) {
+//       setSelectedMenuItem("Resource Pool");
+//     } else if (currentPath.includes("/employee-management")) {
+//       setSelectedMenuItem("Employee Management");
+//     } else if (currentPath.includes("/final-eos")) {
+//       setSelectedMenuItem("EoS");
+//     } else if (currentPath.includes("/hr-dashboard")) {
+//       setSelectedMenuItem("HR Dashboard");
+//     }
+//     else if (currentPath.includes("/all-documents")) {
+//       setSelectedMenuItem("All Documents");
+//     }
+//   }, [location]); // Depend on location change for updating the state
 
 //   // Function to handle click on menu items
 //   const handleMenuItemClick = (menuItem) => {
@@ -1239,8 +1290,9 @@ export default Sidebar;
 //     } else if (menuItem === "HR Dashboard") {
 //       navigate("/hr-dashboard");
 //     }
-
-//     // Perform any other actions upon main item click
+//       else if (menuItem === "All Documents") {
+//       navigate("/all-documents");
+//     }
 //   };
 
 //   // Function to handle submenu visibility
@@ -1248,21 +1300,27 @@ export default Sidebar;
 //     setShowSubmenu(status);
 //   };
 
-//   const closeRightSidebar = (mainItem) => {
-//     setSelectedMainItem(mainItem);
-//     setActiveRightSidebar(!activeRightSidebar);
+//   const closeRightSidebar = () => {
+//     setActiveRightSidebar(false); // Close the sidebar after the page navigation
 //   };
 
-//   if (
-//     selectedMainItem === "Dashboard" ||
-//     selectedMainItem === "Admin" ||
-//     selectedMainItem === "Learning & Developement" ||
-//     selectedMainItem === "Helpdesk"
-//   ) {
-//     // If selectedMainItem is "Dashboard", set activeRightSidebar to false
-//     setActiveRightSidebar(false);
-//   }
-
+//   // Logic to determine sidebar state based on the route and selected item
+//   useEffect(() => {
+//     if (
+//       selectedMainItem === "Dashboard" ||
+//       selectedMainItem === "Admin" ||
+//       selectedMainItem === "Learning & Developement" ||
+//       selectedMainItem === "Helpdesk"
+//     ) {
+//       // If selectedMainItem is "Dashboard", set activeRightSidebar to false
+//       setActiveRightSidebar(false);
+//     }
+//     // else if (selectedMainItem === "Document Center") {
+//     //   // Don't close the sidebar for Document Center
+//     //   setActiveRightSidebar(true);
+//     // }
+//   }, [selectedMainItem]);
+  
 //   // useEffect(() => {
 //   //   if (
 //   //     selectedMainItem === "Dashboard" ||
@@ -1274,6 +1332,8 @@ export default Sidebar;
 //   //   }
 //   // }, [selectedMainItem, setActiveRightSidebar]);
 
+
+  
 //   return (
 //     <div className="app">
 //       {/* Left Column */}
@@ -1800,6 +1860,7 @@ export default Sidebar;
 //                 </div>
 //               </div>
 //             )}
+            
 //             {selectedMainItem === "Document Center" && (
 //               <div className="right-sidebar-item">
 //                 {/* Sub-items for Finance Ops */}
