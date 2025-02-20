@@ -26,14 +26,14 @@ const UserProfilePage = () => {
     let newMarginLeft;
 
     // Handle screen widths based on breakpoints
-    if (screenWidth >= 320 && screenWidth <= 639) {
+    if (screenWidth >= 320 && screenWidth <= 767) {
       // For small screens, calculate margin based on dynamic logic
       const decrement = Math.floor((screenWidth - 320) / 1);
-      newMarginLeft = -120 - decrement;
-    } else if (screenWidth >= 640 ) {
+      newMarginLeft = -110 - decrement;
+    } else if (screenWidth >= 768 ) {
       // For medium screens (md), apply the fixed margin
-      const decrement = Math.floor((screenWidth - 640) / 2);
-      newMarginLeft = -160 - decrement;
+      const decrement = Math.floor((screenWidth - 768) / 2);
+      newMarginLeft = -220 - decrement;
     } 
     // Update margin-left state
     setMarginLeft(newMarginLeft);
@@ -427,7 +427,7 @@ const UserProfilePage = () => {
                   </button>
                 </div>
               </div>
-              <div className="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="profile1 personalInformation border shadow-lg rounded  p-4 sm:px-8 min-h-96 max-h-96">
                   <div className="tableInformation">
                     <div className="flex flex-row justify-between items-start ">
@@ -643,7 +643,7 @@ const UserProfilePage = () => {
               </div>
                */}
 
-              <div className="educationexperience grid grid-cols-1 sm:grid-cols-2  gap-4 mt-4 w-full mx-auto">
+              <div className="educationexperience grid grid-cols-1 md:grid-cols-2  gap-4 mt-4 w-full mx-auto">
                 <div className="education border shadow-lg rounded p-4 sm:px-8 flex-1 min-h-96 max-h-96">
                   <div className="educationInformation flex flex-col">
                     <div className="flex flex-row justify-between items-start">
