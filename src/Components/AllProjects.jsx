@@ -1122,7 +1122,7 @@ const AllProjects = () => {
           />
           {product && (
             <span className="text-sm sm:text-base">
-              Are you sure you want to delete the selected products?
+              Are you sure you want to delete the selected projects?
               </span>
           )}
         </div>
