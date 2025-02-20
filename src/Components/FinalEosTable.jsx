@@ -471,34 +471,42 @@ const FinalEosTable = () => {
   );
   const deleteProductDialogFooter = (
     <React.Fragment>
+      <div className="flex justify-end space-x-3 p-2">
       <Button
         label="No"
         icon="pi pi-times"
         outlined
         onClick={hideDeleteProductDialog}
+        className="flex justify-center"
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         severity="danger"
         onClick={deleteProduct}
+        className="flex justify-center"
       />
+      </div>
     </React.Fragment>
   );
   const deleteProductsDialogFooter = (
     <React.Fragment>
+      <div className="flex justify-end space-x-3 p-2">
       <Button
         label="No"
         icon="pi pi-times"
         outlined
         onClick={hideDeleteProductsDialog}
+        className="flex justify-center"
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         severity="danger"
         onClick={deleteSelectedProducts}
+        className="flex justify-center"
       />
+      </div>
     </React.Fragment>
   );
 
@@ -1081,6 +1089,7 @@ const FinalEosTable = () => {
         modal
         footer={deleteProductDialogFooter}
         onHide={hideDeleteProductDialog}
+        className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
       >
         <div className="confirmation-content">
           <i
@@ -1103,6 +1112,7 @@ const FinalEosTable = () => {
         modal
         footer={deleteProductsDialogFooter}
         onHide={hideDeleteProductsDialog}
+        className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
       >
         <div className="confirmation-content">
           <i

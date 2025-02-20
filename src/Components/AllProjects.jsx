@@ -753,36 +753,42 @@ const AllProjects = () => {
   );
   const deleteProjectDialogFooter = (
     <React.Fragment>
+      <div className="flex justify-end space-x-3 p-2">
       <Button
         label="No"
         icon="pi pi-times"
         outlined
         onClick={hideDeleteProjectDialog}
-        className="rounded p-2 px-6  text-blue-300 border border-blue-300 mr-2"
+        className="flex justify-center"
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         severity="danger"
         onClick={deleteProject}
-        className="border rounded p-2 px-6 bg-red-500 text-white ml-2"
+        className="flex justify-center"
       />
+      </div>
     </React.Fragment>
   );
   const deleteProductsDialogFooter = (
     <React.Fragment>
+      <div className="flex justify-end space-x-3 p-2">
       <Button
         label="No"
         icon="pi pi-times"
         outlined
         onClick={hideDeleteProductsDialog}
+        className="flex justify-center"
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         severity="danger"
         onClick={deleteSelectedProducts}
+        className="flex justify-center"
       />
+      </div>
     </React.Fragment>
   );
 
@@ -1078,18 +1084,18 @@ const AllProjects = () => {
         modal
         footer={deleteProjectDialogFooter}
         onHide={hideDeleteProjectDialog}
+        className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
       >
-        <div className="confirmation-content">
-          <i
-            className="pi pi-exclamation-triangle mr-3"
-            style={{ fontSize: "2rem" }}
-          />
-          {project && (
-            <span>
-              Are you sure you want to delete <b>{project.projectName}</b>?
-            </span>
-          )}
-        </div>
+         <div className="confirmation-content flex items-center">
+    <i
+      className="pi pi-exclamation-triangle mr-3 text-2xl"
+    />
+    {project && (
+      <span className="text-sm sm:text-base">
+        Are you sure you want to delete <b>{project.projectName}</b>?
+      </span>
+    )}
+  </div>
       </Dialog>
 
       <Dialog
@@ -1100,6 +1106,7 @@ const AllProjects = () => {
         modal
         footer={deleteProductsDialogFooter}
         onHide={hideDeleteProductsDialog}
+        className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
       >
         <div className="confirmation-content">
           <i
@@ -1107,7 +1114,9 @@ const AllProjects = () => {
             style={{ fontSize: "2rem" }}
           />
           {product && (
-            <span>Are you sure you want to delete the selected products?</span>
+            <span className="text-sm sm:text-base">
+              Are you sure you want to delete the selected products?
+              </span>
           )}
         </div>
       </Dialog>

@@ -551,11 +551,11 @@ const EmployeeManagement = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 overflow-y-auto">
       {/* Left: Header */}
 
-<h4 className="m-0 w-full md:w-auto text-center md:text-left" style={{ display: 'table', width: '100%', height: '100%' }}>
-  <span style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-    HR Department - {getEmployeeCountText()}
-  </span>
-</h4>
+      <h4 className="m-0 w-full md:w-auto text-center md:text-left" style={{ display: 'table', width: '100%', height: '100%' }}>
+        <span style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+          HR Department - {getEmployeeCountText()}
+        </span>
+      </h4>
 
       {/* Middle: Search Input */}
       <span className="p-input-icon-left w-full md:w-auto">
@@ -621,34 +621,42 @@ const EmployeeManagement = () => {
   );
   const deleteProductDialogFooter = (
     <React.Fragment>
-      <Button
-        label="No"
-        icon="pi pi-times"
-        outlined
-        onClick={hideDeleteProductDialog}
-      />
-      <Button
-        label="Yes"
-        icon="pi pi-check"
-        severity="danger"
-        onClick={deleteProduct}
-      />
+      <div className="flex justify-end space-x-3 p-2">
+        <Button
+          label="No"
+          icon="pi pi-times"
+          outlined
+          onClick={hideDeleteProductDialog}
+          className="flex justify-center"
+        />
+        <Button
+          label="Yes"
+          icon="pi pi-check"
+          severity="danger"
+          onClick={deleteProduct}
+          className="flex justify-center"
+        />
+      </div>
     </React.Fragment>
   );
   const deleteProductsDialogFooter = (
     <React.Fragment>
-      <Button
-        label="No"
-        icon="pi pi-times"
-        outlined
-        onClick={hideDeleteProductsDialog}
-      />
-      <Button
-        label="Yes"
-        icon="pi pi-check"
-        severity="danger"
-        onClick={deleteSelectedProducts}
-      />
+      <div className="flex justify-end space-x-3 p-2">
+        <Button
+          label="No"
+          icon="pi pi-times"
+          outlined
+          onClick={hideDeleteProductsDialog}
+          className="flex justify-center"
+        />
+        <Button
+          label="Yes"
+          icon="pi pi-check"
+          severity="danger"
+          onClick={deleteSelectedProducts}
+          className="flex justify-center"
+        />
+      </div>
     </React.Fragment>
   );
 
@@ -885,6 +893,7 @@ const EmployeeManagement = () => {
           modal
           footer={deleteProductDialogFooter}
           onHide={hideDeleteProductDialog}
+          className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
         >
           <div className="confirmation-content">
             <i
@@ -907,6 +916,7 @@ const EmployeeManagement = () => {
           modal
           footer={deleteProductsDialogFooter}
           onHide={hideDeleteProductsDialog}
+          className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
         >
           <div className="confirmation-content">
             <i
