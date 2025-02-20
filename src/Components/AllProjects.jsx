@@ -219,7 +219,7 @@ const AllProjects = () => {
   };
 
   const hideDeleteProductsDialog = () => {
-    setDeleteProjectsDialog(false);
+    setDeleteProductsDialog(false);
   };
 
   const saveProduct = () => {
@@ -327,7 +327,7 @@ const AllProjects = () => {
   };
 
   const deleteProject = () => {
-    let _projects = projects.filter((val) => val.id !== project.id);
+    let _projects = projects.filter((val) => val.id !== project._id);
 
     setProjects(_projects);
     setDeleteProjectDialog(false);
@@ -377,12 +377,18 @@ const AllProjects = () => {
     setDeleteProjectsDialog(true);
   };
 
-  const deleteSelectedProducts = () => {
-    let _products = products.filter((val) => !selectedProducts.includes(val));
 
-    setProducts(_products);
+  const deleteSelectedProducts = () => {
+    if (!selectedProjects || selectedProjects.length === 0) {
+      return; // Do nothing or silently return if no projects are selected
+    }
+  
+    let _projects = projects.filter((val) => !selectedProjects.includes(val));
+  
+    setProjects(_projects);
     setDeleteProductsDialog(false);
-    setSelectedProducts(null);
+    setSelectedProjects([]); // Clear selected projects after deletion
+  
     toast.current.show({
       severity: "success",
       summary: "Successful",
@@ -390,6 +396,7 @@ const AllProjects = () => {
       life: 3000,
     });
   };
+  
 
   const deleteSelectedProjects = () => {
     let _projects = projects.filter((val) => !selectedProjects.includes(val));
