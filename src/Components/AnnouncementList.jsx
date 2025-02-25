@@ -147,13 +147,7 @@ const AnnouncementList = () => {
         ref={announcementContainerRef}
         className={`${
           isWithinRange ? "max-h-60 min-h-60" : "max-h-64 min-h-64"
-        }max-h-64 overflow-y-hidden hover:overflow-y-auto transition-all duration-300
-          [&::-webkit-scrollbar]:w-2
-          [&::-webkit-scrollbar-track]:rounded-full
-          [&::-webkit-scrollbar-thumb]:rounded-full
-          [&::-webkit-scrollbar-thumb]:bg-gray-300
-          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}
+        }max-h-64 overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent`}
         style={{
           overflowX: "hidden",
           top: `-${announcementIndexRef.current * 100}%`,

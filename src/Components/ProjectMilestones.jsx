@@ -45,7 +45,7 @@ const ProjectMilestones = () => {
   // const [teams, setTeams] = useState(["Software", "Hardware", "Verification","FPGA", "QA"]);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [tasks, setTasks] = useState(null);
-  const [selectedTasks, setSelectedTasks] = useState({});
+  const [selectedTasks, setSelectedTasks] = useState(null);
   const [task, setTask] = useState(emptyTask);
   const [taskDialog, setTaskDialog] = useState(false);
   const [milestoneDialog, setMilestoneDialog] = useState(false);
@@ -533,7 +533,7 @@ const ProjectMilestones = () => {
 
   const projectOptionTemplate = (option) => {
     return (
-      <div className="flex flex-row w-full justify-center items-center gap-2">
+      <div className="flex flex-row w-full justify-start items-center gap-2">
         <span>{option.projectId}</span>
         <span>:</span>
         <span>{option.projectName}</span>
@@ -563,11 +563,11 @@ const ProjectMilestones = () => {
           valueTemplate={selectedProjectTemplate}
           itemTemplate={projectOptionTemplate}
           virtualScrollerOptions={{ itemSize: 38 }}
-          className="w-full sm:w-64 md:w-96 lg:w-64 xl:w-60 sm:ml-8 md:ml-2 lg:ml-0 mx-auto"
+          className="w-full sm:w-64 md:w-96 lg:w-64 xl:w-60 sm:ml-8 md:ml-2 lg:ml-0 "
         />
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto  mx-auto">
+      <div className="flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-4 w-full sm:w-auto  ">
         <label htmlFor="" className="font-semibold text-xl mb-2 sm:mb-0 sm:text-lg md:w-1/3 lg:w-auto">
           Project Name
         </label>
@@ -818,7 +818,7 @@ const ProjectMilestones = () => {
           severity="danger"
           className="md:w-[180px] lg:w-auto"
           onClick={confirmDeleteSelectedTasks}
-          disabled={!Object.values(selectedTasks).some(tasks => tasks.length > 0)}
+          disabled={!selectedTasks || !selectedTasks.length}
           ref={deleteTaskBtnRef}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -998,37 +998,47 @@ const ProjectMilestones = () => {
 
   const deleteTaskDialogFooter = (
     <React.Fragment>
+      <div className="flex justify-end space-x-3 p-2">
       <Button
         label="No"
         icon="pi pi-times"
         outlined
         onClick={hideDeleteTaskDialog}
+        className="flex justify-center"
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         severity="danger"
         onClick={deleteTask}
+        className="flex justify-center"
       />
+      </div>
     </React.Fragment>
   );
 
   const deleteTasksDialogFooter = (
     <React.Fragment>
-      <Button
-        label="No"
-        icon="pi pi-times"
-        outlined
-        onClick={hideDeleteTasksDialog}
-      />
-      <Button
-        label="Yes"
-        icon="pi pi-check"
-        severity="danger"
-        onClick={deleteSelectedTasks}
-      />
+      <div className="flex justify-end space-x-3 p-2">
+        <Button
+          label="No"
+          icon="pi pi-times"
+          outlined
+          onClick={hideDeleteTasksDialog}
+          className="flex justify-center"
+        />
+        <Button
+          label="Yes"
+          icon="pi pi-check"
+          severity="danger"
+          onClick={deleteSelectedTasks}
+          className="flex justify-center"
+        />
+      </div>
     </React.Fragment>
   );
+ 
+  
   const handleSelectionChange = (milestoneIndex, selected) => {
     setSelectedTasks(prev => ({
       ...prev,
@@ -1041,10 +1051,12 @@ const ProjectMilestones = () => {
       <div key={milestone.id || index} className="mb-4">
         <h3 className="rounded shadow border p-2">Milestone {index + 1}: {milestone.name}</h3>
         <DataTable
-          value={milestone.tasks}
+          
           selectionMode="checkbox"
-          selection={selectedTasks[index] || []}  // Pass selected tasks as an array for each milestone
-          onSelectionChange={(e) => handleSelectionChange(index, e.value)}  // Update selection for the specific milestone
+          value={milestone.tasks}
+          selection={selectedTasks}
+          // onSelectionChange={(e) => setSelectedTasks(prev => ({ ...prev, [index]: e.value }))}
+          onSelectionChange={(e) => setSelectedTasks(e.value)} // `e.value` will be an array of selected tasks
           dataKey="task"
           paginator
           rows={10}
@@ -1382,8 +1394,9 @@ const ProjectMilestones = () => {
             modal
             footer={deleteTaskDialogFooter}
             onHide={hideDeleteTaskDialog}
+            className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
           >
-            <div className="confirmation-content">
+            <div className="confirmation-content ">
               <i
                 className="pi pi-exclamation-triangle mr-3"
                 style={{ fontSize: "2rem" }}
@@ -1404,8 +1417,9 @@ const ProjectMilestones = () => {
             modal
             footer={deleteTasksDialogFooter}
             onHide={hideDeleteTasksDialog}
+            className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
           >
-            <div className="confirmation-content">
+            <div className="confirmation-content ">
               <i
                 className="pi pi-exclamation-triangle mr-3"
                 style={{ fontSize: "2rem" }}

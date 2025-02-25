@@ -471,34 +471,42 @@ const FinalEosTable = () => {
   );
   const deleteProductDialogFooter = (
     <React.Fragment>
+      <div className="flex justify-end space-x-3 p-2">
       <Button
         label="No"
         icon="pi pi-times"
         outlined
         onClick={hideDeleteProductDialog}
+        className="flex justify-center"
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         severity="danger"
         onClick={deleteProduct}
+        className="flex justify-center"
       />
+      </div>
     </React.Fragment>
   );
   const deleteProductsDialogFooter = (
     <React.Fragment>
+      <div className="flex justify-end space-x-3 p-2">
       <Button
         label="No"
         icon="pi pi-times"
         outlined
         onClick={hideDeleteProductsDialog}
+        className="flex justify-center"
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         severity="danger"
         onClick={deleteSelectedProducts}
+        className="flex justify-center"
       />
+      </div>
     </React.Fragment>
   );
 
@@ -661,7 +669,7 @@ const FinalEosTable = () => {
           right={rightToolbarTemplate}
         ></Toolbar>
 
-        <DataTable
+        {/* <DataTable
           ref={dt}
           value={eosData}
           selectionMode={"checkbox"}
@@ -679,6 +687,7 @@ const FinalEosTable = () => {
             currentPageReportTemplate={currentPageReportTemplate}
           globalFilter={globalFilter}
           header={header}
+          
         >
           <Column
             selectionMode="multiple"
@@ -758,7 +767,318 @@ const FinalEosTable = () => {
             }}
             style={{ textAlign: "center", minWidth: "12rem" }}
           ></Column>
-        </DataTable>
+        </DataTable> */}
+
+{/* <DataTable
+  ref={dt}
+  value={eosData}
+  selectionMode={"checkbox"}
+  selection={selectedProducts}
+  onSelectionChange={(e) => setSelectedProducts(e.value)}
+  dataKey="employee.employeeId"
+  paginator
+  rows={10}
+  rowsPerPageOptions={[5, 10, 25]}
+  removableSort
+  showGridlines
+  columnResizeMode="expand"
+  resizableColumns
+  paginatorTemplate={template}
+  currentPageReportTemplate={currentPageReportTemplate}
+  globalFilter={globalFilter}
+  header={header}
+  style={{ overflowX: 'auto' }} // Allow horizontal scroll for the entire DataTable
+>
+  <Column
+    selectionMode="multiple"
+    exportable={false}
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      minWidth: '60px',  // Ensure fixed width for the checkbox column
+    }}
+  ></Column>
+
+
+  <Column
+    field="employee.employeeId"
+    header="Employee Id"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: 0,
+      backgroundColor: "white",
+      zIndex: 1,
+      minWidth: "150px", // Fix the width for this column
+    }}
+  />
+
+  <Column
+    field="employee.fullName"
+    header="Employee Name"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: "150px",  // Set left offset based on previous column width
+      backgroundColor: "white",
+      zIndex: 2,
+      minWidth: "200px", // Fix the width for this column
+    }}
+  />
+
+  <Column
+    field="employee.status"
+    header="Status"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: "350px",  // Set left offset based on previous column width
+      backgroundColor: "white",
+      zIndex: 3,
+      minWidth: "150px", // Fix the width for this column
+    }}
+  />
+
+  <Column
+    field="employee.department"
+    header="Department"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: "500px",  // Set left offset based on previous column width
+      backgroundColor: "white",
+      zIndex: 4,
+      minWidth: "200px", // Fix the width for this column
+    }}
+  />
+
+  <Column
+    field="employee.reportingManager"
+    header="Reporting Manager"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: "700px",  // Set left offset based on previous column width
+      backgroundColor: "white",
+      zIndex: 5,
+      minWidth: "200px", // Fix the width for this column
+    }}
+  />
+
+
+  {columns.map((col) => (
+    <Column
+      key={col.field}
+      field={col.field}
+      header={col.header}
+      body={(rowData) => getOccupancyValue(rowData, col.field)}
+      headerStyle={{
+        backgroundColor: "rgb(187 247 208)",
+        textAlign: "center",
+      }}
+      style={{
+        textAlign: "center",
+        minWidth: "12rem", // Customize width for other columns as necessary
+      }}
+    />
+  ))}
+
+  <Column
+    header="Actions"
+    body={actionBodyTemplate}
+    exportable={false}
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      minWidth: "12rem", // Customize width for Actions column
+    }}
+  ></Column>
+</DataTable> */}
+
+<DataTable
+  ref={dt}
+  value={eosData}
+  selectionMode={"checkbox"}
+  selection={selectedProducts}
+  onSelectionChange={(e) => setSelectedProducts(e.value)}
+  dataKey="employee.employeeId"
+  paginator
+  rows={10}
+  rowsPerPageOptions={[5, 10, 25]}
+  removableSort
+  showGridlines
+  columnResizeMode="expand"
+  resizableColumns
+  paginatorTemplate={template}
+  currentPageReportTemplate={currentPageReportTemplate}
+  globalFilter={globalFilter}
+  header={header}
+  style={{ overflowX: 'auto' }} // Allow horizontal scroll for the entire DataTable
+>
+
+  <Column
+    selectionMode="multiple"
+    exportable={false}
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      minWidth: "60px",  // Ensure fixed width for the checkbox column
+      position: "sticky",  // Make the checkbox column sticky
+      left: 0,  // Ensure it sticks to the left side
+      backgroundColor: "white",  // Ensure no overlapping with data columns
+      zIndex: 10,  // Ensure it's above other columns
+      borderRight: '1px solid #ddd', // Add right border for gridlines
+    }}
+  ></Column>
+
+
+  <Column
+    field="employee.employeeId"
+    header="Employee Id"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: "60px",  // Add space for the checkbox column
+      backgroundColor: "white",
+      zIndex: 1,
+      minWidth: "150px", // Fix the width for this column
+    }}
+  />
+
+  <Column
+    field="employee.fullName"
+    header="Employee Name"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: "210px",  // Set left offset based on the checkbox column and previous column width
+      backgroundColor: "white",
+      zIndex: 2,
+      minWidth: "200px", // Fix the width for this column
+    }}
+  />
+
+  <Column
+    field="employee.status"
+    header="Status"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: "455px",  // Set left offset based on previous column width
+      backgroundColor: "white",
+      zIndex: 3,
+      minWidth: "150px", // Fix the width for this column
+    }}
+  />
+
+  <Column
+    field="employee.department"
+    header="Department"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: "605px",  // Set left offset based on previous column width
+      backgroundColor: "white",
+      zIndex: 4,
+      minWidth: "200px", // Fix the width for this column
+    }}
+  />
+
+  <Column
+    field="employee.reportingManager"
+    header="Reporting Manager"
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      position: "sticky",
+      left: "805px",  // Set left offset based on previous column width
+      backgroundColor: "white",
+      zIndex: 5,
+      minWidth: "200px", // Fix the width for this column
+    }}
+  />
+
+
+  {columns.map((col) => (
+    <Column
+      key={col.field}
+      field={col.field}
+      header={col.header}
+      body={(rowData) => getOccupancyValue(rowData, col.field)}
+      headerStyle={{
+        backgroundColor: "rgb(187 247 208)",
+        textAlign: "center",
+      }}
+      style={{
+        textAlign: "center",
+        minWidth: "12rem", // Customize width for other columns as necessary
+      }}
+    />
+  ))}
+
+  <Column
+    header="Actions"
+    body={actionBodyTemplate}
+    exportable={false}
+    headerStyle={{
+      backgroundColor: "rgb(187 247 208)",
+      textAlign: "center",
+    }}
+    style={{
+      textAlign: "center",
+      minWidth: "12rem", // Customize width for Actions column
+    }}
+  ></Column>
+</DataTable>
+
       </div>
 
       <Dialog
@@ -769,6 +1089,7 @@ const FinalEosTable = () => {
         modal
         footer={deleteProductDialogFooter}
         onHide={hideDeleteProductDialog}
+        className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
       >
         <div className="confirmation-content">
           <i
@@ -791,6 +1112,7 @@ const FinalEosTable = () => {
         modal
         footer={deleteProductsDialogFooter}
         onHide={hideDeleteProductsDialog}
+        className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
       >
         <div className="confirmation-content">
           <i

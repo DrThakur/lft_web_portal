@@ -22,7 +22,7 @@ const AwardCard = ({
   }, []);
 
   return (
-    <div className="border-pink-300 border-2 flex flex-col md:flex-row w-full h-96 md:h-[455px] bg-pink-200 rounded-lg shadow-lg overflow-hidden">
+    <div className="flex flex-col md:flex-row w-full h-96 md:h-[455px] bg-white rounded-lg shadow-lg overflow-hidden">
 
       {/* Left Section (Image on small screens, User Info on larger screens) */}
       {imagePosition === "left" && (
@@ -104,3 +104,4 @@ const AwardCard = ({
 };
 
 export default AwardCard;
+

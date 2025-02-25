@@ -19,6 +19,41 @@ const UserProfilePage = () => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
+  const [marginLeft, setMarginLeft] = useState(-120); // Default margin-left is -160px
+  // Function to update margin-left based on screen width
+  const updateMarginLeft = () => {
+    const screenWidth = window.innerWidth;
+    let newMarginLeft;
+
+    // Handle screen widths based on breakpoints
+    if (screenWidth >= 320 && screenWidth <= 767) {
+      // For small screens, calculate margin based on dynamic logic
+      const decrement = Math.floor((screenWidth - 320) / 1);
+      newMarginLeft = -110 - decrement;
+    } else if (screenWidth >= 768 ) {
+      // For medium screens (md), apply the fixed margin
+      const decrement = Math.floor((screenWidth - 768) / 2);
+      newMarginLeft = -220 - decrement;
+    } 
+    // Update margin-left state
+    setMarginLeft(newMarginLeft);
+  };
+
+  // Update margin when screen size changes
+  useEffect(() => {
+    // Call the function on initial load
+    updateMarginLeft();
+
+    // Add resize event listener
+    window.addEventListener('resize', updateMarginLeft);
+
+    // Cleanup event listener when component unmounts
+    return () => {
+      window.removeEventListener('resize', updateMarginLeft);
+    };
+  }, []); // Empty dependency array ensures this runs once on mount
+
+
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -392,7 +427,7 @@ const UserProfilePage = () => {
                   </button>
                 </div>
               </div>
-              <div className="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="profile1 personalInformation border shadow-lg rounded  p-4 sm:px-8 min-h-96 max-h-96">
                   <div className="tableInformation">
                     <div className="flex flex-row justify-between items-start ">
@@ -608,7 +643,7 @@ const UserProfilePage = () => {
               </div>
                */}
 
-              <div className="educationexperience flex flex-col sm:flex-row gap-4 mt-4 w-full mx-auto">
+              <div className="educationexperience grid grid-cols-1 md:grid-cols-2  gap-4 mt-4 w-full mx-auto">
                 <div className="education border shadow-lg rounded p-4 sm:px-8 flex-1 min-h-96 max-h-96">
                   <div className="educationInformation flex flex-col">
                     <div className="flex flex-row justify-between items-start">
@@ -619,9 +654,13 @@ const UserProfilePage = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="educationTimeline -ml-40 xs:-ml-[345px] sm:-ml-[164px] md:-ml-[235px] lg:-ml-[350px] xl:-ml-[490px] 2xl:-ml-[610px] mt-4 ">
+                    {/* <div className="educationTimeline -ml-40 xs:-ml-[345px] sm:-ml-[164px] md:-ml-[235px] lg:-ml-[350px] xl:-ml-[490px] 2xl:-ml-[610px] mt-4 ">
                       <Timeline value={events} content={customizedContent}  />
-                    </div>
+                    </div> */}
+
+<div className="educationTimeline mt-4" style={{ marginLeft: `${marginLeft}px` }}>
+      <Timeline value={events} content={customizedContent} />
+    </div>
                   </div>
                 </div>
 
@@ -635,7 +674,7 @@ const UserProfilePage = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="educationTimeline -ml-40 xs:-ml-[345px] sm:-ml-[164px] md:-ml-[235px] lg:-ml-[350px] xl:-ml-[490px] 2xl:-ml-[610px] mt-4">
+                    <div className="educationTimeline mt-4" style={{ marginLeft: `${marginLeft}px` }}>
                       <Timeline
                         value={experienceEvents}
                         content={customizedContentExperience}

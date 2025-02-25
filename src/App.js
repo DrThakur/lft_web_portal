@@ -333,7 +333,8 @@ const App = () => {
                 <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
                 <Route path="/eos-approval-hod" element={<EosApprovalHod />} />
                 <Route path="/eos-approval-hod/:year/:month" element={<EosApprovalByMonth />} />
-                <Route path="/document-center" element={<DocumentCenter />} />
+                {/* <Route path="/document-center" element={<DocumentCenter />} /> */}
+                <Route path="/all-documents" element={<DocumentCenter />} />
                 <Route path="/org-chart" element={<OragnizationChart />} />
                 <Route path="/org-chart-page" element={<OrganizationChartPage />} />
                 <Route path="/resource-pool" element={<ResourcePool />} />

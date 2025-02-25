@@ -116,13 +116,8 @@ const BirthdaysAndAnniversaries = () => {
 
       <div className={`${
           isWithinRange ? "max-h-60 min-h-60" : "max-h-64 min-h-64"
-        }space-y-4  overflow-y-auto overflow-x-hidden lg:overflow-x-hidden sm:hover:overflow-y-auto sm:hover:overflow-x-auto transition-all duration-300 
-        [&::-webkit-scrollbar]:w-2
-        [&::-webkit-scrollbar-track]:rounded-full 
-        [&::-webkit-scrollbar-thumb]:rounded-full 
-        [&::-webkit-scrollbar-thumb]:bg-gray-300 
-        dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-        dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500`}>
+        }space-y-4  overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto  scrollbar-thin scrollbar-thumb-gray-300 
+        scrollbar-track-transparent overflow-x-auto lg:overflow-x-hidden lg:hover:overflow-x-auto`}>
         <ul className="space-y-1 p-1">
           {displayedDates.map(([date, events]) => (
             <li key={date}>

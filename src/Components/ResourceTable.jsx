@@ -57,64 +57,64 @@ const ResourceTable = ({
   const toast = useRef(null);
   const dt = useRef(null);
 
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  
-    // Update the screen width on window resize
-    useEffect(() => {
-      const handleResize = () => setScreenWidth(window.innerWidth);
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  // Update the screen width on window resize
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
 
 
-     const [scrollHeight, setScrollHeight] = useState('600px');
-    
-    
-      useEffect(() => {
-        const handleResize = () => {
-          // Update the scrollHeight dynamically based on the window height or container
-          const newHeight = window.innerHeight - 355; // adjust this as per your layout
-          setScrollHeight(`${newHeight}px`);
-        };
-    
-        // Listen for window resize events
-        window.addEventListener('resize', handleResize);
-    
-        // Call the handler immediately to set the initial height
-        handleResize();
-    
-        // Cleanup the event listener
-        return () => {
-          window.removeEventListener('resize', handleResize);
-        };
-      }, []); // Empty dependency array ensures this effect runs once on mount
-    
-      const [screenSize, setScreenSize] = useState(window.innerWidth);
-      useEffect(() => {
-        const handleResize = () => setScreenSize(window.innerWidth);
-        window.addEventListener("resize", handleResize);
-        handleResize(); // Set the screen size on initial load
-        return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
-      }, []);
-    
+  const [scrollHeight, setScrollHeight] = useState('600px');
 
-      let template;
 
-      if (screenSize < 468) {
-        template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
-      } else if (screenSize >= 468 && screenSize < 768) {
-        template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
-      } else {
-        template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
-      }
-    
-    
-      const currentPageReportTemplate = screenSize < 768 ? (
-        "{first}-{last} of {totalRecords}"
-      ) : (
-        "Showing {first} to {last} of {totalRecords} employees"
-      );
+  useEffect(() => {
+    const handleResize = () => {
+      // Update the scrollHeight dynamically based on the window height or container
+      const newHeight = window.innerHeight - 355; // adjust this as per your layout
+      setScrollHeight(`${newHeight}px`);
+    };
+
+    // Listen for window resize events
+    window.addEventListener('resize', handleResize);
+
+    // Call the handler immediately to set the initial height
+    handleResize();
+
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array ensures this effect runs once on mount
+
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Set the screen size on initial load
+    return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+  }, []);
+
+
+  let template;
+
+  if (screenSize < 468) {
+    template = "PrevPageLink CurrentPageReport NextPageLink RowsPerPageDropdown";
+  } else if (screenSize >= 468 && screenSize < 768) {
+    template = "FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown ";
+  } else {
+    template = "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown";
+  }
+
+
+  const currentPageReportTemplate = screenSize < 768 ? (
+    "{first}-{last} of {totalRecords}"
+  ) : (
+    "Showing {first} to {last} of {totalRecords} employees"
+  );
 
 
   useEffect(() => {
@@ -288,23 +288,24 @@ const ResourceTable = ({
 
   const leftToolbarTemplate = () => {
     if (screenWidth < 527) {
-    return (
-      <div className="flex flex-wrap gap-2">
-        <Button
-          
-          icon="pi pi-plus"
-          severity="success"
-          onClick={openNew}
-        />
-        <Button
-          
-          icon="pi pi-trash"
-          severity="danger"
-          onClick={confirmDeleteSelected}
-          disabled={!selectedProducts || !selectedProducts.length}
-        />
-      </div>
-    );} else {
+      return (
+        <div className="flex flex-wrap gap-2">
+          <Button
+
+            icon="pi pi-plus"
+            severity="success"
+            onClick={openNew}
+          />
+          <Button
+
+            icon="pi pi-trash"
+            severity="danger"
+            onClick={confirmDeleteSelected}
+            disabled={!selectedProducts || !selectedProducts.length}
+          />
+        </div>
+      );
+    } else {
       return (
         <div className="flex flex-wrap gap-2">
           <Button
@@ -327,14 +328,15 @@ const ResourceTable = ({
 
   const rightToolbarTemplate = () => {
     if (screenWidth < 527) {
-    return (
-      <Button
-        
-        icon="pi pi-upload"
-        className="p-button-help"
-        onClick={exportCSV}
-      />
-    );} else {
+      return (
+        <Button
+
+          icon="pi pi-upload"
+          className="p-button-help"
+          onClick={exportCSV}
+        />
+      );
+    } else {
       return (
         <Button
           label="Export"
@@ -420,10 +422,10 @@ const ResourceTable = ({
     const totalOccupancy = rowData.projects.reduce((acc, project) => {
       return acc + project.occupancy;
     }, 0);
-  
+
     // Calculate the available bandwidth
     const availableBandwidth = 100 - totalOccupancy;
-  
+
     return <strong>{availableBandwidth.toFixed(2)} %</strong>;
   };
 
@@ -431,20 +433,20 @@ const ResourceTable = ({
     return (
       <React.Fragment>
         <div className="flex justify-center items-center gap-4">
-        <Button
-          icon="pi pi-pencil"
-          rounded
-          outlined
-          className="mr-2"
-          onClick={() => editProduct(rowData)}
-        />
-        <Button
-          icon="pi pi-trash"
-          rounded
-          outlined
-          severity="danger"
-          onClick={() => confirmDeleteProduct(rowData)}
-        />
+          <Button
+            icon="pi pi-pencil"
+            rounded
+            outlined
+            className="mr-2"
+            onClick={() => editProduct(rowData)}
+          />
+          <Button
+            icon="pi pi-trash"
+            rounded
+            outlined
+            severity="danger"
+            onClick={() => confirmDeleteProduct(rowData)}
+          />
         </div>
       </React.Fragment>
     );
@@ -493,7 +495,7 @@ const ResourceTable = ({
       <h4 className="m-0 w-full md:w-auto text-center md:text-left">
         {title} Department ({employees.length} Active Employees)
       </h4>
-      
+
       {/* Search Input */}
       <span className="p-input-icon-left w-full md:w-auto  ">
         <i className="pi pi-search" />
@@ -504,7 +506,7 @@ const ResourceTable = ({
           className="w-full mx-auto md:mx-0"
         />
       </span>
-  
+
       {/* Dropdowns - Wrapping for small screens */}
       <div className="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-start ">
         <Dropdown
@@ -534,7 +536,7 @@ const ResourceTable = ({
       </div>
     </div>
   );
-  
+
   const productDialogFooter = (
     <React.Fragment>
       <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
@@ -543,34 +545,42 @@ const ResourceTable = ({
   );
   const deleteProductDialogFooter = (
     <React.Fragment>
+      <div className="flex justify-end space-x-3 p-2">
       <Button
         label="No"
         icon="pi pi-times"
         outlined
         onClick={hideDeleteProductDialog}
+        className="flex justify-center"
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         severity="danger"
         onClick={deleteProduct}
+        className="flex justify-center"
       />
+      </div>
     </React.Fragment>
   );
   const deleteProductsDialogFooter = (
     <React.Fragment>
+      <div className="flex justify-end space-x-3 p-2">
       <Button
         label="No"
         icon="pi pi-times"
         outlined
         onClick={hideDeleteProductsDialog}
+        className="flex justify-center"
       />
       <Button
         label="Yes"
         icon="pi pi-check"
         severity="danger"
         onClick={deleteSelectedProducts}
+        className="flex justify-center"
       />
+      </div>
     </React.Fragment>
   );
 
@@ -644,165 +654,227 @@ const ResourceTable = ({
           left={leftToolbarTemplate}
           right={rightToolbarTemplate}
         ></Toolbar>
-<div className="overflow-y-auto " style={{ height: `calc(100vh - 310px)` }}>
-        <DataTable
-          ref={dt}
-          value={getFilteredEmployees()}
-          selectionMode={"checkbox"}
-          selection={selectedProducts}
-          onSelectionChange={(e) => setSelectedProducts(e.value)}
-          dataKey="employeeId"
-          paginator
-          rows={pageSize}
-          rowsPerPageOptions={[5, 10, 25]}
-          removableSort
-          scrollable
-          scrollHeight={scrollHeight}
-          //   totalRecords={totalPages * pageSize}
-          //   onPage={handlePageChange}
-          //   onRowToggle={handlePageSizeChange}
-          paginatorTemplate={template}
-          currentPageReportTemplate={currentPageReportTemplate}
-          globalFilter={globalFilter}
-          header={header}
+        <div className="overflow-y-auto " style={{ height: `calc(100vh - 310px)` }}>
+          <DataTable
+            ref={dt}
+            value={getFilteredEmployees()}
+            selectionMode={"checkbox"}
+            selection={selectedProducts}
+            onSelectionChange={(e) => setSelectedProducts(e.value)}
+            dataKey="employeeId"
+            paginator
+            rows={pageSize}
+            rowsPerPageOptions={[5, 10, 25]}
+            removableSort
+            showGridlines
+            scrollable
+            scrollHeight={scrollHeight}
+            //   totalRecords={totalPages * pageSize}
+            //   onPage={handlePageChange}
+            //   onRowToggle={handlePageSizeChange}
+            paginatorTemplate={template}
+            currentPageReportTemplate={currentPageReportTemplate}
+            globalFilter={globalFilter}
+            header={header}
+
+          >
+            <Column selectionMode="multiple" exportable={false} headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}></Column>
+            <Column
+              field="employeeId"
+              header="Employee Id"
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="fullName"
+              header="Employee Name"
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "16rem" }}
+            ></Column>
+            <Column field="designation" header="Designation" headerStyle={{
+              backgroundColor: "rgb(187 247 208)",
+              textAlign: "center",
+            }}></Column>
+            <Column
+              field="location"
+              header="Location"
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "8rem" }}
+            ></Column>
+            <Column
+              field="status"
+              header="Status"
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "10rem" }}
+            ></Column>
+            <Column
+              field="performance"
+              header="Employee Performance"
+              body={ratingBodyTemplate}
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="projects"
+              header="Projects"
+              body={projectBodyTemplate}
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="role"
+              header="Project Role"
+              body={statusBodyTemplate}
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="duration"
+              header="Duration"
+              body={statusBodyTemplate}
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="allocatedBandWidth"
+              header="Allocated Bandwidth"
+              body={allocatedBandwidthBodyTemplate}
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="availableBandWidth"
+              header="Available Bandwidth"
+              body={availableBandWidthBodyTemplate}
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="techSkills"
+              header="Tech Skills"
+              body={techSkillsBodyTemplate}
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+            <Column
+              field="remarks"
+              header="Remarks"
+              body={statusBodyTemplate}
+              sortable
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+              editor={(options) => cellEditor(options)}
+              onCellEditComplete={onCellEditComplete}
+            ></Column>
+            <Column
+              field="action"
+              header="Actions"
+              alignHeader={"center"}
+              body={actionBodyTemplate}
+              exportable={false}
+              headerStyle={{
+                backgroundColor: "rgb(187 247 208)",
+                textAlign: "center",
+              }}
+              style={{ minWidth: "12rem" }}
+            ></Column>
+          </DataTable>
+        </div>
+
+        <Dialog
+          visible={deleteProductDialog}
+          style={{ width: "32rem" }}
+          breakpoints={{ "960px": "75vw", "641px": "90vw" }}
+          header="Confirm"
+          modal
+          footer={deleteProductDialogFooter}
+          onHide={hideDeleteProductDialog}
+          className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
         >
-          <Column selectionMode="multiple" exportable={false}></Column>
-          <Column
-            field="employeeId"
-            header="Employee Id"
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="fullName"
-            header="Employee Name"
-            sortable
-            style={{ minWidth: "16rem" }}
-          ></Column>
-          <Column field="designation" header="Designation"></Column>
-          <Column
-            field="location"
-            header="Location"
-            sortable
-            style={{ minWidth: "8rem" }}
-          ></Column>
-          <Column
-            field="status"
-            header="Status"
-            sortable
-            style={{ minWidth: "10rem" }}
-          ></Column>
-          <Column
-            field="performance"
-            header="Employee Performance"
-            body={ratingBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="projects"
-            header="Projects"
-            body={projectBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="role"
-            header="Project Role"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="duration"
-            header="Duration"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="allocatedBandWidth"
-            header="Allocated Bandwidth"
-            body={allocatedBandwidthBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="availableBandWidth"
-            header="Available Bandwidth"
-            body={availableBandWidthBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="techSkills"
-            header="Tech Skills"
-            body={techSkillsBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-          ></Column>
-          <Column
-            field="remarks"
-            header="Remarks"
-            body={statusBodyTemplate}
-            sortable
-            style={{ minWidth: "12rem" }}
-            editor={(options) => cellEditor(options)}
-            onCellEditComplete={onCellEditComplete}
-          ></Column>
-          <Column
-          field="action"
-          header="Actions"
-          alignHeader={"center"}
-            body={actionBodyTemplate}
-            exportable={false}
-            style={{ minWidth: "12rem" }}
-          ></Column>
-        </DataTable>
+          <div className="confirmation-content">
+            <i
+              className="pi pi-exclamation-triangle mr-3"
+              style={{ fontSize: "2rem" }}
+            />
+            {product && (
+              <span>
+                Are you sure you want to delete <b>{product.name}</b>?
+              </span>
+            )}
+          </div>
+        </Dialog>
+
+        <Dialog
+          visible={deleteProductsDialog}
+          style={{ width: "32rem" }}
+          breakpoints={{ "960px": "75vw", "641px": "90vw" }}
+          header="Confirm"
+          modal
+          footer={deleteProductsDialogFooter}
+          onHide={hideDeleteProductsDialog}
+          className="max-w-[70%] md:max-w-full ml-20 md:ml-0"
+        >
+          <div className="confirmation-content">
+            <i
+              className="pi pi-exclamation-triangle mr-3"
+              style={{ fontSize: "2rem" }}
+            />
+            {product && (
+              <span>Are you sure you want to delete the selected employees?</span>
+            )}
+          </div>
+        </Dialog>
       </div>
-
-      <Dialog
-        visible={deleteProductDialog}
-        style={{ width: "32rem" }}
-        breakpoints={{ "960px": "75vw", "641px": "90vw" }}
-        header="Confirm"
-        modal
-        footer={deleteProductDialogFooter}
-        onHide={hideDeleteProductDialog}
-      >
-        <div className="confirmation-content">
-          <i
-            className="pi pi-exclamation-triangle mr-3"
-            style={{ fontSize: "2rem" }}
-          />
-          {product && (
-            <span>
-              Are you sure you want to delete <b>{product.name}</b>?
-            </span>
-          )}
-        </div>
-      </Dialog>
-
-      <Dialog
-        visible={deleteProductsDialog}
-        style={{ width: "32rem" }}
-        breakpoints={{ "960px": "75vw", "641px": "90vw" }}
-        header="Confirm"
-        modal
-        footer={deleteProductsDialogFooter}
-        onHide={hideDeleteProductsDialog}
-      >
-        <div className="confirmation-content">
-          <i
-            className="pi pi-exclamation-triangle mr-3"
-            style={{ fontSize: "2rem" }}
-          />
-          {product && (
-            <span>Are you sure you want to delete the selected employees?</span>
-          )}
-        </div>
-      </Dialog>
-    </div>
     </div>
   );
 };
