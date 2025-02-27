@@ -1889,8 +1889,8 @@ const AllProjects = () => {
           onChange={(e) => setprojectNameColumnFrozen(e.value)}
           onIcon="pi pi-lock"
           offIcon="pi pi-lock-open"
-          onLabel="ProjectName"
-          offLabel="ProjectName"
+          onLabel="Project Name"
+          offLabel="Project Name"
           className="w-full md:w-auto border-2 rounded"
         />
       )}
