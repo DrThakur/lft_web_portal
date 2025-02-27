@@ -140,7 +140,7 @@ const NewHire = () => {
   return (
     <div className="w-full h-full p-3">
       <div className="flex justify-between items-center gap-1">
-        <h3 className="font-bold text-lg">New Joinee</h3>
+        <h3 className="font-bold text-lg cursor-default">New Joinee</h3>
         <button className="bg-blue-500 hover:bg-blue-700 px-2 py-1 rounded-lg font-semibold text-white">
           View All
         </button>
@@ -160,6 +160,7 @@ const NewHire = () => {
           field="fullName"
           header="Full Name"
           body={recruitemntBodyTemplate}
+          className="cursor-default"
           style={{ width: '25%' }}
         ></Column>
         <Column field="roleAppliedFor" header="Role" className="cursor-default"  style={{ width: '15%' }}></Column>
@@ -170,6 +171,7 @@ const NewHire = () => {
           header="Action"
           alignHeader={"center"}
           body={actionBodyTemplate}
+          className="cursor-default"
           style={{ width: '15%', textAlign: "center" }}
         ></Column>
       </DataTable>
