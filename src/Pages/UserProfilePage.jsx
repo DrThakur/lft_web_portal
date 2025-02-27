@@ -398,7 +398,7 @@ const UserProfilePage = () => {
           </div>
         </div>
 
-        <div className="container2">
+        <div className="container2 ">
           <TabView>
             <TabPanel header="Profile">
               <div className="resume border rounded shadow-lg p-2 sm:p-6 w-full mx-auto mb-4 flex flex-row justify-between items-center  ">

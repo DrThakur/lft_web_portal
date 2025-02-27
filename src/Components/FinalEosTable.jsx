@@ -669,7 +669,7 @@ const FinalEosTable = () => {
           right={rightToolbarTemplate}
         ></Toolbar>
 
-        {/* <DataTable
+        <DataTable
           ref={dt}
           value={eosData}
           selectionMode={"checkbox"}
@@ -767,7 +767,7 @@ const FinalEosTable = () => {
             }}
             style={{ textAlign: "center", minWidth: "12rem" }}
           ></Column>
-        </DataTable> */}
+        </DataTable>
 
 {/* <DataTable
   ref={dt}
@@ -921,7 +921,7 @@ const FinalEosTable = () => {
   ></Column>
 </DataTable> */}
 
-<DataTable
+{/* <DataTable
   ref={dt}
   value={eosData}
   selectionMode={"checkbox"}
@@ -1077,7 +1077,7 @@ const FinalEosTable = () => {
       minWidth: "12rem", // Customize width for Actions column
     }}
   ></Column>
-</DataTable>
+</DataTable> */}
 
       </div>
 
