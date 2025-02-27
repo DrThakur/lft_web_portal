@@ -77,7 +77,7 @@ const NewHire = () => {
   const recruitemntBodyTemplate = (rowData) => {
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
-        <div className="flex flex-row items-center justify-start ">
+        <div className="flex flex-row items-center justify-start cursor-default">
           <img
             alt={rowData.profilePic}
             src={rowData.profilePic}
@@ -85,7 +85,7 @@ const NewHire = () => {
             height="40"
             className="rounded-full"
           />
-          <a href="/" className="ml-2 text-blue-500 hover:text-blue-900">
+          <a href="/" className="ml-2 text-blue-500 hover:text-blue-900 ">
             {rowData.fullName}
           </a>
         </div>
@@ -162,9 +162,9 @@ const NewHire = () => {
           body={recruitemntBodyTemplate}
           style={{ width: '25%' }}
         ></Column>
-        <Column field="roleAppliedFor" header="Role" style={{ width: '15%' }}></Column>
-        <Column field="reportingManager" header="Reporting Manager" style={{ width: '15%' }}></Column>
-        <Column field="status" header="Onboarding Status" body={statusBodyTemplate} style={{ width: '15%' }}></Column>
+        <Column field="roleAppliedFor" header="Role" className="cursor-default"  style={{ width: '15%' }}></Column>
+        <Column field="reportingManager" header="Reporting Manager" className="cursor-default"  style={{ width: '15%' }}></Column>
+        <Column field="status" header="Onboarding Status" body={statusBodyTemplate} className="cursor-default"  style={{ width: '15%' }}></Column>
         <Column
           field="action"
           header="Action"
