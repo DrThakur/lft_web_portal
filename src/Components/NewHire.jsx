@@ -85,9 +85,14 @@ const NewHire = () => {
             height="40"
             className="rounded-full"
           />
-          <a href="/" className="ml-2 text-blue-500 hover:text-blue-900 ">
+          <a
+            href="/"
+            className="ml-2 text-blue-500 hover:text-blue-900"
+            onClick={(e) => e.preventDefault()}
+          >
             {rowData.fullName}
           </a>
+
         </div>
       </div>
     );
@@ -152,9 +157,9 @@ const NewHire = () => {
         size="small"
         scrollable
         scrollHeight={scrollHeight}
-      responsiveLayout="scroll"
+        responsiveLayout="scroll"
 
-        
+
       >
         <Column
           field="fullName"
@@ -163,9 +168,9 @@ const NewHire = () => {
           className="cursor-default"
           style={{ width: '25%' }}
         ></Column>
-        <Column field="roleAppliedFor" header="Role" className="cursor-default"  style={{ width: '15%' }}></Column>
-        <Column field="reportingManager" header="Reporting Manager" className="cursor-default"  style={{ width: '15%' }}></Column>
-        <Column field="status" header="Onboarding Status" body={statusBodyTemplate} className="cursor-default"  style={{ width: '15%' }}></Column>
+        <Column field="roleAppliedFor" header="Role" className="cursor-default" style={{ width: '15%' }}></Column>
+        <Column field="reportingManager" header="Reporting Manager" className="cursor-default" style={{ width: '15%' }}></Column>
+        <Column field="status" header="Onboarding Status" body={statusBodyTemplate} className="cursor-default" style={{ width: '15%' }}></Column>
         <Column
           field="action"
           header="Action"
