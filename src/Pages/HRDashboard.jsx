@@ -20,7 +20,7 @@ const HRDashboard = () => {
       <h1 className="text-3xl font-bold mb-6">HR Dashboard</h1>
       <div
 
-        className={`h-[calc(100vh-222px)] xs:h-[calc(100vh-210px)]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5  gap-6 overflow-x-hidden  overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300 hover:-mr-3`}
+        className={`h-[calc(100vh-222px)] xs:h-[calc(100vh-210px)]  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  gap-6 overflow-x-hidden  overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300 hover:-mr-3`}
       >
         <HiringStatus data={hiringStatusData} />
         <HRTickets data={hrTicketsData} />

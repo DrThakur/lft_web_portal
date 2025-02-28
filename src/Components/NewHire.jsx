@@ -77,7 +77,7 @@ const NewHire = () => {
   const recruitemntBodyTemplate = (rowData) => {
     return (
       <div className="flex flex-col align-items-center gap-2 mr-2">
-        <div className="flex flex-row items-center justify-start ">
+        <div className="flex flex-row items-center justify-start cursor-default">
           <img
             alt={rowData.profilePic}
             src={rowData.profilePic}
@@ -85,9 +85,14 @@ const NewHire = () => {
             height="40"
             className="rounded-full"
           />
-          <a href="/" className="ml-2 text-blue-500 hover:text-blue-900">
+          <a
+            href="/"
+            className="ml-2 text-blue-500 hover:text-blue-900"
+            onClick={(e) => e.preventDefault()}
+          >
             {rowData.fullName}
           </a>
+
         </div>
       </div>
     );
@@ -140,7 +145,7 @@ const NewHire = () => {
   return (
     <div className="w-full h-full p-3">
       <div className="flex justify-between items-center gap-1">
-        <h3 className="font-bold text-lg">New Joinee</h3>
+        <h3 className="font-bold text-lg cursor-default">New Joinee</h3>
         <button className="bg-blue-500 hover:bg-blue-700 px-2 py-1 rounded-lg font-semibold text-white">
           View All
         </button>
@@ -152,24 +157,26 @@ const NewHire = () => {
         size="small"
         scrollable
         scrollHeight={scrollHeight}
-      responsiveLayout="scroll"
+        responsiveLayout="scroll"
 
-        
+
       >
         <Column
           field="fullName"
           header="Full Name"
           body={recruitemntBodyTemplate}
+          className="cursor-default"
           style={{ width: '25%' }}
         ></Column>
-        <Column field="roleAppliedFor" header="Role" style={{ width: '15%' }}></Column>
-        <Column field="reportingManager" header="Reporting Manager" style={{ width: '15%' }}></Column>
-        <Column field="status" header="Onboarding Status" body={statusBodyTemplate} style={{ width: '15%' }}></Column>
+        <Column field="roleAppliedFor" header="Role" className="cursor-default" style={{ width: '15%' }}></Column>
+        <Column field="reportingManager" header="Reporting Manager" className="cursor-default" style={{ width: '15%' }}></Column>
+        <Column field="status" header="Onboarding Status" body={statusBodyTemplate} className="cursor-default" style={{ width: '15%' }}></Column>
         <Column
           field="action"
           header="Action"
           alignHeader={"center"}
           body={actionBodyTemplate}
+          className="cursor-default"
           style={{ width: '15%', textAlign: "center" }}
         ></Column>
       </DataTable>

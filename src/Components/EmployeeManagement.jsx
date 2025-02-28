@@ -279,7 +279,7 @@ const EmployeeManagement = () => {
     toast.current.show({
       severity: "success",
       summary: "Successful",
-      detail: "Product Deleted",
+      detail: "Employee Deleted",
       life: 3000,
     });
   };
@@ -326,7 +326,7 @@ const EmployeeManagement = () => {
     toast.current.show({
       severity: "success",
       summary: "Successful",
-      detail: "Products Deleted",
+      detail: "Employees Deleted",
       life: 3000,
     });
   };
