@@ -1685,6 +1685,7 @@ const EmployeeManagement = () => {
             selectionMode={"checkbox"}
             selection={selectedProducts}
             onSelectionChange={(e) => setSelectedProducts(e.value)}
+            
             dataKey="employeeId"
             paginator
             rows={10}
