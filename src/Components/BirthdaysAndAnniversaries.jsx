@@ -11,8 +11,21 @@ const BirthdaysAndAnniversaries = () => {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1); // to track month changes
   const navigate = useNavigate();
   const apiUrl = process.env.REACT_APP_API_URL;
+
+  //New use effect to update instant month update
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newMonth = new Date().getMonth() + 1;
+      if (newMonth !== currentMonth) {
+        setCurrentMonth(newMonth);
+      }
+    }, 1000 * 60 * 60); // Check every hour
+  
+    return () => clearInterval(interval);
+  }, [currentMonth]);
 
   useEffect(() => {
     const fetchEosData = async () => {

@@ -1,4 +1,3 @@
-
 import { useRef, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import logo from "../Images/LFT-Logo.svg";
@@ -52,17 +51,17 @@ const Login = () => {
       toast.error("Please fill in both email and password fields."); // Show toast on empty fields
       return;
     }
-    
 
     dispatch({ type: "LOGIN_START" });
     setLoading(true);
     try {
       const res = await axios.post(`${apiUrl}/api/v1/auth/login`, {
-        email: userRef.current.value,
-        password: passwordRef.current.value,
+        email: email,
+        password: password,
       });
       console.log("My login response", res);
       const token = res.data.token;
+      localStorage.setItem("authToken", token); // Store token in localStorage
       const decodedToken = jwtDecode(token);
       const userData = decodedToken;
       console.log("user Dtata", userData);
@@ -71,7 +70,16 @@ const Login = () => {
       return navigate("/dashboard");
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE" });
-      setErrorMsg("*Incorrect email or password.");
+
+      if (error.response) {
+        if (error.response.status === 401) {
+          setErrorMsg("*Incorrect email or password.");
+        } else {
+          setErrorMsg("*Login failed. Please try again.");
+        }
+      } else {
+        setErrorMsg("*Network error. Please check your connection.");
+      }
     } finally {
       setLoading(false);
     }
@@ -87,6 +95,7 @@ const Login = () => {
       });
       console.log("Guest login response", res);
       const token = res.data.token;
+      localStorage.setItem("authToken", token); // Store guest token in localStorage
       const decodedToken = jwtDecode(token);
       const userData = decodedToken;
       console.log("Guest user data", userData);
@@ -95,7 +104,12 @@ const Login = () => {
       return navigate("/dashboard");
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE" });
-      setErrorMsg("*Guest login failed.");
+
+      if (error.response) {
+        setErrorMsg("*Guest login failed. Please try again.");
+      } else {
+        setErrorMsg("*Network error. Please check your connection.");
+      }
     } finally {
       setLoading(false);
     }
@@ -149,14 +163,17 @@ const Login = () => {
             {images.map((image, index) => (
               <div
                 key={index}
-                className={`transition-all duration-700 absolute ${index === currentImage ? "opacity-100" : "opacity-0"
-                  }`}
+                className={`transition-all duration-700 absolute ${
+                  index === currentImage ? "opacity-100" : "opacity-0"
+                }`}
                 style={{
                   maxWidth: "80%",
                   maxHeight: "80%",
                   objectFit: "cover",
                   transition: "transform 1s ease", // Smooth sliding transition
-                  transform: `translateX(${index === currentImage ? "0" : "100%"})`, // Slide effect
+                  transform: `translateX(${
+                    index === currentImage ? "0" : "100%"
+                  })`, // Slide effect
                 }}
               >
                 <img
@@ -171,15 +188,15 @@ const Login = () => {
             {images.map((_, index) => (
               <button
                 key={index}
-                className={`w-2.5 h-2.5 rounded-full mx-1 ${index === currentImage ? "bg-white" : "bg-white opacity-50"
-                  }`}
+                className={`w-2.5 h-2.5 rounded-full mx-1 ${
+                  index === currentImage ? "bg-white" : "bg-white opacity-50"
+                }`}
                 onClick={() => handleSlideChange(index)}
               ></button>
             ))}
           </div>
         </div>
       )}
-
 
       {/* Right Section: Login Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-8 md:px-12 md:py-16 ">
@@ -196,7 +213,9 @@ const Login = () => {
 
           <form onSubmit={handleSignin}>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-xl font-bold mb-2">Email</label>
+              <label htmlFor="email" className="block text-xl font-bold mb-2">
+                Email
+              </label>
               <input
                 type="email"
                 id="email"
@@ -208,7 +227,12 @@ const Login = () => {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="password" className="block text-xl font-bold mb-2">Password</label>
+              <label
+                htmlFor="password"
+                className="block text-xl font-bold mb-2"
+              >
+                Password
+              </label>
               <div className="relative">
                 <input
                   type={passwordShown ? "text" : "password"}
@@ -245,10 +269,11 @@ const Login = () => {
               type="submit"
               disabled={isFetching || loading}
               onClick={handleSignin}
-              className={`w-full py-3 text-xl rounded-md ${isFetching || loading
-                ? "bg-red-300 cursor-not-allowed"
-                : "bg-blue-500 text-white hover:bg-blue-600"
-                }`}
+              className={`w-full py-3 text-xl rounded-md ${
+                isFetching || loading
+                  ? "bg-red-300 cursor-not-allowed"
+                  : "bg-blue-500 text-white hover:bg-blue-600"
+              }`}
             >
               {loading ? "Loading..." : "Login"}
             </button>

@@ -1,5 +1,5 @@
 // Action.js
-export const LoginStart = (userCredentials) => ({
+export const LoginStart = () => ({
     type: "LOGIN_START",
   });
   

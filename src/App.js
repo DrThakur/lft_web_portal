@@ -43,8 +43,7 @@ import EosApprovalByMonth from "./Components/EosApprovalByMonth";
 import HRDashboard from "./Pages/HRDashboard";
 import Recruitment from "./Components/HRComponents/Recruitment";
 import Helpdesk from "./Components/Helpdesk/Helpdesk";
-
-
+import PrivateRoute from "./Components/PrivateRoute";
 
 const App = () => {
   const projects = [
@@ -289,8 +288,6 @@ const App = () => {
     // Add more announcements here as needed
   ];
 
-
-
   return (
     <div>
       <BrowserRouter>
@@ -298,57 +295,108 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route
-          path="/*"
-          element={
-            <Layout>
-              <Routes>
-              
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/all-projects" element={<AllProjects />} />
-                <Route path="/create-project" element={<CreateProjectForm />} />
-                <Route path="/purchase-order" element={<PurchaseOrder />} />
-                <Route path="/project-dashboard/:projectId" element={<ProjectDetails />} />
-                <Route path="/user-profile" element={<UserProfilePage />} />
-                <Route path="/test1" element={<ProjectCarousel />} />
-                <Route path="/test2" element={<ProjectCard project={projects[1]} />} />
-                <Route path="/pms-dashboard" element={<ProjectTableView />} />
-                <Route path="/project-milestones" element={<ProjectMilestones />} />
-                <Route path="/add-task" element={<TaskForm />} />
-                <Route path="/test6" element={<TestSelect />} />
-                <Route path="/test7" element={<TeamDeatils teams={teamsData} />} />
-                <Route path="/test8" element={<FinalEmployeeDropdown />} />
-                <Route path="/test9" element={<NewAddTeamForm />} />
-                <Route path="/test10" element={<NewMilestoneForm />} />
-                <Route path="/test11" element={<TestCreateProjectForm />} />
-                <Route path="/test12" element={<TestMilestoneForm />} />
-                <Route path="/project-details/:projectId" element={<ProjectDetailsPage  />} />
-                <Route path="/test13" element={<ColumnToggleDemo />} />
-                <Route path="/holiday-calender" element={<HolidayCalendarPage holidays={holidays} />} />
-                <Route path="/announcements" element={<AnnouncementsPage announcements={announcements} />} />
-                <Route path="/eos-update" element={<EosUpdate />} />
-                <Route path="/month" element={<MonthYearPicker />} />
-                <Route path="/eos-update/:year/:month" element={<EosUpdateByMonth />} />
-                <Route path="/eos-approval/:year/:month" element={<EosApprovalByMonth />} />
-                <Route path="/eos-approval" element={<EosApproval />} />
-                <Route path="/eos-approval-final" element={<EosApprovalFinal />} />
-                <Route path="/eos-approval-hod" element={<EosApprovalHod />} />
-                <Route path="/eos-approval-hod/:year/:month" element={<EosApprovalByMonth />} />
-                {/* <Route path="/document-center" element={<DocumentCenter />} /> */}
-                <Route path="/all-documents" element={<DocumentCenter />} />
-                <Route path="/org-chart" element={<OragnizationChart />} />
-                <Route path="/org-chart-page" element={<OrganizationChartPage />} />
-                <Route path="/resource-pool" element={<ResourcePool />} />
-                <Route path="/resource-table" element={<ResourceTable />} />
-                <Route path="/employee-management" element={<EmployeeManagement />} />
-                <Route path="/final-eos" element={<FinalEosTable />} />
-                <Route path="/eos-table" element={<EosTable />} />
-                <Route path="/hr-dashboard" element={<HRDashboard />} />
-                <Route path="/recruitment" element={<Recruitment />} />
-                <Route path="/helpdesk" element={<Helpdesk />} />
-              </Routes>
-            </Layout>
-          }
-        />
+            path="/*"
+            element={
+              <PrivateRoute>
+                <Layout>
+                  <Routes>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/all-projects" element={<AllProjects />} />
+                    <Route
+                      path="/create-project"
+                      element={<CreateProjectForm />}
+                    />
+                    <Route path="/purchase-order" element={<PurchaseOrder />} />
+                    <Route
+                      path="/project-dashboard/:projectId"
+                      element={<ProjectDetails />}
+                    />
+                    <Route path="/user-profile" element={<UserProfilePage />} />
+                    <Route path="/test1" element={<ProjectCarousel />} />
+                    <Route
+                      path="/test2"
+                      element={<ProjectCard project={projects[1]} />}
+                    />
+                    <Route
+                      path="/pms-dashboard"
+                      element={<ProjectTableView />}
+                    />
+                    <Route
+                      path="/project-milestones"
+                      element={<ProjectMilestones />}
+                    />
+                    <Route path="/add-task" element={<TaskForm />} />
+                    <Route path="/test6" element={<TestSelect />} />
+                    <Route
+                      path="/test7"
+                      element={<TeamDeatils teams={teamsData} />}
+                    />
+                    <Route path="/test8" element={<FinalEmployeeDropdown />} />
+                    <Route path="/test9" element={<NewAddTeamForm />} />
+                    <Route path="/test10" element={<NewMilestoneForm />} />
+                    <Route path="/test11" element={<TestCreateProjectForm />} />
+                    <Route path="/test12" element={<TestMilestoneForm />} />
+                    <Route
+                      path="/project-details/:projectId"
+                      element={<ProjectDetailsPage />}
+                    />
+                    <Route path="/test13" element={<ColumnToggleDemo />} />
+                    <Route
+                      path="/holiday-calender"
+                      element={<HolidayCalendarPage holidays={holidays} />}
+                    />
+                    <Route
+                      path="/announcements"
+                      element={
+                        <AnnouncementsPage announcements={announcements} />
+                      }
+                    />
+                    <Route path="/eos-update" element={<EosUpdate />} />
+                    <Route path="/month" element={<MonthYearPicker />} />
+                    <Route
+                      path="/eos-update/:year/:month"
+                      element={<EosUpdateByMonth />}
+                    />
+                    <Route
+                      path="/eos-approval/:year/:month"
+                      element={<EosApprovalByMonth />}
+                    />
+                    <Route path="/eos-approval" element={<EosApproval />} />
+                    <Route
+                      path="/eos-approval-final"
+                      element={<EosApprovalFinal />}
+                    />
+                    <Route
+                      path="/eos-approval-hod"
+                      element={<EosApprovalHod />}
+                    />
+                    <Route
+                      path="/eos-approval-hod/:year/:month"
+                      element={<EosApprovalByMonth />}
+                    />
+                    {/* <Route path="/document-center" element={<DocumentCenter />} /> */}
+                    <Route path="/all-documents" element={<DocumentCenter />} />
+                    <Route path="/org-chart" element={<OragnizationChart />} />
+                    <Route
+                      path="/org-chart-page"
+                      element={<OrganizationChartPage />}
+                    />
+                    <Route path="/resource-pool" element={<ResourcePool />} />
+                    <Route path="/resource-table" element={<ResourceTable />} />
+                    <Route
+                      path="/employee-management"
+                      element={<EmployeeManagement />}
+                    />
+                    <Route path="/final-eos" element={<FinalEosTable />} />
+                    <Route path="/eos-table" element={<EosTable />} />
+                    <Route path="/hr-dashboard" element={<HRDashboard />} />
+                    <Route path="/recruitment" element={<Recruitment />} />
+                    <Route path="/helpdesk" element={<Helpdesk />} />
+                  </Routes>
+                </Layout>
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
