@@ -49,7 +49,13 @@ const BirthdaysAndAnniversaries = () => {
   const groupedEvents = {};
 
   currentMonthEmployees.forEach((employee) => {
-    const birthdayDate = new Date(employee.dateOfBirth);
+    const birthdayDate = employee.dateOfBirth ? new Date(employee.dateOfBirth) : new Date(); // Fallback to current date
+    if (isNaN(birthdayDate)) {
+      console.error("Invalid date value:", employee.dateOfBirth);
+    } else {
+      console.log("Valid date:", birthdayDate);
+    }
+    
     const anniversaryDate = new Date(employee.dateOfJoining);
 
     const birthdayKey = format(birthdayDate, "dd MMM");
