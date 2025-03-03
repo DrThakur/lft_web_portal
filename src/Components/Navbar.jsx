@@ -78,6 +78,8 @@ const Navbar = () => {
     }
   }, [screenSize, setActiveMenu]);
 
+  console.log("my user navbar:: ", user);
+
   // const handleActiveMenu = () => setActiveMenu(!activeMenu);
   const handleActiveName = () => {
     if (activeName && activeRightSidebar) {
@@ -400,7 +402,7 @@ const Navbar = () => {
             />
             {screenSize > 900 &&
               <p>
-                <span className="text-gray-400 text-14">Hi,</span>{" "}
+                <span className="text-gray-400 text-14">Hi,</span>
                 <span className="text-gray-400 font-bold ml-1 text-14">
                   {user.fullName}
                 </span>
