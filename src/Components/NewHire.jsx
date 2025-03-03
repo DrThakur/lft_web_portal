@@ -3,14 +3,39 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Tag } from "primereact/tag";
-// Import your images
+import { Dialog } from "primereact/dialog";
+import { InputText } from "primereact/inputtext";
+import { Toast } from "primereact/toast";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Dropdown } from "primereact/dropdown";  // Import Dropdown
 import profile1 from "../assets/images/images.jpg";
 
 const NewHire = () => {
-
   const [recruitments, setRecruitments] = useState([]);
   const [scrollHeight, setScrollHeight] = useState("320px");
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [currentRecruitment, setCurrentRecruitment] = useState(null);
+  const toast = React.useRef(null);
 
+  const managers = [
+    { label: "Dhruv Kumar Saxena", value: "Dhruv Kumar Saxena" },
+    { label: "Amritpreet Singh", value: "Amritpreet Singh" },
+    { label: "Ravi Kumar", value: "Ravi Kumar" },  // Add more managers as needed
+  ];
+
+  const statuses = [
+    { label: "Onboarded", value: "Onboarded" },
+    { label: "In Progress", value: "In Progress" },
+    { label: "Pending", value: "Pending" },
+  ];
+
+  const roles = [
+    { label: "Project Manage", value: "Project Manage" },
+    { label: "Web Developer", value: "Web Developer" },
+    { label: "Data Scientist", value: "Data Scientist" },
+    { label: "FPGA Engineer", value: "FPGA Engineer" },
+    { label: "Sr Verification Engineer", value: "Sr Verification Engineer" },
+  ];
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -20,16 +45,10 @@ const NewHire = () => {
       }
     };
 
-    // Initialize the scroll height based on the current window size
     handleResize();
-
-    // Add event listener for window resize
     window.addEventListener("resize", handleResize);
-
-    // Cleanup event listener on component unmount
     return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty dependency array means it runs once after initial render
-
+  }, []);
 
   const recruitmentData = [
     {
@@ -49,7 +68,7 @@ const NewHire = () => {
     {
       fullName: "Rajkumar Rao",
       profilePic: profile1,
-      roleAppliedFor: "Data Sceientist",
+      roleAppliedFor: "Data Scientist",
       reportingManager: "Dhruv Kumar Saxena",
       status: "Pending",
     },
@@ -68,7 +87,6 @@ const NewHire = () => {
       status: "In Progress",
     },
   ];
-
 
   useEffect(() => {
     setRecruitments(recruitmentData);
@@ -92,7 +110,6 @@ const NewHire = () => {
           >
             {rowData.fullName}
           </a>
-
         </div>
       </div>
     );
@@ -107,6 +124,7 @@ const NewHire = () => {
             rounded
             outlined
             className="mr-2 border border-blue-400 rounded-full"
+            onClick={() => onEditClick(rowData)} 
           />
           <Button
             icon="pi pi-trash text-red-400"
@@ -114,10 +132,20 @@ const NewHire = () => {
             outlined
             severity="danger"
             className="border border-red-400 rounded-full"
+            onClick={() => onDeleteClick(rowData)} 
           />
         </div>
       </React.Fragment>
     );
+  };
+
+  const onEditClick = (rowData) => {
+    setCurrentRecruitment({ ...rowData }); 
+    setDialogVisible(true); 
+  };
+
+  const onDialogHide = () => {
+    setDialogVisible(false);
   };
 
   const getSeverity = (recruitmemt) => {
@@ -142,8 +170,56 @@ const NewHire = () => {
     );
   };
 
+  const handleSave = () => {
+    // Handle save logic
+    setRecruitments((prevRecruitments) =>
+      prevRecruitments.map((recruitment) =>
+        recruitment.fullName === currentRecruitment.fullName
+          ? currentRecruitment
+          : recruitment
+      )
+    );
+    toast.current.show({
+      severity: "success",
+      summary: "Success",
+      detail: "Recruitment details updated successfully!",
+      life: 3000,
+    });
+    setDialogVisible(false);
+  };
+
+  const onDeleteClick = (rowData) => {
+    // Confirm the delete action
+    confirmDialog({
+      className:"max-w-[75%] md:max-w-full ml-20 md:ml-0",
+      message: `Are you sure you want to delete ${rowData.fullName}?`,
+      header: "Confirm Deletion",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => handleDelete(rowData),
+      reject: () => toast.current.show({ severity: "info", summary: "Cancelled", detail: "Delete action cancelled", life: 3000 }),
+    });
+  };
+
+  const handleDelete = (rowData) => {
+    // Delete the recruitment from the list
+    setRecruitments((prevRecruitments) =>
+      prevRecruitments.filter((recruitment) => recruitment.fullName !== rowData.fullName)
+    );
+    toast.current.show({
+      severity: "success",
+      summary: "Success",
+      detail: `${rowData.fullName} has been deleted successfully!`,
+      life: 3000,
+    });
+  };
+
   return (
     <div className="w-full h-full p-3">
+      {/* Toast component */}
+      <Toast ref={toast} />
+      {/* Confirm Dialog component */}
+      <ConfirmDialog />
+
       <div className="flex justify-between items-center gap-1">
         <h3 className="font-bold text-lg cursor-default">New Joinee</h3>
         <button className="bg-blue-500 hover:bg-blue-700 px-2 py-1 rounded-lg font-semibold text-white">
@@ -158,8 +234,6 @@ const NewHire = () => {
         scrollable
         scrollHeight={scrollHeight}
         responsiveLayout="scroll"
-
-
       >
         <Column
           field="fullName"
@@ -180,6 +254,64 @@ const NewHire = () => {
           style={{ width: '15%', textAlign: "center" }}
         ></Column>
       </DataTable>
+
+      {/* Dialog for editing */}
+      <Dialog
+        visible={dialogVisible}
+        onHide={onDialogHide}
+        header="Edit New Joinee"
+        className="max-w-[75%] md:max-w-full ml-20 md:ml-0"
+        footer={
+          <div>
+            <Button label="Cancel" icon="pi pi-times" onClick={onDialogHide} className="p-button-text" />
+            <Button label="Save" icon="pi pi-check" onClick={handleSave} />
+          </div>
+        }
+      >
+        {currentRecruitment && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="flex flex-col">
+              <label htmlFor="fullName" className="font-bold">Full Name</label>
+              <InputText
+                id="fullName"
+                value={currentRecruitment.fullName}
+                onChange={(e) => setCurrentRecruitment({ ...currentRecruitment, fullName: e.target.value })}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="role" className="font-bold">Role Applied For</label>
+              <Dropdown
+                id="role"
+                value={currentRecruitment.roleAppliedFor}
+                options={roles}
+                onChange={(e) => setCurrentRecruitment({ ...currentRecruitment, roleAppliedFor: e.value })}
+                placeholder="Select role"
+                scrollHeight="170px"
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="manager" className="font-bold">Reporting Manager</label>
+              <Dropdown
+                id="manager"
+                value={currentRecruitment.reportingManager}
+                options={managers}
+                onChange={(e) => setCurrentRecruitment({ ...currentRecruitment, reportingManager: e.value })}
+                placeholder="Select Manager"
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="status" className="font-bold">Status</label>
+              <Dropdown
+                id="status"
+                value={currentRecruitment.status}
+                options={statuses}
+                onChange={(e) => setCurrentRecruitment({ ...currentRecruitment, status: e.value })}
+                placeholder="Select Status"
+              />
+            </div>
+          </div>
+        )}
+      </Dialog>
     </div>
   );
 };
