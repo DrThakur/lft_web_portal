@@ -1660,13 +1660,17 @@ const EmployeeManagement = () => {
 
 
   const openEditDialog = (employee) => {
-    setSelectedEmployee(employee);  // Store the selected employee
-    setEditDialogVisible(true);     // Open the dialog
+    setSelectedEmployee(employee);  
+    setEditDialogVisible(true);     
   };
   const saveEmployee = () => {
-    console.log("Updated Employee Data:", selectedEmployee);
-    // You should handle the logic for saving the updated data here
-    setEditDialogVisible(false); // Close the dialog after saving
+    const updatedEmployees = employees.map(emp =>
+      emp.employeeId === selectedEmployee.employeeId ? selectedEmployee : emp
+    );
+    setEmployees(updatedEmployees);
+    setEditDialogVisible(false); 
+
+    toast.current.show({ severity: 'success', summary: 'Employee Updated', detail: 'Employee data has been updated.' });
   };
 
   return (
