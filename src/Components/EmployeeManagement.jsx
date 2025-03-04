@@ -1411,7 +1411,18 @@ const EmployeeManagement = () => {
       </div>
     );
   };
-
+  // const techSkillsBodyTemplate = (rowData) => {
+  //   const skillsToShow = Array.isArray(rowData.techSkills) ? rowData.techSkills : [];  // Default to an empty array if it's not an array
+  
+  //   return skillsToShow.length > 0 ? (
+  //     skillsToShow.map((skill, index) => (
+  //       <div key={index}>{skill}</div>
+  //     ))
+  //   ) : (
+  //     <span>No skills available</span>
+  //   );
+  // };
+  
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
