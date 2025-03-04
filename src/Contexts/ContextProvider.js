@@ -9,7 +9,7 @@ import Reducer from "./Reducer";
 
 // Initial state for the user context
 const INITIAL_STATE = {
-  user: null, //  user: JSON.parse(localStorage.getItem("user")) || null,
+  user: JSON.parse(localStorage.getItem("user")) || null, //  user: JSON.parse(localStorage.getItem("user")) || null,
   isFetching: false,
   error: false,
 };
@@ -29,14 +29,14 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     // localStorage.setItem("user", JSON.stringify(state.user));
-    // if (state.user) {
-    //   localStorage.setItem("user", JSON.stringify(state.user));
-    // } else {
-    //   localStorage.removeItem("user");
-    // }
     if (state.user) {
       localStorage.setItem("user", JSON.stringify(state.user));
+    } else {
+      localStorage.removeItem("user");
     }
+    // if (state.user) {
+    //   localStorage.setItem("user", JSON.stringify(state.user));
+    // }
   }, [state.user]);
 
   // UI related states using useState
