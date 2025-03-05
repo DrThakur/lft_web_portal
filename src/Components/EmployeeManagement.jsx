@@ -1156,10 +1156,22 @@ const EmployeeManagement = () => {
   };
 
   const hideDeleteProductDialog = () => {
+    toast.current.show({
+      severity: 'info',
+      summary: 'Dialog Closed',
+      detail: 'You have closed the dialog without taking action.',
+      life: 3000,
+    });
     setDeleteProductDialog(false);
   };
 
   const hideDeleteProductsDialog = () => {
+    toast.current.show({
+      severity: 'info',
+      summary: 'Dialog Closed',
+      detail: 'You have closed the dialog without taking action.',
+      life: 3000,
+    });
     setDeleteProductsDialog(false);
   };
 
@@ -1887,7 +1899,15 @@ const EmployeeManagement = () => {
                 label="Cancel"
                 icon="pi pi-times"
                 outlined
-                onClick={() => setEditDialogVisible(false)}
+                onClick={() => {
+                  setEditDialogVisible(false);  // Close the dialog
+                  toast.current.show({  // Show the toast
+                    severity: 'info',  // Toast severity (could be 'success', 'info', 'warn', 'error')
+                    summary: 'Cancelled',  // Toast title
+                    detail: 'You have cancelled the update operation',  // Toast message
+                    life: 3000  // Time for the toast to stay visible (in ms)
+                  });
+                }}
               />
               <Button
                 label="Save"

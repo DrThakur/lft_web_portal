@@ -14,8 +14,10 @@ const HolidayCalendarPage = ({ holidays }) => {
   
   return (
     <div>
-      <h1 className="text-base sm:text-lg md:text-2xl lg:text-lg font-bold mb-4  py-2 px-3 rounded-lg">Holiday Calendar</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 -ml-0.5">
+      <h1 className="text-2xl font-bold text-gray-800 mb-2">Holiday Calendar</h1>
+      <div className="-ml-1 h-[calc(100vh-156px)] xs:h-[calc(100vh-146px)] overflow-y-auto lg:overflow-y-hidden lg:hover:overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300 transition-all
+       duration-300">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 p-1 ">
         {Object.keys(holidaysByMonth).map((monthKey, index) => {
           const [month, year] = monthKey.split('-').map(Number);
           const monthName = new Date(year, month - 1).toLocaleString('en-us', { month: 'long' });
@@ -44,6 +46,7 @@ const HolidayCalendarPage = ({ holidays }) => {
           );
         })}
       </div>
+    </div>
     </div>
   );
 };
