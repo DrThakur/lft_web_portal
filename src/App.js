@@ -46,6 +46,7 @@ import Helpdesk from "./Components/Helpdesk/Helpdesk";
 import PrivateRoute from "./Components/PrivateRoute";
 import BirthdaysAndAnniversariesPage from "./Components/BirthdaysAndAnniversariesPage";
 import AllEvents from "./Components/AllEvents";
+import AllOpeningJobs from "./Components/AllOpeningJobs"
 
 const App = () => {
   const projects = [
@@ -397,7 +398,7 @@ const App = () => {
 
 
                     <Route path="/all-events" element={<AllEvents />} />
-
+                    <Route path="/all-opening-jobs" element={<AllOpeningJobs />} />
                     {/* New route for BirthdaysAndAnniversariesPage */}
                     <Route path="/birthdays-and-anniversaries" element={<BirthdaysAndAnniversariesPage />} />
                   </Routes>
