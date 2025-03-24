@@ -16,6 +16,7 @@ import { InputText } from "primereact/inputtext";
 import { Tag } from "primereact/tag";
 import { Dropdown } from "primereact/dropdown";
 
+
 const ResourceTable = ({
   title,
   employees,
@@ -29,6 +30,7 @@ const ResourceTable = ({
   let emptyProduct = {
     id: null,
     name: "",
+    fullName: "",
     image: null,
     description: "",
     category: null,
@@ -145,6 +147,12 @@ const ResourceTable = ({
   const hideDialog = () => {
     setSubmitted(false);
     setProductDialog(false);
+    toast.current.show({
+      severity: 'info',  // Toast severity
+      summary: 'Cancelled',  // Toast title
+      detail: 'You have cancelled the update operation',  // Toast message
+      life: 3000  // Time for the toast to stay visible (in ms)
+    });
   };
 
   const hideDeleteProductDialog = () => {
@@ -157,19 +165,28 @@ const ResourceTable = ({
 
   const saveProduct = () => {
     setSubmitted(true);
-
-    if (product.name.trim()) {
+    if (!product.fullName || !product.fullName.trim()) {
+      toast.current.show({
+        severity: "error",
+        summary: "Validation Failed",
+        detail: "Product name is required.",
+        life: 3000,
+      });
+      return;
+    }
+    if (product.fullName.trim()) {
       let _products = [...products];
       let _product = { ...product };
 
       if (product.id) {
         const index = findIndexById(product.id);
+        console.log(index);
 
         _products[index] = _product;
         toast.current.show({
           severity: "success",
           summary: "Successful",
-          detail: "Product Updated",
+          detail: "Employee Updated",
           life: 3000,
         });
       } else {
@@ -179,7 +196,7 @@ const ResourceTable = ({
         toast.current.show({
           severity: "success",
           summary: "Successful",
-          detail: "Product Created",
+          detail: "Employee Created",
           life: 3000,
         });
       }
@@ -215,6 +232,10 @@ const ResourceTable = ({
   };
 
   const findIndexById = (id) => {
+    if (!id) {
+      console.log("Invalid ID provided:", id);
+      return -1;
+    }
     let index = -1;
 
     for (let i = 0; i < products.length; i++) {
@@ -546,40 +567,40 @@ const ResourceTable = ({
   const deleteProductDialogFooter = (
     <React.Fragment>
       <div className="flex justify-end space-x-3 p-2">
-      <Button
-        label="No"
-        icon="pi pi-times"
-        outlined
-        onClick={hideDeleteProductDialog}
-        className="flex justify-center"
-      />
-      <Button
-        label="Yes"
-        icon="pi pi-check"
-        severity="danger"
-        onClick={deleteProduct}
-        className="flex justify-center"
-      />
+        <Button
+          label="No"
+          icon="pi pi-times"
+          outlined
+          onClick={hideDeleteProductDialog}
+          className="flex justify-center"
+        />
+        <Button
+          label="Yes"
+          icon="pi pi-check"
+          severity="danger"
+          onClick={deleteProduct}
+          className="flex justify-center"
+        />
       </div>
     </React.Fragment>
   );
   const deleteProductsDialogFooter = (
     <React.Fragment>
       <div className="flex justify-end space-x-3 p-2">
-      <Button
-        label="No"
-        icon="pi pi-times"
-        outlined
-        onClick={hideDeleteProductsDialog}
-        className="flex justify-center"
-      />
-      <Button
-        label="Yes"
-        icon="pi pi-check"
-        severity="danger"
-        onClick={deleteSelectedProducts}
-        className="flex justify-center"
-      />
+        <Button
+          label="No"
+          icon="pi pi-times"
+          outlined
+          onClick={hideDeleteProductsDialog}
+          className="flex justify-center"
+        />
+        <Button
+          label="Yes"
+          icon="pi pi-check"
+          severity="danger"
+          onClick={deleteSelectedProducts}
+          className="flex justify-center"
+        />
       </div>
     </React.Fragment>
   );
@@ -830,6 +851,136 @@ const ResourceTable = ({
             ></Column>
           </DataTable>
         </div>
+
+        <Dialog
+          visible={productDialog}
+          style={{ width: "32rem", height: "650px" }}
+          breakpoints={{ "960px": "75vw", "641px": "90vw" }}
+          header="Update Employee"
+          modal
+          className="p-fluid"
+          footer={productDialogFooter}
+          onHide={hideDialog}
+        >
+          <div className="p-fluid grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-field">
+              <label htmlFor="employeeId" className="font-bold">Employee Id</label>
+              <InputText
+                id="employeeId"
+                value={product?.employeeId || ''}
+                onChange={(e) => onInputChange(e, "employeeId")}
+                readOnly
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="fullName" className="font-bold">Employee Name</label>
+              <InputText
+                id="fullName"
+                value={product?.fullName || ''}
+                onChange={(e) => onInputChange(e, "fullName")}
+              />
+            </div>
+
+            <div className="p-field">
+              <label htmlFor="designation" className="font-bold">Designation</label>
+              <InputText
+                id="designation"
+                value={product?.designation || ''}
+                onChange={(e) => onInputChange(e, "designation")}
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="location" className="font-bold">Location</label>
+              <InputText
+                id="location"
+                value={product?.location || ''}
+                onChange={(e) => onInputChange(e, "location")}
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="status" className="font-bold">Status</label>
+              <Dropdown
+                id="status"
+                value={product?.status || ''}
+                options={['Active', 'Inactive', 'Pending']} // Example options for the dropdown
+                onChange={(e) => onInputChange(e, "status")}
+                placeholder="Select a Status"
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="performance" className="font-bold">Employee Performance</label>
+              <InputText
+                id="performance"
+                value={product?.performance || ''}
+                onChange={(e) => onInputChange(e, "performance")}
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="projects" className="font-bold">Projects</label>
+              <InputText
+                id="projects"
+                value={product?.projects || ''}
+                onChange={(e) => onInputChange(e, "projects")}
+
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="role" className="font-bold">Project Role</label>
+              <InputText
+                id="role"
+                value={product?.role || ''}
+                onChange={(e) => onInputChange(e, "role")}
+
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="duration" className="font-bold">Duration</label>
+              <InputText
+                id="duration"
+                value={product?.duration || ''}
+                onChange={(e) => onInputChange(e, "duration")}
+
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="allocatedBandWidth" className="font-bold">Allocated BandWidth</label>
+              <InputText
+                id="allocatedBandWidth"
+                value={product?.allocatedBandWidth || ''}
+                onChange={(e) => onInputChange(e, "allocatedBandWidth")}
+
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="availableBandWidth" className="font-bold">Available BandWidth</label>
+              <InputText
+                id="availableBandWidth"
+                value={product?.availableBandWidth || ''}
+                onChange={(e) => onInputChange(e, "availableBandWidth")}
+
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="techSkills" className="font-bold">Tech Skills</label>
+              <InputText
+                id="techSkills"
+                value={product?.techSkills || ''}
+                onChange={(e) => onInputChange(e, "techSkills")}
+
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="remarks" className="font-bold">Remarks</label>
+              <InputText
+                id="remarks"
+                value={product?.remarks || ''}
+                onChange={(e) => onInputChange(e, "remarks")}
+
+              />
+            </div>
+          </div>
+        </Dialog>
+
 
         <Dialog
           visible={deleteProductDialog}

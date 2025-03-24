@@ -44,6 +44,8 @@ import HRDashboard from "./Pages/HRDashboard";
 import Recruitment from "./Components/HRComponents/Recruitment";
 import Helpdesk from "./Components/Helpdesk/Helpdesk";
 import PrivateRoute from "./Components/PrivateRoute";
+import BirthdaysAndAnniversariesPage from "./Components/BirthdaysAndAnniversariesPage";
+import AllEvents from "./Components/AllEvents";
 
 const App = () => {
   const projects = [
@@ -392,6 +394,12 @@ const App = () => {
                     <Route path="/hr-dashboard" element={<HRDashboard />} />
                     <Route path="/recruitment" element={<Recruitment />} />
                     <Route path="/helpdesk" element={<Helpdesk />} />
+
+
+                    <Route path="/all-events" element={<AllEvents />} />
+
+                    {/* New route for BirthdaysAndAnniversariesPage */}
+                    <Route path="/birthdays-and-anniversaries" element={<BirthdaysAndAnniversariesPage />} />
                   </Routes>
                 </Layout>
               </PrivateRoute>
