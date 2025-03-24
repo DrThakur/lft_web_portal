@@ -2151,7 +2151,7 @@ const AllProjects = () => {
           </label>
           <InputText
             id="projectName"
-            value={project.projectName}
+            value={product.projectName}
             onChange={(e) => onInputChange(e, "projectName")}
             required
             autoFocus

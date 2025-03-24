@@ -102,7 +102,7 @@ const BirthdaysAndAnniversaries = () => {
   );
 
   const handleViewAll = () => {
-    // navigate("/test13")
+    navigate("/birthdays-and-anniversaries")
   };
 
   // Handling screen size change

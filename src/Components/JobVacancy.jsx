@@ -5,7 +5,7 @@ import { Badge } from "primereact/badge";
 const JobVacancy = () => {
   const navigate = useNavigate();
   const handleViewAll = () => {
-    navigate("/test13");
+    navigate("/all-opening-jobs");
   };
 
       // Handle Screen Size Change
