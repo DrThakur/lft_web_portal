@@ -53,7 +53,7 @@ const HolidayCalendarPage = ({ holidays }) => {
 
       {/* Display holidays in grouped format by month and year */}
       <div className="overflow-y-auto h-[calc(100vh-220px)] lg:h-[calc(100vh-180px)] scrollbar-thin scrollbar-thumb-teal-500 scrollbar-track-gray-200">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 p-2 lg:gap-6 lg:p-4">
           {Object.keys(holidaysByMonth).map((monthKey) => {
             const [month, year] = monthKey.split('-').map(Number);
             const monthName = new Date(year, month - 1).toLocaleString('en-us', { month: 'long' });
