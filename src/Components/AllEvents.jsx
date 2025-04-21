@@ -124,7 +124,8 @@ const AllEvents = () => {
 
       {/* Calendar View */}
       {viewMode === "calendar" && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+        <div className="space-y-6 mt-6 h-[72vh]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6 ">
           {upcomingEvents.map((event, index) => (
             <div
               key={index}
@@ -145,6 +146,7 @@ const AllEvents = () => {
             </div>
           ))}
         </div>
+        </div>
       )}
 
       {/* Modal */}
@@ -152,7 +154,6 @@ const AllEvents = () => {
         <>
           <div className="fixed inset-0 bg-black bg-opacity-40 z-40" onClick={() => setSelectedEvent(null)}></div>
           <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-gray-200 w-[78%] ml-20 max-w-md p-1 rounded-2xl shadow-2xl">
               <div className="bg-white w-full max-w-md p-6 rounded-2xl shadow-2xl relative">
                 <button
                   onClick={() => setSelectedEvent(null)}
@@ -172,7 +173,6 @@ const AllEvents = () => {
                 <p className="text-gray-600">{selectedEvent.description || "No additional information available."}</p>
               </div>
             </div>
-          </div>
         </>
       )}
 

@@ -183,7 +183,7 @@ const BirthdaysAndAnniversariesPage = () => {
   }
 
   return (
-    <div className="px-4 py-6 bg-gradient-to-r from-blue-100 to-teal-100 min-h-screen">
+    <div className="px-4 py-6 bg-gradient-to-r from-blue-100 to-teal-100 ">
       <div className="flex flex-col sm:flex-row items-center justify-between px-6 py-6 shadow-lg rounded-lg bg-white">
         <h1 className="text-4xl font-extrabold text-teal-600 mb-4 sm:mb-0 text-center sm:text-left">Birthdays and Anniversaries</h1>
 
