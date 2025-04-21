@@ -260,7 +260,7 @@ const NewHire = () => {
         visible={dialogVisible}
         onHide={onDialogHide}
         header="Edit New Joinee"
-        className="w-full md:w-auto p-1 sm:p-2 rounded-lg shadow-lg "
+        className="w-full md:w-auto  rounded-lg shadow-lg "
         footer={
           <div>
             <Button label="Cancel" icon="pi pi-times" onClick={onDialogHide} className="p-button-text" />
