@@ -98,7 +98,7 @@ const AllEvents = () => {
 
       {/* List View */}
       {viewMode === "list" && (
-        <div className="space-y-6 mt-6">
+        <div className="space-y-6 mt-6 h-[72vh]">
           {upcomingEvents.length > 0 ? (
             upcomingEvents.map((event, index) => (
               <div
