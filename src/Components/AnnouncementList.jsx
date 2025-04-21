@@ -187,7 +187,7 @@ const AnnouncementList = () => {
 
       {/* Modal for Creating Announcement */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 ">
+        <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 p-2 ">
           <div className="bg-white p-6 rounded-lg shadow-lg w-80 sm:w-[600px] sm:h-[400px] ml-20 lg:ml-0">
             <h2 className="text-xl font-semibold mb-4">Create New Announcement</h2>
             <form onSubmit={handleSubmit}>
