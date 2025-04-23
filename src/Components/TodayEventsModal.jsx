@@ -25,8 +25,8 @@ const TodayEventsModal = ({ events, onClose }) => {
   const groupedEvents = groupEventsByDate(events);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-all duration-300 ease-in-out transform hover:scale-105">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full lg:w-[70%] max-h-[80vh] overflow-y-auto transition-all duration-300">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-all duration-300 ease-in-out transform hover:scale-105 p-4">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full lg:w-[70%] max-h-[80vh] overflow-y-auto transition-all duration-300  ml-20 lg:ml-0 ">
         
         {/* Modal Header */}
         <div className="flex justify-between items-center mb-6">

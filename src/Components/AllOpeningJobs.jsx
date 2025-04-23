@@ -52,8 +52,8 @@ const AllOpeningJobs = () => {
       </div>
 
       {/* Job List */}
-      <div className="overflow-y-auto max-h-[calc(100vh-220px)] scrollbar-thin scrollbar-thumb-teal-500 scrollbar-track-gray-200">
-        <ul className="space-y-4">
+      <div className="overflow-y-auto max-h-[calc(100vh-250px)] scrollbar-thin scrollbar-thumb-teal-500 scrollbar-track-gray-200">
+        <ul className="space-y-4 h-[72vh]"> 
           {jobList.map((job, index) => (
             <li
               key={index}

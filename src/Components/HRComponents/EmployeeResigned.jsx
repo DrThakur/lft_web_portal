@@ -69,5 +69,3 @@ const EmployeesResigned = ({ data }) => {
 };
 
 export default EmployeesResigned;
-
-

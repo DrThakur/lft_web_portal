@@ -187,9 +187,8 @@ const AnnouncementList = () => {
 
       {/* Modal for Creating Announcement */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
-          <div className="bg-gray-300 p-1 sm:p-2 rounded-lg shadow-lg  ">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-80 sm:w-[600px] sm:h-[400px]">
+        <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 p-2 ">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-80 sm:w-[600px] sm:h-[400px] ml-20 lg:ml-0">
             <h2 className="text-xl font-semibold mb-4">Create New Announcement</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
@@ -199,7 +198,7 @@ const AnnouncementList = () => {
                   name="title"
                   value={newAnnouncement.title}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 p-2"
                   required
                 />
               </div>
@@ -209,7 +208,7 @@ const AnnouncementList = () => {
                   name="content"
                   value={newAnnouncement.content}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 p-2"
                   required
                 />
               </div>
@@ -220,7 +219,7 @@ const AnnouncementList = () => {
                   name="date"
                   value={newAnnouncement.date}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 p-2"
                   required
                 />
               </div>
@@ -242,7 +241,6 @@ const AnnouncementList = () => {
             </form>
           </div>
           </div>
-        </div>
       )}
     </div>
   );
