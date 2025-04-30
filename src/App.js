@@ -47,6 +47,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import BirthdaysAndAnniversariesPage from "./Components/BirthdaysAndAnniversariesPage";
 import AllEvents from "./Components/AllEvents";
 import AllOpeningJobs from "./Components/AllOpeningJobs"
+import AllJoiners from "./Components/AllJoiners";
 
 const App = () => {
   const projects = [
@@ -304,6 +305,7 @@ const App = () => {
                 <Layout>
                   <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/all-joiners" element={<AllJoiners />} />
                     <Route path="/all-projects" element={<AllProjects />} />
                     <Route
                       path="/create-project"
