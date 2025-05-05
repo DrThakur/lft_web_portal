@@ -9,6 +9,7 @@ import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Dropdown } from "primereact/dropdown";  // Import Dropdown
 import profile1 from "../assets/images/images.jpg";
+import { useNavigate } from "react-router-dom";
 
 const NewHire = () => {
   const [recruitments, setRecruitments] = useState([]);
@@ -16,6 +17,7 @@ const NewHire = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [currentRecruitment, setCurrentRecruitment] = useState(null);
   const toast = React.useRef(null);
+    const navigate = useNavigate();
 
   const managers = [
     { label: "Dhruv Kumar Saxena", value: "Dhruv Kumar Saxena" },
@@ -212,6 +214,8 @@ const NewHire = () => {
       life: 3000,
     });
   };
+    // Navigate to view all events
+    const handleViewAll = () => navigate("/all-joiners");
 
   return (
     <div className="w-full h-full p-3">
@@ -222,7 +226,9 @@ const NewHire = () => {
 
       <div className="flex justify-between items-center gap-1">
         <h3 className="font-bold text-lg cursor-default">New Joinee</h3>
-        <button className="bg-blue-500 hover:bg-blue-700 px-2 py-1 rounded-lg font-semibold text-white">
+        <button 
+        onClick={handleViewAll}
+        className="bg-blue-500 hover:bg-blue-700 px-2 py-1 rounded-lg font-semibold text-white cursor-pointer">
           View All
         </button>
       </div>
