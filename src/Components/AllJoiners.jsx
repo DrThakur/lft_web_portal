@@ -192,13 +192,24 @@ const AllJoiners = () => {
                 />
             </div>
 
+            {/* <DataTable
+                value={filteredRecruitments}
+                paginator
+                rows={10}
+                responsiveLayout="scroll"
+                scrollHeight='50%'
+                className="p-datatable-striped p-datatable-hoverable-rows"
+            >   */}
+            
             <DataTable
                 value={filteredRecruitments}
                 paginator
                 rows={10}
                 responsiveLayout="scroll"
                 className="p-datatable-striped p-datatable-hoverable-rows"
-            >  
+                emptyMessage="No records found."
+                showGridlines
+            >
                 <Column
                     field="fullName"
                     header="Full Name"

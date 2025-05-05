@@ -183,11 +183,11 @@ const BirthdaysAndAnniversariesPage = () => {
   }
 
   return (
-    <div className="px-4 py-6 bg-gradient-to-r from-blue-100 to-teal-100 ">
+    <div className="px-2 lg:px-4 py-6 bg-gradient-to-r from-blue-100 to-teal-100 ">
       <div className="flex flex-col sm:flex-row items-center justify-between px-6 py-6 shadow-lg rounded-lg bg-white">
         <h1 className="text-4xl font-extrabold text-teal-600 mb-4 sm:mb-0 text-center sm:text-left">Birthdays and Anniversaries</h1>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 lg:space-x-2">
           <div className="text-center mt-4 sm:mt-0">
             <button
               onClick={() => navigate(-1)}
@@ -249,11 +249,11 @@ const BirthdaysAndAnniversariesPage = () => {
                 {months[monthIndex]} {selectedYear}
               </h2>
               
-                <ul className="space-y-4 p-3 mt-0 ">
+                <ul className="space-y-4 py-1 lg:p-3 mt-0 ">
                   {Object.entries(dates).map(([date, events]) => (
                     <li key={date}>
                       <p className="font-semibold text-sm sm:text-base">{date}</p>
-                      <ul className="ml-3 mt-2">
+                      <ul className="lg:ml-3 mt-2">
                         {events.map((event, index) => (
                           <li key={`${date}-${event.type}-${event.name}-${event.id || index}`} className="flex flex-col sm:flex-row justify-between items-center py-5 px-6 bg-white rounded-lg shadow-md transition-all duration-300  hover:shadow-xl hover:bg-teal-100 hover:border-teal-500 hover:border-2 my-2 w-full " >
                             <div className="flex flex-col sm:flex-row justify-between items-center w-full py-1 px-4 border-b border-teal-200 rounded-md">
